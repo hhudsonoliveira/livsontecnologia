@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Livson Conecta — Site + Vendedor IA no WhatsApp + CRM | Livson Tecnologia</title>
+  <meta name="description" content="Livson Conecta: sistema que capta leads, atende no WhatsApp com IA, agenda sozinho e organiza tudo em CRM e painel de resultado. Conheça os planos." />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Hudson Oliveira Santos" />
+  <meta name="theme-color" content="#05070d" />
+  <link rel="canonical" href="[SEU-DOMINIO]/livson-conecta.html" />
+
+  <!-- Favicons (logo Livson) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="img/favicon-192.png" />
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Livson Conecta — Site + Vendedor IA no WhatsApp + CRM" />
+  <meta property="og:description" content="O sistema que capta, atende no WhatsApp, agenda, organiza em CRM e mede resultado — tudo conectado, vendendo por você." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="[SEU-DOMINIO]/livson-conecta.html" />
+  <meta property="og:image" content="[SEU-DOMINIO]/img/livson-tecnologia-logo.png" />
+  <meta property="og:image:width" content="1080" />
+  <meta property="og:image:height" content="1080" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:site_name" content="Livson Tecnologia" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Livson Conecta — Site + Vendedor IA no WhatsApp + CRM" />
+  <meta name="twitter:description" content="O sistema que capta, atende no WhatsApp, agenda, organiza em CRM e mede resultado — tudo conectado, vendendo por você." />
+  <meta name="twitter:image" content="[SEU-DOMINIO]/img/livson-tecnologia-logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Dados estruturados (SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Início", "item": "[SEU-DOMINIO]/" },
+          { "@type": "ListItem", "position": 2, "name": "Livson Conecta", "item": "[SEU-DOMINIO]/livson-conecta.html" }
+        ]
+      },
+      {
+        "@type": "Service",
+        "name": "Livson Conecta",
+        "serviceType": "Automação comercial com IA (site + agente de IA no WhatsApp + CRM + dashboard)",
+        "provider": { "@type": "Organization", "name": "Livson Tecnologia", "url": "[SEU-DOMINIO]/" },
+        "areaServed": "BR",
+        "description": "Sistema integrado que capta leads, atende no WhatsApp com IA, agenda, organiza tudo em CRM e mede o resultado em um painel."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "O Vendedor IA substitui o atendimento humano?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Não totalmente: ele faz a triagem, responde dúvidas frequentes, qualifica e agenda. Casos mais complexos podem ser transferidos para você a qualquer momento." }
+          },
+          {
+            "@type": "Question",
+            "name": "Funciona no meu número de WhatsApp normal?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Sim. O sistema é configurado no número que você já usa (ou em um novo, se preferir), sem precisar trocar de aparelho." }
+          },
+          {
+            "@type": "Question",
+            "name": "Quanto tempo leva para ficar no ar?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Depende do plano: a partir de 7 dias no plano Start, e em até 15 dias nos planos com automações mais completas (Pro e Max)." }
+          },
+          {
+            "@type": "Question",
+            "name": "Os dados dos meus leads ficam comigo?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Sim. Diferente de robôs genéricos, todo o histórico de conversas e contatos fica no seu CRM, sob seu controle." }
+          },
+          {
+            "@type": "Question",
+            "name": "Preciso entender de tecnologia para usar?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Não. Você recebe o sistema pronto, com um painel simples de usar, e a Livson acompanha a implantação e o suporte." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- Three.js via importmap -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.161.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.161.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ===== PRELOADER ===== -->
+  <div class="preloader" id="preloader">
+    <div class="preloader__logo">
+      <span class="preloader__mark"></span>
+      <span>LIVSON</span>
+    </div>
+    <div class="preloader__bar"><span id="preloaderBar"></span></div>
+  </div>
+
+  <!-- ===== 3D BACKGROUND CANVAS ===== -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="bg-overlay" aria-hidden="true"></div>
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="brand" aria-label="Livson Tecnologia — início">
+        <img src="img/livson-tecnologia-logo.png" alt="" class="brand__mark" width="32" height="32" />
+        <span class="brand__text">LIVSON<em>TECNOLOGIA</em></span>
+      </a>
+
+      <nav class="nav__links" id="navLinks">
+        <a href="index.html">Início</a>
+        <a href="#modulos" class="nav__hot">Como funciona</a>
+        <a href="#impacto-conecta">Impacto Real</a>
+        <a href="#planos-conecta">Planos</a>
+        <a href="#faq">Perguntas</a>
+        <a href="index.html#contato">Contato</a>
+      </nav>
+
+      <a href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20Livson%20Conecta%20e%20quero%20saber%20mais." target="_blank" rel="noopener" class="btn btn--sm btn--primary nav__cta">Quero começar</a>
+
+      <button class="nav__toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+      <div class="container hero__inner">
+        <nav class="breadcrumb" aria-label="breadcrumb"><a href="index.html">Início</a> / <span>Livson Conecta</span></nav>
+        <div class="hero__badge reveal">
+          <span class="pulse-dot"></span> Vendendo até enquanto você dorme
+        </div>
+        <h1 class="hero__title">
+          <span class="reveal-line">O sistema que vende</span>
+          <span class="reveal-line">por você, <span class="grad">do clique à agenda</span></span>
+        </h1>
+        <p class="hero__sub reveal">
+          Site, <strong>Vendedor IA no WhatsApp</strong>, CRM e painel de resultado — tudo conectado
+          num único sistema. Você para de perder venda por demora ou desorganização, e passa a ver,
+          em tempo real, o que está funcionando.
+        </p>
+        <div class="hero__actions reveal">
+          <a href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20Livson%20Conecta%20e%20quero%20saber%20mais." target="_blank" rel="noopener" class="btn btn--primary btn--glow">Quero implementar no meu negócio</a>
+          <a href="#modulos" class="btn btn--ghost">Ver como funciona</a>
+        </div>
+        <div class="hero__company reveal">
+          <img src="img/livson-tecnologia-logo.png" alt="" class="brand__mark" width="32" height="32" />
+          <span>Da <strong>Livson Tecnologia</strong> — sistema de vendas com IA construído do zero, não um bot genérico revendido.</span>
+        </div>
+      </div>
+      <a href="#modulos" class="hero__scroll" aria-label="Rolar para baixo">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- ===== MÓDULOS ===== -->
+    <section class="section conecta" id="modulos">
+      <div class="container">
+        <div class="section__head section__head--center reveal">
+          <span class="eyebrow">Como funciona</span>
+          <h2 class="section__title">4 módulos. <span class="grad">1 sistema conectado.</span></h2>
+          <p class="conecta__tagline">Tudo conectado. Vendendo por você.</p>
+          <p class="section__lead">Separamos a venda em 4 etapas porque é assim que ela acontece de verdade no seu negócio. Cada módulo cuida de uma parte — e todos conversam entre si.</p>
+        </div>
+
+        <div class="conecta__flow">
+          <article class="module reveal">
+            <span class="module__step">01</span>
+            <div class="module__icon">🖥️</div>
+            <h3>Vitrine</h3>
+            <span class="module__role">Captação</span>
+            <p>Site ou landing page de alta conversão que atrai e captura o lead.</p>
+          </article>
+          <div class="module__link" aria-hidden="true"></div>
+          <article class="module reveal">
+            <span class="module__step">02</span>
+            <div class="module__icon">🤖</div>
+            <h3>Vendedor IA</h3>
+            <span class="module__role">Atendimento</span>
+            <p>Atende no WhatsApp 24/7, qualifica, agenda e ainda faz follow-up sozinho.</p>
+          </article>
+          <div class="module__link" aria-hidden="true"></div>
+          <article class="module reveal">
+            <span class="module__step">03</span>
+            <div class="module__icon">🗂️</div>
+            <h3>CRM</h3>
+            <span class="module__role">Organização</span>
+            <p>Cada lead vira um card: histórico, status e follow-up automático.</p>
+          </article>
+          <div class="module__link" aria-hidden="true"></div>
+          <article class="module reveal">
+            <span class="module__step">04</span>
+            <div class="module__icon">📊</div>
+            <h3>Painel</h3>
+            <span class="module__role">Resultado</span>
+            <p>Dashboard com leads, agendamentos, conversão e retorno real.</p>
+          </article>
+        </div>
+
+        <!-- Comparação: robô comum vs Livson Conecta -->
+        <div class="compare reveal">
+          <div class="compare__row compare__row--head">
+            <span>Recurso</span>
+            <span>🤖 Robô comum</span>
+            <span>🚀 Livson Conecta</span>
+          </div>
+          <div class="compare__row">
+            <span>Treinado no seu negócio</span>
+            <span class="no">✕ Genérico</span>
+            <span class="yes">✓ Total</span>
+          </div>
+          <div class="compare__row">
+            <span>Agenda sozinho</span>
+            <span class="no">✕</span>
+            <span class="yes">✓ No seu calendário</span>
+          </div>
+          <div class="compare__row">
+            <span>Capta do site e anúncios</span>
+            <span class="no">✕</span>
+            <span class="yes">✓ Funil conectado</span>
+          </div>
+          <div class="compare__row">
+            <span>Os dados são seus</span>
+            <span class="no">✕ Fora do seu controle</span>
+            <span class="yes">✓ Seu CRM</span>
+          </div>
+          <div class="compare__row">
+            <span>Painel de resultado</span>
+            <span class="no">✕</span>
+            <span class="yes">✓ ROI na tela</span>
+          </div>
+          <div class="compare__row">
+            <span>Follow-up de lead frio</span>
+            <span class="no">✕</span>
+            <span class="yes">✓ Recupera venda</span>
+          </div>
+          <div class="compare__row">
+            <span>Vantagem competitiva</span>
+            <span class="no">✕ Igual p/ todos</span>
+            <span class="yes">✓ Exclusivo seu</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== O QUE VEM INCLUSO ===== -->
+    <section class="section section--alt" id="incluso">
+      <div class="container">
+        <div class="section__head section__head--center reveal">
+          <span class="eyebrow">Dentro do sistema</span>
+          <h2 class="section__title">Tudo que vem dentro do <span class="grad">Livson Conecta</span></h2>
+          <p class="section__lead">Não é serviço solto: cada peça se conecta com a outra e trabalha junto pra vender por você.</p>
+        </div>
+
+        <div class="grid grid--services">
+          <article class="service reveal"><span class="service__num">01</span><h3>Criação de Sites Responsivos</h3><p>Sites modernos, rápidos e perfeitos em qualquer dispositivo.</p></article>
+          <article class="service reveal"><span class="service__num">02</span><h3>Landing Pages de Conversão</h3><p>Estrutura otimizada para captar e converter leads.</p></article>
+          <article class="service reveal"><span class="service__num">03</span><h3>Automações com n8n</h3><p>Fluxos que trabalham por você, integrando seus sistemas.</p></article>
+          <article class="service reveal"><span class="service__num">04</span><h3>Gestão Google Meu Negócio</h3><p>Apareça no mapa e conquiste a confiança local.</p></article>
+          <article class="service reveal"><span class="service__num">05</span><h3>Dashboards Inteligentes</h3><p>Seus dados organizados e visuais para decidir melhor.</p></article>
+          <article class="service reveal"><span class="service__num">06</span><h3>Chatbots com IA</h3><p>Atendimento automático que entende e resolve.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== IMPACTO REAL ===== -->
+    <section class="section impact" id="impacto-conecta">
+      <div class="container">
+        <div class="section__head section__head--center reveal">
+          <span class="eyebrow">Impacto Real</span>
+          <h2 class="section__title">Isso é o que você <span class="grad">ganha na prática</span></h2>
+          <p class="section__lead">Já mostramos como o sistema funciona. Agora veja o que isso representa no seu dia a dia.</p>
+        </div>
+
+        <div class="grid grid--impact">
+          <article class="impact__card reveal">
+            <span class="impact__icon">⚡</span>
+            <h3 class="impact__num">21x mais chance</h3>
+            <p class="impact__label">de qualificar o lead respondendo em 5 min*</p>
+            <p class="impact__desc">Empresas que respondem um lead em até 5 minutos qualificam muito mais do que as que esperam 30 — e é exatamente esse primeiro contato que o Vendedor IA garante, sempre.</p>
+          </article>
+
+          <article class="impact__card reveal">
+            <span class="impact__icon">🌙</span>
+            <h3 class="impact__num">24/7</h3>
+            <p class="impact__label">vendendo fora do horário comercial</p>
+            <p class="impact__desc">De madrugada, no fim de semana ou com a equipe ocupada — o WhatsApp continua respondendo, tirando dúvida e agendando sozinho.</p>
+          </article>
+
+          <article class="impact__card reveal">
+            <span class="impact__icon">🗂️</span>
+            <h3 class="impact__num">Zero</h3>
+            <p class="impact__label">leads esquecidos no meio da conversa</p>
+            <p class="impact__desc">Todo contato vira um card no CRM, com histórico e follow‑up automático — inclusive o lead frio que antes ia ser esquecido.</p>
+          </article>
+
+          <article class="impact__card reveal">
+            <span class="impact__icon">📊</span>
+            <h3 class="impact__num">100%</h3>
+            <p class="impact__label">de visibilidade sobre o que está funcionando</p>
+            <p class="impact__desc">Um painel mostra leads, agendamentos e conversão em tempo real — decisão com dado, não achismo.</p>
+          </article>
+        </div>
+
+        <p class="impact__note">*Pesquisa externa sobre tempo de resposta a leads (Dr. James Oldroyd, MIT, popularizada pela Harvard Business Review). Os demais pontos descrevem o funcionamento do Livson Conecta — não são resultados de clientes.</p>
+      </div>
+    </section>
+
+    <!-- ===== PLANOS ===== -->
+    <section class="section section--alt" id="planos-conecta">
+      <div class="container">
+        <div class="section__head section__head--center reveal">
+          <span class="eyebrow">Planos</span>
+          <h2 class="section__title">Escolha o nível do seu <span class="grad">Livson Conecta</span></h2>
+          <p class="section__lead">Do primeiro passo à operação de vendas completa. Comece pequeno e cresça quando fizer sentido.</p>
+        </div>
+
+        <div class="grid grid--plans">
+          <article class="plan reveal">
+            <h3 class="plan__name">Start</h3>
+            <p class="plan__focus">Comece a captar</p>
+            <ul class="plan__list">
+              <li>Landing page que converte</li>
+              <li>Design 100% responsivo</li>
+              <li>Botão direto de WhatsApp</li>
+              <li>No ar em 7 dias</li>
+              <li>1 revisão inclusa</li>
+            </ul>
+            <a href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Quero%20um%20or%C3%A7amento%20do%20plano%20Start%20do%20Livson%20Conecta." target="_blank" rel="noopener" class="btn btn--ghost btn--block">Pedir orçamento</a>
+          </article>
+
+          <article class="plan plan--featured reveal">
+            <span class="plan__badge">Mais escolhido</span>
+            <h3 class="plan__name">Pro</h3>
+            <p class="plan__focus">Cresça com método</p>
+            <ul class="plan__list">
+              <li>Site de várias páginas</li>
+              <li>Vendedor IA no WhatsApp</li>
+              <li>SEO para aparecer no Google</li>
+              <li>CRM para organizar os leads</li>
+              <li>Dashboard de resultados</li>
+              <li>3 revisões inclusas</li>
+            </ul>
+            <a href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Quero%20um%20or%C3%A7amento%20do%20plano%20Pro%20do%20Livson%20Conecta." target="_blank" rel="noopener" class="btn btn--primary btn--block">Pedir orçamento</a>
+          </article>
+
+          <article class="plan reveal">
+            <h3 class="plan__name">Max</h3>
+            <p class="plan__focus">Operação completa</p>
+            <ul class="plan__list">
+              <li>Tudo do plano Pro</li>
+              <li>Google Meu Negócio</li>
+              <li>SEO avançado</li>
+              <li>Automações sob medida (n8n)</li>
+              <li>Follow-up que recupera venda</li>
+              <li>Suporte prioritário</li>
+            </ul>
+            <a href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Quero%20um%20or%C3%A7amento%20do%20plano%20Max%20do%20Livson%20Conecta." target="_blank" rel="noopener" class="btn btn--ghost btn--block">Pedir orçamento</a>
+          </article>
+        </div>
+        <p class="plans__note">🔒 7 dias de teste grátis ou seu dinheiro de volta. Sem risco pra você.</p>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section__head section__head--center reveal">
+          <span class="eyebrow">Perguntas Frequentes</span>
+          <h2 class="section__title">Ainda com <span class="grad">dúvidas?</span></h2>
+        </div>
+
+        <div class="faq reveal">
+          <div class="faq__item">
+            <button class="faq__question">O Vendedor IA substitui o atendimento humano?</button>
+            <p class="faq__answer">Não totalmente: ele faz a triagem, responde dúvidas frequentes, qualifica e agenda. Casos mais complexos podem ser transferidos para você a qualquer momento.</p>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question">Funciona no meu número de WhatsApp normal?</button>
+            <p class="faq__answer">Sim. O sistema é configurado no número que você já usa (ou em um novo, se preferir), sem precisar trocar de aparelho.</p>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question">Quanto tempo leva para ficar no ar?</button>
+            <p class="faq__answer">Depende do plano: a partir de 7 dias no plano Start, e em até 15 dias nos planos com automações mais completas (Pro e Max).</p>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question">Os dados dos meus leads ficam comigo?</button>
+            <p class="faq__answer">Sim. Diferente de robôs genéricos, todo o histórico de conversas e contatos fica no seu CRM, sob seu controle.</p>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question">Preciso entender de tecnologia para usar?</button>
+            <p class="faq__answer">Não. Você recebe o sistema pronto, com um painel simples de usar, e a Livson acompanha a implantação e o suporte.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA FINAL ===== -->
+    <section class="cta-band" id="diagnostico">
+      <div class="container cta-band__inner reveal">
+        <h2>Pronto pra <span class="grad">parar de perder venda?</span></h2>
+        <p>Chama no WhatsApp e entenda, sem compromisso, como o Livson Conecta se encaixa no seu negócio.</p>
+        <a href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20Livson%20Conecta%20e%20quero%20saber%20mais." target="_blank" rel="noopener" class="btn btn--primary btn--glow btn--lg">Falar no WhatsApp</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img src="img/livson-tecnologia-logo.png" alt="" class="brand__mark" width="32" height="32" />
+        <span class="brand__text">LIVSON<em>TECNOLOGIA</em></span>
+        <p>O sistema que capta, atende e agenda seus clientes — 24 horas por dia.</p>
+      </div>
+      <nav class="footer__nav">
+        <a href="livson-conecta.html">Livson Conecta</a>
+        <a href="index.html#solucoes">Soluções</a>
+        <a href="index.html#pacotes">Planos</a>
+        <a href="index.html#portfolio">Portfólio</a>
+        <a href="index.html#fundador">Fundador</a>
+        <a href="diagnostico.html">Diagnóstico Grátis</a>
+      </nav>
+      <div class="footer__contact">
+        <a href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20saber%20mais%20sobre%20o%20Livson%20Conecta." target="_blank" rel="noopener"><span class="icon"><svg viewBox="0 0 32 32" aria-hidden="true" fill="currentColor"><path d="M16.004 3C9.377 3 4 8.377 4 15.004c0 2.42.71 4.673 1.936 6.567L4 29l7.61-1.897a11.94 11.94 0 0 0 4.395.833h.004c6.627 0 12.003-5.377 12.003-12.003C28.012 8.377 22.63 3 16.004 3zm0 21.723h-.003a9.7 9.7 0 0 1-4.942-1.354l-.354-.21-3.68.918.98-3.59-.23-.368a9.688 9.688 0 0 1-1.487-5.115c0-5.362 4.363-9.725 9.72-9.725 2.598 0 5.04 1.013 6.877 2.852a9.654 9.654 0 0 1 2.848 6.878c0 5.362-4.364 9.714-9.729 9.714zm5.33-7.282c-.29-.145-1.72-.849-1.987-.946-.267-.097-.462-.145-.656.146-.194.29-.752.946-.922 1.14-.17.194-.34.218-.63.073-.29-.146-1.225-.452-2.335-1.44-.863-.77-1.446-1.72-1.615-2.01-.17-.29-.018-.447.127-.59.13-.13.29-.34.435-.51.146-.17.194-.29.29-.485.097-.194.049-.363-.024-.509-.073-.145-.656-1.58-.9-2.164-.237-.568-.478-.49-.656-.499l-.559-.01c-.194 0-.509.073-.775.363-.267.29-1.018.995-1.018 2.427 0 1.432 1.042 2.816 1.187 3.011.146.194 2.052 3.133 4.973 4.393.695.3 1.237.48 1.66.614.697.222 1.332.19 1.834.115.56-.083 1.72-.703 1.963-1.382.243-.679.243-1.261.17-1.382-.073-.122-.267-.194-.558-.34z"/></svg></span> (71) 99646-6575</a>
+        <a href="https://www.instagram.com/livsontecnologia/" target="_blank" rel="noopener"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.3"/><circle cx="17.3" cy="6.7" r="0.9" fill="currentColor" stroke="none"/></svg></span> @livsontecnologia</a>
+      </div>
+    </div>
+    <div class="footer__bottom container">
+      <span>© <span id="year"></span> Livson Tecnologia LTDA. Todos os direitos reservados.</span>
+      <nav class="footer__legal">
+        <a href="politica-de-privacidade.html">Política de Privacidade</a>
+        <a href="termos-de-uso.html">Termos de Uso</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- ===== WHATSAPP FLUTUANTE ===== -->
+  <a
+    href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20do%20Livson%20Conecta%20e%20quero%20saber%20mais."
+    class="whatsapp-float"
+    target="_blank"
+    rel="noopener"
+    aria-label="Falar no WhatsApp com a Livson Tecnologia"
+  >
+    <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true" fill="currentColor">
+      <path d="M16.004 3C9.377 3 4 8.377 4 15.004c0 2.42.71 4.673 1.936 6.567L4 29l7.61-1.897a11.94 11.94 0 0 0 4.395.833h.004c6.627 0 12.003-5.377 12.003-12.003C28.012 8.377 22.63 3 16.004 3zm0 21.723h-.003a9.7 9.7 0 0 1-4.942-1.354l-.354-.21-3.68.918.98-3.59-.23-.368a9.688 9.688 0 0 1-1.487-5.115c0-5.362 4.363-9.725 9.72-9.725 2.598 0 5.04 1.013 6.877 2.852a9.654 9.654 0 0 1 2.848 6.878c0 5.362-4.364 9.714-9.729 9.714zm5.33-7.282c-.29-.145-1.72-.849-1.987-.946-.267-.097-.462-.145-.656.146-.194.29-.752.946-.922 1.14-.17.194-.34.218-.63.073-.29-.146-1.225-.452-2.335-1.44-.863-.77-1.446-1.72-1.615-2.01-.17-.29-.018-.447.127-.59.13-.13.29-.34.435-.51.146-.17.194-.29.29-.485.097-.194.049-.363-.024-.509-.073-.145-.656-1.58-.9-2.164-.237-.568-.478-.49-.656-.499l-.559-.01c-.194 0-.509.073-.775.363-.267.29-1.018.995-1.018 2.427 0 1.432 1.042 2.816 1.187 3.011.146.194 2.052 3.133 4.973 4.393.695.3 1.237.48 1.66.614.697.222 1.332.19 1.834.115.56-.083 1.72-.703 1.963-1.382.243-.679.243-1.261.17-1.382-.073-.122-.267-.194-.558-.34z"/>
+    </svg>
+  </a>
+
+  <!-- Scripts -->
+  <script type="module" src="js/scene.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

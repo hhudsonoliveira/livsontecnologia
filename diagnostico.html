@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diagnóstico Grátis | Livson Tecnologia</title>
+  <meta name="description" content="Responda 9 perguntas rápidas sobre o seu negócio e receba um diagnóstico gratuito de onde você está perdendo venda e o que dá pra automatizar primeiro." />
+  <meta name="robots" content="noindex, follow" />
+  <meta name="theme-color" content="#05070d" />
+  <link rel="canonical" href="[SEU-DOMINIO]/diagnostico.html" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="img/favicon-192.png" />
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+
+  <meta property="og:title" content="Diagnóstico Grátis | Livson Tecnologia" />
+  <meta property="og:description" content="Em menos de 3 minutos, descubra onde seu negócio está perdendo venda e o que dá pra automatizar primeiro." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="[SEU-DOMINIO]/diagnostico.html" />
+  <meta property="og:image" content="[SEU-DOMINIO]/img/livson-tecnologia-logo.png" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:site_name" content="Livson Tecnologia" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR (minimalista, sem distração) ===== -->
+  <header class="nav is-scrolled" id="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="brand" aria-label="Livson Tecnologia — início">
+        <img src="img/livson-tecnologia-logo.png" alt="" class="brand__mark" width="32" height="32" />
+        <span class="brand__text">LIVSON<em>TECNOLOGIA</em></span>
+      </a>
+      <a href="index.html" class="diag__exit">Sair</a>
+    </div>
+  </header>
+
+  <div class="diag__progress-track" aria-hidden="true">
+    <div class="diag__progress-bar" id="diagProgressBar"></div>
+  </div>
+
+  <main>
+    <section class="diag">
+      <div class="diag__form">
+
+        <p class="diag__counter" id="diagCounter">Pergunta 1 de 9</p>
+
+        <form id="diagForm" novalidate>
+          <!-- Formspree: troque [SEU-FORM-ID-FORMSPREE] pelo ID gerado em formspree.io -->
+          <input type="hidden" name="_subject" value="Novo diagnóstico — Livson Tecnologia" />
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+
+          <div class="diag__step is-active" data-step="0">
+            <h1 class="diag__question">Qual o seu nome?</h1>
+            <input class="diag__input" type="text" name="nome" placeholder="Seu nome completo" autocomplete="name" required />
+            <p class="diag__error"></p>
+            <div class="diag__nav">
+              <span></span>
+              <button type="button" class="btn btn--primary diag__next">Continuar</button>
+            </div>
+          </div>
+
+          <div class="diag__step" data-step="1">
+            <h1 class="diag__question">Qual o seu WhatsApp?</h1>
+            <p class="diag__hint">É por ali que vamos te chamar com o diagnóstico.</p>
+            <input class="diag__input" type="tel" name="whatsapp" placeholder="(00) 00000-0000" autocomplete="tel" required />
+            <p class="diag__error"></p>
+            <div class="diag__nav">
+              <button type="button" class="btn btn--ghost diag__back">Voltar</button>
+              <button type="button" class="btn btn--primary diag__next">Continuar</button>
+            </div>
+          </div>
+
+          <div class="diag__step" data-step="2">
+            <h1 class="diag__question">E o seu e-mail?</h1>
+            <input class="diag__input" type="email" name="email" placeholder="voce@empresa.com" autocomplete="email" required />
+            <p class="diag__error"></p>
+            <div class="diag__nav">
+              <button type="button" class="btn btn--ghost diag__back">Voltar</button>
+              <button type="button" class="btn btn--primary diag__next">Continuar</button>
+            </div>
+          </div>
+
+          <div class="diag__step" data-step="3">
+            <h1 class="diag__question">Qual o nome do seu negócio?</h1>
+            <input class="diag__input" type="text" name="negocio" placeholder="Nome da empresa" required />
+            <p class="diag__error"></p>
+            <div class="diag__nav">
+              <button type="button" class="btn btn--ghost diag__back">Voltar</button>
+              <button type="button" class="btn btn--primary diag__next">Continuar</button>
+            </div>
+          </div>
+
+          <div class="diag__step" data-step="4">
+            <h1 class="diag__question">Site ou Instagram do seu negócio?</h1>
+            <p class="diag__hint">Se ainda não tiver, sem problema — pode pular.</p>
+            <input class="diag__input" type="text" name="site_instagram" placeholder="seusite.com.br ou @seuinstagram" />
+            <p class="diag__error"></p>
+            <div class="diag__nav">
+              <button type="button" class="btn btn--ghost diag__back">Voltar</button>
+              <button type="button" class="btn btn--primary diag__next">Continuar</button>
+            </div>
+          </div>
+
+          <div class="diag__step" data-step="5">
+            <h1 class="diag__question">Qual o maior problema hoje?</h1>
+            <div class="diag__options" role="radiogroup">
+              <div class="diag__option">
+                <input type="radio" name="problema" id="p1" value="Poucos clientes chegando" required />
+                <label for="p1">🎯 Poucos clientes chegando</label>
+              </div>
+              <div class="diag__option">
+                <input type="radio" name="problema" id="p2" value="Demoro muito pra responder" />
+                <label for="p2">⏱️ Demoro muito pra responder</label>
+              </div>
+              <div class="diag__option">
+                <input type="radio" name="problema" id="p3" value="Não tenho site ou landing page" />
+                <label for="p3">🖥️ Não tenho site ou landing page</label>
+              </div>
+              <div class="diag__option">
+                <input type="radio" name="problema" id="p4" value="Perco o controle dos contatos (sem CRM)" />
+                <label for="p4">🗂️ Perco o controle dos contatos</label>
+              </div>
+              <div class="diag__option">
+                <input type="radio" name="problema" id="p5" value="Não sei se o que eu faço está funcionando" />
+                <label for="p5">📊 Não sei se o que eu faço está funcionando</label>
+              </div>
+            </div>
+            <p class="diag__error"></p>
+            <div class="diag__nav">
+              <button type="button" class="btn btn--ghost diag__back">Voltar</button>
+              <button type="button" class="btn btn--primary diag__next">Continuar</button>
+            </div>
+          </div>
+
+          <div class="diag__step" data-step="6">
+            <h1 class="diag__question">Quantos contatos ou leads chegam por dia, mais ou menos?</h1>
+            <div class="diag__options" role="radiogroup">
+              <div class="diag__option">
+                <input type="radio" name="volume_leads" id="v1" value="1 a 5 por dia" required />
+                <label for="v1">1 a 5 por dia</label>
+              </div>
+              <div class="diag__option">
+                <input type="radio" name="volume_leads" id="v2" value="6 a 15 por dia" />
+                <label for="v2">6 a 15 por dia</label>
+              </div>
+              <div class="diag__option">
+                <input type="radio" name="volume_leads" id="v3" value="16 a 40 por dia" />
+                <label for="v3">16 a 40 por dia</label>
+              </div>
+              <div class="diag__option">
+                <input type="radio" name="volume_leads" id="v4" value="Mais de 40 por dia" />
+                <label for="v4">Mais de 40 por dia</label>
+              </div>
+            </div>
+            <p class="diag__error"></p>
+            <div class="diag__nav">
+              <button type="button" class="btn btn--ghost diag__back">Voltar</button>
+              <button type="button" class="btn btn--primary diag__next">Continuar</button>
+            </div>
+          </div>
+
+          <div class="diag__step" data-step="7">
+            <h1 class="diag__question">O que você já usa hoje?</h1>
+            <p class="diag__hint">Pode marcar mais de um.</p>
+            <div class="diag__options">
+              <div class="diag__option">
+                <input type="checkbox" name="ferramentas" id="f1" value="Site ou landing page própria" />
+                <label for="f1">Site ou landing page própria</label>
+              </div>
+              <div class="diag__option">
+                <input type="checkbox" name="ferramentas" id="f2" value="Instagram" />
+                <label for="f2">Instagram</label>
+              </div>
+              <div class="diag__option">
+                <input type="checkbox" name="ferramentas" id="f3" value="WhatsApp Business" />
+                <label for="f3">WhatsApp Business</label>
+              </div>
+              <div class="diag__option">
+                <input type="checkbox" name="ferramentas" id="f4" value="Algum CRM" />
+                <label for="f4">Algum CRM</label>
+              </div>
+              <div class="diag__option">
+                <input type="checkbox" name="ferramentas" id="f5" value="Nenhum desses ainda" />
+                <label for="f5">Nenhum desses ainda</label>
+              </div>
+            </div>
+            <p class="diag__error"></p>
+            <div class="diag__nav">
+              <button type="button" class="btn btn--ghost diag__back">Voltar</button>
+              <button type="button" class="btn btn--primary diag__next">Continuar</button>
+            </div>
+          </div>
+
+          <div class="diag__step" data-step="8">
+            <h1 class="diag__question">Quando você quer resolver isso?</h1>
+            <div class="diag__options" role="radiogroup">
+              <div class="diag__option">
+                <input type="radio" name="urgencia" id="u1" value="O quanto antes" required />
+                <label for="u1">🔥 O quanto antes</label>
+              </div>
+              <div class="diag__option">
+                <input type="radio" name="urgencia" id="u2" value="Nas próximas semanas" />
+                <label for="u2">🗓️ Nas próximas semanas</label>
+              </div>
+              <div class="diag__option">
+                <input type="radio" name="urgencia" id="u3" value="Só pesquisando por enquanto" />
+                <label for="u3">👀 Só pesquisando por enquanto</label>
+              </div>
+            </div>
+            <p class="diag__error"></p>
+            <div class="diag__nav">
+              <button type="button" class="btn btn--ghost diag__back">Voltar</button>
+              <button type="submit" class="btn btn--primary btn--glow diag__submit">Enviar diagnóstico</button>
+            </div>
+          </div>
+        </form>
+
+        <div class="diag__done" id="diagDone" hidden>
+          <span class="diag__done-icon">✅</span>
+          <h1 class="diag__question">Recebemos o seu diagnóstico!</h1>
+          <p class="section__lead">Vamos analisar as suas respostas e te chamar no WhatsApp em breve. Se quiser adiantar, já chama a gente por lá:</p>
+          <a href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Acabei%20de%20preencher%20o%20diagn%C3%B3stico%20gr%C3%A1tis%20no%20site." target="_blank" rel="noopener" class="btn btn--primary btn--glow btn--lg">Falar no WhatsApp agora</a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="diag__footer">
+    <p>Seus dados são usados só pra elaborar o seu diagnóstico. Veja nossa <a href="politica-de-privacidade.html">Política de Privacidade</a>.</p>
+  </footer>
+
+  <!-- ===== WHATSAPP FLUTUANTE ===== -->
+  <a
+    href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Vim%20pelo%20diagn%C3%B3stico%20do%20site%20e%20quero%20saber%20mais."
+    class="whatsapp-float"
+    target="_blank"
+    rel="noopener"
+    aria-label="Falar no WhatsApp com a Livson Tecnologia"
+  >
+    <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true" fill="currentColor">
+      <path d="M16.004 3C9.377 3 4 8.377 4 15.004c0 2.42.71 4.673 1.936 6.567L4 29l7.61-1.897a11.94 11.94 0 0 0 4.395.833h.004c6.627 0 12.003-5.377 12.003-12.003C28.012 8.377 22.63 3 16.004 3zm0 21.723h-.003a9.7 9.7 0 0 1-4.942-1.354l-.354-.21-3.68.918.98-3.59-.23-.368a9.688 9.688 0 0 1-1.487-5.115c0-5.362 4.363-9.725 9.72-9.725 2.598 0 5.04 1.013 6.877 2.852a9.654 9.654 0 0 1 2.848 6.878c0 5.362-4.364 9.714-9.729 9.714zm5.33-7.282c-.29-.145-1.72-.849-1.987-.946-.267-.097-.462-.145-.656.146-.194.29-.752.946-.922 1.14-.17.194-.34.218-.63.073-.29-.146-1.225-.452-2.335-1.44-.863-.77-1.446-1.72-1.615-2.01-.17-.29-.018-.447.127-.59.13-.13.29-.34.435-.51.146-.17.194-.29.29-.485.097-.194.049-.363-.024-.509-.073-.145-.656-1.58-.9-2.164-.237-.568-.478-.49-.656-.499l-.559-.01c-.194 0-.509.073-.775.363-.267.29-1.018.995-1.018 2.427 0 1.432 1.042 2.816 1.187 3.011.146.194 2.052 3.133 4.973 4.393.695.3 1.237.48 1.66.614.697.222 1.332.19 1.834.115.56-.083 1.72-.703 1.963-1.382.243-.679.243-1.261.17-1.382-.073-.122-.267-.194-.558-.34z"/>
+    </svg>
+  </a>
+
+  <script src="js/diagnostico.js" defer></script>
+</body>
+</html>

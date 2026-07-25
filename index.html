@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Livson Tecnologia — Sites, IA e Automação para Empresas Venderem Mais</title>
+  <meta name="description" content="Sites, agentes de IA no WhatsApp e automações com n8n para pequenas e médias empresas venderem mais. Conheça o Livson Conecta e peça um diagnóstico gratuito." />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Hudson Oliveira Santos" />
+  <meta name="theme-color" content="#05070d" />
+  <link rel="canonical" href="[SEU-DOMINIO]/" />
+
+  <!-- Favicons (logo Livson) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="img/favicon-192.png" />
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Livson Tecnologia — Sites, IA e Automação para Empresas" />
+  <meta property="og:description" content="Ajudamos empresas a reduzir custos, automatizar processos e vender mais com IA. Conheça o Livson Conecta." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="[SEU-DOMINIO]/" />
+  <meta property="og:image" content="[SEU-DOMINIO]/img/livson-tecnologia-logo.png" />
+  <meta property="og:image:width" content="1080" />
+  <meta property="og:image:height" content="1080" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:site_name" content="Livson Tecnologia" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Livson Tecnologia — Sites, IA e Automação para Empresas" />
+  <meta name="twitter:description" content="Ajudamos empresas a reduzir custos, automatizar processos e vender mais com IA. Conheça o Livson Conecta." />
+  <meta name="twitter:image" content="[SEU-DOMINIO]/img/livson-tecnologia-logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Dados estruturados (SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ProfessionalService",
+        "@id": "[SEU-DOMINIO]/#organization",
+        "name": "Livson Tecnologia",
+        "image": "[SEU-DOMINIO]/img/livson-tecnologia-logo.png",
+        "logo": "[SEU-DOMINIO]/img/livson-tecnologia-logo.png",
+        "url": "[SEU-DOMINIO]/",
+        "telephone": "+5571996466575",
+        "priceRange": "$$",
+        "description": "Consultoria em IA e automação: sites, landing pages, agentes de IA no WhatsApp e automações com n8n para pequenas e médias empresas.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Salvador",
+          "addressRegion": "BA",
+          "addressCountry": "BR"
+        },
+        "areaServed": "BR",
+        "sameAs": ["https://www.instagram.com/livsontecnologia/"],
+        "founder": {
+          "@type": "Person",
+          "name": "Hudson Oliveira Santos",
+          "jobTitle": "Fundador & Desenvolvedor Full Stack",
+          "alumniOf": "Faculdade Sirius",
+          "knowsAbout": ["Inteligência Artificial", "Desenvolvimento Full Stack", "Automação de Processos"]
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "[SEU-DOMINIO]/#website",
+        "name": "Livson Tecnologia",
+        "url": "[SEU-DOMINIO]/",
+        "inLanguage": "pt-BR"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Three.js via importmap -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.161.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.161.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ===== PRELOADER ===== -->
+  <div class="preloader" id="preloader">
+    <div class="preloader__logo">
+      <span class="preloader__mark"></span>
+      <span>LIVSON</span>
+    </div>
+    <div class="preloader__bar"><span id="preloaderBar"></span></div>
+  </div>
+
+  <!-- ===== 3D BACKGROUND CANVAS ===== -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="bg-overlay" aria-hidden="true"></div>
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="#hero" class="brand" aria-label="Livson Tecnologia — início">
+        <img src="img/livson-tecnologia-logo.png" alt="" class="brand__mark" width="32" height="32" />
+        <span class="brand__text">LIVSON<em>TECNOLOGIA</em></span>
+      </a>
+
+      <nav class="nav__links" id="navLinks">
+        <a href="livson-conecta.html" class="nav__hot">Livson Conecta</a>
+        <a href="#solucoes">Soluções</a>
+        <a href="#pacotes">Planos</a>
+        <a href="livson-conecta.html#impacto-conecta">Impacto Real</a>
+        <a href="#portfolio">Portfólio</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <a href="diagnostico.html" class="btn btn--sm btn--primary nav__cta">Diagnóstico Grátis</a>
+
+      <button class="nav__toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+      <div class="container hero__inner">
+        <div class="hero__badge reveal">
+          <span class="pulse-dot"></span> Sistema de vendas com IA para PMEs
+        </div>
+        <h1 class="hero__title">
+          <span class="reveal-line">Sua empresa vendendo</span>
+          <span class="reveal-line">no automático, <span class="grad">24h por dia</span></span>
+        </h1>
+        <p class="hero__sub reveal">
+          A Livson instala um sistema que <strong>capta, atende no WhatsApp e agenda</strong>
+          seus clientes sozinho — pra você <strong>parar de perder venda</strong> e cuidar do que
+          só você pode fazer.
+        </p>
+        <div class="hero__actions reveal">
+          <a href="#livson-conecta" class="btn btn--primary btn--glow">Quero vender no automático</a>
+          <a href="#pacotes" class="btn btn--ghost">Ver planos</a>
+        </div>
+        <div class="hero__trust reveal">
+          <span class="hero__trust-badge">🎓 MBA em IA</span>
+          <span>Fundada por especialista em Inteligência Artificial • Atendimento 100% remoto em todo o Brasil</span>
+        </div>
+      </div>
+      <a href="#solucoes" class="hero__scroll" aria-label="Rolar para baixo">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- ===== MARQUEE ===== -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Inteligência Artificial</span><i>◆</i>
+        <span>Automação com n8n</span><i>◆</i>
+        <span>Landing Pages</span><i>◆</i>
+        <span>Chatbots</span><i>◆</i>
+        <span>SEO Estratégico</span><i>◆</i>
+        <span>Dashboards</span><i>◆</i>
+        <span>Sites Profissionais</span><i>◆</i>
+        <span>Inteligência Artificial</span><i>◆</i>
+        <span>Automação com n8n</span><i>◆</i>
+        <span>Landing Pages</span><i>◆</i>
+        <span>Chatbots</span><i>◆</i>
+        <span>SEO Estratégico</span><i>◆</i>
+        <span>Dashboards</span><i>◆</i>
+        <span>Sites Profissionais</span><i>◆</i>
+      </div>
+    </div>
+
+    <!-- ===== SOLUÇÕES ===== -->
+    <section class="section" id="solucoes">
+      <div class="container">
+        <div class="section__head section__head--center reveal">
+          <span class="eyebrow">Soluções</span>
+          <h2 class="section__title">Cada problema tem uma <span class="grad">solução inteligente</span></h2>
+          <p class="section__lead">Identificamos os gargalos do seu negócio e aplicamos tecnologia onde ela realmente gera retorno.</p>
+        </div>
+
+        <div class="grid grid--solutions">
+          <article class="card card--sol reveal">
+            <div class="card__icon">🎯</div>
+            <div class="card__problem">Sem clientes online</div>
+            <h3>Landing Pages de Alta Conversão</h3>
+            <p>Páginas rápidas, persuasivas e focadas em transformar visitantes em clientes.</p>
+          </article>
+
+          <article class="card card--sol reveal">
+            <div class="card__icon">⚙️</div>
+            <div class="card__problem">Processos manuais</div>
+            <h3>Automação Inteligente com n8n</h3>
+            <p>Elimine tarefas repetitivas e conecte suas ferramentas em fluxos automáticos.</p>
+          </article>
+
+          <article class="card card--sol reveal">
+            <div class="card__icon">🔍</div>
+            <div class="card__problem">Invisível no Google</div>
+            <h3>SEO Estratégico</h3>
+            <p>Seja encontrado por quem procura o seu serviço, na hora certa.</p>
+          </article>
+
+          <article class="card card--sol reveal">
+            <div class="card__icon">🤖</div>
+            <div class="card__problem">Atendimento sobrecarregado</div>
+            <h3>Chatbots com IA</h3>
+            <p>Atenda 24/7, qualifique leads e responda dúvidas automaticamente.</p>
+          </article>
+
+          <article class="card card--sol reveal">
+            <div class="card__icon">📊</div>
+            <div class="card__problem">Sem visibilidade de dados</div>
+            <h3>Dashboards Inteligentes</h3>
+            <p>Enxergue seus números em tempo real e tome decisões com clareza.</p>
+          </article>
+
+          <article class="card card--sol card--cta reveal">
+            <h3>Não sabe por onde começar?</h3>
+            <p>Faça um diagnóstico gratuito e descubra suas maiores oportunidades.</p>
+            <a href="diagnostico.html" class="btn btn--sm btn--primary">Fazer Diagnóstico</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LIVSON CONECTA (teaser — página completa em livson-conecta.html) ===== -->
+    <section class="section conecta-teaser" id="livson-conecta">
+      <div class="container conecta-teaser__inner">
+        <div class="conecta-teaser__copy reveal">
+          <span class="eyebrow">Nosso Sistema</span>
+          <h2 class="section__title">Apresentando o <span class="grad">Livson Conecta</span></h2>
+          <p class="conecta__tagline">Tudo conectado. Vendendo por você.</p>
+          <p class="section__lead">Um sistema completo que <strong>capta, atende, agenda, organiza e mede</strong> — tudo integrado e no seu controle. Um robô comum só responde mensagem e para por aí. O Livson Conecta cuida da venda inteira: do primeiro clique ao cliente agendado.</p>
+          <ul class="conecta-teaser__list">
+            <li><strong>01 Vitrine</strong> — site ou landing page que capta o lead</li>
+            <li><strong>02 Vendedor IA</strong> — atende no WhatsApp 24/7 e agenda sozinho</li>
+            <li><strong>03 CRM</strong> — cada lead organizado, com follow‑up automático</li>
+            <li><strong>04 Painel</strong> — resultado e retorno em tempo real</li>
+          </ul>
+          <div class="conecta__cta">
+            <a href="livson-conecta.html" class="btn btn--primary btn--glow btn--lg">Conhecer o Livson Conecta</a>
+            <a href="#contato" class="btn btn--ghost">Falar com um especialista</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PLANOS (logo após o Livson Conecta) ===== -->
+    <section class="section" id="pacotes">
+      <div class="container">
+        <div class="section__head section__head--center reveal">
+          <span class="eyebrow">Planos</span>
+          <h2 class="section__title">Escolha o nível do seu <span class="grad">Livson Conecta</span></h2>
+          <p class="section__lead">Do primeiro passo à operação de vendas completa. Comece pequeno e cresça quando fizer sentido.</p>
+        </div>
+
+        <div class="grid grid--plans">
+          <article class="plan reveal">
+            <h3 class="plan__name">Start</h3>
+            <p class="plan__focus">Comece a captar</p>
+            <ul class="plan__list">
+              <li>Landing page que converte</li>
+              <li>Design 100% responsivo</li>
+              <li>Botão direto de WhatsApp</li>
+              <li>No ar em 7 dias</li>
+              <li>1 revisão inclusa</li>
+            </ul>
+            <a href="#contato" class="btn btn--ghost btn--block">Pedir orçamento</a>
+          </article>
+
+          <article class="plan plan--featured reveal">
+            <span class="plan__badge">Mais escolhido</span>
+            <h3 class="plan__name">Pro</h3>
+            <p class="plan__focus">Cresça com método</p>
+            <ul class="plan__list">
+              <li>Site de várias páginas</li>
+              <li>Vendedor IA no WhatsApp</li>
+              <li>SEO para aparecer no Google</li>
+              <li>CRM para organizar os leads</li>
+              <li>Dashboard de resultados</li>
+              <li>3 revisões inclusas</li>
+            </ul>
+            <a href="#contato" class="btn btn--primary btn--block">Pedir orçamento</a>
+          </article>
+
+          <article class="plan reveal">
+            <h3 class="plan__name">Max</h3>
+            <p class="plan__focus">Operação completa</p>
+            <ul class="plan__list">
+              <li>Tudo do plano Pro</li>
+              <li>Google Meu Negócio</li>
+              <li>SEO avançado</li>
+              <li>Automações sob medida (n8n)</li>
+              <li>Follow-up que recupera venda</li>
+              <li>Suporte prioritário</li>
+            </ul>
+            <a href="#contato" class="btn btn--ghost btn--block">Pedir orçamento</a>
+          </article>
+        </div>
+        <p class="plans__note">🔒 7 dias de teste grátis ou seu dinheiro de volta. Sem risco pra você.</p>
+      </div>
+    </section>
+
+    <!-- ===== METODOLOGIA ===== -->
+    <section class="section" id="metodologia">
+      <div class="container">
+        <div class="section__head section__head--center reveal">
+          <span class="eyebrow">Como Funciona</span>
+          <h2 class="section__title">Um processo <span class="grad">simples e transparente</span></h2>
+          <p class="section__lead">Da primeira conversa ao suporte contínuo, você sabe exatamente o que esperar.</p>
+        </div>
+
+        <div class="steps">
+          <div class="step reveal">
+            <span class="step__num">1</span>
+            <h3>Briefing</h3>
+            <p>Entendemos suas necessidades, metas e o cenário do seu negócio.</p>
+          </div>
+          <div class="step reveal">
+            <span class="step__num">2</span>
+            <h3>Desenvolvimento</h3>
+            <p>Criamos a solução com tecnologia e foco em resultado.</p>
+          </div>
+          <div class="step reveal">
+            <span class="step__num">3</span>
+            <h3>Publicação</h3>
+            <p>Colocamos tudo no ar, otimizado e pronto para performar.</p>
+          </div>
+          <div class="step reveal">
+            <span class="step__num">4</span>
+            <h3>Suporte</h3>
+            <p>Acompanhamento contínuo para você crescer com tranquilidade.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <section class="stats" id="stats">
+      <div class="container stats__inner">
+        <div class="stat reveal"><span class="stat__num" data-count="10" data-suffix="+">0</span><span class="stat__label">Projetos entregues</span></div>
+        <div class="stat reveal"><span class="stat__num" data-count="10" data-suffix="+">0</span><span class="stat__label">Clientes satisfeitos</span></div>
+        <div class="stat reveal"><span class="stat__num" data-count="2" data-suffix="+">0</span><span class="stat__label">Anos de experiência</span></div>
+        <div class="stat reveal"><span class="stat__num" data-count="100" data-suffix="%">0</span><span class="stat__label">Foco em resultado</span></div>
+      </div>
+    </section>
+
+    <!-- ===== PORTFÓLIO ===== -->
+    <section class="section section--alt" id="portfolio">
+      <div class="container">
+        <div class="section__head section__head--center reveal">
+          <span class="eyebrow">Portfólio</span>
+          <h2 class="section__title">Projetos que <span class="grad">geram resultado</span></h2>
+          <p class="section__lead">Alguns clientes que confiaram na Livson Tecnologia.</p>
+        </div>
+
+        <div class="grid grid--portfolio">
+          <article class="project reveal">
+            <div class="project__top">
+              <span class="project__tag">Saúde &amp; Estética</span>
+              <span class="stars">★★★★★</span>
+            </div>
+            <h3><a href="https://jvsaudebelezaestetica.com/" target="_blank" rel="noopener">JV Saúde Beleza e Estética ↗</a></h3>
+            <p class="project__quote">"Trabalho incrível! Ficou exatamente como eu sonhava — profissional, bonito e moderno."</p>
+            <div class="project__client">Jacira Oliveira · <a href="https://www.instagram.com/jaciraoliversantos/" target="_blank" rel="noopener">@jaciraoliversantos</a></div>
+          </article>
+
+          <article class="project reveal">
+            <div class="project__top">
+              <span class="project__tag">Personal Trainer</span>
+              <span class="stars">★★★★★</span>
+            </div>
+            <h3><a href="https://fabifelintro.com/" target="_blank" rel="noopener">Fabi Felintro Personal ↗</a></h3>
+            <p class="project__quote">"Muito dedicado e atencioso! Entregou tudo no prazo e superou expectativas."</p>
+            <div class="project__client">Fabi Felintro · <a href="https://www.instagram.com/fabifelintro.trainer/" target="_blank" rel="noopener">@fabifelintro.trainer</a></div>
+          </article>
+
+          <article class="project reveal">
+            <div class="project__top">
+              <span class="project__tag">Marketing Digital</span>
+              <span class="stars">★★★★★</span>
+            </div>
+            <h3><a href="https://marketingbazcar.com/" target="_blank" rel="noopener">Agência Bazcar ↗</a></h3>
+            <p class="project__quote">"Parceria perfeita! Entrega no prazo, design impecável e comunicação clara."</p>
+            <div class="project__client">Agência Bazcar · <a href="https://www.instagram.com/agenciabazcar/" target="_blank" rel="noopener">@agenciabazcar</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MISSÃO / VISÃO / VALORES ===== -->
+    <section class="section section--alt" id="sobre">
+      <div class="container">
+        <div class="section__head section__head--center reveal">
+          <span class="eyebrow">Sobre a Livson</span>
+          <h2 class="section__title">Tecnologia prática, <span class="grad">acessível e com propósito</span></h2>
+        </div>
+        <div class="grid grid--mvv">
+          <article class="mvv reveal">
+            <div class="mvv__icon">🚀</div>
+            <h3>Missão</h3>
+            <p>Ajudar empresas a crescer usando tecnologia de forma prática e acessível.</p>
+          </article>
+          <article class="mvv reveal">
+            <div class="mvv__icon">🌎</div>
+            <h3>Visão</h3>
+            <p>Ser referência em consultoria de IA para empreendedores e empresas no Brasil.</p>
+          </article>
+          <article class="mvv reveal">
+            <div class="mvv__icon">💎</div>
+            <h3>Valores</h3>
+            <p>Resultado real, clareza, comprometimento e inovação em cada projeto.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FUNDADOR ===== -->
+    <section class="section founder" id="fundador">
+      <div class="container founder__inner">
+        <div class="founder__media reveal">
+          <img
+            src="img/hudson-oliveira-fundador-livson-tecnologia.jpg"
+            alt="Hudson Oliveira Santos, fundador da Livson Tecnologia, em frente a um notebook"
+            width="900" height="1346" loading="lazy" decoding="async"
+            class="founder__photo"
+          />
+        </div>
+        <div class="founder__copy reveal">
+          <span class="eyebrow">Quem está por trás</span>
+          <h2 class="section__title">Feito por quem entende <span class="grad">do assunto</span></h2>
+          <p class="founder__name">Hudson Oliveira Santos</p>
+          <p class="founder__role">Fundador &amp; Desenvolvedor Full Stack</p>
+          <p class="section__lead">Toda entrega da Livson passa pelas mãos de quem a fundou: MBA em Inteligência Artificial pela Faculdade Sirius e desenvolvedor full stack há mais de 2 anos, construindo sites, agentes de IA e automações de ponta a ponta — sem terceirizar o que importa.</p>
+          <p class="founder__desc">Isso significa comunicação direta, do diagnóstico à entrega — sem telefone sem fio entre quem atende e quem programa.</p>
+          <div class="founder__badges">
+            <span class="founder__badge">🎓 MBA em Inteligência Artificial — Faculdade Sirius</span>
+            <span class="founder__badge">💻 Full Stack Developer — 2+ anos</span>
+          </div>
+          <a href="https://wa.me/5571996466575?text=Ol%C3%A1%2C%20Hudson!%20Vim%20pelo%20site%20e%20quero%20saber%20mais." target="_blank" rel="noopener" class="btn btn--ghost">Falar com o Hudson</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== DIAGNÓSTICO / CTA ===== -->
+    <section class="cta-band" id="diagnostico">
+      <div class="container cta-band__inner reveal">
+        <h2>Descubra onde você está <span class="grad">perdendo cliente</span></h2>
+        <p>Em <strong>menos de 3 minutos e sem custo</strong>, mostramos onde o seu negócio perde venda hoje e o que dá pra automatizar primeiro. Sem enrolação, sem compromisso.</p>
+        <a href="diagnostico.html" class="btn btn--primary btn--glow btn--lg">Quero meu diagnóstico grátis</a>
+      </div>
+    </section>
+
+    <!-- ===== CONTATO ===== -->
+    <section class="section" id="contato">
+      <div class="container contact--simple">
+        <div class="section__head section__head--center reveal">
+          <span class="eyebrow">Fale Conosco</span>
+          <h2 class="section__title">Vamos conversar sobre o seu <span class="grad">projeto</span></h2>
+          <p class="section__lead">Chama no WhatsApp — é o canal mais rápido pra gente te responder.</p>
+        </div>
+
+        <ul class="contact__list contact__list--center reveal">
+          <li><span class="contact__ic"><svg viewBox="0 0 32 32" aria-hidden="true" fill="currentColor"><path d="M16.004 3C9.377 3 4 8.377 4 15.004c0 2.42.71 4.673 1.936 6.567L4 29l7.61-1.897a11.94 11.94 0 0 0 4.395.833h.004c6.627 0 12.003-5.377 12.003-12.003C28.012 8.377 22.63 3 16.004 3zm0 21.723h-.003a9.7 9.7 0 0 1-4.942-1.354l-.354-.21-3.68.918.98-3.59-.23-.368a9.688 9.688 0 0 1-1.487-5.115c0-5.362 4.363-9.725 9.72-9.725 2.598 0 5.04 1.013 6.877 2.852a9.654 9.654 0 0 1 2.848 6.878c0 5.362-4.364 9.714-9.729 9.714zm5.33-7.282c-.29-.145-1.72-.849-1.987-.946-.267-.097-.462-.145-.656.146-.194.29-.752.946-.922 1.14-.17.194-.34.218-.63.073-.29-.146-1.225-.452-2.335-1.44-.863-.77-1.446-1.72-1.615-2.01-.17-.29-.018-.447.127-.59.13-.13.29-.34.435-.51.146-.17.194-.29.29-.485.097-.194.049-.363-.024-.509-.073-.145-.656-1.58-.9-2.164-.237-.568-.478-.49-.656-.499l-.559-.01c-.194 0-.509.073-.775.363-.267.29-1.018.995-1.018 2.427 0 1.432 1.042 2.816 1.187 3.011.146.194 2.052 3.133 4.973 4.393.695.3 1.237.48 1.66.614.697.222 1.332.19 1.834.115.56-.083 1.72-.703 1.963-1.382.243-.679.243-1.261.17-1.382-.073-.122-.267-.194-.558-.34z"/></svg></span> <a href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20saber%20mais%20sobre%20o%20Livson%20Conecta." target="_blank" rel="noopener">WhatsApp: (71) 99646-6575</a></li>
+          <li><span class="contact__ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.3"/><circle cx="17.3" cy="6.7" r="0.9" fill="currentColor" stroke="none"/></svg></span> <a href="https://www.instagram.com/livsontecnologia/" target="_blank" rel="noopener">@livsontecnologia</a></li>
+          <li><span class="contact__ic">📍</span> Salvador, Bahia — atendimento 100% remoto em todo o Brasil</li>
+        </ul>
+
+        <div class="contact__cta reveal">
+          <a href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20saber%20mais%20sobre%20o%20Livson%20Conecta." target="_blank" rel="noopener" class="btn btn--primary btn--glow btn--lg">Chamar no WhatsApp</a>
+          <a href="https://www.instagram.com/livsontecnologia/" target="_blank" rel="noopener" class="btn btn--ghost">Seguir no Instagram</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img src="img/livson-tecnologia-logo.png" alt="" class="brand__mark" width="32" height="32" />
+        <span class="brand__text">LIVSON<em>TECNOLOGIA</em></span>
+        <p>O sistema que capta, atende e agenda seus clientes — 24 horas por dia.</p>
+      </div>
+      <nav class="footer__nav">
+        <a href="livson-conecta.html">Livson Conecta</a>
+        <a href="index.html#solucoes">Soluções</a>
+        <a href="index.html#pacotes">Planos</a>
+        <a href="index.html#portfolio">Portfólio</a>
+        <a href="index.html#fundador">Fundador</a>
+        <a href="diagnostico.html">Diagnóstico Grátis</a>
+      </nav>
+      <div class="footer__contact">
+        <a href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20saber%20mais%20sobre%20o%20Livson%20Conecta." target="_blank" rel="noopener"><span class="icon"><svg viewBox="0 0 32 32" aria-hidden="true" fill="currentColor"><path d="M16.004 3C9.377 3 4 8.377 4 15.004c0 2.42.71 4.673 1.936 6.567L4 29l7.61-1.897a11.94 11.94 0 0 0 4.395.833h.004c6.627 0 12.003-5.377 12.003-12.003C28.012 8.377 22.63 3 16.004 3zm0 21.723h-.003a9.7 9.7 0 0 1-4.942-1.354l-.354-.21-3.68.918.98-3.59-.23-.368a9.688 9.688 0 0 1-1.487-5.115c0-5.362 4.363-9.725 9.72-9.725 2.598 0 5.04 1.013 6.877 2.852a9.654 9.654 0 0 1 2.848 6.878c0 5.362-4.364 9.714-9.729 9.714zm5.33-7.282c-.29-.145-1.72-.849-1.987-.946-.267-.097-.462-.145-.656.146-.194.29-.752.946-.922 1.14-.17.194-.34.218-.63.073-.29-.146-1.225-.452-2.335-1.44-.863-.77-1.446-1.72-1.615-2.01-.17-.29-.018-.447.127-.59.13-.13.29-.34.435-.51.146-.17.194-.29.29-.485.097-.194.049-.363-.024-.509-.073-.145-.656-1.58-.9-2.164-.237-.568-.478-.49-.656-.499l-.559-.01c-.194 0-.509.073-.775.363-.267.29-1.018.995-1.018 2.427 0 1.432 1.042 2.816 1.187 3.011.146.194 2.052 3.133 4.973 4.393.695.3 1.237.48 1.66.614.697.222 1.332.19 1.834.115.56-.083 1.72-.703 1.963-1.382.243-.679.243-1.261.17-1.382-.073-.122-.267-.194-.558-.34z"/></svg></span> (71) 99646-6575</a>
+        <a href="https://www.instagram.com/livsontecnologia/" target="_blank" rel="noopener"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.3"/><circle cx="17.3" cy="6.7" r="0.9" fill="currentColor" stroke="none"/></svg></span> @livsontecnologia</a>
+      </div>
+    </div>
+    <div class="footer__bottom container">
+      <span>© <span id="year"></span> Livson Tecnologia LTDA. Todos os direitos reservados.</span>
+      <nav class="footer__legal">
+        <a href="politica-de-privacidade.html">Política de Privacidade</a>
+        <a href="termos-de-uso.html">Termos de Uso</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- ===== WHATSAPP FLUTUANTE ===== -->
+  <a
+    href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20saber%20mais%20sobre%20o%20Livson%20Conecta."
+    class="whatsapp-float"
+    target="_blank"
+    rel="noopener"
+    aria-label="Falar no WhatsApp com a Livson Tecnologia"
+  >
+    <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true" fill="currentColor">
+      <path d="M16.004 3C9.377 3 4 8.377 4 15.004c0 2.42.71 4.673 1.936 6.567L4 29l7.61-1.897a11.94 11.94 0 0 0 4.395.833h.004c6.627 0 12.003-5.377 12.003-12.003C28.012 8.377 22.63 3 16.004 3zm0 21.723h-.003a9.7 9.7 0 0 1-4.942-1.354l-.354-.21-3.68.918.98-3.59-.23-.368a9.688 9.688 0 0 1-1.487-5.115c0-5.362 4.363-9.725 9.72-9.725 2.598 0 5.04 1.013 6.877 2.852a9.654 9.654 0 0 1 2.848 6.878c0 5.362-4.364 9.714-9.729 9.714zm5.33-7.282c-.29-.145-1.72-.849-1.987-.946-.267-.097-.462-.145-.656.146-.194.29-.752.946-.922 1.14-.17.194-.34.218-.63.073-.29-.146-1.225-.452-2.335-1.44-.863-.77-1.446-1.72-1.615-2.01-.17-.29-.018-.447.127-.59.13-.13.29-.34.435-.51.146-.17.194-.29.29-.485.097-.194.049-.363-.024-.509-.073-.145-.656-1.58-.9-2.164-.237-.568-.478-.49-.656-.499l-.559-.01c-.194 0-.509.073-.775.363-.267.29-1.018.995-1.018 2.427 0 1.432 1.042 2.816 1.187 3.011.146.194 2.052 3.133 4.973 4.393.695.3 1.237.48 1.66.614.697.222 1.332.19 1.834.115.56-.083 1.72-.703 1.963-1.382.243-.679.243-1.261.17-1.382-.073-.122-.267-.194-.558-.34z"/>
+    </svg>
+  </a>
+
+  <!-- Scripts -->
+  <script type="module" src="js/scene.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
