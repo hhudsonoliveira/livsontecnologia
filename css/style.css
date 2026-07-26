@@ -116,8 +116,9 @@ main, .nav, .footer { position: relative; z-index: 2; }
   color: var(--text);
 }
 .preloader__mark {
+  display: block;
   width: 20px; height: 20px; border-radius: 6px;
-  background: var(--grad);
+  background: var(--grad); object-fit: cover;
   box-shadow: var(--shadow-glow);
   animation: spinMark 1.6s var(--ease) infinite;
 }
