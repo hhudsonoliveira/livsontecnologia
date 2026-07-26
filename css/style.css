@@ -304,12 +304,16 @@ main, .nav, .footer { position: relative; z-index: 2; }
   display: flex; align-items: center; gap: 28px;
   width: max-content;
   animation: marquee 34s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1.05rem; color: var(--muted);
 }
 .marquee__track i { color: var(--cyan); font-style: normal; font-size: .7rem; }
 .marquee__track span { white-space: nowrap; }
-@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes marquee { to { transform: translate3d(-50%, 0, 0); } }
 
 /* ---------- Sections ---------- */
 .section { padding: clamp(70px, 11vw, 130px) 0; position: relative; }
