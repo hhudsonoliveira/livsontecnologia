@@ -1,12 +1,11 @@
 /* =========================================================
    LIVSON TECNOLOGIA — Diagnóstico (formulário multi-etapas)
    Navegação por step, validação simples, envio via Formspree.
-   Troque FORM_ENDPOINT abaixo pelo endpoint gerado em formspree.io
    ========================================================= */
 (function () {
   'use strict';
 
-  const FORM_ENDPOINT = 'https://formspree.io/f/[SEU-FORM-ID-FORMSPREE]';
+  const FORM_ENDPOINT = 'https://formspree.io/f/xeeybpge';
 
   const form = document.getElementById('diagForm');
   if (!form) return;
