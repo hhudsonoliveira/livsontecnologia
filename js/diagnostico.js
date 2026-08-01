@@ -1,11 +1,13 @@
 /* =========================================================
    LIVSON TECNOLOGIA — Diagnóstico (formulário multi-etapas)
-   Navegação por step, validação simples, envio via Formspree.
+   Navegação por step, validação, cálculo de receita perdida
+   estimada com base nas respostas, envio via Formspree.
    ========================================================= */
 (function () {
   'use strict';
 
   const FORM_ENDPOINT = 'https://formspree.io/f/xeeybpge';
+  const WHATSAPP = '5571996466575';
 
   const form = document.getElementById('diagForm');
   if (!form) return;
@@ -15,6 +17,7 @@
   const counter = document.getElementById('diagCounter');
   const progressBar = document.getElementById('diagProgressBar');
   const doneEl = document.getElementById('diagDone');
+  const formWrap = form;
   let current = 0;
 
   function showStep(i) {
@@ -23,27 +26,31 @@
     progressBar.style.width = `${((i + 1) / total) * 100}%`;
 
     const active = steps[i];
-    const firstField = active.querySelector('input');
-    if (firstField && (firstField.type === 'text' || firstField.type === 'email' || firstField.type === 'tel')) {
-      firstField.focus({ preventScroll: true });
-    }
+    const firstField = active.querySelector('input[type="text"], input[type="email"], input[type="tel"]');
+    if (firstField) firstField.focus({ preventScroll: true });
   }
 
+  /* valida todos os campos obrigatórios do step (a primeira tela tem dois) */
   function currentStepError(i) {
     const active = steps[i];
-    const required = active.querySelector('[required]');
-    if (!required) return '';
+    const required = Array.from(active.querySelectorAll('[required]'));
+    if (!required.length) return '';
 
-    if (required.type === 'radio') {
-      const group = active.querySelectorAll(`input[name="${required.name}"]`);
-      const checked = Array.from(group).some((r) => r.checked);
-      return checked ? '' : 'Escolha uma opção pra continuar.';
-    }
-    if (!required.value || !required.value.trim()) {
-      return 'Preencha esse campo pra continuar.';
-    }
-    if (required.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(required.value.trim())) {
-      return 'Digite um e-mail válido.';
+    for (const field of required) {
+      if (field.type === 'radio') {
+        const group = active.querySelectorAll(`input[name="${field.name}"]`);
+        const checked = Array.from(group).some((r) => r.checked);
+        if (!checked) return 'Escolha uma opção pra continuar.';
+        continue;
+      }
+      if (!field.value || !field.value.trim()) {
+        field.focus({ preventScroll: true });
+        return 'Preencha os campos obrigatórios pra continuar.';
+      }
+      if (field.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value.trim())) {
+        field.focus({ preventScroll: true });
+        return 'Digite um e-mail válido.';
+      }
     }
     return '';
   }
@@ -72,7 +79,6 @@
   form.querySelectorAll('.diag__next').forEach((btn) => btn.addEventListener('click', goNext));
   form.querySelectorAll('.diag__back').forEach((btn) => btn.addEventListener('click', goBack));
 
-  // Enter avança pro próximo step (exceto no último, onde envia)
   form.addEventListener('keydown', (e) => {
     if (e.key !== 'Enter') return;
     if (e.target.tagName === 'TEXTAREA') return;
@@ -82,18 +88,73 @@
     }
   });
 
-  // Auto-avança em perguntas de escolha única (radio) ao clicar numa opção
+  /* auto-avanço em perguntas de escolha única — steps com campo de texto não avançam sozinhos */
   steps.forEach((step, idx) => {
-    const radios = step.querySelectorAll('input[type="radio"]');
-    radios.forEach((radio) => {
+    if (step.querySelector('input[type="text"], input[type="email"], input[type="tel"]')) return;
+    step.querySelectorAll('input[type="radio"]').forEach((radio) => {
       radio.addEventListener('change', () => {
-        if (idx === total - 1) return; // último step: usuário confirma com o botão de enviar
-        setTimeout(() => { if (current === idx) goNext(); }, 280);
+        if (idx === total - 1) return; // último step: confirma com o botão de enviar
+        setTimeout(() => { if (current === idx) goNext(); }, 300);
       });
     });
   });
 
-  form.addEventListener('submit', async (e) => {
+  /* ---------- Cálculo da estimativa de receita perdida ---------- */
+  function pick(name) {
+    return form.querySelector(`input[name="${name}"]:checked`);
+  }
+
+  function brl(v) {
+    return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+  }
+
+  function calcular() {
+    const vol = pick('volume');
+    const tk = pick('ticket');
+    const tr = pick('tempo_resposta');
+    const sm = pick('sumico');
+    if (!vol || !tk || !tr || !sm) return null;
+
+    const contatos = parseFloat(vol.dataset.n);
+    const ticket = parseFloat(tk.dataset.n);
+    const fatorPerda = Math.min(parseFloat(tr.dataset.n) + parseFloat(sm.dataset.n), 0.85);
+    const perdidosMes = contatos * fatorPerda;
+    const perdaAno = Math.round((perdidosMes * ticket * 12) / 100) * 100;
+
+    return {
+      perdaAno, perdidosMes,
+      volume: vol.value, ticket: tk.value, tempo: tr.value, sumico: sm.value,
+    };
+  }
+
+  function mostrarResultado() {
+    const r = calcular();
+    if (!r) return;
+
+    document.getElementById('resValor').textContent = brl(r.perdaAno);
+    document.getElementById('resUnit').textContent =
+      `O equivalente a cerca de ${(r.perdidosMes * 12).toFixed(0)} vendas por ano que hoje não estão acontecendo.`;
+
+    document.getElementById('brVolume').textContent = r.volume;
+    document.getElementById('brTicket').textContent = r.ticket;
+    document.getElementById('brTempo').textContent = r.tempo;
+    document.getElementById('brSumico').textContent = r.sumico;
+
+    const nome = (form.querySelector('input[name="nome"]').value || '').trim();
+    const negocio = (form.querySelector('input[name="negocio"]').value || '').trim();
+    document.getElementById('repWho').textContent = [nome, negocio].filter(Boolean).join(' · ') || '—';
+
+    const primeiroNome = nome.split(' ')[0] || '';
+    const msg = `Olá! Sou ${primeiroNome}${negocio ? ', da ' + negocio : ''}. Fiz o diagnóstico no site e deu ${brl(r.perdaAno)} por ano. Quero entender como resolver.`;
+    document.getElementById('waLink').href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
+
+    formWrap.hidden = true;
+    counter.hidden = true;
+    doneEl.hidden = false;
+    doneEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
     const error = currentStepError(current);
     const errorEl = steps[current].querySelector('.diag__error');
@@ -102,28 +163,22 @@
       return;
     }
 
-    const submitBtn = form.querySelector('.diag__submit');
-    const originalLabel = submitBtn.textContent;
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Enviando...';
+    const r = calcular();
+    if (r) document.getElementById('fPerda').value = brl(r.perdaAno);
 
-    try {
-      const res = await fetch(FORM_ENDPOINT, {
-        method: 'POST',
-        headers: { Accept: 'application/json' },
-        body: new FormData(form),
-      });
-      if (!res.ok) throw new Error('submit failed');
-      form.hidden = true;
-      counter.hidden = true;
-      doneEl.hidden = false;
-    } catch (err) {
-      submitBtn.disabled = false;
-      submitBtn.textContent = originalLabel;
-      if (errorEl) {
-        errorEl.textContent = 'Não deu pra enviar agora. Chama a gente direto no WhatsApp (botão no canto da tela) que resolvemos na hora.';
-      }
-    }
+    const submitBtn = form.querySelector('.diag__submit');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Calculando...';
+
+    fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: { Accept: 'application/json' },
+      body: new FormData(form),
+    }).catch(() => {
+      console.warn('[Livson] Envio do formulário falhou — o resultado ainda é mostrado, mas confira o Formspree.');
+    });
+
+    setTimeout(mostrarResultado, 500);
   });
 
   showStep(0);
