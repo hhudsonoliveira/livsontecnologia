@@ -72,6 +72,16 @@ async function start() {
   let running = true;
   let frame = 0;
   let lastFrameTime = 0;
+
+  /* Trava de segurança: a detecção de GPU acima pode falhar (navegadores que
+     bloqueiam WEBGL_debug_renderer_info por privacidade). Então medimos o
+     custo real dos primeiros frames — se o navegador não estiver dando conta,
+     desmontamos a cena em vez de travar a página. */
+  const WARMUP_FRAMES = 3;   // ignora os primeiros (compilação de shader é lenta até em GPU boa)
+  const WATCHDOG_FRAMES = 15;
+  const MAX_AVG_FRAME_MS = 90; // alvo é ~33ms; 90ms (≈11fps) = aparelho não dá conta
+  let watchdogStart = 0;
+  let disposed = false;
   const FRAME_BUDGET = 1000 / 30; // limita a ~30fps — fundo decorativo não precisa de 60fps
   const LINKS_EVERY_N_FRAMES = 4; // recalcular as linhas entre partículas é O(n²); não precisa toda hora
 
@@ -320,6 +330,41 @@ async function start() {
 
     composer.render();
 
+    /* Trava de segurança: mede o intervalo REAL entre frames entregues.
+       (Medir o tempo dentro de composer.render() não serve — o trabalho
+       gráfico é assíncrono e não aparece ali.) Se o aparelho não sustenta
+       um mínimo de fluidez, desmonta a cena em vez de travar a página. */
+    if (frame === WARMUP_FRAMES) {
+      watchdogStart = now;
+    } else if (frame === WARMUP_FRAMES + WATCHDOG_FRAMES) {
+      if ((now - watchdogStart) / WATCHDOG_FRAMES > MAX_AVG_FRAME_MS) {
+        teardown();
+        return;
+      }
+    }
+
     if (reduceMotion) running = false; // render one frame then stop
+  }
+
+  /* Desmonta tudo e devolve a memória de GPU. O fundo volta a ser só o
+     gradiente CSS, que já sustenta o visual sozinho. */
+  function teardown() {
+    if (disposed) return;
+    disposed = true;
+    running = false;
+    try {
+      scene.traverse((obj) => {
+        if (obj.geometry) obj.geometry.dispose();
+        if (obj.material) {
+          const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+          mats.forEach((m) => { if (m.map) m.map.dispose(); m.dispose(); });
+        }
+      });
+      composer.dispose();
+      renderer.dispose();
+    } catch (e) { /* melhor esforço: o importante é parar o loop */ }
+    window.removeEventListener('resize', onResize);
+    window.removeEventListener('pointermove', onPointerMove);
+    if (canvas) canvas.remove();
   }
 }

@@ -10,3 +10,15 @@ RewriteRule ^ /%1 [R=301,L]
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^([^.]+)$ $1.html [NC,L]
+
+# ---------------------------------------------------------------
+# Cache
+# O HTML nunca pode ficar preso em cache: é ele que aponta para as
+# versões atuais do CSS/JS (via ?v=). Os arquivos CSS/JS podem ter
+# cache longo justamente porque o ?v= muda quando eles mudam.
+# ---------------------------------------------------------------
+<IfModule mod_headers.c>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>
