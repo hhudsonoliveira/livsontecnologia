@@ -17,27 +17,29 @@
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ---------- Preloader ---------- */
+  /* ---------- Preloader ----------
+     O preloader cobre a tela inteira, então tudo que ele fica visível é
+     tempo em que o usuário não vê conteúdo (e conta como LCP ruim). Por
+     isso: barra rápida + teto absoluto, e nunca esperar o window "load"
+     (que só dispara depois de TODAS as imagens baixarem). */
+  const PRELOADER_MAX_MS = 700;
   const preloader = document.getElementById('preloader');
   const bar = document.getElementById('preloaderBar');
   let progress = 0;
   const tick = setInterval(() => {
-    progress = Math.min(100, progress + Math.random() * 22);
+    progress = Math.min(100, progress + 18 + Math.random() * 22);
     if (bar) bar.style.width = progress + '%';
     if (progress >= 100) {
       clearInterval(tick);
-      setTimeout(hidePreloader, 250);
+      hidePreloader();
     }
-  }, 130);
+  }, 90);
 
-  window.addEventListener('load', () => {
-    progress = 100;
-    if (bar) bar.style.width = '100%';
-    setTimeout(hidePreloader, 400);
-  });
+  setTimeout(hidePreloader, PRELOADER_MAX_MS);
 
   function hidePreloader() {
     if (!preloader || preloader.classList.contains('is-done')) return;
+    clearInterval(tick);
     preloader.classList.add('is-done');
     startHeroIntro();
   }

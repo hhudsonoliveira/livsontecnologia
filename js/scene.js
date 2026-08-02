@@ -9,15 +9,36 @@
 
    Performance: skipped entirely on mobile (CPU/GPU-heavy for
    little visual payoff on small screens — .bg-overlay's CSS
-   gradient carries the background alone there). On desktop,
-   Three.js is dynamically imported after window "load" so it
-   never competes with the initial page render.
+   gradient carries the background alone there) and on machines
+   without hardware-accelerated WebGL, where this scene renders
+   via software rasterizer (SwiftShader/llvmpipe) and blocks the
+   main thread for seconds. On desktop with a real GPU, Three.js
+   is dynamically imported after window "load" so it never
+   competes with the initial page render.
    ========================================================= */
 
 const canvas = document.getElementById('bg-canvas');
 const isMobile = window.innerWidth < 768;
 
-if (isMobile) {
+/* Sem GPU real (VM, PC antigo, GPU bloqueada, robôs de auditoria como o
+   PageSpeed) o WebGL cai em rasterização por software e essa cena trava a
+   página por vários segundos. Nesses casos o fundo fica só com o gradiente
+   CSS, que já sustenta o visual sozinho. */
+function hasHardwareWebGL() {
+  try {
+    const c = document.createElement('canvas');
+    const gl = c.getContext('webgl') || c.getContext('experimental-webgl');
+    if (!gl) return false;
+    const dbg = gl.getExtension('WEBGL_debug_renderer_info');
+    if (!dbg) return true; // sem como saber: assume que dá, em vez de punir o usuário
+    const renderer = String(gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) || '');
+    return !/swiftshader|llvmpipe|software|basic render|microsoft basic/i.test(renderer);
+  } catch (e) {
+    return false;
+  }
+}
+
+if (isMobile || !hasHardwareWebGL()) {
   if (canvas) canvas.remove();
 } else if (document.readyState === 'complete') {
   start();
