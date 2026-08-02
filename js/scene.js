@@ -43,12 +43,16 @@ async function start() {
   let renderer, scene, camera, composer;
   let particles, lineMesh, grid, icoGroup, ico, icoInner;
   let linePositions, linePairs, particleData;
-  const PARTICLE_COUNT = window.innerWidth < 992 ? 70 : 130;
+  const PARTICLE_COUNT = window.innerWidth < 992 ? 70 : 90;
   const MAX_LINK_DIST = 3.2;
 
   const pointer = { x: 0, y: 0, tx: 0, ty: 0 };
   const clock = new THREE.Clock();
   let running = true;
+  let frame = 0;
+  let lastFrameTime = 0;
+  const FRAME_BUDGET = 1000 / 30; // limita a ~30fps — fundo decorativo não precisa de 60fps
+  const LINKS_EVERY_N_FRAMES = 4; // recalcular as linhas entre partículas é O(n²); não precisa toda hora
 
   init();
 
@@ -241,9 +245,15 @@ async function start() {
   }
 
   /* ---------- Animation loop ---------- */
-  function animate() {
+  function animate(now) {
     if (!running) return;
     requestAnimationFrame(animate);
+
+    // Cap a ~30fps — fundo decorativo não precisa de 60fps, e cada frame
+    // pulado aqui é praticamente grátis (só essa comparação).
+    if (now - lastFrameTime < FRAME_BUDGET) return;
+    lastFrameTime = now;
+    frame++;
 
     const t = clock.getElapsedTime();
 
@@ -264,7 +274,8 @@ async function start() {
       if (pos[i * 3 + 2] > spreadZ || pos[i * 3 + 2] < -spreadZ) d.vz *= -1;
     }
     particles.geometry.attributes.position.needsUpdate = true;
-    updateLinks();
+    // updateLinks é O(n²) — recalcula bem menos vezes por segundo que o resto
+    if (frame % LINKS_EVERY_N_FRAMES === 0) updateLinks();
 
     particles.rotation.y = t * 0.02;
     lineMesh.rotation.y = t * 0.02;
