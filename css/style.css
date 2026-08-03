@@ -899,27 +899,26 @@ main, .nav, .footer { position: relative; z-index: 2; }
 
 .report__body { padding: clamp(24px, 4vw, 36px); }
 .report__label { font-size: .78rem; letter-spacing: .13em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
-.report__value {
-  font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.2rem, 7vw, 3.4rem); font-weight: 700;
-  letter-spacing: -.03em; margin: 8px 0 6px; line-height: 1;
-  background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+.report__level {
+  font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.7rem, 5vw, 2.3rem); font-weight: 700;
+  letter-spacing: -.02em; margin: 8px 0 22px; line-height: 1;
+  display: inline-flex; align-items: center; gap: 10px;
 }
-.report__unit { color: var(--muted); font-size: .95rem; max-width: 52ch; }
+.report__level::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: currentColor; flex: none; }
+.report__level--ok { color: #4ade80; }
+.report__level--atencao { color: #fbbf24; }
+.report__level--critico { color: #f87171; }
 
-.report__table { width: 100%; border-collapse: collapse; margin-top: 26px; font-size: .9rem; }
-.report__table th {
-  text-align: left; padding: 9px 0; font-family: 'Space Grotesk', sans-serif; font-size: .72rem;
-  letter-spacing: .1em; text-transform: uppercase; color: var(--muted-2); font-weight: 600;
-  border-bottom: 1px solid var(--border-2);
-}
-.report__table td { padding: 11px 0; border-bottom: 1px solid var(--border); color: var(--muted); }
-.report__table td:last-child { text-align: right; color: var(--text); font-weight: 500; }
-.report__table tr:last-child td { border-bottom: 0; }
+.report__causes { display: flex; flex-direction: column; gap: 12px; }
+.report__cause { padding: 16px 18px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-soft); }
+.report__cause h3 { font-family: 'Space Grotesk', sans-serif; font-size: .95rem; font-weight: 700; margin-bottom: 6px; }
+.report__cause p { color: var(--muted); font-size: .88rem; line-height: 1.55; }
 
 .report__note {
   margin-top: 22px; padding: 14px 16px; border-left: 3px solid var(--border-2); background: var(--bg-soft);
   font-size: .82rem; color: var(--muted); line-height: 1.55; border-radius: 0 8px 8px 0;
 }
+.report__note:empty { display: none; }
 
 .report__next { margin-top: 30px; text-align: center; }
 .report__next h2 { font-size: 1.3rem; font-weight: 700; font-family: 'Space Grotesk', sans-serif; margin-bottom: 10px; }
@@ -929,7 +928,6 @@ main, .nav, .footer { position: relative; z-index: 2; }
 @media (max-width: 560px) {
   .report__actions { flex-direction: column; align-items: stretch; }
   .report__actions .btn { width: 100%; }
-  .report__table { font-size: .84rem; }
 }
 
 @media (max-width: 560px) {

@@ -1,7 +1,7 @@
 /* =========================================================
    LIVSON TECNOLOGIA — Diagnóstico (formulário multi-etapas)
-   Navegação por step, validação, cálculo de receita perdida
-   estimada com base nas respostas, envio via Formspree.
+   Navegação por step, validação, diagnóstico qualitativo
+   (nível + causas) com base nas respostas, envio via Formspree.
    ========================================================= */
 (function () {
   'use strict';
@@ -99,53 +99,79 @@
     });
   });
 
-  /* ---------- Cálculo da estimativa de receita perdida ---------- */
+  /* ---------- Diagnóstico qualitativo (nível + causas identificadas) ---------- */
   function pick(name) {
     return form.querySelector(`input[name="${name}"]:checked`);
   }
 
-  function brl(v) {
-    return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
-  }
+  /* peso: quanto esse ponto pesa no nível final. ids sem entrada aqui (tr1, sm1) = sem problema */
+  const CAUSAS = {
+    tr2: { titulo: 'Tempo de resposta pode melhorar', texto: 'Responder em até 1 hora é bom, mas quem responde em minutos costuma sair na frente — vale apertar esse tempo.', peso: 1 },
+    tr3: { titulo: 'Demora na primeira resposta', texto: 'Um contato que espera horas pela resposta, na maioria das vezes, já está falando com outro fornecedor. Costuma ser a maior causa de perda.', peso: 2 },
+    tr4: { titulo: 'Resposta lenta demais', texto: 'Contato respondido só no dia seguinte praticamente já foi perdido — o cliente resolveu com outra empresa antes de você aparecer.', peso: 3 },
+    sm2: { titulo: 'Follow-up não está acontecendo', texto: 'Metade de quem pergunta o preço some sem resposta. Normalmente falta alguém voltando a procurar essas pessoas depois.', peso: 2 },
+    sm3: { titulo: 'Falta de acompanhamento após o orçamento', texto: 'A maioria dos interessados some depois do preço — é o sinal mais claro de que falta um follow-up estruturado nesse momento.', peso: 3 },
+    sm4: { titulo: 'Sem visibilidade do que acontece depois do orçamento', texto: 'Sem acompanhar quem some, fica difícil saber onde a venda está escapando — e mais difícil ainda corrigir.', peso: 1.5 },
+  };
 
-  function calcular() {
-    const vol = pick('volume');
-    const tk = pick('ticket');
+  function diagnosticar() {
     const tr = pick('tempo_resposta');
     const sm = pick('sumico');
-    if (!vol || !tk || !tr || !sm) return null;
+    const problema = pick('problema');
+    if (!tr || !sm) return null;
 
-    const contatos = parseFloat(vol.dataset.n);
-    const ticket = parseFloat(tk.dataset.n);
-    const fatorPerda = Math.min(parseFloat(tr.dataset.n) + parseFloat(sm.dataset.n), 0.85);
-    const perdidosMes = contatos * fatorPerda;
-    const perdaAno = Math.round((perdidosMes * ticket * 12) / 100) * 100;
+    const causaTempo = CAUSAS[tr.id] || null;
+    const causaSumico = CAUSAS[sm.id] || null;
+    const causas = [causaTempo, causaSumico].filter(Boolean).sort((a, b) => b.peso - a.peso);
+    const score = (causaTempo ? causaTempo.peso : 0) + (causaSumico ? causaSumico.peso : 0);
 
-    return {
-      perdaAno, perdidosMes,
-      volume: vol.value, ticket: tk.value, tempo: tr.value, sumico: sm.value,
-    };
+    let nivel;
+    if (score === 0) nivel = { texto: 'Sob controle', classe: 'ok' };
+    else if (score < 3) nivel = { texto: 'Ponto de atenção', classe: 'atencao' };
+    else nivel = { texto: 'Crítico', classe: 'critico' };
+
+    return { causas, nivel, problema: problema ? problema.value : '' };
   }
 
   function mostrarResultado() {
-    const r = calcular();
+    const r = diagnosticar();
     if (!r) return;
 
-    document.getElementById('resValor').textContent = brl(r.perdaAno);
-    document.getElementById('resUnit').textContent =
-      `O equivalente a cerca de ${(r.perdidosMes * 12).toFixed(0)} vendas por ano que hoje não estão acontecendo.`;
+    const levelEl = document.getElementById('resLevel');
+    levelEl.textContent = r.nivel.texto;
+    levelEl.className = `report__level report__level--${r.nivel.classe}`;
 
-    document.getElementById('brVolume').textContent = r.volume;
-    document.getElementById('brTicket').textContent = r.ticket;
-    document.getElementById('brTempo').textContent = r.tempo;
-    document.getElementById('brSumico').textContent = r.sumico;
+    const causasEl = document.getElementById('resCausas');
+    causasEl.innerHTML = '';
+    if (r.causas.length) {
+      r.causas.forEach((c) => {
+        const div = document.createElement('div');
+        div.className = 'report__cause';
+        div.innerHTML = `<h3></h3><p></p>`;
+        div.querySelector('h3').textContent = c.titulo;
+        div.querySelector('p').textContent = c.texto;
+        causasEl.appendChild(div);
+      });
+    } else {
+      const div = document.createElement('div');
+      div.className = 'report__cause';
+      div.innerHTML = `<h3></h3><p></p>`;
+      div.querySelector('h3').textContent = 'Tempo de resposta e follow-up estão bem cuidados';
+      div.querySelector('p').textContent = 'Esses dois pontos, que costumam ser os maiores vazamentos de venda, já estão sob controle no seu negócio.';
+      causasEl.appendChild(div);
+    }
+
+    const problemaEl = document.getElementById('resProblema');
+    problemaEl.textContent = r.problema
+      ? `Você apontou "${r.problema}" como o maior problema hoje — é por aí que a conversa no WhatsApp vai começar.`
+      : '';
 
     const nome = (form.querySelector('input[name="nome"]').value || '').trim();
     const negocio = (form.querySelector('input[name="negocio"]').value || '').trim();
     document.getElementById('repWho').textContent = [nome, negocio].filter(Boolean).join(' · ') || '—';
 
     const primeiroNome = nome.split(' ')[0] || '';
-    const msg = `Olá! Sou ${primeiroNome}${negocio ? ', da ' + negocio : ''}. Fiz o diagnóstico no site e deu ${brl(r.perdaAno)} por ano. Quero entender como resolver.`;
+    const msg = `Olá! Sou ${primeiroNome}${negocio ? ', da ' + negocio : ''}. Fiz o diagnóstico no site e meu resultado foi "${r.nivel.texto}". Quero entender como resolver.`;
     document.getElementById('waLink').href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
 
     formWrap.hidden = true;
@@ -163,12 +189,12 @@
       return;
     }
 
-    const r = calcular();
-    if (r) document.getElementById('fPerda').value = brl(r.perdaAno);
+    const r = diagnosticar();
+    if (r) document.getElementById('fNivel').value = r.nivel.texto;
 
     const submitBtn = form.querySelector('.diag__submit');
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Calculando...';
+    submitBtn.textContent = 'Gerando diagnóstico...';
 
     fetch(FORM_ENDPOINT, {
       method: 'POST',

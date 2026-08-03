@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-BR" class="no-js">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TPRQHFC8YE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TPRQHFC8YE');
+  </script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Diagnóstico Grátis | Livson Tecnologia</title>
-  <meta name="description" content="Responda algumas perguntas rápidas e descubra, na hora, quanto o seu negócio deixa de faturar por ano por demora de resposta e falta de follow-up." />
+  <meta name="description" content="Responda algumas perguntas rápidas e descubra, na hora, onde o seu negócio está perdendo venda por demora de resposta e falta de follow-up." />
   <meta name="robots" content="noindex, follow" />
   <meta name="theme-color" content="#05070d" />
   <link rel="canonical" href="https://livsontecnologia.com.br/diagnostico" />
@@ -14,7 +23,7 @@
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
 
   <meta property="og:title" content="Diagnóstico Grátis | Livson Tecnologia" />
-  <meta property="og:description" content="Em poucos minutos, descubra quanto o seu negócio está deixando de faturar por ano — e o que dá pra automatizar primeiro." />
+  <meta property="og:description" content="Em poucos minutos, descubra onde o seu negócio está perdendo venda — e o que dá pra resolver primeiro." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://livsontecnologia.com.br/diagnostico" />
   <meta property="og:image" content="https://livsontecnologia.com.br/img/livson-tecnologia-logo.png" />
@@ -26,7 +35,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" /></noscript>
 
-  <link rel="stylesheet" href="css/style.css?v=20260802" />
+  <link rel="stylesheet" href="css/style.css?v=20260802b" />
 </head>
 <body>
 
@@ -53,7 +62,7 @@
 
         <form id="diagForm" novalidate>
           <input type="hidden" name="_subject" value="Novo diagnóstico — Livson Tecnologia" />
-          <input type="hidden" name="perda_anual_estimada" id="fPerda" value="" />
+          <input type="hidden" name="nivel_diagnostico" id="fNivel" value="" />
           <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
 
           <!-- 0 -->
@@ -63,7 +72,7 @@
             <input class="diag__input" type="text" name="nome" placeholder="Seu nome completo" autocomplete="name" required />
             <input class="diag__input" type="text" name="negocio" placeholder="Nome do seu negócio" required />
             <p class="diag__error"></p>
-            <div class="diag__meta">São poucas perguntas rápidas. No final você recebe, em números, quanto o seu negócio deixa de faturar por ano por demora de resposta e falta de follow-up. Sem compromisso.</div>
+            <div class="diag__meta">São poucas perguntas rápidas. No final você recebe um diagnóstico personalizado do que está te custando venda hoje — e o que resolver primeiro. Sem compromisso.</div>
             <div class="diag__nav">
               <span></span>
               <button type="button" class="btn btn--primary diag__next">Começar</button>
@@ -230,21 +239,12 @@
               <span class="report__who" id="repWho">—</span>
             </div>
             <div class="report__body">
-              <p class="report__label">Estimativa de receita perdida por ano</p>
-              <p class="report__value" id="resValor">R$ 0</p>
-              <p class="report__unit" id="resUnit">—</p>
+              <p class="report__label">Nível do seu atendimento hoje</p>
+              <p class="report__level" id="resLevel">—</p>
 
-              <table class="report__table">
-                <thead><tr><th>Parâmetro informado</th><th>Resposta</th></tr></thead>
-                <tbody>
-                  <tr><td>Contatos por mês</td><td id="brVolume">—</td></tr>
-                  <tr><td>Ticket médio</td><td id="brTicket">—</td></tr>
-                  <tr><td>Tempo até a primeira resposta</td><td id="brTempo">—</td></tr>
-                  <tr><td>Clientes que somem sem fechar</td><td id="brSumico">—</td></tr>
-                </tbody>
-              </table>
+              <div class="report__causes" id="resCausas"></div>
 
-              <p class="report__note">Estimativa baseada nas suas respostas, considerando o volume de contatos, o tempo de resposta e quantos pedem preço e não fecham. Não é promessa de resultado: é o tamanho da oportunidade que hoje passa batido.</p>
+              <p class="report__note" id="resProblema"></p>
             </div>
           </div>
 
@@ -266,6 +266,6 @@
     <p>Seus dados são usados só pra elaborar o seu diagnóstico. Veja nossa <a href="/politica-de-privacidade">Política de Privacidade</a>.</p>
   </footer>
 
-  <script src="js/diagnostico.js?v=20260802" defer></script>
+  <script src="js/diagnostico.js?v=20260802b" defer></script>
 </body>
 </html>
