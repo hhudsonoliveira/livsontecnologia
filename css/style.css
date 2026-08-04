@@ -261,8 +261,11 @@ main, .nav, .footer { position: relative; z-index: 2; }
 }
 
 .hero__title {
-  font-size: clamp(2.4rem, 6.4vw, 4.6rem);
+  /* headline longa (2 frases): fonte menor no celular pra não empurrar o CTA
+     pra fora da tela — no desktop continua grande */
+  font-size: clamp(1.85rem, 5.2vw, 3.9rem);
   font-weight: 700;
+  line-height: 1.1;
   margin-bottom: 26px;
 }
 .hero__title .reveal-line { display: block; }
