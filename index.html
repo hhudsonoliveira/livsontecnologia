@@ -44,10 +44,10 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" /></noscript>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" /></noscript>
 
-  <link rel="stylesheet" href="css/style.css?v=20260803" />
+  <link rel="stylesheet" href="css/style.css?v=20260824e" />
 
   <!-- Dados estruturados (SEO) -->
   <script type="application/ld+json">
@@ -165,12 +165,14 @@
           <a href="#solucoes" class="btn btn--ghost">Ver soluções</a>
         </div>
         <div class="hero__trust reveal">
-          <span class="hero__trust-badge">🎓 MBA em IA</span>
-          <span>Fundada por especialista em Inteligência Artificial • Atendimento 100% remoto no Brasil e Exterior</span>
+          <span class="hero__trust-badge"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.5 9 12 14l9.5-5L12 4Z"/><path d="M6.8 11.4V16c0 1.35 2.33 2.45 5.2 2.45S17.2 17.35 17.2 16v-4.6"/><path d="M21.5 9.2v4.6"/></svg> MBA em IA</span>
+          <span class="hero__trust-item">Fundada por especialista em Inteligência Artificial</span>
+          <span class="hero__trust-item">Atendimento 100% remoto no Brasil e Exterior</span>
         </div>
       </div>
-      <a href="#solucoes" class="hero__scroll" aria-label="Rolar para baixo">
-        <span></span>
+      <a href="#solucoes" class="hero__scroll" aria-label="Rolar para as soluções">
+        <span class="hero__scroll-line" aria-hidden="true"></span>
+        <span class="hero__scroll-label">Role para ver onde você trava</span>
       </a>
     </section>
 
@@ -199,74 +201,104 @@
     <!-- ===== SOLUÇÕES ===== -->
     <section class="section" id="solucoes">
       <div class="container">
-        <div class="section__head section__head--center reveal">
-          <span class="eyebrow">Soluções</span>
-          <h2 class="section__title">Os pontos onde negócio <span class="grad">costuma travar</span></h2>
-          <p class="section__lead">Cada empresa trava em um lugar diferente. Estes são os mais comuns — e o que a gente constrói para destravar cada um.</p>
+        <div class="section__head section__head--split reveal">
+          <div>
+            <span class="eyebrow">Soluções</span>
+            <h2 class="section__title title--display">Os pontos onde o negócio <strong>costuma travar</strong></h2>
+          </div>
+          <p class="section__lead">Cada empresa trava em um lugar diferente. Na prática, quase sempre é um destes três — e o que a gente constrói muda conforme o seu.</p>
         </div>
 
-        <div class="grid grid--solutions">
-          <article class="card card--sol reveal">
-            <div class="card__icon">🖥️</div>
-            <div class="card__problem">Sem presença profissional</div>
-            <h3>Sites Profissionais</h3>
-            <p>Um site rápido, bonito no celular e que passa credibilidade de empresa séria.</p>
-          </article>
+        <div class="tracks">
 
-          <article class="card card--sol reveal">
-            <div class="card__icon">🎯</div>
-            <div class="card__problem">Sem clientes online</div>
-            <h3>Landing Pages de Alta Conversão</h3>
-            <p>Páginas rápidas, persuasivas e focadas em transformar visitantes em clientes.</p>
-          </article>
+          <div class="track reveal">
+            <div class="track__head">
+              <span class="track__idx">01</span>
+              <h3 class="track__name">Ninguém te encontra</h3>
+            </div>
+            <div class="track__list">
+              <div class="trava">
+                <p class="trava__problem">Sem presença profissional</p>
+                <div>
+                  <p class="trava__solution">Sites Profissionais</p>
+                  <p class="trava__desc">Um site rápido, bonito no celular e que passa credibilidade de empresa séria.</p>
+                </div>
+              </div>
+              <div class="trava">
+                <p class="trava__problem">Sem clientes online</p>
+                <div>
+                  <p class="trava__solution">Landing Pages de Alta Conversão</p>
+                  <p class="trava__desc">Páginas rápidas, persuasivas e focadas em transformar visitantes em clientes.</p>
+                </div>
+              </div>
+              <div class="trava">
+                <p class="trava__problem">Invisível no Google</p>
+                <div>
+                  <p class="trava__solution">SEO Estratégico</p>
+                  <p class="trava__desc">Seja encontrado por quem procura o seu serviço, na hora certa.</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-          <article class="card card--sol reveal">
-            <div class="card__icon">⚙️</div>
-            <div class="card__problem">Processos manuais</div>
-            <h3>Automação Inteligente com n8n</h3>
-            <p>Elimine tarefas repetitivas e conecte suas ferramentas em fluxos automáticos.</p>
-          </article>
+          <div class="track reveal">
+            <div class="track__head">
+              <span class="track__idx">02</span>
+              <h3 class="track__name">O cliente chega e se perde</h3>
+            </div>
+            <div class="track__list">
+              <div class="trava">
+                <p class="trava__problem">Atendimento sobrecarregado</p>
+                <div>
+                  <p class="trava__solution">Chatbots com IA</p>
+                  <p class="trava__desc">Atenda 24/7, qualifique leads e responda dúvidas automaticamente.</p>
+                </div>
+              </div>
+              <div class="trava">
+                <p class="trava__problem">Contato perdido na planilha</p>
+                <div>
+                  <p class="trava__solution">CRM para Organizar os Leads</p>
+                  <p class="trava__desc">Cada cliente no lugar certo, com follow-up acontecendo sem ninguém lembrar.</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-          <article class="card card--sol reveal">
-            <div class="card__icon">🔍</div>
-            <div class="card__problem">Invisível no Google</div>
-            <h3>SEO Estratégico</h3>
-            <p>Seja encontrado por quem procura o seu serviço, na hora certa.</p>
-          </article>
+          <div class="track reveal">
+            <div class="track__head">
+              <span class="track__idx">03</span>
+              <h3 class="track__name">A operação não escala</h3>
+            </div>
+            <div class="track__list">
+              <div class="trava">
+                <p class="trava__problem">Processos manuais</p>
+                <div>
+                  <p class="trava__solution">Automação Inteligente com n8n</p>
+                  <p class="trava__desc">Elimine tarefas repetitivas e conecte suas ferramentas em fluxos automáticos.</p>
+                </div>
+              </div>
+              <div class="trava">
+                <p class="trava__problem">Sem visibilidade de dados</p>
+                <div>
+                  <p class="trava__solution">Dashboards Inteligentes</p>
+                  <p class="trava__desc">Enxergue seus números em tempo real e tome decisões com clareza.</p>
+                </div>
+              </div>
+              <div class="trava">
+                <p class="trava__problem">A ferramenta que você precisa não existe</p>
+                <div>
+                  <p class="trava__solution">Aplicativos e Sistemas Sob Medida</p>
+                  <p class="trava__desc">Quando nada no mercado serve, a gente constrói para o seu jeito de trabalhar.</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-          <article class="card card--sol reveal">
-            <div class="card__icon">🤖</div>
-            <div class="card__problem">Atendimento sobrecarregado</div>
-            <h3>Chatbots com IA</h3>
-            <p>Atenda 24/7, qualifique leads e responda dúvidas automaticamente.</p>
-          </article>
+        </div>
 
-          <article class="card card--sol reveal">
-            <div class="card__icon">📊</div>
-            <div class="card__problem">Sem visibilidade de dados</div>
-            <h3>Dashboards Inteligentes</h3>
-            <p>Enxergue seus números em tempo real e tome decisões com clareza.</p>
-          </article>
-
-          <article class="card card--sol reveal">
-            <div class="card__icon">🗂️</div>
-            <div class="card__problem">Contato perdido na planilha</div>
-            <h3>CRM para Organizar os Leads</h3>
-            <p>Cada cliente no lugar certo, com follow-up acontecendo sem ninguém lembrar.</p>
-          </article>
-
-          <article class="card card--sol reveal">
-            <div class="card__icon">📱</div>
-            <div class="card__problem">A ferramenta que você precisa não existe</div>
-            <h3>Aplicativos e Sistemas Sob Medida</h3>
-            <p>Quando nada no mercado serve, a gente constrói para o seu jeito de trabalhar.</p>
-          </article>
-
-          <article class="card card--sol card--cta reveal">
-            <h3>Não sabe por onde começar?</h3>
-            <p>Faça o diagnóstico gratuito e descubra onde o seu negócio está travando.</p>
-            <a href="/diagnostico" class="btn btn--sm btn--primary">Fazer Diagnóstico</a>
-          </article>
+        <div class="section__outro reveal">
+          <p>Não sabe em qual dos três você está? É exatamente isso que o diagnóstico responde.</p>
+          <a href="/diagnostico" class="btn btn--sm btn--primary">Fazer Diagnóstico</a>
         </div>
       </div>
     </section>
@@ -276,7 +308,7 @@
       <div class="container conecta-teaser__inner">
         <div class="conecta-teaser__copy reveal">
           <span class="eyebrow">Quando o gargalo é comercial</span>
-          <h2 class="section__title">Para esse caso, já existe pronto: <span class="grad">Livson Conecta</span></h2>
+          <h2 class="section__title title--display">Para esse caso, já existe pronto: <strong>Livson Conecta</strong></h2>
           <p class="conecta__tagline">Tudo conectado. Vendendo por você.</p>
           <p class="section__lead">Tem um gargalo que aparece na maioria dos diagnósticos: o cliente chega e ninguém responde a tempo. Para ele a gente não precisa começar do zero — o Livson Conecta <strong>capta, atende, agenda, organiza e mede</strong>, do primeiro clique ao cliente agendado.</p>
           <ul class="conecta-teaser__list">
@@ -296,30 +328,32 @@
     <!-- ===== METODOLOGIA ===== -->
     <section class="section" id="metodologia">
       <div class="container">
-        <div class="section__head section__head--center reveal">
-          <span class="eyebrow">Como Funciona</span>
-          <h2 class="section__title">Um processo <span class="grad">simples e transparente</span></h2>
-          <p class="section__lead">Da primeira conversa ao suporte contínuo, você sabe exatamente o que esperar.</p>
+        <div class="section__head section__head--split reveal">
+          <div>
+            <span class="eyebrow">Como Funciona</span>
+            <h2 class="section__title title--display">Um processo <strong>sem surpresa</strong></h2>
+          </div>
+          <p class="section__lead">Da primeira conversa ao suporte contínuo, você sabe exatamente o que esperar — inclusive o que a gente vai dizer para não fazer.</p>
         </div>
 
-        <div class="steps">
-          <div class="step reveal">
-            <span class="step__num">1</span>
+        <div class="flow">
+          <div class="flow__step reveal">
+            <span class="flow__num">01</span>
             <h3>Diagnóstico</h3>
             <p>Estudamos como sua operação funciona hoje e achamos onde ela trava. Todo projeto começa aqui.</p>
           </div>
-          <div class="step reveal">
-            <span class="step__num">2</span>
+          <div class="flow__step reveal">
+            <span class="flow__num">02</span>
             <h3>Proposta</h3>
             <p>Você recebe o que resolve o problema — e também o que não vale a pena fazer agora.</p>
           </div>
-          <div class="step reveal">
-            <span class="step__num">3</span>
+          <div class="flow__step reveal">
+            <span class="flow__num">03</span>
             <h3>Desenvolvimento</h3>
             <p>Construímos a solução e colocamos no ar, com você acompanhando cada etapa.</p>
           </div>
-          <div class="step reveal">
-            <span class="step__num">4</span>
+          <div class="flow__step reveal">
+            <span class="flow__num">04</span>
             <h3>Suporte</h3>
             <p>Acompanhamento contínuo para você crescer com tranquilidade.</p>
           </div>
@@ -330,79 +364,81 @@
     <!-- ===== STATS ===== -->
     <section class="stats" id="stats">
       <div class="container stats__inner">
-        <div class="stat reveal"><span class="stat__num" data-count="10" data-suffix="+">0</span><span class="stat__label">Projetos entregues</span></div>
-        <div class="stat reveal"><span class="stat__num" data-count="10" data-suffix="+">0</span><span class="stat__label">Clientes satisfeitos</span></div>
-        <div class="stat reveal"><span class="stat__num" data-count="2" data-suffix="+">0</span><span class="stat__label">Anos de experiência</span></div>
-        <div class="stat reveal"><span class="stat__num" data-count="100" data-suffix="%">0</span><span class="stat__label">Foco em resultado</span></div>
+        <div class="stat reveal"><span class="stat__num" data-count="10" data-suffix="+">10+</span><span class="stat__label">Projetos entregues</span></div>
+        <div class="stat reveal"><span class="stat__num" data-count="10" data-suffix="+">10+</span><span class="stat__label">Clientes satisfeitos</span></div>
+        <div class="stat reveal"><span class="stat__num" data-count="2" data-suffix="+">2+</span><span class="stat__label">Anos de experiência</span></div>
+        <div class="stat reveal"><span class="stat__num" data-count="100" data-suffix="%">100%</span><span class="stat__label">Foco em resultado</span></div>
       </div>
     </section>
 
     <!-- ===== PORTFÓLIO ===== -->
     <section class="section section--alt" id="portfolio">
       <div class="container">
-        <div class="section__head section__head--center reveal">
-          <span class="eyebrow">Portfólio</span>
-          <h2 class="section__title">Projetos que <span class="grad">geram resultado</span></h2>
-          <p class="section__lead">Alguns clientes que confiaram na Livson Tecnologia.</p>
+        <div class="section__head section__head--split reveal">
+          <div>
+            <span class="eyebrow">Portfólio</span>
+            <h2 class="section__title title--display">Projetos que <strong>foram ao ar</strong></h2>
+          </div>
+          <p class="section__lead">Alguns clientes que confiaram na Livson Tecnologia. Os depoimentos são deles, no texto que eles mesmos escreveram.</p>
         </div>
 
-        <div class="grid grid--portfolio">
-          <article class="project reveal">
-            <div class="project__top">
-              <span class="project__tag">Saúde &amp; Estética</span>
-              <span class="stars">★★★★★</span>
+        <div class="works">
+
+          <!-- ATENCAO: jvsaudebelezaestetica.com esta sem registro A no DNS
+               (nao resolve). Depoimento e @ preservados; sem print porque o
+               site nao esta no ar para ser capturado. -->
+          <article class="work work--texto reveal">
+            <div>
+              <p class="work__tag">Saúde &amp; Estética</p>
+              <h3 class="work__name"><a href="https://jvsaudebelezaestetica.com/" target="_blank" rel="noopener">JV Saúde Beleza e Estética ↗</a></h3>
             </div>
-            <h3><a href="https://jvsaudebelezaestetica.com/" target="_blank" rel="noopener">JV Saúde Beleza e Estética ↗</a></h3>
-            <p class="project__quote">"Trabalho incrível! Ficou exatamente como eu sonhava — profissional, bonito e moderno."</p>
-            <div class="project__client">Jacira Oliveira · <a href="https://www.instagram.com/jaciraoliversantos/" target="_blank" rel="noopener">@jaciraoliversantos</a></div>
+            <div>
+              <blockquote class="work__quote">"Trabalho incrível! Ficou exatamente como eu sonhava — profissional, bonito e moderno."</blockquote>
+              <p class="work__client">Jacira Oliveira · <a href="https://www.instagram.com/jaciraoliversantos/" target="_blank" rel="noopener">@jaciraoliversantos</a> <span class="stars">★★★★★</span></p>
+            </div>
           </article>
 
-          <article class="project reveal">
-            <div class="project__top">
-              <span class="project__tag">Personal Trainer</span>
-              <span class="stars">★★★★★</span>
+          <article class="work reveal">
+            <a class="work__shot" href="https://fabifelintro.com/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+              <img src="img/portfolio/fabi-felintro.webp"
+                   alt="Página inicial do site Fabi Felintro Personal, entregue pela Livson Tecnologia"
+                   width="1100" height="688" loading="lazy" decoding="async" />
+            </a>
+            <div class="work__copy">
+              <p class="work__tag">Personal Trainer</p>
+              <h3 class="work__name"><a href="https://fabifelintro.com/" target="_blank" rel="noopener">Fabi Felintro Personal ↗</a></h3>
+              <blockquote class="work__quote">"Muito dedicado e atencioso! Entregou tudo no prazo e superou expectativas."</blockquote>
+              <p class="work__client">Fabi Felintro · <a href="https://www.instagram.com/fabifelintro.trainer/" target="_blank" rel="noopener">@fabifelintro.trainer</a> <span class="stars">★★★★★</span></p>
             </div>
-            <h3><a href="https://fabifelintro.com/" target="_blank" rel="noopener">Fabi Felintro Personal ↗</a></h3>
-            <p class="project__quote">"Muito dedicado e atencioso! Entregou tudo no prazo e superou expectativas."</p>
-            <div class="project__client">Fabi Felintro · <a href="https://www.instagram.com/fabifelintro.trainer/" target="_blank" rel="noopener">@fabifelintro.trainer</a></div>
           </article>
 
-          <article class="project reveal">
-            <div class="project__top">
-              <span class="project__tag">Marketing Digital</span>
-              <span class="stars">★★★★★</span>
+          <article class="work work--inverso reveal">
+            <a class="work__shot" href="https://marketingbazcar.com/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+              <img src="img/portfolio/bazcar.webp"
+                   alt="Página inicial do site da Agência Bazcar, entregue pela Livson Tecnologia"
+                   width="1100" height="688" loading="lazy" decoding="async" />
+            </a>
+            <div class="work__copy">
+              <p class="work__tag">Marketing Digital</p>
+              <h3 class="work__name"><a href="https://marketingbazcar.com/" target="_blank" rel="noopener">Agência Bazcar ↗</a></h3>
+              <blockquote class="work__quote">"Parceria perfeita! Entrega no prazo, design impecável e comunicação clara."</blockquote>
+              <p class="work__client">Agência Bazcar · <a href="https://www.instagram.com/agenciabazcar/" target="_blank" rel="noopener">@agenciabazcar</a> <span class="stars">★★★★★</span></p>
             </div>
-            <h3><a href="https://marketingbazcar.com/" target="_blank" rel="noopener">Agência Bazcar ↗</a></h3>
-            <p class="project__quote">"Parceria perfeita! Entrega no prazo, design impecável e comunicação clara."</p>
-            <div class="project__client">Agência Bazcar · <a href="https://www.instagram.com/agenciabazcar/" target="_blank" rel="noopener">@agenciabazcar</a></div>
           </article>
+
         </div>
       </div>
     </section>
 
-    <!-- ===== MISSÃO / VISÃO / VALORES ===== -->
-    <section class="section section--alt" id="sobre">
-      <div class="container">
-        <div class="section__head section__head--center reveal">
-          <span class="eyebrow">Sobre a Livson</span>
-          <h2 class="section__title">Tecnologia prática, <span class="grad">acessível e com propósito</span></h2>
-        </div>
-        <div class="grid grid--mvv">
-          <article class="mvv reveal">
-            <div class="mvv__icon">🚀</div>
-            <h3>Missão</h3>
-            <p>Ajudar empresas a crescer usando tecnologia de forma prática e acessível.</p>
-          </article>
-          <article class="mvv reveal">
-            <div class="mvv__icon">🌎</div>
-            <h3>Visão</h3>
-            <p>Ser referência em consultoria e tecnologia para empreendedores e empresas no Brasil.</p>
-          </article>
-          <article class="mvv reveal">
-            <div class="mvv__icon">💎</div>
-            <h3>Valores</h3>
-            <p>Resultado real, clareza, comprometimento e inovação em cada projeto.</p>
-          </article>
+    <!-- ===== MANIFESTO (absorve Missão/Visão/Valores como texto corrido) ===== -->
+    <section class="manifesto" id="sobre">
+      <div class="container manifesto__inner reveal">
+        <span class="eyebrow">Como a gente trabalha</span>
+        <p class="manifesto__lead">Tecnologia não é o que a gente vende. É o que a gente usa para <em>destravar o seu negócio</em>.</p>
+        <div class="manifesto__body">
+          <p>Quase todo projeto começa com alguém pedindo um site. E quase nunca o site é o problema. Por isso a primeira coisa que a Livson entrega não é código — é <strong>clareza sobre onde a sua operação está perdendo cliente hoje</strong>.</p>
+          <p>Depois disso, a gente constrói só o que resolve. Se for simples, dizemos que é simples. Se não valer a pena fazer agora, dizemos também — e explicamos por quê. Escopo grande impressiona na proposta; <strong>resultado real aparece na operação</strong>.</p>
+          <p>É esse o trabalho: tecnologia prática e acessível, feita para empresa que precisa crescer — não para impressionar em portfólio.</p>
         </div>
       </div>
     </section>
@@ -420,14 +456,14 @@
         </div>
         <div class="founder__copy reveal">
           <span class="eyebrow">Quem está por trás</span>
-          <h2 class="section__title">Feito por quem entende <span class="grad">do assunto</span></h2>
+          <h2 class="section__title title--display">Feito por quem entende <strong>do assunto</strong></h2>
           <p class="founder__name">Hudson Oliveira Santos</p>
           <p class="founder__role">Fundador &amp; Desenvolvedor Full Stack</p>
           <p class="section__lead">Toda entrega da Livson passa pelas mãos de quem a fundou: MBA em Inteligência Artificial pela Faculdade Sirius e desenvolvedor full stack há mais de 2 anos, construindo sites, agentes de IA e automações de ponta a ponta — sem terceirizar o que importa.</p>
           <p class="founder__desc">Isso significa comunicação direta, do diagnóstico à entrega — sem telefone sem fio entre quem atende e quem programa.</p>
           <div class="founder__badges">
-            <span class="founder__badge">🎓 MBA em Inteligência Artificial — Faculdade Sirius</span>
-            <span class="founder__badge">💻 Full Stack Developer — 2+ anos</span>
+            <span class="founder__badge"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.5 9 12 14l9.5-5L12 4Z"/><path d="M6.8 11.4V16c0 1.35 2.33 2.45 5.2 2.45S17.2 17.35 17.2 16v-4.6"/><path d="M21.5 9.2v4.6"/></svg> MBA em Inteligência Artificial — Faculdade Sirius</span>
+            <span class="founder__badge"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8.6 8.8-3.4 3.2 3.4 3.2"/><path d="m15.4 8.8 3.4 3.2-3.4 3.2"/><path d="M13.4 6.6 10.6 17.4"/></svg> Full Stack Developer — 2+ anos</span>
           </div>
           <a href="https://wa.me/5571996466575?text=Ol%C3%A1%2C%20Hudson!%20Vim%20pelo%20site%20e%20quero%20saber%20mais." target="_blank" rel="noopener" class="btn btn--ghost">Falar com o Hudson</a>
         </div>
@@ -448,7 +484,7 @@
       <div class="container contact--simple">
         <div class="section__head section__head--center reveal">
           <span class="eyebrow">Fale Conosco</span>
-          <h2 class="section__title">Vamos conversar sobre o seu <span class="grad">projeto</span></h2>
+          <h2 class="section__title title--display">Vamos conversar sobre o seu <strong>projeto</strong></h2>
           <p class="section__lead">Chama no WhatsApp — é o canal mais rápido pra gente te responder.</p>
         </div>
 
@@ -456,7 +492,7 @@
           <li><span class="contact__ic"><svg viewBox="0 0 32 32" aria-hidden="true" fill="currentColor"><path d="M16.004 3C9.377 3 4 8.377 4 15.004c0 2.42.71 4.673 1.936 6.567L4 29l7.61-1.897a11.94 11.94 0 0 0 4.395.833h.004c6.627 0 12.003-5.377 12.003-12.003C28.012 8.377 22.63 3 16.004 3zm0 21.723h-.003a9.7 9.7 0 0 1-4.942-1.354l-.354-.21-3.68.918.98-3.59-.23-.368a9.688 9.688 0 0 1-1.487-5.115c0-5.362 4.363-9.725 9.72-9.725 2.598 0 5.04 1.013 6.877 2.852a9.654 9.654 0 0 1 2.848 6.878c0 5.362-4.364 9.714-9.729 9.714zm5.33-7.282c-.29-.145-1.72-.849-1.987-.946-.267-.097-.462-.145-.656.146-.194.29-.752.946-.922 1.14-.17.194-.34.218-.63.073-.29-.146-1.225-.452-2.335-1.44-.863-.77-1.446-1.72-1.615-2.01-.17-.29-.018-.447.127-.59.13-.13.29-.34.435-.51.146-.17.194-.29.29-.485.097-.194.049-.363-.024-.509-.073-.145-.656-1.58-.9-2.164-.237-.568-.478-.49-.656-.499l-.559-.01c-.194 0-.509.073-.775.363-.267.29-1.018.995-1.018 2.427 0 1.432 1.042 2.816 1.187 3.011.146.194 2.052 3.133 4.973 4.393.695.3 1.237.48 1.66.614.697.222 1.332.19 1.834.115.56-.083 1.72-.703 1.963-1.382.243-.679.243-1.261.17-1.382-.073-.122-.267-.194-.558-.34z"/></svg></span> <a href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Livson%20e%20quero%20conversar%20sobre%20o%20meu%20neg%C3%B3cio." target="_blank" rel="noopener">WhatsApp: (71) 99646-6575</a></li>
           <li><span class="contact__ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3.5 6.5l8.5 7 8.5-7"/></svg></span> <a href="mailto:contato@livsontecnologia.com.br">contato@livsontecnologia.com.br</a></li>
           <li><span class="contact__ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.3"/><circle cx="17.3" cy="6.7" r="0.9" fill="currentColor" stroke="none"/></svg></span> <a href="https://www.instagram.com/hhudson.oliveira/" target="_blank" rel="noopener">@hhudson.oliveira</a></li>
-          <li><span class="contact__ic">📍</span> Salvador, Bahia — atendimento 100% remoto no Brasil e Exterior</li>
+          <li><span class="contact__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s6.8-5.5 6.8-11a6.8 6.8 0 1 0-13.6 0C5.2 15.5 12 21 12 21Z"/><circle cx="12" cy="10" r="2.5"/></svg></span> Salvador, Bahia — atendimento 100% remoto no Brasil e Exterior</li>
         </ul>
 
         <div class="contact__cta reveal">
@@ -512,9 +548,9 @@
   </a>
 
   <!-- Scripts -->
-  <script type="module" src="js/scene.js?v=20260803"></script>
+  <script type="module" src="js/scene.js?v=20260824e"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-  <script src="js/main.js?v=20260803" defer></script>
+  <script src="js/main.js?v=20260824e" defer></script>
 </body>
 </html>

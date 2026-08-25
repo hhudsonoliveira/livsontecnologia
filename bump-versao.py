@@ -37,15 +37,38 @@ def main():
     raiz = Path(__file__).resolve().parent
     nova_versao = date.today().strftime("%Y%m%d")
 
-    # se rodar duas vezes no mesmo dia, adiciona um sufixo pra forcar mudanca
+    # Se rodar mais de uma vez no mesmo dia, precisa AVANCAR o sufixo.
+    #
+    # A versao anterior deste trecho comparava `versoes_atuais == {nova_versao}`.
+    # Isso voltava atras: estando tudo em "20260824b", o conjunto era
+    # {"20260824b"}, diferente de {"20260824"}, entao o script gerava
+    # "20260824" de novo — uma versao que o navegador do visitante ja podia
+    # ter em cache daquele mesmo dia. Ou seja, reintroduzia exatamente o bug
+    # que este arquivo existe para evitar.
+    #
+    # Agora a escolha e monotonica: pega o maior sufixo ja usado hoje e soma 1.
+    # Sufixo 0 = "", 1 = "b", 2 = "c", ... (mantem a convencao que ja estava no ar)
     versoes_atuais = set()
     for nome in PAGINAS:
         conteudo = io.open(raiz / nome, encoding="utf-8").read()
         versoes_atuais.update(re.findall(r'\?v=([^"]*)', conteudo))
-    if versoes_atuais == {nova_versao}:
-        nova_versao += "b"
-        while versoes_atuais == {nova_versao}:
-            nova_versao += "b"
+
+    def indice_do_sufixo(versao, base):
+        """"20260824" -> 0 ; "20260824b" -> 1 ; "20260824c" -> 2 ; senao None"""
+        if not versao.startswith(base):
+            return None
+        resto = versao[len(base):]
+        if resto == "":
+            return 0
+        if len(resto) == 1 and "b" <= resto <= "z":
+            return ord(resto) - ord("b") + 1
+        return None
+
+    usados = [i for i in (indice_do_sufixo(v, nova_versao) for v in versoes_atuais)
+              if i is not None]
+    if usados:
+        proximo = max(usados) + 1
+        nova_versao += chr(ord("b") + proximo - 1) if proximo else ""
 
     total = 0
     for nome in PAGINAS:

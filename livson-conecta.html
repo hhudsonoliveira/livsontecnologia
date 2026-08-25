@@ -43,10 +43,10 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" /></noscript>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" /></noscript>
 
-  <link rel="stylesheet" href="css/style.css?v=20260803" />
+  <link rel="stylesheet" href="css/style.css?v=20260824e" />
 
   <!-- Dados estruturados (SEO) -->
   <script type="application/ld+json">
@@ -179,25 +179,27 @@
           <span>Da <strong>Livson Tecnologia</strong> — sistema de vendas com IA construído do zero, não um bot genérico revendido.</span>
         </div>
       </div>
-      <a href="#modulos" class="hero__scroll" aria-label="Rolar para baixo">
-        <span></span>
+      <a href="#modulos" class="hero__scroll" aria-label="Rolar para os módulos">
+        <span class="hero__scroll-line" aria-hidden="true"></span>
+        <span class="hero__scroll-label">Role para ver os 4 módulos</span>
       </a>
     </section>
 
     <!-- ===== MÓDULOS ===== -->
     <section class="section conecta" id="modulos">
       <div class="container">
-        <div class="section__head section__head--center reveal">
-          <span class="eyebrow">Como funciona</span>
-          <h2 class="section__title">4 módulos. <span class="grad">1 sistema conectado.</span></h2>
-          <p class="conecta__tagline">Tudo conectado. Vendendo por você.</p>
+        <div class="section__head section__head--split reveal">
+          <div>
+            <span class="eyebrow">Como funciona</span>
+            <h2 class="section__title title--display">4 módulos. <strong>1 sistema conectado</strong></h2>
+            <p class="conecta__tagline">Tudo conectado. Vendendo por você.</p>
+          </div>
           <p class="section__lead">Separamos a venda em 4 etapas porque é assim que ela acontece de verdade no seu negócio. Cada módulo cuida de uma parte — e todos conversam entre si.</p>
         </div>
 
         <div class="conecta__flow">
           <article class="module reveal">
             <span class="module__step">01</span>
-            <div class="module__icon">🖥️</div>
             <h3>Vitrine</h3>
             <span class="module__role">Captação</span>
             <p>Site ou landing page de alta conversão que atrai e captura o lead.</p>
@@ -205,7 +207,6 @@
           <div class="module__link" aria-hidden="true"></div>
           <article class="module reveal">
             <span class="module__step">02</span>
-            <div class="module__icon">🤖</div>
             <h3>Vendedor IA</h3>
             <span class="module__role">Atendimento</span>
             <p>Atende no WhatsApp 24/7, qualifica, agenda e ainda faz follow-up sozinho.</p>
@@ -213,7 +214,6 @@
           <div class="module__link" aria-hidden="true"></div>
           <article class="module reveal">
             <span class="module__step">03</span>
-            <div class="module__icon">🗂️</div>
             <h3>CRM</h3>
             <span class="module__role">Organização</span>
             <p>Cada lead vira um card: histórico, status e follow-up automático.</p>
@@ -221,7 +221,6 @@
           <div class="module__link" aria-hidden="true"></div>
           <article class="module reveal">
             <span class="module__step">04</span>
-            <div class="module__icon">📊</div>
             <h3>Painel</h3>
             <span class="module__role">Resultado</span>
             <p>Dashboard com leads, agendamentos, conversão e retorno real.</p>
@@ -232,8 +231,8 @@
         <div class="compare reveal">
           <div class="compare__row compare__row--head">
             <span>Recurso</span>
-            <span>🤖 Robô comum</span>
-            <span>🚀 Livson Conecta</span>
+            <span>Robô comum</span>
+            <span>Livson Conecta</span>
           </div>
           <div class="compare__row">
             <span>Treinado no seu negócio</span>
@@ -277,9 +276,11 @@
     <!-- ===== O QUE VEM INCLUSO ===== -->
     <section class="section section--alt" id="incluso">
       <div class="container">
-        <div class="section__head section__head--center reveal">
-          <span class="eyebrow">Dentro do sistema</span>
-          <h2 class="section__title">Tudo que vem dentro do <span class="grad">Livson Conecta</span></h2>
+        <div class="section__head section__head--split reveal">
+          <div>
+            <span class="eyebrow">Dentro do sistema</span>
+            <h2 class="section__title title--display">Tudo que vem <strong>dentro do sistema</strong></h2>
+          </div>
           <p class="section__lead">Não é serviço solto: cada peça se conecta com a outra e trabalha junto pra vender por você.</p>
         </div>
 
@@ -297,36 +298,34 @@
     <!-- ===== IMPACTO REAL ===== -->
     <section class="section impact" id="impacto-conecta">
       <div class="container">
-        <div class="section__head section__head--center reveal">
-          <span class="eyebrow">Impacto Real</span>
-          <h2 class="section__title">Isso é o que você <span class="grad">ganha na prática</span></h2>
+        <div class="section__head section__head--split reveal">
+          <div>
+            <span class="eyebrow">Impacto Real</span>
+            <h2 class="section__title title--display">Isso é o que você <strong>ganha na prática</strong></h2>
+          </div>
           <p class="section__lead">Já mostramos como o sistema funciona. Agora veja o que isso representa no seu dia a dia.</p>
         </div>
 
         <div class="grid grid--impact">
           <article class="impact__card reveal">
-            <span class="impact__icon">⚡</span>
             <h3 class="impact__num">21x mais chance</h3>
             <p class="impact__label">de qualificar o lead respondendo em 5 min*</p>
             <p class="impact__desc">Empresas que respondem um lead em até 5 minutos qualificam muito mais do que as que esperam 30 — e é exatamente esse primeiro contato que o Vendedor IA garante, sempre.</p>
           </article>
 
           <article class="impact__card reveal">
-            <span class="impact__icon">🌙</span>
             <h3 class="impact__num">24/7</h3>
             <p class="impact__label">vendendo fora do horário comercial</p>
             <p class="impact__desc">De madrugada, no fim de semana ou com a equipe ocupada — o WhatsApp continua respondendo, tirando dúvida e agendando sozinho.</p>
           </article>
 
           <article class="impact__card reveal">
-            <span class="impact__icon">🗂️</span>
             <h3 class="impact__num">Zero</h3>
             <p class="impact__label">leads esquecidos no meio da conversa</p>
             <p class="impact__desc">Todo contato vira um card no CRM, com histórico e follow‑up automático — inclusive o lead frio que antes ia ser esquecido.</p>
           </article>
 
           <article class="impact__card reveal">
-            <span class="impact__icon">📊</span>
             <h3 class="impact__num">100%</h3>
             <p class="impact__label">de visibilidade sobre o que está funcionando</p>
             <p class="impact__desc">Um painel mostra leads, agendamentos e conversão em tempo real — decisão com dado, não achismo.</p>
@@ -340,9 +339,11 @@
     <!-- ===== PLANOS ===== -->
     <section class="section section--alt" id="planos-conecta">
       <div class="container">
-        <div class="section__head section__head--center reveal">
-          <span class="eyebrow">Planos</span>
-          <h2 class="section__title">Escolha o nível do seu <span class="grad">Livson Conecta</span></h2>
+        <div class="section__head section__head--split reveal">
+          <div>
+            <span class="eyebrow">Planos</span>
+            <h2 class="section__title title--display">Escolha o nível do seu <strong>Conecta</strong></h2>
+          </div>
           <p class="section__lead">Do primeiro passo à operação de vendas completa. Comece pequeno e cresça quando fizer sentido.</p>
         </div>
 
@@ -389,16 +390,16 @@
             <a href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Quero%20um%20or%C3%A7amento%20do%20plano%20Max%20do%20Livson%20Conecta." target="_blank" rel="noopener" class="btn btn--ghost btn--block">Pedir orçamento</a>
           </article>
         </div>
-        <p class="plans__note">🔒 7 dias de teste grátis ou seu dinheiro de volta. Sem risco pra você.</p>
+        <p class="plans__note">7 dias de teste grátis ou seu dinheiro de volta. Sem risco pra você.</p>
       </div>
     </section>
 
     <!-- ===== FAQ ===== -->
     <section class="section" id="faq">
       <div class="container">
-        <div class="section__head section__head--center reveal">
+        <div class="section__head reveal">
           <span class="eyebrow">Perguntas Frequentes</span>
-          <h2 class="section__title">Ainda com <span class="grad">dúvidas?</span></h2>
+          <h2 class="section__title title--display">Ainda com <strong>dúvidas?</strong></h2>
         </div>
 
         <div class="faq reveal">
@@ -481,9 +482,9 @@
   </a>
 
   <!-- Scripts -->
-  <script type="module" src="js/scene.js?v=20260803"></script>
+  <script type="module" src="js/scene.js?v=20260824e"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-  <script src="js/main.js?v=20260803" defer></script>
+  <script src="js/main.js?v=20260824e" defer></script>
 </body>
 </html>

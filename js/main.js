@@ -134,8 +134,21 @@
     reveals.forEach((el) => io.observe(el));
   }
 
-  /* ---------- Animated counters ---------- */
+  /* ---------- Animated counters ----------
+     O numero REAL fica escrito no HTML (10+, 10+, 2+, 100%). Isso e de
+     proposito: se o JS nao rodar, se o robo do Google ler a pagina, ou se
+     o visitante nunca chegar a rolar ate a faixa, ele ve o numero certo.
+     Antes o HTML trazia "0" e o JS contava ate o valor — quando a contagem
+     nao disparava, a pagina exibia "0 Projetos entregues", que e pior do
+     que nao animar: e um numero errado sobre o proprio negocio.
+     Agora o JS so zera o contador quando tem certeza de que vai anima-lo. */
   const counters = document.querySelectorAll('.stat__num[data-count]');
+
+  const valorFinal = (el) => {
+    const casas = parseInt(el.dataset.decimals || '0', 10);
+    return parseFloat(el.dataset.count).toFixed(casas) + (el.dataset.suffix || '');
+  };
+
   const runCounter = (el) => {
     const target = parseFloat(el.dataset.count);
     const decimals = parseInt(el.dataset.decimals || '0', 10);
@@ -145,34 +158,51 @@
     const step = (now) => {
       const p = Math.min((now - start) / dur, 1);
       const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
-      const val = target * eased;
-      el.textContent = val.toFixed(decimals) + suffix;
+      el.textContent = (target * eased).toFixed(decimals) + suffix;
       if (p < 1) requestAnimationFrame(step);
-      else el.textContent = target.toFixed(decimals) + suffix;
+      else el.textContent = valorFinal(el);
     };
     requestAnimationFrame(step);
   };
 
-  if (counters.length) {
-    if (prefersReduced) {
-      counters.forEach((el) => {
-        const d = parseInt(el.dataset.decimals || '0', 10);
-        el.textContent = parseFloat(el.dataset.count).toFixed(d) + (el.dataset.suffix || '');
-      });
-    } else {
-      const cIO = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) {
-              runCounter(e.target);
-              cIO.unobserve(e.target);
-            }
-          });
-        },
-        { threshold: 0.5 }
-      );
-      counters.forEach((el) => cIO.observe(el));
-    }
+  // Sem animacao com "reduzir movimento": o HTML ja mostra o valor certo.
+  if (counters.length && !prefersReduced && 'IntersectionObserver' in window) {
+    // Dois observadores, de proposito:
+    //   "prepara" dispara ~400px ANTES da faixa aparecer e so entao zera o
+    //   numero (fora da vista, sem piscar na tela do visitante);
+    //   "anima" dispara quando ela realmente entra e faz a contagem subir.
+    // Se o visitante nunca chegar perto da faixa, nenhum dos dois roda e o
+    // numero real escrito no HTML continua na tela.
+    const pendente = new WeakMap();
+
+    const anima = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          anima.unobserve(e.target);
+          clearTimeout(pendente.get(e.target));
+          runCounter(e.target);
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    const prepara = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          prepara.unobserve(e.target);
+          e.target.textContent = '0' + (e.target.dataset.suffix || '');
+          // rede de seguranca: se a contagem nao comecar, devolve o numero real
+          pendente.set(e.target, setTimeout(() => {
+            e.target.textContent = valorFinal(e.target);
+          }, 3000));
+        });
+      },
+      { rootMargin: '0px 0px 400px 0px' }
+    );
+
+    counters.forEach((el) => { anima.observe(el); prepara.observe(el); });
   }
 
   /* ---------- Card spotlight (mouse-follow glow) ---------- */
