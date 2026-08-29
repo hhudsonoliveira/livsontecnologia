@@ -47,7 +47,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" /></noscript>
 
-  <link rel="stylesheet" href="css/style.css?v=20260824e" />
+  <link rel="stylesheet" href="css/style.css?v=20260828f" />
 
   <!-- Dados estruturados (SEO) -->
   <script type="application/ld+json">
@@ -103,7 +103,7 @@
   }
   </script>
 </head>
-<body>
+<body class="tema-hero-escuro">
 
   <!-- ===== PRELOADER ===== -->
   <div class="preloader" id="preloader">
@@ -147,56 +147,110 @@
 
     <!-- ===== HERO ===== -->
     <section class="hero" id="hero">
-      <div class="container hero__inner">
-        <div class="hero__badge reveal">
-          <span class="pulse-dot"></span> Consultoria e tecnologia para PMEs
+      <div class="container container--wide hero__inner">
+
+        <div class="hero__copy">
+          <div class="hero__badge reveal">
+            <span class="pulse-dot"></span> Consultoria e tecnologia para PMEs
+          </div>
+          <h1 class="hero__title">
+            <span class="reveal-line hero__line-1">Todo negócio trava em um ponto diferente.</span>
+            <span class="reveal-line hero__line-2">Achar o seu é a nossa <span class="grad">primeira entrega</span>.</span>
+          </h1>
+          <p class="hero__sub reveal">
+            A Livson estuda como a sua operação funciona hoje, <strong>encontra o gargalo</strong>
+            e constrói o que resolve — site, landing page, CRM, painel, aplicativo, automação
+            ou IA.
+          </p>
+          <div class="hero__actions reveal">
+            <a href="/diagnostico" class="btn btn--primary btn--glow">Começar pelo diagnóstico</a>
+            <a href="#solucoes" class="btn btn--ghost">Ver soluções</a>
+          </div>
+          <div class="hero__trust reveal">
+            <span class="hero__trust-badge"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.5 9 12 14l9.5-5L12 4Z"/><path d="M6.8 11.4V16c0 1.35 2.33 2.45 5.2 2.45S17.2 17.35 17.2 16v-4.6"/><path d="M21.5 9.2v4.6"/></svg> MBA em IA</span>
+            <span class="hero__trust-item">Fundada por especialista em Inteligência Artificial</span>
+            <span class="hero__trust-item">Atendimento 100% remoto no Brasil e Exterior</span>
+          </div>
         </div>
-        <h1 class="hero__title">
-          <span class="reveal-line">Todo negócio trava em um ponto diferente.</span>
-          <span class="reveal-line">Achar o seu é a nossa <span class="grad">primeira entrega</span>.</span>
-        </h1>
-        <p class="hero__sub reveal">
-          A Livson estuda como a sua operação funciona hoje, <strong>encontra o gargalo</strong>
-          e constrói o que resolve — site, landing page, CRM, painel, aplicativo, automação
-          ou IA.
-        </p>
-        <div class="hero__actions reveal">
-          <a href="/diagnostico" class="btn btn--primary btn--glow">Começar pelo diagnóstico</a>
-          <a href="#solucoes" class="btn btn--ghost">Ver soluções</a>
-        </div>
-        <div class="hero__trust reveal">
-          <span class="hero__trust-badge"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.5 9 12 14l9.5-5L12 4Z"/><path d="M6.8 11.4V16c0 1.35 2.33 2.45 5.2 2.45S17.2 17.35 17.2 16v-4.6"/><path d="M21.5 9.2v4.6"/></svg> MBA em IA</span>
-          <span class="hero__trust-item">Fundada por especialista em Inteligência Artificial</span>
-          <span class="hero__trust-item">Atendimento 100% remoto no Brasil e Exterior</span>
-        </div>
+
+        <!-- ÂNCORA VISUAL DO HERO ==========================================
+             Composição das telas que a Livson entrega, renderizada em
+             HTML/CSS puro (regras em "MOCKUPS DE PRODUTO" no style.css).
+             Nenhuma imagem envolvida.
+
+             PARA TROCAR POR PRINT REAL: substitua o conteúdo de
+             .mock__screen por <img src="..." alt="" />. O frame, a sombra,
+             a legenda e o responsivo continuam funcionando sem mais nada.
+
+             Os dados são fictícios de propósito (ver a legenda). -->
+        <figure class="hero__anchor reveal" aria-hidden="true">
+          <div class="hero__stack">
+
+            <div class="mock mock--browser hero__stack-back">
+              <div class="mock__frame">
+                <div class="mock__chrome">
+                  <span class="mock__dots"><i></i><i></i><i></i></span>
+                  <span class="mock__url">app.livsonconecta.com.br/pipeline</span>
+                </div>
+                <div class="mock__screen scr-crm">
+                  <div class="crm__bar">
+                    <span class="crm__title">Pipeline comercial</span>
+                    <span class="crm__pill">Últimos 7 dias</span>
+                  </div>
+                  <div class="crm__cols">
+                    <div class="crm__col">
+                      <p class="crm__colhead">Novo lead <span>4</span></p>
+                      <div class="crm__card crm__card--hot"><b>Marina Duarte</b><span>WhatsApp · há 6 min</span></div>
+                      <div class="crm__card"><b>Rogério Lima</b><span>Instagram · há 1 h</span></div>
+                    </div>
+                    <div class="crm__col">
+                      <p class="crm__colhead">Em conversa <span>3</span></p>
+                      <div class="crm__card"><b>Camila Prado</b><span>Vendedor IA · há 12 min</span></div>
+                      <div class="crm__card"><b>Anderson Reis</b><span>Vendedor IA · há 40 min</span></div>
+                    </div>
+                    <div class="crm__col">
+                      <p class="crm__colhead">Agendado <span>2</span></p>
+                      <div class="crm__card"><b>Patrícia Nunes</b><span>Sábado, 09:30</span></div>
+                    </div>
+                    <div class="crm__col">
+                      <p class="crm__colhead">Cliente <span>5</span></p>
+                      <div class="crm__card"><b>Thiago Barbosa</b><span>Fechado · 22/08</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mock mock--phone hero__stack-front">
+              <div class="mock__frame">
+                <div class="mock__screen scr-wa">
+                  <div class="wa__top">
+                    <span class="wa__av">CV</span>
+                    <span class="wa__who"><b>Clínica Vitalis</b><i>respondendo agora</i></span>
+                  </div>
+                  <div class="wa__body">
+                    <p class="wa__msg wa__msg--in">Vocês atendem no sábado?<time>19:42</time></p>
+                    <p class="wa__msg wa__msg--out">Atendemos sim, das 8h às 13h. Quer que eu veja um horário pra você?<time>19:42</time></p>
+                    <p class="wa__msg wa__msg--in">Quero, de manhã<time>19:43</time></p>
+                    <p class="wa__msg wa__msg--out">Tenho 09:30 ou 11:00. Qual fica melhor?<time>19:43</time></p>
+                    <p class="wa__msg wa__msg--in">09:30<time>19:44</time></p>
+                    <p class="wa__msg wa__msg--out">Agendado, Marina. Sábado, 09:30, com a Dra. Helena. Mando um lembrete na sexta.<time>19:44</time></p>
+                  </div>
+                  <div class="wa__input">Mensagem</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <figcaption class="mock__cap">Exemplo de tela — dados fictícios</figcaption>
+        </figure>
+
       </div>
       <a href="#solucoes" class="hero__scroll" aria-label="Rolar para as soluções">
         <span class="hero__scroll-line" aria-hidden="true"></span>
         <span class="hero__scroll-label">Role para ver onde você trava</span>
       </a>
     </section>
-
-    <!-- ===== MARQUEE ===== -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee__track">
-        <span>Sites Profissionais</span><i>◆</i>
-        <span>Landing Pages</span><i>◆</i>
-        <span>CRM</span><i>◆</i>
-        <span>Dashboards</span><i>◆</i>
-        <span>Aplicativos</span><i>◆</i>
-        <span>Automação com n8n</span><i>◆</i>
-        <span>Inteligência Artificial</span><i>◆</i>
-        <span>SEO Estratégico</span><i>◆</i>
-        <span>Sites Profissionais</span><i>◆</i>
-        <span>Landing Pages</span><i>◆</i>
-        <span>CRM</span><i>◆</i>
-        <span>Dashboards</span><i>◆</i>
-        <span>Aplicativos</span><i>◆</i>
-        <span>Automação com n8n</span><i>◆</i>
-        <span>Inteligência Artificial</span><i>◆</i>
-        <span>SEO Estratégico</span><i>◆</i>
-      </div>
-    </div>
 
     <!-- ===== SOLUÇÕES ===== -->
     <section class="section" id="solucoes">
@@ -209,88 +263,164 @@
           <p class="section__lead">Cada empresa trava em um lugar diferente. Na prática, quase sempre é um destes três — e o que a gente constrói muda conforme o seu.</p>
         </div>
 
-        <div class="tracks">
+        <div class="blocks">
 
-          <div class="track reveal">
-            <div class="track__head">
-              <span class="track__idx">01</span>
-              <h3 class="track__name">Ninguém te encontra</h3>
+          <!-- BLOCO 1 — texto à esquerda, site à direita -->
+          <div class="block reveal">
+            <div class="block__copy">
+              <h3 class="block__name">Ninguém te encontra</h3>
+              <div class="track__list">
+                <div class="trava">
+                  <p class="trava__problem">Sem presença profissional</p>
+                  <div>
+                    <p class="trava__solution">Sites Profissionais</p>
+                    <p class="trava__desc">Um site rápido, bonito no celular e que passa credibilidade de empresa séria.</p>
+                  </div>
+                </div>
+                <div class="trava">
+                  <p class="trava__problem">Sem clientes online</p>
+                  <div>
+                    <p class="trava__solution">Landing Pages de Alta Conversão</p>
+                    <p class="trava__desc">Páginas rápidas, persuasivas e focadas em transformar visitantes em clientes.</p>
+                  </div>
+                </div>
+                <div class="trava">
+                  <p class="trava__problem">Invisível no Google</p>
+                  <div>
+                    <p class="trava__solution">SEO Estratégico</p>
+                    <p class="trava__desc">Seja encontrado por quem procura o seu serviço, na hora certa.</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="track__list">
-              <div class="trava">
-                <p class="trava__problem">Sem presença profissional</p>
-                <div>
-                  <p class="trava__solution">Sites Profissionais</p>
-                  <p class="trava__desc">Um site rápido, bonito no celular e que passa credibilidade de empresa séria.</p>
+            <div class="block__media">
+              <figure class="mock mock--browser" aria-hidden="true">
+                <div class="mock__frame">
+                  <div class="mock__chrome">
+                    <span class="mock__dots"><i></i><i></i><i></i></span>
+                    <span class="mock__url">clinicavitalis.com.br</span>
+                  </div>
+                  <div class="mock__screen scr-site">
+                    <div class="site__nav">
+                      <span class="site__mark"></span><i></i><i></i><i></i>
+                      <span class="site__btn">Agendar</span>
+                    </div>
+                    <div class="site__hero">
+                      <p class="site__eyebrow">Clínica Vitalis · Salvador</p>
+                      <h4>Sua avaliação agendada em 2 minutos</h4>
+                      <p class="site__p">Fisioterapia e pilates com horário no mesmo dia, sem fila de espera.</p>
+                      <span class="site__cta">Agendar avaliação</span>
+                    </div>
+                    <div class="site__cards"><i></i><i></i><i></i></div>
+                  </div>
                 </div>
-              </div>
-              <div class="trava">
-                <p class="trava__problem">Sem clientes online</p>
-                <div>
-                  <p class="trava__solution">Landing Pages de Alta Conversão</p>
-                  <p class="trava__desc">Páginas rápidas, persuasivas e focadas em transformar visitantes em clientes.</p>
-                </div>
-              </div>
-              <div class="trava">
-                <p class="trava__problem">Invisível no Google</p>
-                <div>
-                  <p class="trava__solution">SEO Estratégico</p>
-                  <p class="trava__desc">Seja encontrado por quem procura o seu serviço, na hora certa.</p>
-                </div>
-              </div>
+                <figcaption class="mock__cap">Exemplo de tela — dados fictícios</figcaption>
+              </figure>
             </div>
           </div>
 
-          <div class="track reveal">
-            <div class="track__head">
-              <span class="track__idx">02</span>
-              <h3 class="track__name">O cliente chega e se perde</h3>
+          <!-- BLOCO 2 — invertido: conversa à esquerda, texto à direita -->
+          <div class="block block--flip reveal">
+            <div class="block__copy">
+              <h3 class="block__name">O cliente chega e se perde</h3>
+              <div class="track__list">
+                <div class="trava">
+                  <p class="trava__problem">Atendimento sobrecarregado</p>
+                  <div>
+                    <p class="trava__solution">Chatbots com IA</p>
+                    <p class="trava__desc">Atenda 24/7, qualifique leads e responda dúvidas automaticamente.</p>
+                  </div>
+                </div>
+                <div class="trava">
+                  <p class="trava__problem">Contato perdido na planilha</p>
+                  <div>
+                    <p class="trava__solution">CRM para Organizar os Leads</p>
+                    <p class="trava__desc">Cada cliente no lugar certo, com follow-up acontecendo sem ninguém lembrar.</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="track__list">
-              <div class="trava">
-                <p class="trava__problem">Atendimento sobrecarregado</p>
-                <div>
-                  <p class="trava__solution">Chatbots com IA</p>
-                  <p class="trava__desc">Atenda 24/7, qualifique leads e responda dúvidas automaticamente.</p>
+            <div class="block__media">
+              <figure class="mock mock--phone mock--phone-wide" aria-hidden="true">
+                <div class="mock__frame">
+                  <div class="mock__screen scr-wa">
+                    <div class="wa__top">
+                      <span class="wa__av">AB</span>
+                      <span class="wa__who"><b>Ateliê Bela Casa</b><i>respondendo agora</i></span>
+                    </div>
+                    <div class="wa__body">
+                      <p class="wa__msg wa__msg--in">Boa noite! Vocês fazem armário planejado pra cozinha pequena?<time>21:14</time></p>
+                      <p class="wa__msg wa__msg--out">Boa noite, Rogério! Fazemos sim — cozinha compacta é o que mais sai aqui. Você já tem as medidas?<time>21:14</time></p>
+                      <p class="wa__msg wa__msg--in">Mais ou menos: 2,40 x 1,80<time>21:15</time></p>
+                      <p class="wa__msg wa__msg--out">Dá pra trabalhar bem com isso. Consigo uma visita técnica quinta 14h ou sexta 10h — qual prefere?<time>21:15</time></p>
+                      <p class="wa__msg wa__msg--in">Quinta 14h<time>21:16</time></p>
+                    </div>
+                    <div class="wa__input">Mensagem</div>
+                  </div>
                 </div>
-              </div>
-              <div class="trava">
-                <p class="trava__problem">Contato perdido na planilha</p>
-                <div>
-                  <p class="trava__solution">CRM para Organizar os Leads</p>
-                  <p class="trava__desc">Cada cliente no lugar certo, com follow-up acontecendo sem ninguém lembrar.</p>
-                </div>
-              </div>
+                <figcaption class="mock__cap">Exemplo de tela — dados fictícios</figcaption>
+              </figure>
             </div>
           </div>
 
-          <div class="track reveal">
-            <div class="track__head">
-              <span class="track__idx">03</span>
-              <h3 class="track__name">A operação não escala</h3>
+          <!-- BLOCO 3 — texto à esquerda, painel à direita -->
+          <div class="block reveal">
+            <div class="block__copy">
+              <h3 class="block__name">A operação não escala</h3>
+              <div class="track__list">
+                <div class="trava">
+                  <p class="trava__problem">Processos manuais</p>
+                  <div>
+                    <p class="trava__solution">Automação Inteligente com n8n</p>
+                    <p class="trava__desc">Elimine tarefas repetitivas e conecte suas ferramentas em fluxos automáticos.</p>
+                  </div>
+                </div>
+                <div class="trava">
+                  <p class="trava__problem">Sem visibilidade de dados</p>
+                  <div>
+                    <p class="trava__solution">Dashboards Inteligentes</p>
+                    <p class="trava__desc">Enxergue seus números em tempo real e tome decisões com clareza.</p>
+                  </div>
+                </div>
+                <div class="trava">
+                  <p class="trava__problem">A ferramenta que você precisa não existe</p>
+                  <div>
+                    <p class="trava__solution">Aplicativos e Sistemas Sob Medida</p>
+                    <p class="trava__desc">Quando nada no mercado serve, a gente constrói para o seu jeito de trabalhar.</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="track__list">
-              <div class="trava">
-                <p class="trava__problem">Processos manuais</p>
-                <div>
-                  <p class="trava__solution">Automação Inteligente com n8n</p>
-                  <p class="trava__desc">Elimine tarefas repetitivas e conecte suas ferramentas em fluxos automáticos.</p>
+            <div class="block__media">
+              <figure class="mock mock--browser" aria-hidden="true">
+                <div class="mock__frame">
+                  <div class="mock__chrome">
+                    <span class="mock__dots"><i></i><i></i><i></i></span>
+                    <span class="mock__url">app.livsonconecta.com.br/painel</span>
+                  </div>
+                  <div class="mock__screen scr-dash">
+                    <div class="dash__head">
+                      <b>Painel do mês</b>
+                      <span>atualizado agora</span>
+                    </div>
+                    <div class="dash__kpis">
+                      <div class="dash__kpi"><i>Leads</i><b>128</b></div>
+                      <div class="dash__kpi"><i>Atendidos pela IA</i><b>112</b></div>
+                      <div class="dash__kpi"><i>Agendados</i><b>34</b></div>
+                    </div>
+                    <div class="dash__chart">
+                      <i style="--h:34%"></i><i style="--h:52%"></i><i style="--h:41%"></i>
+                      <i style="--h:68%"></i><i class="is-up" style="--h:88%"></i>
+                      <i style="--h:60%"></i><i style="--h:29%"></i>
+                    </div>
+                    <div class="dash__foot">
+                      <span>seg</span><span>ter</span><span>qua</span><span>qui</span>
+                      <span>sex</span><span>sáb</span><span>dom</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="trava">
-                <p class="trava__problem">Sem visibilidade de dados</p>
-                <div>
-                  <p class="trava__solution">Dashboards Inteligentes</p>
-                  <p class="trava__desc">Enxergue seus números em tempo real e tome decisões com clareza.</p>
-                </div>
-              </div>
-              <div class="trava">
-                <p class="trava__problem">A ferramenta que você precisa não existe</p>
-                <div>
-                  <p class="trava__solution">Aplicativos e Sistemas Sob Medida</p>
-                  <p class="trava__desc">Quando nada no mercado serve, a gente constrói para o seu jeito de trabalhar.</p>
-                </div>
-              </div>
+                <figcaption class="mock__cap">Exemplo de tela — dados fictícios</figcaption>
+              </figure>
             </div>
           </div>
 
@@ -447,10 +577,16 @@
     <section class="section founder" id="fundador">
       <div class="container founder__inner">
         <div class="founder__media reveal">
+          <!-- Recorte com fundo transparente e CORTE RETO na base. Não
+               tente dissolver a base: sobre fundo claro isso vira uma
+               mancha cinza (ver LEIA-ME.md). O corte é justificado pelo
+               painel em ::before de .founder__media. -->
           <img
-            src="img/hudson-oliveira-fundador-livson-tecnologia.jpg"
-            alt="Hudson Oliveira Santos, fundador da Livson Tecnologia, em frente a um notebook"
-            width="900" height="1346" loading="lazy" decoding="async"
+            src="img/hudson-recorte.webp"
+            srcset="img/hudson-recorte-620.webp 620w, img/hudson-recorte.webp 1040w"
+            sizes="(max-width: 960px) 320px, 34vw"
+            alt="Hudson Oliveira Santos, fundador da Livson Tecnologia"
+            width="1040" height="983" loading="lazy" decoding="async"
             class="founder__photo"
           />
         </div>
@@ -548,9 +684,9 @@
   </a>
 
   <!-- Scripts -->
-  <script type="module" src="js/scene.js?v=20260824e"></script>
+  <script type="module" src="js/scene.js?v=20260828f"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-  <script src="js/main.js?v=20260824e" defer></script>
+  <script src="js/main.js?v=20260828f" defer></script>
 </body>
 </html>

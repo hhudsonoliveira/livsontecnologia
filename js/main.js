@@ -70,6 +70,71 @@
     });
   });
 
+  /* ---------- Mascara do titulo ----------
+     Divide uma linha do <h1> em "janelas" que recortam o texto. Cada
+     pedaco vira <span class="w"><span class="w__in">palavra</span></span>:
+     a de fora recorta, a de dentro e o que a timeline move.
+
+     Duas regras que importam:
+     - o <span class="grad"> entra INTEIRO como um pedaco so. Se as duas
+       palavras dele virassem pedacos separados, cada uma ganharia uma
+       rampa de gradiente completa em vez de uma rampa atravessando as
+       duas.
+     - pontuacao solta ("." depois do gradiente) e grudada no pedaco
+       anterior, senao o ponto final sobe sozinho, atrasado. */
+  function mascararLinha(linha, porPalavra) {
+    const frag = document.createDocumentFragment();
+    const moveis = [];
+    let ultimaJanela = null;
+
+    const janela = (conteudo) => {
+      const fora = document.createElement('span');
+      fora.className = 'w';
+      const dentro = document.createElement('span');
+      dentro.className = 'w__in';
+      if (typeof conteudo === 'string') dentro.textContent = conteudo;
+      else dentro.appendChild(conteudo);
+      fora.appendChild(dentro);
+      moveis.push(dentro);
+      ultimaJanela = dentro;
+      return fora;
+    };
+
+    if (!porPalavra) {
+      // linha inteira dentro de uma janela so
+      const dentro = document.createDocumentFragment();
+      while (linha.firstChild) dentro.appendChild(linha.firstChild);
+      const fora = document.createElement('span');
+      fora.className = 'w';
+      const alvo = document.createElement('span');
+      alvo.className = 'w__in';
+      alvo.appendChild(dentro);
+      fora.appendChild(alvo);
+      linha.appendChild(fora);
+      return [alvo];
+    }
+
+    Array.prototype.slice.call(linha.childNodes).forEach((no) => {
+      if (no.nodeType === 3) {
+        no.textContent.split(/(\s+)/).forEach((parte) => {
+          if (!parte) return;
+          if (/^\s+$/.test(parte)) { frag.appendChild(document.createTextNode(' ')); return; }
+          if (/^[.,;:!?)\]]+$/.test(parte) && ultimaJanela) {
+            ultimaJanela.appendChild(document.createTextNode(parte));
+            return;
+          }
+          frag.appendChild(janela(parte));
+        });
+      } else {
+        frag.appendChild(janela(no));
+      }
+    });
+
+    while (linha.firstChild) linha.removeChild(linha.firstChild);
+    linha.appendChild(frag);
+    return moveis;
+  }
+
   /* ---------- Hero intro (staggered entrance) ---------- */
   function startHeroIntro() {
     const lines = document.querySelectorAll('.hero__title .reveal-line');
@@ -84,14 +149,35 @@
     // Neutralise the CSS `.reveal { opacity:0 }` so gsap tweens to a visible end.
     gsap.set(lines, { opacity: 1 });
 
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    // O titulo so e dividido em palavras aqui dentro, depois de checar
+    // GSAP e movimento reduzido: se qualquer um dos dois falhar, o HTML
+    // original continua intacto na tela.
+    const titulo = document.querySelector('.hero__title');
+    const alvos = [];
+    lines.forEach((linha) => {
+      // linha 1 sobe inteira (e o preparo); linha 2, palavra a palavra
+      const porPalavra = !linha.classList.contains('hero__line-1');
+      alvos.push.apply(alvos, mascararLinha(linha, porPalavra));
+    });
+    titulo && titulo.classList.add('is-revealing');
+
+    const tl = gsap.timeline({
+      defaults: { ease: 'power3.out' },
+      onComplete: () => titulo && titulo.classList.remove('is-revealing'),
+    });
     tl.fromTo('.hero__badge', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 })
-      .fromTo(lines,
-        { yPercent: 115, opacity: 0 },
-        { yPercent: 0, opacity: 1, duration: 0.9, stagger: 0.12, ease: 'power4.out' }, '-=0.25')
+      // Sem opacidade de proposito: quem revela e a mascara. Misturar os
+      // dois devolve o fade generico que estamos tirando.
+      .fromTo(alvos,
+        { yPercent: 118 },
+        { yPercent: 0, duration: 0.78, stagger: 0.038, ease: 'power3.out' }, '-=0.25')
       .fromTo('.hero__sub', { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, '-=0.55')
       .fromTo('.hero__actions', { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, '-=0.5')
-      .fromTo('.hero__trust, .hero__company', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, '-=0.5');
+      .fromTo('.hero__trust, .hero__company', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, '-=0.5')
+      // A ancora visual entra por ultimo e de baixo: o texto le primeiro,
+      // a tela do produto confirma. Sem isso ela ficaria em opacity:0,
+      // porque .reveal zera tudo e so a timeline devolve.
+      .fromTo('.hero__anchor', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9 }, '-=0.75');
   }
 
   /* ---------- Scroll reveals ---------- */
@@ -203,17 +289,6 @@
     );
 
     counters.forEach((el) => { anima.observe(el); prepara.observe(el); });
-  }
-
-  /* ---------- Card spotlight (mouse-follow glow) ---------- */
-  if (!prefersReduced && window.matchMedia('(hover: hover)').matches) {
-    document.querySelectorAll('.card').forEach((card) => {
-      card.addEventListener('pointermove', (e) => {
-        const r = card.getBoundingClientRect();
-        card.style.setProperty('--mx', ((e.clientX - r.left) / r.width) * 100 + '%');
-        card.style.setProperty('--my', ((e.clientY - r.top) / r.height) * 100 + '%');
-      });
-    });
   }
 
   /* ---------- FAQ accordion (Livson Conecta) ---------- */

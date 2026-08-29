@@ -1,39 +1,136 @@
 /* =========================================================
-   LIVSON TECNOLOGIA — Dark Tech Futurista
-   Palette: base #05070d · cyan #22d3ee · violet #8b5cf6
-   Signature easing (Corporate/Premium): cubic-bezier(.2,0,0,1)
+   LIVSON TECNOLOGIA — sistema visual
+   Institucional claro com ancoras escuras (hero, manifesto, CTA,
+   rodape e as telas de produto). TONALIDADE UNICA: todo tom, claro
+   ou escuro, e do mesmo hue 228. Sem cyan, sem gradiente.
+
+   Como funciona: :root carrega o tema claro; .on-dark redeclara os
+   MESMOS tokens nos valores escuros. Por isso nenhum componente
+   precisa saber em que faixa esta — todos leem var(--text),
+   var(--line), var(--surface) e se adaptam sozinhos.
+
+   Contraste conferido nos dois contextos: tudo passa WCAG AA.
+   Signature easing: cubic-bezier(.2,0,0,1)
    ========================================================= */
 
 :root {
-  --bg:        #05070d;
-  --bg-soft:   #0a0e1a;
-  --bg-alt:    #080b14;
-  --surface:   rgba(255, 255, 255, 0.03);
-  --surface-2: rgba(255, 255, 255, 0.05);
-  --border:    rgba(255, 255, 255, 0.08);
-  --border-2:  rgba(255, 255, 255, 0.14);
+  /* ---------- Superficies (claro) ---------- */
+  --bg:        #f7f8fc;
+  --bg-1:      #eef1f8;
+  --bg-2:      #ffffff;
+  --bg-3:      #f2f4fa;
+  --bg-soft:   #eef1f8;
+  --surface:   rgba(28, 40, 89, 0.035);
+  --surface-2: rgba(28, 40, 89, 0.065);
 
-  --text:      #e8ecf6;
-  --muted:     #93a0b8;
-  /* #5f6c85 dava 3.81:1 sobre o fundo e reprovava no WCAG AA em texto
-     pequeno (rodape, rotulos). Este da 5.47:1 e continua discreto. */
-  --muted-2:   #78869e;
+  /* O chao da pagina e escuro de proposito: e sobre ele que a cena 3D
+     do hero e desenhada. As faixas claras sao opacas e cobrem a cena
+     assim que o hero termina. */
+  --ground:    #0d1220;
 
-  --cyan:      #22d3ee;
-  --violet:    #8b5cf6;
-  --pink:      #e879f9;
+  /* ---------- Linhas ---------- */
+  --line:      rgba(28, 40, 89, 0.12);
+  --line-2:    rgba(28, 40, 89, 0.20);
+  --line-3:    rgba(28, 40, 89, 0.32);
 
-  --grad:      linear-gradient(100deg, #22d3ee 0%, #818cf8 45%, #e879f9 100%);
-  --grad-soft: linear-gradient(100deg, rgba(34,211,238,.16), rgba(139,92,246,.16));
+  /* ---------- Texto ---------- */
+  --text:      #1c2859;
+  --text-hi:   #0f1733;
+  --muted:     #535a79;
+  --muted-2:   #656c8b;   /* 4.86:1 — o menor da paleta, ainda AA */
 
+  /* ---------- Acento ---------- */
+  --accent:     #3e57bb;
+  --accent-2:   #2f46a0;
+  --accent-dim: rgba(62, 87, 187, 0.10);
+  --accent-ink: #ffffff;
+
+  /* ---------- Tipografia ---------- */
+  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-body:    'Inter', system-ui, -apple-system, sans-serif;
+
+  --fs-hero:    clamp(2.35rem, 5.4vw, 4.5rem);
+  --fs-display: clamp(1.95rem, 4.2vw, 3.35rem);
+  --fs-h3:      clamp(1.15rem, 1.9vw, 1.45rem);
+  --fs-lead:    clamp(1rem, 1.4vw, 1.12rem);
+  --fs-body:    .96rem;
+  --fs-sm:      .88rem;
+  --fs-label:   .72rem;
+
+  --track-display: -0.038em;
+  --track-label:    .18em;
+
+  /* ---------- Espaco ---------- */
+  --s1: 8px;
+  --s2: 14px;
+  --s3: 22px;
+  --s4: 34px;
+  --s5: 52px;
+  --s6: clamp(56px, 7vw, 86px);
+  --s7: clamp(72px, 10vw, 124px);
+  --s8: clamp(92px, 13vw, 168px);
+
+  /* ---------- Forma ---------- */
+  --radius:    16px;
+  --radius-sm: 10px;
+  --radius-xs:  6px;
+  --radius-btn: 10px;
+  --container:      1180px;
+  --container-wide: 1320px;
+
+  /* ---------- Movimento ---------- */
   --ease:      cubic-bezier(.2, 0, 0, 1);
   --ease-out:  cubic-bezier(.05, .7, .1, 1);
 
-  --radius:    18px;
-  --radius-sm: 12px;
-  --container: 1180px;
+  /* ---------- Aliases (o mesmo CSS serve 5 paginas) ---------- */
+  --bg-alt:    var(--bg-1);
+  --border:    var(--line);
+  --border-2:  var(--line-2);
+  --cyan:      var(--accent);
+  --violet:    var(--accent-2);
+  --pink:      var(--accent);
+  --accent-hi: var(--accent);
+  --grad:      var(--accent);
+  --grad-soft: var(--accent-dim);
+  --shadow-glow: none;
+}
 
-  --shadow-glow: 0 0 40px rgba(34, 211, 238, 0.25);
+/* ---------- Faixas escuras ----------
+   Mesmos tokens, valores do outro lado da escala — e o mesmo hue 228.
+   As telas de produto (.mock__frame) tambem entram aqui: painel de
+   sistema escuro sobre pagina clara e contraste proposital, e mantem o
+   mockup legivel como "tela de software". */
+.on-dark,
+.preloader,
+.hero,
+.manifesto,
+.cta-band,
+.footer,
+.mock__frame,
+.tema-hero-escuro .nav:not(.is-scrolled) {
+  --bg:        #0d1220;
+  --bg-1:      #111729;
+  --bg-2:      #0b1017;
+  --bg-3:      #161d30;
+  --bg-soft:   #111729;
+  --surface:   rgba(255, 255, 255, 0.045);
+  --surface-2: rgba(255, 255, 255, 0.075);
+
+  --line:      rgba(255, 255, 255, 0.10);
+  --line-2:    rgba(255, 255, 255, 0.17);
+  --line-3:    rgba(255, 255, 255, 0.28);
+
+  --text:      #e4e8f5;
+  --text-hi:   #ffffff;
+  --muted:     #989eb9;
+  --muted-2:   #8a92ae;
+
+  --accent:     #899cec;
+  --accent-2:   #6f83d8;
+  --accent-dim: rgba(137, 156, 236, 0.14);
+  --accent-ink: #0d1220;
+
+  color: var(--text);
 }
 
 /* ---------- Reset ---------- */
@@ -42,7 +139,7 @@
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body);
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
@@ -51,7 +148,7 @@ body {
 }
 
 h1, h2, h3, .brand__text, .eyebrow, .stat__num, .plan__name {
-  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-family: var(--font-display);
   line-height: 1.1;
   letter-spacing: -0.02em;
 }
@@ -66,13 +163,15 @@ ul { list-style: none; }
   margin-inline: auto;
   padding-inline: clamp(20px, 5vw, 40px);
 }
+.container--wide { max-width: var(--container-wide); }
 
+/* Era texto com gradiente arco-iris. Numa paleta de tonalidade unica o
+   gradiente e justamente o que suja — o realce agora e so a cor de
+   acento, no peso que o titulo ja tem. */
 .grad {
-  background: var(--grad);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+  color: var(--accent);
+  background: none;
+  -webkit-text-fill-color: currentColor;
 }
 
 /* ---------- 3D Canvas ---------- */
@@ -90,12 +189,25 @@ ul { list-style: none; }
   z-index: 1;
   pointer-events: none;
   background:
-    radial-gradient(1200px 600px at 50% -10%, rgba(34,211,238,.10), transparent 60%),
-    radial-gradient(900px 500px at 90% 20%, rgba(139,92,246,.10), transparent 60%),
-    linear-gradient(180deg, transparent 0%, rgba(5,7,13,.55) 65%, var(--bg) 100%);
+    radial-gradient(1200px 600px at 50% -10%, rgba(137,156,236,.13), transparent 62%),
+    radial-gradient(900px 500px at 88% 18%, rgba(111,131,216,.09), transparent 62%),
+    linear-gradient(180deg, transparent 0%, rgba(13,18,32,.55) 68%, #0d1220 100%);
 }
 
 main, .nav, .footer { position: relative; z-index: 2; }
+
+/* Cada faixa de primeiro nivel pinta o proprio fundo. E isso que faz a
+   cena 3D (fixa, z-index 0) aparecer SO no hero: da segunda faixa em
+   diante o fundo claro e opaco e cobre a cena. */
+main > * { background: var(--bg); }
+.hero { background: transparent; }
+.footer { background: var(--bg); }
+
+/* O chao escuro existe SO nas paginas com hero escuro — e nelas que a
+   cena 3D precisa de um fundo para ser desenhada. Nas demais o corpo e
+   claro, senao qualquer faixa fora de <main> (o .diag__footer, por
+   exemplo) fica com texto do tema claro sobre o chao escuro. */
+body.tema-hero-escuro { background: var(--ground); }
 
 /* ---------- Preloader ---------- */
 .preloader {
@@ -113,70 +225,66 @@ main, .nav, .footer { position: relative; z-index: 2; }
 .preloader.is-done { opacity: 0; visibility: hidden; }
 .preloader__logo {
   display: flex; align-items: center; gap: 12px;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-display);
   font-weight: 700; font-size: 1.4rem; letter-spacing: .25em;
   color: var(--text);
 }
 .preloader__mark {
   display: block;
   width: 20px; height: 20px; border-radius: 6px;
-  background: var(--grad); object-fit: cover;
-  box-shadow: var(--shadow-glow);
-  animation: spinMark 1.6s var(--ease) infinite;
+  background: var(--accent); object-fit: cover;
+  animation: markPulse 1.6s var(--ease) infinite;
 }
-@keyframes spinMark { 0%,100%{ transform: rotate(0) scale(1);} 50%{ transform: rotate(180deg) scale(.7);} }
+@keyframes markPulse { 0%,100%{ opacity: 1; } 50%{ opacity: .45; } }
 .preloader__bar {
   width: 180px; height: 3px; border-radius: 3px;
   background: var(--surface-2); overflow: hidden;
 }
 .preloader__bar span {
   display: block; height: 100%; width: 0%;
-  background: var(--grad);
+  background: var(--accent);
   transition: width .3s var(--ease);
 }
 
-/* ---------- Buttons ---------- */
+/* ---------- Buttons ----------
+   Era pilula 999px + preenchimento gradiente + filter:blur(16px) por
+   tras. Esse conjunto e o botao mais reconhecivel de landing gerada.
+   Agora: indigo solido, raio contido, sem halo. O peso vem da cor. */
 .btn {
-  --bg-btn: var(--surface-2);
   display: inline-flex; align-items: center; justify-content: center;
   gap: 8px;
-  padding: 14px 26px;
-  border-radius: 999px;
-  font-weight: 600; font-size: .95rem;
-  font-family: 'Space Grotesk', sans-serif;
-  letter-spacing: .01em;
+  padding: 14px 24px;
+  border-radius: var(--radius-btn);
+  font-weight: 600; font-size: .94rem;
+  font-family: var(--font-display);
+  letter-spacing: -0.005em;
   cursor: pointer;
-  border: 1px solid var(--border-2);
-  background: var(--bg-btn);
+  border: 1px solid var(--line-2);
+  background: transparent;
   color: var(--text);
-  transition: transform .18s var(--ease), box-shadow .3s var(--ease),
-              background .3s var(--ease), border-color .3s var(--ease);
-  will-change: transform;
+  transition: transform .16s var(--ease), background .25s var(--ease),
+              border-color .25s var(--ease), color .25s var(--ease);
 }
-.btn:hover { transform: translateY(-2px); }
-.btn:active { transform: translateY(0) scale(.98); }
+.btn:active { transform: translateY(1px); }
 
 .btn--primary {
-  background: var(--grad);
-  border-color: transparent;
-  color: #05070d;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
   font-weight: 700;
 }
-.btn--primary:hover { box-shadow: 0 10px 40px rgba(34,211,238,.35); }
+.btn--primary:hover { background: var(--accent-2); border-color: var(--accent-2); }
 
-.btn--glow { position: relative; }
-.btn--glow::after {
-  content: ''; position: absolute; inset: -2px; border-radius: inherit;
-  background: var(--grad); filter: blur(16px); opacity: .5; z-index: -1;
-  transition: opacity .3s var(--ease);
-}
-.btn--glow:hover::after { opacity: .9; }
+/* .btn--glow existe no HTML de 3 paginas; virou um realce discreto em
+   vez do halo desfocado. Mantido o nome pra nao mexer no markup. */
+.btn--glow { box-shadow: 0 8px 26px rgba(28, 40, 89, .16); }
+.btn--glow:hover { box-shadow: 0 10px 30px rgba(28, 40, 89, .24); }
 
-.btn--ghost { background: transparent; border-color: var(--border-2); color: var(--text); }
-.btn--ghost:hover { background: var(--surface-2); border-color: var(--cyan); }
+.btn--ghost { background: transparent; border-color: var(--line-2); color: var(--text); }
+.btn--ghost:hover { background: var(--surface-2); border-color: var(--line-3); }
 
-.btn--sm { padding: 10px 18px; font-size: .85rem; }
-.btn--lg { padding: 18px 38px; font-size: 1.05rem; }
+.btn--sm { padding: 10px 16px; font-size: .84rem; }
+.btn--lg { padding: 17px 32px; font-size: 1.02rem; }
 .btn--block { width: 100%; }
 
 /* ---------- Navbar ---------- */
@@ -187,7 +295,7 @@ main, .nav, .footer { position: relative; z-index: 2; }
   border-bottom: 1px solid transparent;
 }
 .nav.is-scrolled {
-  background: rgba(5, 7, 13, 0.72);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom-color: var(--border);
@@ -200,8 +308,7 @@ main, .nav, .footer { position: relative; z-index: 2; }
 .brand__mark {
   display: block;
   width: 26px; height: 26px; border-radius: 8px;
-  background: var(--grad); object-fit: cover;
-  box-shadow: 0 0 20px rgba(34,211,238,.5);
+  background: var(--accent); object-fit: cover;
   flex: none;
 }
 .brand__text {
@@ -216,7 +323,7 @@ main, .nav, .footer { position: relative; z-index: 2; }
 }
 .nav__links a::after {
   content: ''; position: absolute; left: 0; bottom: -6px;
-  width: 0; height: 2px; background: var(--grad);
+  width: 0; height: 2px; background: var(--accent);
   transition: width .3s var(--ease);
 }
 .nav__links a:hover { color: var(--text); }
@@ -235,107 +342,154 @@ main, .nav, .footer { position: relative; z-index: 2; }
 .nav.is-open .nav__toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* ---------- Hero ----------
-   Os nomes de classe sao os mesmos de antes de proposito: a timeline de
-   entrada em js/main.js anima .hero__badge / .hero__sub / .hero__actions /
-   .hero__trust e as .reveal-line pelo seletor. Mudou a roupa, nao a
-   estrutura. */
+   Composicao assimetrica: a coluna de texto ocupa a esquerda e a ancora
+   visual (mockup do produto) entra pela direita, sangrando pra fora da
+   grade. Os nomes de classe da timeline de entrada em js/main.js estao
+   preservados — .hero__badge / .hero__sub / .hero__actions /
+   .hero__trust e as .reveal-line. */
 .hero {
   min-height: 100vh;
   display: flex; align-items: center;
-  padding-top: 96px; padding-bottom: 132px;
+  padding-top: 104px; padding-bottom: 128px;
   position: relative;
 }
-.hero__inner { max-width: 940px; }
+.hero__inner { position: relative; }
+.hero__copy { position: relative; z-index: 2; max-width: min(100%, 700px); }
 
-/* Era uma pilula com fundo gradiente — o tell mais comum de landing
-   page gerada. Virou uma linha de rotulo, com o ponto pulsante mantido
-   porque ele e sinal de marca, nao enfeite de template. */
 .hero__badge {
   display: inline-flex; align-items: center; gap: 10px;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: .74rem; font-weight: 500;
-  text-transform: uppercase; letter-spacing: .24em;
+  font-family: var(--font-display);
+  font-size: var(--fs-label); font-weight: 500;
+  text-transform: uppercase; letter-spacing: .22em;
   color: var(--muted);
-  margin-bottom: 30px;
+  margin-bottom: var(--s3);
   padding: 0; background: none; border: 0;
 }
 .pulse-dot {
   width: 7px; height: 7px; border-radius: 50%; flex: none;
-  background: var(--cyan);
-  box-shadow: 0 0 0 0 rgba(34,211,238,.7);
+  background: var(--accent);
+  box-shadow: 0 0 0 0 rgba(137,156,236,.7);
   animation: pulse 2s infinite;
 }
 @keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(34,211,238,.6); }
-  70% { box-shadow: 0 0 0 10px rgba(34,211,238,0); }
-  100% { box-shadow: 0 0 0 0 rgba(34,211,238,0); }
+  0% { box-shadow: 0 0 0 0 rgba(137,156,236,.55); }
+  70% { box-shadow: 0 0 0 10px rgba(137,156,236,0); }
+  100% { box-shadow: 0 0 0 0 rgba(137,156,236,0); }
 }
 
-/* Tipo grande e leve. As duas frases da tese ganham tons diferentes:
-   o diagnostico do problema recua, a promessa avanca. */
+/* Contraste tipografico de verdade: a frase que diagnostica o problema
+   e pequena, fina e recuada; a promessa vem em corpo cheio, pesada e
+   branca. Antes as duas tinham o mesmo tamanho e o mesmo peso 300 —
+   elegante e sem hierarquia nenhuma. */
 .hero__title {
-  font-size: clamp(2rem, 5.9vw, 4.4rem);
-  font-weight: 300;
-  line-height: 1.03;
-  letter-spacing: -0.042em;
-  margin-bottom: 32px;
+  font-size: var(--fs-hero);
+  line-height: 1.0;
+  letter-spacing: -0.045em;
+  margin-bottom: var(--s4);
+  text-wrap: balance;
 }
 .hero__title .reveal-line { display: block; }
-.hero__title .reveal-line:first-child { color: #a8b4cb; }
-.hero__title .grad { font-weight: 500; }
+.hero__line-1 {
+  font-size: .43em;
+  font-weight: 300;
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  color: var(--muted);
+  margin-bottom: .5em;
+  max-width: 22ch;
+}
+.hero__line-2 {
+  font-weight: 600;
+  color: var(--text-hi);
+}
+.hero__title .grad { font-weight: 600; }
+
+/* ---------- Reveal do titulo (mascara) ----------
+   O reveal antigo era subir a frase inteira com fade. Fade e o reveal
+   generico de qualquer template; mascara e o editorial — a palavra sobe
+   de tras de uma aresta dura, sem transparencia nenhuma.
+
+   A mascara e por PALAVRA, nao por linha, porque o titulo quebra em 2,
+   3 ou 4 linhas conforme a largura da tela: mascarar a linha logica
+   quebraria o efeito em todo breakpoint que reflui.
+
+   .w e a janela (recorta), .w__in e o que se move. As duas caixas so
+   existem depois que o JS divide o titulo — sem JS, o texto fica
+   exatamente como esta no HTML. */
+.hero__title .w {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  /* com line-height 1.0 a caixa tem exatamente 1em: a mascara cortaria
+     os acentos de "negocio/e" em cima e as descidas de "g, c, p" em
+     baixo. O par padding/margem negativa estica a janela sem mover
+     nada no layout. A aresta de revelacao passa a ser a de baixo. */
+  padding-top: .2em;    margin-top: -.2em;
+  padding-bottom: .24em; margin-bottom: -.24em;
+}
+.hero__title .w__in { display: inline-block; }
+/* a linha 1 e o preparo: sobe inteira, de uma vez so */
+.hero__line-1 .w, .hero__line-1 .w__in { display: block; }
+
+.hero__title.is-revealing .w__in { will-change: transform; }
 
 .hero__sub {
-  font-size: clamp(1rem, 2.1vw, 1.15rem);
+  font-size: var(--fs-lead);
   color: var(--muted);
-  max-width: 600px; line-height: 1.7;
-  margin-bottom: 40px;
+  max-width: 52ch; line-height: 1.68;
+  margin-bottom: var(--s4);
 }
 .hero__sub strong { color: var(--text); font-weight: 500; }
 
-.hero__actions { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 0; }
+.hero__actions { display: flex; flex-wrap: wrap; gap: 12px; }
 
-/* Faixa de credencial: regua fina + itens separados, no lugar do
-   selo-pilula solto. */
 .hero__trust {
   display: flex; flex-wrap: wrap; align-items: center;
-  gap: 12px 30px;
-  margin-top: clamp(44px, 6vw, 72px);
-  padding-top: 24px;
-  border-top: 1px solid var(--border);
-  color: var(--muted-2); font-size: .82rem;
+  gap: 12px 28px;
+  margin-top: var(--s6);
+  padding-top: var(--s3);
+  border-top: 1px solid var(--line);
+  color: var(--muted-2); font-size: var(--fs-sm);
+  max-width: 52ch;
 }
-.hero__trust-item {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: .72rem; font-weight: 500;
-  text-transform: uppercase; letter-spacing: .15em;
+.hero__trust-item, .hero__trust-badge {
+  font-family: var(--font-display);
+  font-size: var(--fs-label); font-weight: 500;
+  text-transform: uppercase; letter-spacing: .14em;
   color: var(--muted);
   display: inline-flex; align-items: center;
-}
-.hero__trust-badge {
-  display: inline-flex; align-items: center;
   padding: 0; background: none; border: 0;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: .72rem; font-weight: 600;
-  text-transform: uppercase; letter-spacing: .15em;
-  color: var(--text); white-space: nowrap;
 }
-.stars { color: #fbbf24; letter-spacing: 2px; }
+.hero__trust-badge { color: var(--text); font-weight: 600; white-space: nowrap; }
+/* dourado era o unico ponto fora da tonalidade unica no portfolio */
+.stars { color: var(--accent); letter-spacing: 2px; }
 
-/* Deixa de ser o "mouse" centralizado (outro padrao de template) e vira
-   uma marca discreta na coluna do texto. */
+/* Ancora visual. Em telas largas ela e absoluta e sangra pra fora da
+   coluna — e o que quebra a simetria. Abaixo de 1080px ela volta pro
+   fluxo, embaixo do texto. */
+.hero__anchor {
+  position: absolute;
+  right: 0;
+  bottom: -2vw;
+  width: min(48vw, 560px);
+  z-index: 1;
+  pointer-events: none;
+}
+
 .hero__scroll {
-  position: absolute; bottom: 42px;
-  left: max(clamp(20px, 5vw, 40px), calc(50% - var(--container) / 2 + clamp(20px, 5vw, 40px)));
+  position: absolute; bottom: 40px;
+  left: max(clamp(20px, 5vw, 40px), calc(50% - var(--container-wide) / 2 + clamp(20px, 5vw, 40px)));
   display: inline-flex; align-items: center; gap: 12px;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-display);
   font-size: .68rem; font-weight: 500;
-  text-transform: uppercase; letter-spacing: .22em;
+  text-transform: uppercase; letter-spacing: .2em;
   color: var(--muted-2);
   transition: color .3s var(--ease);
+  z-index: 3;
 }
-.hero__scroll:hover { color: var(--cyan); }
+.hero__scroll:hover { color: var(--text); }
 .hero__scroll-line {
-  width: 1px; height: 34px; background: linear-gradient(180deg, var(--cyan), transparent);
+  width: 1px; height: 34px; background: linear-gradient(180deg, var(--accent), transparent);
   display: block; flex: none; transform-origin: top;
   animation: scrollLine 2.1s var(--ease) infinite;
 }
@@ -345,191 +499,348 @@ main, .nav, .footer { position: relative; z-index: 2; }
   100% { transform: scaleY(1); opacity: 0; }
 }
 
+@media (max-width: 1080px) {
+  .hero { min-height: 0; padding-top: 130px; padding-bottom: var(--s7); }
+  .hero__copy { max-width: none; }
+  .hero__anchor {
+    position: static; width: min(100%, 460px);
+    margin-top: var(--s6);
+  }
+  .hero__scroll { display: none; }
+}
 @media (max-width: 700px) {
-  .hero { padding-bottom: 104px; }
-  .hero__scroll { left: 24px; font-size: .62rem; letter-spacing: .18em; }
-  .hero__scroll-label { display: none; }
   .hero__trust { gap: 10px 20px; }
+  .hero__anchor { width: 100%; margin-top: var(--s5); }
 }
-
-/* ---------- Marquee ---------- */
-.marquee {
-  overflow: hidden;
-  border-block: 1px solid var(--border);
-  background: rgba(255,255,255,.02);
-  padding: 18px 0;
-}
-.marquee__track {
-  display: flex; align-items: center; gap: 28px;
-  width: max-content;
-  animation: marquee 34s linear infinite;
-  will-change: transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  transform: translate3d(0, 0, 0);
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.05rem; color: var(--muted);
-}
-.marquee__track i { color: var(--cyan); font-style: normal; font-size: .7rem; }
-.marquee__track span { white-space: nowrap; }
-@keyframes marquee { to { transform: translate3d(-50%, 0, 0); } }
 
 /* ---------- Sections ---------- */
-.section { padding: clamp(70px, 11vw, 130px) 0; position: relative; }
-.section--alt { background: linear-gradient(180deg, transparent, rgba(255,255,255,.015), transparent); }
+.section { padding: var(--s7) 0; position: relative; }
+.section--alt { background: var(--bg-1); }
 .section--tight-top { padding-top: 0; }
 
-.section__head { max-width: 680px; margin-bottom: 60px; }
+.section__head { max-width: 680px; margin-bottom: var(--s6); }
 .eyebrow {
   display: inline-block;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: .78rem; font-weight: 600; letter-spacing: .25em; text-transform: uppercase;
-  color: var(--cyan);
-  margin-bottom: 16px;
+  font-family: var(--font-display);
+  font-size: var(--fs-label); font-weight: 600;
+  letter-spacing: var(--track-label); text-transform: uppercase;
+  color: var(--muted-2);
+  margin-bottom: var(--s2);
 }
-.section__title {
-  font-size: clamp(1.8rem, 4.4vw, 3rem);
-  font-weight: 700; margin-bottom: 18px;
-}
-.section__lead { color: var(--muted); font-size: 1.08rem; }
+.section__title { font-size: var(--fs-display); font-weight: 600; margin-bottom: 16px; }
+.section__lead { color: var(--muted); font-size: var(--fs-lead); line-height: 1.7; }
 
 /* =========================================================
    BASE EDITORIAL
-   Principio: o ritmo vem de regua fina + espaco vazio + tipo
-   grande, nao de mais uma caixa com borda. Titulo alinhado a
-   esquerda com medida curta dentro de um campo largo.
+   O ritmo vem de regua fina + espaco vazio + contraste de peso,
+   nao de mais uma caixa com borda.
    ========================================================= */
 
-/* Cabecalho assimetrico: titulo na esquerda, apoio na direita. */
 .section__head--split {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
-  gap: 30px 70px;
+  gap: 28px 70px;
   align-items: end;
   max-width: none;
-  margin-bottom: clamp(50px, 7vw, 86px);
+  margin-bottom: var(--s6);
 }
 .section__head--split .section__lead { padding-bottom: .4em; }
 
-/* Tipo de display: peso leve e corpo grande — o oposto do
-   "titulo bold centralizado" que todo template gera. */
+/* Titulo de display: corpo grande e leve, com a palavra-chave pesada e
+   branca. O salto de peso 300 -> 600 dentro da mesma frase e o que da
+   contraste; antes era tudo 300 com um 500 timido. */
 .title--display {
-  font-size: clamp(2.1rem, 5.2vw, 3.9rem);
+  font-size: var(--fs-display);
   font-weight: 300;
-  letter-spacing: -0.035em;
-  line-height: 1.04;
+  letter-spacing: var(--track-display);
+  line-height: 1.06;
   margin-bottom: 0;
+  color: var(--muted);
 }
-.title--display strong { font-weight: 500; color: #fff; white-space: nowrap; }
+/* Sem white-space:nowrap: com body{overflow-x:hidden} ele nao quebrava,
+   so cortava o titulo pra fora da tela em 360px. */
+.title--display strong { font-weight: 600; color: var(--text-hi); }
 @supports (text-wrap: balance) { .title--display { text-wrap: balance; } }
 
-/* ---------- Soluções: trilhas editoriais ---------- */
-.tracks { display: grid; gap: clamp(54px, 7vw, 88px); }
+/* ---------- Blocos editoriais alternados (Solucoes) ----------
+   Era um empilhado de trilhas numeradas 01/02/03. Virou texto de um
+   lado, tela do produto do outro, invertendo o lado a cada bloco. */
+.blocks { display: grid; gap: var(--s8); }
 
-.track__head {
-  display: flex; align-items: baseline; gap: 18px;
-  padding-bottom: 20px;
+.block {
+  display: grid;
+  grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+  gap: var(--s5) clamp(38px, 5.5vw, 84px);
+  align-items: center;
 }
-.track__idx {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: .78rem; font-weight: 500; letter-spacing: .22em;
-  color: var(--cyan);
-  font-variant-numeric: tabular-nums;
-}
-.track__name {
-  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
-  font-weight: 400; letter-spacing: -0.02em; color: var(--text);
-}
+.block--flip .block__media { order: -1; }
 
-/* As linhas: regua fina no lugar da borda de card. */
+.block__name {
+  font-size: var(--fs-h3);
+  font-weight: 500; letter-spacing: -0.025em; line-height: 1.2;
+  color: var(--text-hi);
+  padding-bottom: var(--s3);
+}
+.block__media { position: relative; min-width: 0; }
+
+/* As linhas de trava: regua fina, sem card. */
 .trava {
   display: grid;
-  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
-  gap: 10px 60px;
-  padding: 26px 0;
-  border-top: 1px solid var(--border);
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  gap: 8px 32px;
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
   transition: border-color .4s var(--ease);
 }
-.track__list .trava:last-child { border-bottom: 1px solid var(--border); }
-.trava:hover { border-top-color: var(--border-2); }
+.track__list .trava:last-child { border-bottom: 1px solid var(--line); }
+.trava:hover { border-top-color: var(--line-2); }
 
-/* O problema vem primeiro e em destaque — a secao fala de onde
-   trava, entao o gargalo lidera e a entrega responde. */
 .trava__problem {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(1.02rem, 1.6vw, 1.22rem);
-  font-weight: 400; letter-spacing: -0.015em; line-height: 1.3;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 400; letter-spacing: -0.015em; line-height: 1.35;
   color: var(--text);
 }
 .trava__solution {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: .74rem; font-weight: 600;
-  text-transform: uppercase; letter-spacing: .16em;
-  color: var(--cyan);
-  margin-bottom: 9px;
+  font-family: var(--font-display);
+  font-size: var(--fs-label); font-weight: 600;
+  text-transform: uppercase; letter-spacing: .14em;
+  color: var(--accent);
+  margin-bottom: 7px;
 }
-.trava__desc { color: var(--muted); font-size: .95rem; line-height: 1.65; }
+.trava__desc { color: var(--muted); font-size: var(--fs-sm); line-height: 1.6; }
 
-/* Fecho da secao: uma linha de texto, nao mais um card. */
 .section__outro {
   display: flex; flex-wrap: wrap; align-items: center; gap: 14px 26px;
-  margin-top: clamp(46px, 6vw, 72px);
-  padding-top: 30px;
-  border-top: 1px solid var(--border);
+  margin-top: var(--s6);
+  padding-top: var(--s4);
+  border-top: 1px solid var(--line);
 }
 .section__outro p { color: var(--muted); font-size: 1.02rem; max-width: 46ch; }
 
+@media (max-width: 980px) {
+  .block, .block--flip { grid-template-columns: 1fr; gap: var(--s4); }
+  .block--flip .block__media { order: 0; }
+  .blocks { gap: var(--s7); }
+}
 @media (max-width: 900px) {
-  .section__head--split { grid-template-columns: 1fr; align-items: start; gap: 20px; }
+  .section__head--split { grid-template-columns: 1fr; align-items: start; gap: 18px; }
   .section__head--split .section__lead { padding-bottom: 0; }
-  .trava { grid-template-columns: 1fr; gap: 12px; padding: 22px 0; }
-  .trava__problem { font-size: 1.06rem; }
+  .trava { grid-template-columns: 1fr; gap: 10px; padding: 18px 0; }
 }
 
-/* ---------- Grid + Cards ---------- */
-.grid { display: grid; gap: 22px; }
-.grid--solutions { grid-template-columns: repeat(3, 1fr); }
-.grid--services  { grid-template-columns: repeat(3, 1fr); }
-.grid--portfolio { grid-template-columns: repeat(3, 1fr); }
-.grid--plans     { grid-template-columns: repeat(3, 1fr); align-items: start; }
-.grid--mvv       { grid-template-columns: repeat(3, 1fr); }
+/* =========================================================
+   MOCKUPS DE PRODUTO — renderizados em HTML/CSS, sem imagem
+   ---------------------------------------------------------
+   Cada .mock e um componente isolado e autossuficiente. Para
+   trocar por um print real depois, basta substituir o conteudo
+   de .mock__screen por um <img>: o frame, a sombra, a legenda e
+   o responsivo continuam valendo sem tocar em mais nada.
 
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 30px;
+   Escala: o frame e um container e todo o interior e medido em
+   cqi/em, entao o mockup encolhe inteiro junto com a coluna —
+   nunca vira texto minusculo dentro de caixa grande.
+   ========================================================= */
+.mock { display: block; margin: 0; }
+.mock__frame {
   position: relative;
+  border-radius: 12px;
+  background: var(--bg-2);
+  border: 1px solid var(--line-2);
   overflow: hidden;
-  transition: transform .35s var(--ease), border-color .35s var(--ease), background .35s var(--ease);
+  box-shadow: 0 30px 60px -26px rgba(15, 23, 51, .45), 0 2px 10px rgba(15, 23, 51, .12);
+  font-size: 10px;
 }
-.card::before {
-  content: ''; position: absolute; inset: 0;
-  background: radial-gradient(400px circle at var(--mx, 50%) var(--my, 0%), rgba(34,211,238,.10), transparent 45%);
-  opacity: 0; transition: opacity .4s var(--ease); pointer-events: none;
+@supports (container-type: inline-size) {
+  .mock__frame { container-type: inline-size; }
+  .mock__chrome, .mock__screen { font-size: clamp(7px, 2.55cqi, 13px); }
+  .mock--phone .mock__screen { font-size: clamp(8px, 4.4cqi, 15px); }
 }
-.card:hover { transform: translateY(-6px); border-color: var(--border-2); background: var(--surface-2); }
-.card:hover::before { opacity: 1; }
+.mock__cap {
+  display: block;
+  margin-top: 12px;
+  font-family: var(--font-display);
+  font-size: .66rem; font-weight: 500;
+  text-transform: uppercase; letter-spacing: .18em;
+  color: var(--muted-2);
+}
 
-.card__icon {
-  width: 54px; height: 54px; border-radius: 14px;
-  display: grid; place-items: center; font-size: 1.5rem;
-  background: var(--grad-soft); border: 1px solid var(--border);
-  margin-bottom: 20px;
+.mock__chrome {
+  display: flex; align-items: center; gap: 1em;
+  padding: .95em 1.2em;
+  background: var(--bg-3);
+  border-bottom: 1px solid var(--line);
 }
-.card__problem {
-  font-size: .78rem; text-transform: uppercase; letter-spacing: .1em;
-  color: var(--pink); font-weight: 600; margin-bottom: 8px;
+.mock__dots { display: flex; gap: .45em; flex: none; }
+.mock__dots i { width: .62em; height: .62em; border-radius: 50%; background: var(--line-3); }
+.mock__url {
+  flex: 1; min-width: 0;
+  padding: .42em .9em; border-radius: 99em;
+  background: rgba(0,0,0,.35);
+  color: var(--muted-2); font-size: .92em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.card h3 { font-size: 1.2rem; margin-bottom: 10px; }
-.card p { color: var(--muted); font-size: .96rem; }
+.mock__screen { display: block; }
 
-.card--cta {
-  background: var(--grad-soft);
-  border-color: var(--border-2);
-  display: flex; flex-direction: column; justify-content: center; gap: 14px;
+.mock--phone .mock__frame {
+  aspect-ratio: 1 / 1.75;
+  display: flex; flex-direction: column;
+  border-radius: 2.4em;
+  border: .55em solid #1b2233;
+  background: #0b1017;
+  box-shadow: 0 34px 64px -26px rgba(15, 23, 51, .5);
 }
-.card--cta h3 { font-size: 1.3rem; }
+.mock--phone .mock__frame::before {
+  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 34%; height: 1.5em; border-radius: 0 0 1em 1em; background: #1b2233; z-index: 3;
+}
+
+/* ---------- tela 1: site / landing ---------- */
+.scr-site { padding: 0 0 1.4em; background: linear-gradient(180deg, #0d1220, var(--bg-2)); }
+.site__nav {
+  display: flex; align-items: center; gap: .8em;
+  padding: 1.1em 1.4em; border-bottom: 1px solid var(--line);
+}
+.site__mark { width: 1.5em; height: 1.5em; border-radius: .45em; background: var(--accent); flex: none; }
+.site__nav i { height: .5em; width: 3em; border-radius: 99em; background: var(--line-2); }
+.site__nav .site__btn {
+  margin-left: auto; padding: .45em .9em; border-radius: .5em;
+  background: var(--accent); color: var(--accent-ink);
+  font-size: .88em; font-weight: 700; white-space: nowrap;
+}
+.site__hero { padding: 2.2em 1.6em 1.6em; }
+.site__eyebrow {
+  font-size: .8em; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: .9em;
+}
+.site__hero h4 {
+  font-family: var(--font-display);
+  font-size: 1.85em; font-weight: 600; line-height: 1.12; letter-spacing: -0.03em;
+  color: var(--text-hi); margin-bottom: .55em;
+}
+.site__p { font-size: .95em; color: var(--muted); line-height: 1.5; margin-bottom: 1.3em; max-width: 24em; }
+.site__cta {
+  display: inline-block; padding: .7em 1.3em; border-radius: .55em;
+  background: var(--accent); color: var(--accent-ink); font-size: .95em; font-weight: 700;
+}
+.site__cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8em; padding: 0 1.6em; }
+.site__cards i {
+  height: 3.6em; border-radius: .6em;
+  background: var(--surface); border: 1px solid var(--line);
+}
+
+/* ---------- tela 2: conversa no WhatsApp ---------- */
+.mock--phone .mock__screen { flex: 1; min-height: 0; }
+.scr-wa { display: flex; flex-direction: column; background: #0b1017; }
+.wa__top {
+  display: flex; align-items: center; gap: .8em;
+  padding: 2.6em 1.2em 1em;
+  background: var(--bg-3); border-bottom: 1px solid var(--line);
+}
+.wa__av {
+  width: 2.5em; height: 2.5em; border-radius: 50%; flex: none;
+  display: grid; place-items: center;
+  background: var(--accent-2); color: var(--accent-ink);
+  font-family: var(--font-display); font-size: .85em; font-weight: 700;
+}
+.wa__who b { display: block; color: var(--text); font-size: 1.02em; font-weight: 600; }
+.wa__who i {
+  display: block; font-style: normal; font-size: .82em; color: var(--accent);
+  letter-spacing: .04em;
+}
+.wa__body {
+  flex: 1; display: flex; flex-direction: column; justify-content: flex-end;
+  gap: .7em;
+  padding: 1.3em 1em; overflow: hidden;
+}
+.wa__msg {
+  max-width: 84%; padding: .7em .85em .55em;
+  font-size: .95em; line-height: 1.42; color: var(--text);
+  border-radius: 1em;
+}
+.wa__msg time {
+  display: block; text-align: right;
+  font-size: .76em; color: var(--muted-2); margin-top: .25em;
+}
+.wa__msg--in  { align-self: flex-start; background: #1b2434; border-bottom-left-radius: .25em; }
+.wa__msg--out { align-self: flex-end; background: #2a3566; border-bottom-right-radius: .25em; }
+.wa__msg--out time { color: #a9b3e8; }
+.wa__msg b { font-weight: 600; color: var(--text-hi); }
+.wa__input {
+  display: flex; align-items: center; gap: .7em;
+  padding: .85em 1.1em; border-top: 1px solid var(--line); background: var(--bg-3);
+  color: var(--muted-2); font-size: .92em;
+}
+.wa__input::after {
+  content: ''; margin-left: auto; width: 1.9em; height: 1.9em; border-radius: 50%;
+  background: var(--accent); flex: none;
+}
+
+/* ---------- tela 3: pipeline do CRM ---------- */
+.scr-crm { padding: 1.3em; }
+.crm__bar { display: flex; align-items: center; gap: .8em; margin-bottom: 1.2em; }
+.crm__title {
+  font-family: var(--font-display); font-size: 1.05em; font-weight: 600;
+  color: var(--text-hi); letter-spacing: -0.02em;
+}
+.crm__pill {
+  margin-left: auto; padding: .35em .8em; border-radius: 99em;
+  border: 1px solid var(--line-2); color: var(--muted); font-size: .82em;
+}
+.crm__cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: .7em; }
+.crm__colhead {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: .8em; font-weight: 600; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--muted-2); margin-bottom: .7em; padding-bottom: .5em;
+  border-bottom: 1px solid var(--line);
+}
+.crm__colhead span { color: var(--accent); font-variant-numeric: tabular-nums; }
+.crm__col { display: flex; flex-direction: column; gap: .55em; min-width: 0; }
+.crm__card {
+  padding: .75em .8em; border-radius: .55em;
+  background: var(--surface); border: 1px solid var(--line);
+}
+.crm__card b {
+  display: block; font-size: .95em; font-weight: 600; color: var(--text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.crm__card span { display: block; font-size: .8em; color: var(--muted-2); margin-top: .3em; }
+.crm__card--hot { border-color: rgba(129,140,248,.45); background: var(--accent-dim); }
+
+/* ---------- tela 4: painel de resultado ---------- */
+.scr-dash { padding: 1.3em; }
+.dash__head { display: flex; align-items: baseline; gap: .8em; margin-bottom: 1.1em; }
+.dash__head b {
+  font-family: var(--font-display); font-size: 1.05em; font-weight: 600;
+  color: var(--text-hi); letter-spacing: -0.02em;
+}
+.dash__head span { margin-left: auto; font-size: .82em; color: var(--muted-2); }
+.dash__kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: .7em; margin-bottom: 1.2em; }
+.dash__kpi { padding: .85em .9em; border-radius: .55em; background: var(--surface); border: 1px solid var(--line); }
+.dash__kpi i {
+  display: block; font-style: normal; font-size: .78em; text-transform: uppercase;
+  letter-spacing: .1em; color: var(--muted-2); margin-bottom: .45em;
+}
+.dash__kpi b {
+  font-family: var(--font-display); font-size: 1.5em; font-weight: 600;
+  color: var(--text-hi); letter-spacing: -0.03em; font-variant-numeric: tabular-nums;
+}
+.dash__chart {
+  display: flex; align-items: flex-end; gap: .55em; height: 7em;
+  padding-top: .8em; border-top: 1px solid var(--line);
+}
+.dash__chart i { flex: 1; height: var(--h, 45%); border-radius: .25em .25em 0 0; background: var(--line-2); }
+.dash__chart i.is-up { background: var(--accent); }
+.dash__foot {
+  display: flex; gap: .8em; margin-top: .7em;
+  font-size: .78em; color: var(--muted-2);
+}
+.dash__foot span { flex: 1; text-align: center; }
+
+/* ---------- Grid (so as variantes que existem no HTML) ---------- */
+.grid { display: grid; gap: 22px; }
+.grid--services { grid-template-columns: repeat(3, 1fr); }
+.grid--plans    { grid-template-columns: repeat(3, 1fr); align-items: start; }
 
 /* ---------- Services ---------- */
 .service {
@@ -540,7 +851,7 @@ main, .nav, .footer { position: relative; z-index: 2; }
 }
 .service:hover { border-top-color: var(--border-2); }
 .service__num {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-display);
   font-size: .76rem; font-weight: 600; letter-spacing: .22em;
   color: var(--cyan); font-variant-numeric: tabular-nums;
   background: none; -webkit-text-fill-color: currentColor;
@@ -552,90 +863,86 @@ main, .nav, .footer { position: relative; z-index: 2; }
 }
 .service p { color: var(--muted); font-size: .93rem; line-height: 1.65; }
 
-/* ---------- Metodologia: linha do tempo ----------
-   De proposito NAO e a mesma lista vertical de #solucoes: aqui o
-   conteudo corre na horizontal sobre uma unica regua. O ritmo do
-   scroll muda de secao pra secao em vez de repetir o mesmo bloco. */
+/* ---------- Metodologia: passos assimetricos ----------
+   Eram 4 caixas iguais empilhadas na mesma regua — o olho lia uma e
+   pulava o resto. Agora o passo 01 tem o peso que ele tem no discurso
+   ("todo projeto comeca aqui") e os outros tres correm menores ao lado.
+   Este e o UNICO lugar da home que ainda usa numeracao: 01/02/03
+   aparecia em quatro secoes diferentes e virou tique de template. */
 .flow {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 40px 34px;
-  border-top: 1px solid var(--border-2);
-  padding-top: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: var(--s5) clamp(40px, 6vw, 90px);
+  align-items: start;
 }
-.flow__step { padding-top: 30px; position: relative; }
-/* marcador que se apoia na regua de cima */
-.flow__step::before {
-  content: ''; position: absolute; top: -1px; left: 0; width: 34px; height: 1px;
-  background: var(--cyan);
+.flow__step { position: relative; }
+
+/* passo 1 — ancora da secao */
+.flow__step:first-child {
+  grid-row: span 3;
+  align-self: stretch;
+  padding: var(--s4) 0 0;
+  border-top: 2px solid var(--accent);
 }
+.flow__step:first-child h3 {
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  font-weight: 600; letter-spacing: -0.035em; line-height: 1.1;
+  color: var(--text-hi);
+  margin-bottom: var(--s2);
+}
+.flow__step:first-child p { font-size: var(--fs-lead); max-width: 34ch; }
+.flow__step:first-child .flow__num { color: var(--accent-hi); }
+
+/* passos 2 a 4 — pauta menor, alinhada a direita da grade */
+.flow__step + .flow__step {
+  padding-top: var(--s3);
+  border-top: 1px solid var(--line);
+  transition: border-color .4s var(--ease);
+}
+.flow__step + .flow__step:hover { border-top-color: var(--line-2); }
+
 .flow__num {
   display: block;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: .76rem; font-weight: 600; letter-spacing: .22em;
-  color: var(--cyan); font-variant-numeric: tabular-nums;
-  margin-bottom: 16px;
+  font-family: var(--font-display);
+  font-size: var(--fs-label); font-weight: 600; letter-spacing: .2em;
+  color: var(--muted-2); font-variant-numeric: tabular-nums;
+  margin-bottom: var(--s2);
 }
 .flow__step h3 {
-  font-size: 1.18rem; font-weight: 400; letter-spacing: -0.02em;
-  margin-bottom: 10px; color: var(--text);
+  font-size: 1.1rem; font-weight: 500; letter-spacing: -0.02em;
+  margin-bottom: 8px; color: var(--text);
 }
-.flow__step p { color: var(--muted); font-size: .93rem; line-height: 1.65; }
+.flow__step p { color: var(--muted); font-size: var(--fs-sm); line-height: 1.62; }
 
-@media (max-width: 900px) {
-  .flow { grid-template-columns: 1fr 1fr; gap: 32px 24px; }
-}
-@media (max-width: 560px) {
-  .flow { grid-template-columns: 1fr; gap: 0; border-top: 0; }
-  .flow__step { padding: 24px 0; border-top: 1px solid var(--border); }
-  .flow__step::before { width: 26px; }
+@media (max-width: 860px) {
+  .flow { grid-template-columns: 1fr; gap: var(--s4); }
+  .flow__step:first-child { grid-row: auto; padding-bottom: var(--s2); }
 }
 
-/* ---------- Steps ---------- */
-.steps {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px;
-  counter-reset: step;
-}
-.step {
-  padding: 32px 26px; border-radius: var(--radius);
-  border: 1px solid var(--border); background: var(--surface);
-  position: relative;
-  transition: transform .35s var(--ease), border-color .35s var(--ease);
-}
-.step:hover { transform: translateY(-6px); border-color: var(--border-2); }
-.step__num {
-  width: 46px; height: 46px; border-radius: 50%;
-  display: grid; place-items: center;
-  font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.15rem;
-  color: #05070d; background: var(--grad);
-  box-shadow: 0 0 20px rgba(34,211,238,.4);
-  margin-bottom: 18px;
-}
-.step h3 { font-size: 1.15rem; margin-bottom: 8px; }
-.step p { color: var(--muted); font-size: .95rem; }
-
-/* ---------- Stats ---------- */
-.stats { padding: clamp(50px, 7vw, 90px) 0; }
+/* ---------- Stats ----------
+   Os numeros sao os reais e continuam escritos no HTML (ver o comentario
+   do contador em js/main.js). O que mudou e o peso: rotulo em cima,
+   numero grande embaixo, e o conjunto ancorado numa regua so. */
+.stats { padding: var(--s6) 0; }
 .stats__inner {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px 22px;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 46px 0;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s4) var(--s3);
+  border-top: 1px solid var(--line-2);
+  padding-top: var(--s4);
 }
-.stat { text-align: left; }
+.stat { text-align: left; display: flex; flex-direction: column-reverse; gap: 10px; }
 .stat__num {
   display: block;
-  font-size: clamp(2.4rem, 5vw, 3.4rem);
-  font-weight: 300; letter-spacing: -0.04em; line-height: 1;
-  color: var(--text);
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.6vw, 3.2rem);
+  font-weight: 600; letter-spacing: -0.05em; line-height: .95;
+  color: var(--text-hi);
   font-variant-numeric: tabular-nums;
-  margin-bottom: 10px;
 }
 .stat__label {
-  color: var(--muted-2); font-size: .78rem;
+  color: var(--muted-2); font-size: var(--fs-label);
   text-transform: uppercase; letter-spacing: .14em;
-  font-family: 'Space Grotesk', sans-serif; font-weight: 500;
+  font-family: var(--font-display); font-weight: 500;
 }
-.stats__note { text-align: center; color: var(--muted-2); font-size: .8rem; margin-top: 16px; }
 
 /* ---------- Portfolio editorial ----------
    Print do site entregue de um lado, depoimento do outro, alternando o
@@ -645,22 +952,23 @@ main, .nav, .footer { position: relative; z-index: 2; }
 
 .work {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
-  gap: 26px 56px;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr);
+  gap: var(--s4) clamp(34px, 5vw, 72px);
   align-items: center;
 }
 .work--inverso .work__shot { order: 2; }
 
-.work__shot { display: block; border-radius: 14px; overflow: hidden;
-  border: 1px solid var(--border); background: var(--bg-soft);
+.work__shot { display: block; border-radius: 12px; overflow: hidden;
+  border: 1px solid var(--line); background: var(--bg-soft);
+  box-shadow: 0 26px 54px -28px rgba(15, 23, 51, .38);
   transition: border-color .4s var(--ease), transform .4s var(--ease); }
 .work__shot img { width: 100%; height: auto; display: block; }
-.work__shot:hover { border-color: var(--border-2); transform: translateY(-4px); }
+.work__shot:hover { border-color: var(--line-2); transform: translateY(-3px); }
 
 .work__tag {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: .72rem; font-weight: 600; text-transform: uppercase;
-  letter-spacing: .18em; color: var(--cyan); margin-bottom: 14px;
+  font-family: var(--font-display);
+  font-size: var(--fs-label); font-weight: 600; text-transform: uppercase;
+  letter-spacing: var(--track-label); color: var(--muted-2); margin-bottom: 12px;
 }
 .work__name {
   font-size: clamp(1.3rem, 2.4vw, 1.7rem); font-weight: 400;
@@ -670,8 +978,8 @@ main, .nav, .footer { position: relative; z-index: 2; }
 .work__name a:hover { color: var(--cyan); }
 .work__quote {
   color: var(--text); font-size: 1.02rem; line-height: 1.7;
-  font-style: italic; margin-bottom: 16px;
-  padding-left: 18px; border-left: 2px solid var(--border-2);
+  font-style: normal; margin-bottom: 14px;
+  padding-left: 16px; border-left: 2px solid var(--accent);
 }
 .work__client { color: var(--muted); font-size: .88rem; display: flex;
   flex-wrap: wrap; align-items: center; gap: 8px; }
@@ -701,16 +1009,15 @@ main, .nav, .footer { position: relative; z-index: 2; }
 }
 .manifesto__inner { max-width: 780px; }
 .manifesto__lead {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(1.6rem, 3.6vw, 2.7rem);
-  font-weight: 300; line-height: 1.18; letter-spacing: -0.035em;
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3.9vw, 3rem);
+  font-weight: 300; line-height: 1.15; letter-spacing: var(--track-display);
   color: var(--text);
   margin-bottom: 36px;
 }
 .manifesto__lead em {
   font-style: normal; font-weight: 500;
-  background: var(--grad); -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--accent);
 }
 .manifesto__body { display: grid; gap: 20px; max-width: 62ch; }
 .manifesto__body p { color: var(--muted); font-size: 1.04rem; line-height: 1.75; }
@@ -719,29 +1026,6 @@ main, .nav, .footer { position: relative; z-index: 2; }
 @media (max-width: 900px) {
   .manifesto__lead { margin-bottom: 28px; }
 }
-
-/* ---------- Portfolio ---------- */
-.project {
-  padding: 30px; border-radius: var(--radius);
-  border: 1px solid var(--border); background: var(--surface);
-  transition: transform .35s var(--ease), border-color .35s var(--ease), background .35s var(--ease);
-  display: flex; flex-direction: column;
-}
-.project:hover { transform: translateY(-6px); border-color: var(--border-2); background: var(--surface-2); }
-.project__top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-.project__tag {
-  font-size: .74rem; text-transform: uppercase; letter-spacing: .08em;
-  color: var(--cyan); font-weight: 600;
-  padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border);
-  background: var(--grad-soft);
-}
-.project h3 { font-size: 1.2rem; margin-bottom: 12px; }
-.project h3 a { color: inherit; transition: color .25s var(--ease); }
-.project h3 a:hover { color: var(--cyan); }
-.project__quote { color: var(--muted); font-style: italic; margin-bottom: 18px; flex: 1; }
-.project__client { font-size: .88rem; font-weight: 600; }
-.project__client a { color: var(--muted-2); font-weight: 400; transition: color .25s var(--ease); }
-.project__client a:hover { color: var(--cyan); }
 
 /* ---------- Plans ---------- */
 .plan {
@@ -752,19 +1036,16 @@ main, .nav, .footer { position: relative; z-index: 2; }
 }
 .plan:hover { transform: translateY(-6px); border-color: var(--border-2); }
 .plan--featured {
-  border-color: transparent;
-  background:
-    linear-gradient(var(--bg-soft), var(--bg-soft)) padding-box,
-    var(--grad) border-box;
-  border: 1.5px solid transparent;
-  box-shadow: 0 20px 60px rgba(34,211,238,.12);
+  background: var(--bg-soft);
+  border: 1px solid var(--accent);
+  box-shadow: 0 24px 60px -30px rgba(129,140,248,.5);
 }
 .plan--featured:hover { transform: translateY(-10px); }
 .plan__badge {
   position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
-  background: var(--grad); color: #05070d; font-weight: 700; font-size: .72rem;
-  letter-spacing: .08em; text-transform: uppercase;
-  padding: 6px 16px; border-radius: 999px; white-space: nowrap;
+  background: var(--accent); color: var(--accent-ink); font-weight: 700; font-size: .72rem;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: 5px 13px; border-radius: var(--radius-xs); white-space: nowrap;
 }
 .plan__name { font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; }
 .plan__focus { color: var(--cyan); font-weight: 600; font-size: .92rem; margin-bottom: 22px; }
@@ -777,32 +1058,33 @@ main, .nav, .footer { position: relative; z-index: 2; }
   color: var(--cyan); font-weight: 700;
 }
 
-/* ---------- MVV ---------- */
-.mvv {
-  padding: 34px 30px; border-radius: var(--radius);
-  border: 1px solid var(--border); background: var(--surface);
-  transition: transform .35s var(--ease), border-color .35s var(--ease);
+/* ---------- CTA band ----------
+   Era uma caixa arredondada de 28px centralizada, com brilho violeta
+   radial por tras — o "card de CTA" que vem em todo template. Agora e
+   uma faixa de ponta a ponta entre duas reguas: o peso vem do tipo e do
+   vazio em volta, nao da moldura. */
+.cta-band {
+  padding: var(--s8) 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-1);
 }
-.mvv:hover { transform: translateY(-6px); border-color: var(--border-2); }
-.mvv__icon { font-size: 2rem; margin-bottom: 16px; }
-.mvv h3 { font-size: 1.3rem; margin-bottom: 10px; }
-.mvv p { color: var(--muted); }
-
-/* ---------- CTA band ---------- */
-.cta-band { padding: clamp(70px, 10vw, 120px) 0; position: relative; }
 .cta-band__inner {
-  text-align: center; max-width: 760px; margin-inline: auto;
-  padding: clamp(40px, 6vw, 70px);
-  border-radius: 28px;
-  border: 1px solid var(--border-2);
-  background:
-    radial-gradient(600px 300px at 50% 0%, rgba(139,92,246,.18), transparent 70%),
-    var(--surface);
-  position: relative; overflow: hidden;
+  text-align: left; max-width: 760px;
+  padding: 0; border: 0; border-radius: 0; background: none;
 }
-.cta-band__inner h2 { font-size: clamp(1.8rem, 4.6vw, 2.8rem); font-weight: 700; margin-bottom: 18px; }
-.cta-band__inner p { color: var(--muted); font-size: 1.1rem; margin-bottom: 32px; }
-.cta-band__inner strong { color: var(--text); }
+.cta-band__inner h2 {
+  font-size: var(--fs-display); font-weight: 300;
+  letter-spacing: var(--track-display); line-height: 1.06;
+  color: var(--muted);
+  margin-bottom: var(--s3);
+}
+.cta-band__inner h2 .grad { font-weight: 600; }
+.cta-band__inner p {
+  color: var(--muted); font-size: var(--fs-lead); line-height: 1.7;
+  margin-bottom: var(--s4); max-width: 54ch;
+}
+.cta-band__inner strong { color: var(--text); font-weight: 500; }
 
 /* ---------- Icons (WhatsApp / Instagram inline) ---------- */
 .icon, .contact__ic { display: inline-flex; flex: none; }
@@ -816,7 +1098,7 @@ main, .nav, .footer { position: relative; z-index: 2; }
 .contact__ic { display: inline-flex; width: 20px; height: 20px; color: var(--cyan); }
 
 /* ---------- Footer ---------- */
-.footer { border-top: 1px solid var(--border); padding-top: 56px; background: rgba(0,0,0,.25); }
+.footer { border-top: 1px solid var(--line); padding-top: 56px; background: var(--bg); }
 .footer__inner { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; padding-bottom: 40px; }
 .footer__brand { max-width: 320px; }
 .footer__brand .brand__text { display: inline-block; margin: 14px 0 10px; }
@@ -843,7 +1125,7 @@ summary:focus-visible,
   outline-offset: 3px;
   border-radius: 4px;
 }
-.btn:focus-visible { border-radius: 999px; }
+.btn:focus-visible { border-radius: var(--radius-btn); }
 
 /* ---------- Reveal animations (JS-driven fallback) ---------- */
 .reveal, .reveal-line { will-change: transform, opacity; }
@@ -855,10 +1137,8 @@ summary:focus-visible,
 
 /* ---------- Responsive ---------- */
 @media (max-width: 960px) {
-  .grid--solutions, .grid--services, .grid--portfolio { grid-template-columns: repeat(2, 1fr); }
+  .grid--services { grid-template-columns: repeat(2, 1fr); }
   .grid--plans { grid-template-columns: 1fr; max-width: 460px; margin-inline: auto; }
-  .grid--mvv { grid-template-columns: 1fr; }
-  .steps { grid-template-columns: repeat(2, 1fr); }
   .stats__inner { grid-template-columns: repeat(2, 1fr); }
 
   .nav__cta { display: none; }
@@ -866,7 +1146,7 @@ summary:focus-visible,
   .nav__links {
     position: fixed; inset: 74px 0 auto 0;
     flex-direction: column; gap: 0;
-    background: rgba(5,7,13,.96); backdrop-filter: blur(14px);
+    background: var(--bg); backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--border);
     padding: 10px 0;
     transform: translateY(-120%); opacity: 0; pointer-events: none;
@@ -878,9 +1158,8 @@ summary:focus-visible,
 }
 
 @media (max-width: 560px) {
-  .grid--solutions, .grid--services, .grid--portfolio { grid-template-columns: 1fr; }
-  .steps { grid-template-columns: 1fr; }
-  .stats__inner { grid-template-columns: 1fr 1fr; gap: 30px 12px; }
+  .grid--services { grid-template-columns: 1fr; }
+  .stats__inner { grid-template-columns: 1fr 1fr; gap: var(--s4) var(--s3); }
   .hero__actions { flex-direction: column; align-items: stretch; }
   .hero__actions .btn { width: 100%; }
 }
@@ -889,15 +1168,14 @@ summary:focus-visible,
 .nav__hot { color: var(--text) !important; font-weight: 600; }
 .nav__hot::before {
   content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%;
-  background: var(--grad); margin-right: 7px; vertical-align: middle;
-  box-shadow: 0 0 8px rgba(34,211,238,.7);
+  background: var(--accent); margin-right: 7px; vertical-align: middle;
 }
 
 /* ---------- Livson Conecta section ---------- */
 .conecta { position: relative; }
 .section__head--center { max-width: 760px; margin-inline: auto; text-align: center; }
 .conecta__tagline {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 400;
   color: var(--cyan);
   letter-spacing: -0.01em;
@@ -920,9 +1198,9 @@ summary:focus-visible,
 }
 .module__step {
   position: static; display: block;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-display);
   font-size: .76rem; font-weight: 600; letter-spacing: .22em;
-  color: var(--cyan); font-variant-numeric: tabular-nums;
+  color: var(--muted-2); font-variant-numeric: tabular-nums;
   margin-bottom: 14px;
 }
 .module h3 {
@@ -952,13 +1230,13 @@ summary:focus-visible,
 .compare__row:last-child { border-bottom: 0; }
 .compare__row--head {
   background: none;
-  font-family: 'Space Grotesk', sans-serif; font-weight: 600;
+  font-family: var(--font-display); font-weight: 600;
   font-size: .72rem; text-transform: uppercase; letter-spacing: .16em;
   color: var(--muted-2);
 }
 .compare__row span:first-child { color: var(--text); font-weight: 500; }
 .compare .no  { color: var(--muted-2); }
-.compare .yes { color: #34d399; font-weight: 600; }
+.compare .yes { color: var(--accent); font-weight: 600; }
 
 .conecta__cta {
   display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;
@@ -969,10 +1247,12 @@ summary:focus-visible,
 }
 
 @media (max-width: 860px) {
-  .conecta__flow { flex-direction: column; align-items: stretch; max-width: 440px; }
-  .module { width: 100%; }
-  .module__link { flex: 0 0 auto; padding: 8px 0; }
-  .module__link::before { content: '↓'; }
+  .conecta__flow { grid-template-columns: 1fr 1fr; gap: 28px 24px; }
+}
+@media (max-width: 560px) {
+  .conecta__flow { grid-template-columns: 1fr; gap: 0; border-top: 0; }
+  .conecta__flow .module { padding: 24px 0 0; border-top: 1px solid var(--line); }
+  .conecta__flow .module::before { width: 26px; }
 }
 @media (max-width: 560px) {
   .compare__row { grid-template-columns: 1.3fr .8fr 1fr; gap: 6px; padding: 12px 14px; font-size: .82rem; }
@@ -996,16 +1276,24 @@ summary:focus-visible,
 
 
 /* ---------- Livson Conecta teaser (home) ---------- */
-.conecta-teaser__inner { max-width: 820px; }
+/* o elemento acumulava .container (margin-inline:auto) com max-width
+   proprio, entao a secao inteira ficava centrada e quebrava a margem
+   esquerda que todas as outras seguem. A medida foi pro filho. */
+.conecta-teaser__copy { max-width: 820px; }
 .conecta-teaser__list {
-  display: grid; gap: 12px; margin: 28px 0 34px;
+  display: grid; gap: 0; margin: var(--s4) 0 var(--s5);
+  border-top: 1px solid var(--line);
 }
 .conecta-teaser__list li {
-  color: var(--muted); font-size: .96rem;
-  padding: 14px 18px; border-radius: var(--radius-sm);
-  border: 1px solid var(--border); background: var(--surface);
+  color: var(--muted); font-size: var(--fs-body);
+  padding: 15px 0;
+  border-bottom: 1px solid var(--line);
+  background: none; border-radius: 0;
 }
-.conecta-teaser__list li strong { color: var(--text); font-family: 'Space Grotesk', sans-serif; }
+.conecta-teaser__list li strong {
+  color: var(--text); font-family: var(--font-display); font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
 .conecta-teaser__copy .conecta__cta { justify-content: flex-start; }
 
 /* ---------- Impacto Real ---------- */
@@ -1030,34 +1318,62 @@ summary:focus-visible,
 .impact__desc { color: var(--muted); font-size: .9rem; line-height: 1.65; }
 .impact__note { text-align: left; color: var(--muted-2); font-size: .78rem; margin-top: 34px; max-width: 760px; padding-top: 20px; border-top: 1px solid var(--border); }
 
-/* ---------- Fundador ---------- */
+/* ---------- Fundador ----------
+   A foto era um retangulo com raio 18 e um retangulo gradiente borrado
+   (blur 30px) por tras — moldura + halo generico. Agora e um recorte com
+   fundo transparente: o corpo dissolve na base e a luz de recorte
+   (indigo + branco-azulado) esta pintada no proprio arquivo, seguindo o
+   contorno. O halo abaixo e a MESMA fonte de luz do rim light. */
 .founder__inner {
-  display: grid; grid-template-columns: .8fr 1.2fr; gap: 56px; align-items: center;
+  display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  gap: clamp(30px, 5vw, 70px); align-items: center;
 }
-.founder__media { position: relative; }
+.founder__media { position: relative; isolation: isolate; padding-top: 10%; }
+/* O recorte tem corte RETO embaixo, de proposito. Dissolver a base nao
+   funciona sobre fundo claro: terno quase preto virando transparente
+   produz um degrade cinza de ~30% da altura da imagem, que o olho le
+   como mancha, nao como "sumindo". Duas tentativas de fade falharam
+   aqui — a segunda ficou pior, porque uma nuvem cinza suja mais que uma
+   forma escura definida.
+   A solucao e MOTIVAR o corte: o painel envolve a foto inteira e a
+   aresta de baixo encosta na base dele — retrato emoldurado. */
 .founder__media::before {
-  content: ''; position: absolute; inset: -14px;
-  border-radius: calc(var(--radius) + 14px);
-  background: var(--grad); opacity: .18; filter: blur(30px); z-index: -1;
+  content: '';
+  position: absolute; z-index: -1;
+  inset: 0;
+  background: var(--bg-1);
+  border-radius: var(--radius);
 }
 .founder__photo {
-  width: 100%; height: auto; aspect-ratio: 2 / 3; object-fit: cover; object-position: top center;
-  border-radius: var(--radius);
-  border: 1px solid var(--border-2);
+  width: 100%; height: auto; display: block;
+  border: 0; border-radius: 0;
+  aspect-ratio: auto; object-fit: contain;
+  /* arredonda so a base, pra acompanhar o painel de tras */
+  border-radius: 0 0 var(--radius) var(--radius);
 }
-.founder__name { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; margin-top: 6px; }
-.founder__role { color: var(--cyan); font-weight: 600; font-size: .92rem; margin-bottom: 18px; }
-.founder__desc { color: var(--muted); margin-top: 14px; }
-/* icone de linha dentro dos selos — mesma espessura de traco dos SVGs
-   de contato/rodape, herdando a cor do texto via currentColor. */
-.ico { width: 1.05em; height: 1.05em; flex: none; margin-right: .5em; color: var(--cyan); }
+.founder__name {
+  font-family: var(--font-display); font-size: 1.28rem; font-weight: 600;
+  letter-spacing: -0.02em; margin-top: 4px; color: var(--text-hi);
+}
+.founder__role {
+  color: var(--muted-2); font-weight: 500; font-size: var(--fs-label);
+  text-transform: uppercase; letter-spacing: .16em;
+  font-family: var(--font-display);
+  margin-bottom: var(--s3);
+}
+.founder__desc { color: var(--muted); margin-top: 14px; font-size: var(--fs-body); line-height: 1.7; }
+
+/* Icone de linha dentro dos selos — mesma espessura de traco dos SVGs
+   de contato/rodape, herdando a cor do texto via currentColor. Sem
+   largura definida um <svg> inline vira 300x150 na tela. */
+.ico { width: 1.05em; height: 1.05em; flex: none; margin-right: .5em; color: var(--accent); }
 .hero__trust-badge, .founder__badge { display: inline-flex; align-items: center; }
 
-.founder__badges { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 26px; }
+.founder__badges { display: flex; flex-wrap: wrap; gap: 10px; margin: var(--s3) 0; }
 .founder__badge {
   font-size: .82rem; font-weight: 500; color: var(--text);
-  padding: 8px 14px; border-radius: 999px;
-  border: 1px solid var(--border-2); background: var(--surface);
+  padding: 8px 13px; border-radius: var(--radius-sm);
+  border: 1px solid var(--line-2); background: var(--surface);
 }
 
 /* ---------- Contato (simplificado, sem formulário) ---------- */
@@ -1080,11 +1396,11 @@ summary:focus-visible,
   position: fixed; right: 22px; bottom: 22px; z-index: 15;
   width: 58px; height: 58px; border-radius: 50%;
   display: grid; place-items: center;
-  background: #25D366; color: #fff;
-  box-shadow: 0 8px 26px rgba(37, 211, 102, .45);
+  background: var(--accent); color: var(--accent-ink);
+  box-shadow: 0 10px 30px rgba(28, 40, 89, .28);
   transition: transform .3s var(--ease), box-shadow .3s var(--ease);
 }
-.whatsapp-float:hover { transform: translateY(-4px) scale(1.05); box-shadow: 0 12px 34px rgba(37, 211, 102, .55); }
+.whatsapp-float:hover { transform: translateY(-4px) scale(1.05); box-shadow: 0 14px 38px rgba(28, 40, 89, .38); }
 .whatsapp-float svg { display: block; }
 
 /* ---------- FAQ (accordion) ---------- */
@@ -1098,7 +1414,7 @@ summary:focus-visible,
 .faq__question {
   width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px;
   padding: 20px 24px; background: none; border: none; cursor: pointer;
-  color: var(--text); font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600;
+  color: var(--text); font-family: var(--font-display); font-size: 1rem; font-weight: 600;
   text-align: left;
 }
 .faq__question::after {
@@ -1122,7 +1438,7 @@ summary:focus-visible,
   position: fixed; top: 74px; left: 0; right: 0; height: 3px;
   background: var(--surface-2); z-index: 15;
 }
-.diag__progress-bar { height: 100%; width: 4%; background: var(--grad); transition: width .4s var(--ease); }
+.diag__progress-bar { height: 100%; width: 4%; background: var(--accent); transition: width .4s var(--ease); }
 
 .diag { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 120px 0 60px; }
 .diag__counter {
@@ -1137,7 +1453,7 @@ summary:focus-visible,
 
 .diag__question {
   font-size: clamp(1.5rem, 3.4vw, 2.1rem); font-weight: 700;
-  font-family: 'Space Grotesk', sans-serif; margin-bottom: 10px;
+  font-family: var(--font-display); margin-bottom: 10px;
 }
 .diag__hint { color: var(--muted); font-size: .95rem; margin-bottom: 26px; }
 .diag__step .diag__input { margin-top: 6px; }
@@ -1192,7 +1508,7 @@ summary:focus-visible,
   display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
 }
 .report__tag {
-  font-family: 'Space Grotesk', sans-serif; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+  font-family: var(--font-display); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
   color: var(--cyan); font-weight: 600;
 }
 .report__who { font-size: .82rem; color: var(--muted-2); }
@@ -1200,7 +1516,7 @@ summary:focus-visible,
 .report__body { padding: clamp(24px, 4vw, 36px); }
 .report__label { font-size: .78rem; letter-spacing: .13em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
 .report__level {
-  font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.7rem, 5vw, 2.3rem); font-weight: 700;
+  font-family: var(--font-display); font-size: clamp(1.7rem, 5vw, 2.3rem); font-weight: 700;
   letter-spacing: -.02em; margin: 8px 0 22px; line-height: 1;
   display: inline-flex; align-items: center; gap: 10px;
 }
@@ -1211,7 +1527,7 @@ summary:focus-visible,
 
 .report__causes { display: flex; flex-direction: column; gap: 12px; }
 .report__cause { padding: 16px 18px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-soft); }
-.report__cause h3 { font-family: 'Space Grotesk', sans-serif; font-size: .95rem; font-weight: 700; margin-bottom: 6px; }
+.report__cause h3 { font-family: var(--font-display); font-size: .95rem; font-weight: 700; margin-bottom: 6px; }
 .report__cause p { color: var(--muted); font-size: .88rem; line-height: 1.55; }
 
 .report__note {
@@ -1221,7 +1537,7 @@ summary:focus-visible,
 .report__note:empty { display: none; }
 
 .report__next { margin-top: 30px; text-align: center; }
-.report__next h2 { font-size: 1.3rem; font-weight: 700; font-family: 'Space Grotesk', sans-serif; margin-bottom: 10px; }
+.report__next h2 { font-size: 1.3rem; font-weight: 700; font-family: var(--font-display); margin-bottom: 10px; }
 .report__next p { color: var(--muted); font-size: .96rem; margin-bottom: 24px; max-width: 46ch; margin-inline: auto; }
 .report__actions { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
 
@@ -1253,7 +1569,7 @@ summary:focus-visible,
 .legal-hero p { color: var(--muted-2); font-size: .9rem; }
 
 .prose { max-width: 780px; margin: 0 auto; padding-bottom: 60px; }
-.prose h2 { font-size: 1.3rem; font-weight: 700; margin: 42px 0 14px; font-family: 'Space Grotesk', sans-serif; }
+.prose h2 { font-size: 1.3rem; font-weight: 700; margin: 42px 0 14px; font-family: var(--font-display); }
 .prose h2:first-child { margin-top: 0; }
 .prose p { color: var(--muted); margin-bottom: 14px; }
 .prose ul { margin: 0 0 14px; padding-left: 22px; list-style: disc; }
@@ -1284,4 +1600,63 @@ summary:focus-visible,
     scroll-behavior: auto !important;
   }
   .reveal, .reveal-line { opacity: 1 !important; transform: none !important; }
+}
+
+/* ---------- Composicao da ancora do hero ----------
+   Painel do CRM atras, conversa do WhatsApp na frente e por baixo — a
+   sobreposicao e o que da profundidade. Diferente da referencia, o
+   mockup da frente e grande o bastante pra ser LIDO: e prova, nao
+   enfeite de dispositivo. */
+.hero__stack { position: relative; aspect-ratio: 1 / .9; }
+.hero__stack-back { position: absolute; right: 0; top: 0; width: 88%; }
+.hero__stack-front { position: absolute; left: -8%; top: 14%; width: 40%; z-index: 2; }
+/* sombra de contato: e o que impede o telefone de "flutuar" colado por
+   cima do painel, que e o defeito classico dessa composicao. */
+.hero__stack-front::after {
+  content: ''; position: absolute; inset: 6% -14% -6% -6%;
+  background: radial-gradient(ellipse at 50% 60%, rgba(0,0,0,.7), transparent 68%);
+  filter: blur(14px);
+  z-index: -1;
+}
+.hero__anchor .mock__cap { text-align: right; }
+
+/* halo atras dos mockups — mesma fonte de luz do resto da pagina */
+.hero__anchor::before {
+  content: ''; position: absolute; z-index: -1;
+  left: 50%; top: 45%; transform: translate(-50%, -50%);
+  /* 108% estourava 21px pra fora da viewport em 1280 — pseudo-elemento
+     conta pro scrollWidth igual a qualquer outro. */
+  width: 100%; aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(129,140,248,.16) 0%, transparent 62%);
+  pointer-events: none;
+}
+.hero__anchor { isolation: isolate; }
+
+/* Telefone sozinho numa coluna larga fica desproporcional. */
+.block__media .mock--phone { max-width: 320px; margin-inline: auto; }
+.block__media { isolation: isolate; }
+.block__media::before {
+  content: ''; position: absolute; z-index: -1;
+  left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: 96%; aspect-ratio: 1.2;
+  background: radial-gradient(ellipse, rgba(129,140,248,.13) 0%, transparent 64%);
+  pointer-events: none;
+}
+
+@media (max-width: 1080px) {
+  .hero__anchor .mock__cap { text-align: left; }
+}
+@media (max-width: 620px) {
+  /* Abaixo disso a sobreposicao come o painel: o telefone sai da frente
+     e os dois empilham, cada um legivel no seu tamanho. */
+  .hero__stack { aspect-ratio: auto; display: grid; gap: 20px; }
+  .hero__stack-back, .hero__stack-front { position: static; width: 100%; }
+  .hero__stack-front { width: 64%; margin-inline: auto; }
+  .hero__stack-front::after { display: none; }
+}
+
+/* O sangramento da ancora pra fora da coluna so entra quando sobra
+   margem fora do container — abaixo disso ele viraria overflow. */
+@media (min-width: 1500px) {
+  .hero__anchor { right: -40px; }
 }

@@ -74,6 +74,87 @@ bump-versao.py                troca a versão dos CSS/JS (ver acima)
 
 ---
 
+## Os mockups de produto do index (telas em HTML/CSS)
+
+O hero e a seção de Soluções mostram **telas do produto renderizadas em
+código** — nenhuma imagem envolvida. São quatro: um site/landing, uma
+conversa de WhatsApp com o vendedor IA, o pipeline do CRM e o painel de
+resultado. As regras ficam em `css/style.css`, no bloco
+`MOCKUPS DE PRODUTO`.
+
+Cada mockup é um `<figure class="mock">` isolado, com esta anatomia:
+
+```html
+<figure class="mock mock--browser">
+  <div class="mock__frame">
+    <div class="mock__chrome">...barra do navegador...</div>
+    <div class="mock__screen scr-site">...a tela...</div>
+  </div>
+  <figcaption class="mock__cap">Exemplo de tela — dados fictícios</figcaption>
+</figure>
+```
+
+**Para trocar por um print real** basta substituir o miolo de
+`.mock__screen` por `<img src="..." alt="" />`. O frame, a sombra, a
+legenda e o responsivo continuam funcionando sem tocar em mais nada.
+
+Dois detalhes que têm motivo de ser:
+
+- **Os dados são fictícios de propósito** (Clínica Vitalis, Ateliê Bela
+  Casa, os nomes nos cards). A legenda "Exemplo de tela — dados
+  fictícios" existe para que nenhum número dentro do mockup seja lido
+  como resultado real de cliente. Se um dia trocar por print de cliente
+  real, peça autorização e ajuste a legenda.
+- **A escala usa container queries** (`cqi`), não `vw`. Por isso o
+  mockup encolhe inteiro junto com a coluna, em vez de virar texto
+  minúsculo dentro de caixa grande. O `@supports` logo acima garante um
+  tamanho fixo em navegador que não suporte.
+
+---
+
+## A foto do fundador é um recorte com corte reto (não dissolve)
+
+`img/hudson-recorte.webp` (e a versão de 620px) foi gerada de
+`img/DSC00714.JPG` com recorte por matte (rembg / U²-Net human-seg).
+
+**A base tem corte reto, de propósito. Não tente dissolvê-la.** Isso já
+foi tentado duas vezes e falhou nas duas:
+
+1. Fade simples de alpha: o terno quase preto virando transparente
+   produz um degradê cinza ocupando ~30% da altura da imagem. Em fundo
+   escuro é invisível; em fundo claro é uma mancha.
+2. Fade "inteligente", clareando o pixel na direção do fundo enquanto
+   perde alpha: melhorou a média (desvio 87 → 44) mas **ficou pior aos
+   olhos** — uma nuvem cinza suja mais que uma forma escura definida. A
+   média é a métrica errada aqui; o que importa é a área afetada.
+
+O que funciona é **justificar o corte**: o `::before` de
+`.founder__media` desenha um painel (`--bg-1`, cantos arredondados) que
+envolve a foto inteira, com a aresta de baixo rente à base dele — um
+retrato emoldurado. Aí ela lê como enquadramento, não como mancha.
+
+O `padding-top` de `.founder__media` é o que dá ar acima da cabeça. Sem
+ele a cabeça encosta na borda do painel, porque o recorte começa
+praticamente rente ao topo do crânio.
+
+Números da versão atual: 7.389 pixels de meia-transparência (só a borda
+antialiasada da silhueta) contra 164.000 da versão que dissolvia.
+
+Outras regras:
+
+- **Não adicione luz de recorte (rim light).** Ela existia quando a
+  faixa do fundador era escura, para separar o terno preto do fundo.
+  Sobre fundo claro vira halo esbranquiçado no contorno.
+- **Não use `drop-shadow` na foto.** Ele segue o alpha, então a sombra
+  reintroduz cinza justamente na borda de baixo.
+- **Se trocar a altura do recorte, atualize `width`/`height` no
+  `<img>`**, senão o navegador reserva a proporção errada e a página
+  pula ao carregar.
+
+O original sem recorte continua em `img/DSC00714.JPG`.
+
+---
+
 ## Onde caem os formulários
 
 O diagnóstico envia para o **Formspree** (`js/diagnostico.js`, constante

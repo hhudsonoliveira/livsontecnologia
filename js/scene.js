@@ -56,10 +56,11 @@ async function start() {
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Colors
-  const CYAN = new THREE.Color('#22d3ee');
-  const VIOLET = new THREE.Color('#8b5cf6');
-  const PINK = new THREE.Color('#e879f9');
+  // Colors — a cena segue a paleta do site (indigo/navy). O cyan
+  // continua existindo, mas so como ponto alto raro, igual no CSS.
+  const CYAN = new THREE.Color('#899cec');    // acento da faixa escura
+  const VIOLET = new THREE.Color('#4a5aa8');  // mesmo hue, mais fundo
+  const PINK = new THREE.Color('#b3c0f7');    // mesmo hue, mais claro
 
   let renderer, scene, camera, composer;
   let particles, lineMesh, grid, icoGroup, ico, icoInner;
@@ -109,9 +110,9 @@ async function start() {
     composer.addPass(new RenderPass(scene, camera));
     const bloom = new UnrealBloomPass(
       new THREE.Vector2(window.innerWidth, window.innerHeight),
-      0.85,  // strength
-      0.7,   // radius
-      0.15   // threshold
+      0.42,  // strength — era 0.85: neon demais para o tom novo
+      0.85,  // radius
+      0.22   // threshold
     );
     composer.addPass(bloom);
 
@@ -230,12 +231,12 @@ async function start() {
     icoGroup.position.set(5.2, 1.6, 2);
 
     const geo = new THREE.IcosahedronGeometry(2.2, 1);
-    const mat = new THREE.MeshBasicMaterial({ color: CYAN, wireframe: true, transparent: true, opacity: 0.55 });
+    const mat = new THREE.MeshBasicMaterial({ color: CYAN, wireframe: true, transparent: true, opacity: 0.34 });
     ico = new THREE.Mesh(geo, mat);
     icoGroup.add(ico);
 
     const innerGeo = new THREE.IcosahedronGeometry(1.25, 0);
-    const innerMat = new THREE.MeshBasicMaterial({ color: PINK, wireframe: true, transparent: true, opacity: 0.4 });
+    const innerMat = new THREE.MeshBasicMaterial({ color: PINK, wireframe: true, transparent: true, opacity: 0.26 });
     icoInner = new THREE.Mesh(innerGeo, innerMat);
     icoGroup.add(icoInner);
 
