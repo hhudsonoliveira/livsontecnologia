@@ -47,7 +47,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" /></noscript>
 
-  <link rel="stylesheet" href="css/style.css?v=20260907b" />
+  <link rel="stylesheet" href="css/style.css?v=20260907c" />
 
   <!-- Dados estruturados (SEO) -->
   <script type="application/ld+json">
@@ -491,13 +491,47 @@
       </div>
     </section>
 
-    <!-- ===== STATS ===== -->
-    <section class="stats" id="stats">
-      <div class="container stats__inner">
-        <div class="stat reveal"><span class="stat__num" data-count="15" data-suffix="+">15+</span><span class="stat__label">Projetos entregues</span></div>
-        <div class="stat reveal"><span class="stat__num" data-count="10" data-suffix="+">10+</span><span class="stat__label">Clientes satisfeitos</span></div>
-        <div class="stat reveal"><span class="stat__num" data-count="2" data-suffix="+">2+</span><span class="stat__label">Anos de experiência</span></div>
-        <div class="stat reveal"><span class="stat__num" data-count="100" data-suffix="%">100%</span><span class="stat__label">Foco em resultado</span></div>
+    <!-- ===== COMPROMISSOS =====
+         Ficava aqui uma faixa de numeros (15+ projetos, 10+ clientes, 2+
+         anos, 100% foco). Saiu inteira em 2026-09-07 por decisao do
+         Hudson, e vale registrar o motivo para ninguem "melhorar" a
+         pagina colocando os numeros de volta:
+
+           - "2+ anos de experiencia" era o unico dado da faixa que servia
+             para o visitante DESQUALIFICAR a Livson. Oferecer isso
+             espontaneamente e entregar o argumento contrario de bandeja.
+           - "100% foco em resultado" nao e estatistica, e slogan vestido
+             de numero. O leitor percebe na hora — e passa a desconfiar
+             dos outros tres, que sao verdadeiros.
+           - "15+ projetos" e "10+ clientes" diziam quase a mesma coisa.
+
+         No lugar entram compromissos: o portfolio logo abaixo ja prova
+         QUE a Livson entrega; o que ele nao responde e o medo de quem
+         contrata empresa pequena de tecnologia ("vou ficar na mao?",
+         "vou falar com vendedor ou com quem programa?"). Cada item aqui
+         ja e afirmado em algum outro ponto do site (Metodologia,
+         Manifesto, Fundador) — esta faixa e a versao escaneavel. -->
+    <section class="pactos" id="compromissos">
+      <div class="container">
+        <p class="pactos__intro reveal"><span class="eyebrow">Nosso compromisso</span> O que você pode <strong>cobrar da gente</strong></p>
+        <ul class="pactos__lista">
+          <li class="pacto reveal">
+            <h3 class="pacto__titulo">Diagnóstico antes de proposta</h3>
+            <p class="pacto__texto">Todo projeto começa entendendo onde a sua operação trava hoje. Escopo e preço vêm depois disso — nunca antes.</p>
+          </li>
+          <li class="pacto reveal">
+            <h3 class="pacto__titulo">Você fala com quem constrói</h3>
+            <p class="pacto__texto">Sem telefone sem fio entre quem atende e quem programa: quem ouve o seu problema é quem entrega a solução.</p>
+          </li>
+          <li class="pacto reveal">
+            <h3 class="pacto__titulo">A gente diz o que não fazer</h3>
+            <p class="pacto__texto">Se uma parte do projeto não vale a pena agora, você ouve isso e o porquê. Escopo grande impressiona na proposta; resultado aparece na operação.</p>
+          </li>
+          <li class="pacto reveal">
+            <h3 class="pacto__titulo">Remoto do começo ao fim</h3>
+            <p class="pacto__texto">O trabalho acontece a distância sem perder proximidade — inclusive fora do Brasil, como no site do In Europa, entregue para Lisboa.</p>
+          </li>
+        </ul>
       </div>
     </section>
 
@@ -712,9 +746,9 @@
   </a>
 
   <!-- Scripts -->
-  <script type="module" src="js/scene.js?v=20260907b"></script>
+  <script type="module" src="js/scene.js?v=20260907c"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-  <script src="js/main.js?v=20260907b" defer></script>
+  <script src="js/main.js?v=20260907c" defer></script>
 </body>
 </html>

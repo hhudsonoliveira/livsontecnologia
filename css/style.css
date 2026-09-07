@@ -147,7 +147,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, .brand__text, .eyebrow, .stat__num, .plan__name {
+h1, h2, h3, .brand__text, .eyebrow, .plan__name {
   font-family: var(--font-display);
   line-height: 1.1;
   letter-spacing: -0.02em;
@@ -919,30 +919,44 @@ body.tema-hero-escuro { background: var(--ground); }
   .flow__step:first-child { grid-row: auto; padding-bottom: var(--s2); }
 }
 
-/* ---------- Stats ----------
-   Os numeros sao os reais e continuam escritos no HTML (ver o comentario
-   do contador em js/main.js). O que mudou e o peso: rotulo em cima,
-   numero grande embaixo, e o conjunto ancorado numa regua so. */
-.stats { padding: var(--s6) 0; }
-.stats__inner {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s4) var(--s3);
+/* ---------- Compromissos ----------
+   Substituiu a faixa de numeros (ver o comentario no index.html). Fica
+   entre a Metodologia (fundo claro) e o Portfolio (fundo --bg-1), entao
+   continua sendo uma FAIXA e nao uma secao inteira: sem fundo proprio,
+   ancorada na mesma regua fina que os numeros usavam.
+
+   A textura de "regua fina + titulo curto + um paragrafo" e emprestada
+   dos passos 02/03/04 da Metodologia logo acima, de proposito: as duas
+   faixas sao da mesma familia. O que muda e o arranjo — la os itens
+   empilham numa coluna so, ao lado de um passo 01 grande; aqui sao duas
+   colunas parelhas e sem numeral nenhum. Isso mantem o parentesco visual
+   sem repetir o mesmo ritmo duas vezes seguidas, e deixa o peso baixo:
+   a prova de verdade e o portfolio logo abaixo, nao esta faixa. */
+.pactos { padding: var(--s6) 0; }
+.pactos__intro {
   border-top: 1px solid var(--line-2);
   padding-top: var(--s4);
-}
-.stat { text-align: left; display: flex; flex-direction: column-reverse; gap: 10px; }
-.stat__num {
-  display: block;
+  margin-bottom: var(--s4);
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 4.6vw, 3.2rem);
-  font-weight: 600; letter-spacing: -0.05em; line-height: .95;
-  color: var(--text-hi);
-  font-variant-numeric: tabular-nums;
+  font-size: clamp(1.3rem, 2.6vw, 1.85rem); font-weight: 400;
+  letter-spacing: -0.028em; line-height: 1.25; color: var(--text-hi);
+  max-width: 34ch;
 }
-.stat__label {
-  color: var(--muted-2); font-size: var(--fs-label);
-  text-transform: uppercase; letter-spacing: .14em;
-  font-family: var(--font-display); font-weight: 500;
+.pactos__intro .eyebrow { display: block; margin-bottom: 10px; }
+.pactos__intro strong { font-weight: 600; }
+
+.pactos__lista {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: var(--s4) clamp(34px, 5vw, 72px);
 }
+.pacto { padding-top: 18px; border-top: 1px solid var(--line); }
+.pacto__titulo {
+  font-family: var(--font-display);
+  font-size: 1.02rem; font-weight: 600; letter-spacing: -0.015em;
+  color: var(--text-hi); margin-bottom: 8px;
+}
+.pacto__texto { color: var(--muted); font-size: var(--fs-body); line-height: 1.7; }
 
 /* ---------- Portfolio editorial ----------
    Print do site entregue de um lado, depoimento do outro, alternando o
@@ -1145,7 +1159,6 @@ summary:focus-visible,
 @media (max-width: 960px) {
   .grid--services { grid-template-columns: repeat(2, 1fr); }
   .grid--plans { grid-template-columns: 1fr; max-width: 460px; margin-inline: auto; }
-  .stats__inner { grid-template-columns: repeat(2, 1fr); }
 
   .nav__cta { display: none; }
   .nav__toggle { display: flex; }
@@ -1165,7 +1178,7 @@ summary:focus-visible,
 
 @media (max-width: 560px) {
   .grid--services { grid-template-columns: 1fr; }
-  .stats__inner { grid-template-columns: 1fr 1fr; gap: var(--s4) var(--s3); }
+  .pactos__lista { grid-template-columns: 1fr; gap: var(--s3); }
   .hero__actions { flex-direction: column; align-items: stretch; }
   .hero__actions .btn { width: 100%; }
 }
