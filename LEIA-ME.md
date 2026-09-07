@@ -174,5 +174,17 @@ do próprio Formspree, não no código.
   página lenta para o Google.
 - **As fontes do Google carregam sem travar a renderização**
   (`rel="preload"` + troca no `onload`).
+- **A barra de endereços nunca mostra `#`.** Os links de menu e rodapé
+  continuam escritos com âncora no HTML (`href="#solucoes"`,
+  `href="/livson-conecta#planos-conecta"`) — **não tire isso**: sem a
+  âncora o link para de funcionar com JS desligado e o Google perde o mapa
+  interno da página. Quem esconde o `#` é o `js/main.js`: ele intercepta o
+  clique, rola por conta própria e reescreve a URL para o caminho limpo.
+  Link para outra página leva o destino por `sessionStorage`, e link antigo
+  com `#` colado ainda funciona (rola e limpa a URL). Duas armadilhas ali,
+  se precisar mexer: `behavior: 'auto'` **não** é salto instantâneo —
+  significa "usa o `scroll-behavior` do CSS", que aqui é `smooth`; para
+  salto seco é `'instant'`. E o posicionamento de entrada reconfere algumas
+  vezes, porque o ScrollTrigger mexe na rolagem para medir a página.
 - **`diagnostico.html` é `noindex`** de propósito: a página é para ser
   acessada pelo link que você divulga, não pela busca do Google.

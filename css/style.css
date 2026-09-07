@@ -981,6 +981,12 @@ body.tema-hero-escuro { background: var(--ground); }
   font-style: normal; margin-bottom: 14px;
   padding-left: 16px; border-left: 2px solid var(--accent);
 }
+/* Projeto sem depoimento publicado ainda: em vez de inventar aspas, o
+   espaco da citacao recebe a descricao do que foi entregue. Sem a barra
+   colorida do .work__quote de proposito — quem le tem que enxergar na hora
+   que aquilo nao e fala de cliente. */
+.work__desc { color: var(--muted); font-size: .98rem; line-height: 1.7; margin-bottom: 14px; }
+
 .work__client { color: var(--muted); font-size: .88rem; display: flex;
   flex-wrap: wrap; align-items: center; gap: 8px; }
 .work__client a { color: var(--muted); transition: color .3s var(--ease); }
@@ -1242,9 +1248,43 @@ summary:focus-visible,
   display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;
 }
 
-.plans__note {
-  text-align: center; color: var(--muted); font-size: .9rem; margin-top: 28px;
+/* ---------- Garantia (planos do Conecta) ----------
+   Era uma nota de rodape em .9rem cinza, do tamanho de um aviso legal —
+   ou seja, do tamanho de algo que o visitante aprende a pular. Mas tirar
+   o risco da mesa e justamente o argumento mais forte da secao de precos,
+   entao ela virou bloco: painel proprio, borda de acento a esquerda e a
+   frase-chave em corpo de subtitulo.
+
+   Sem cor de alerta e sem selo/emoji de proposito. Garantia gritada parece
+   promocao de infoproduto; dita em voz normal, com o passo a passo do que
+   acontece, parece contrato. */
+.garantia {
+  max-width: 720px; margin: clamp(40px, 6vw, 64px) auto 0;
+  padding: clamp(26px, 3.4vw, 38px) clamp(24px, 3.4vw, 40px);
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  box-shadow: 0 22px 46px -30px rgba(15, 23, 51, .34);
 }
+.garantia__selo {
+  font-family: var(--font-display);
+  font-size: var(--fs-label); font-weight: 600; text-transform: uppercase;
+  letter-spacing: var(--track-label); color: var(--accent); margin-bottom: 14px;
+}
+.garantia__titulo {
+  font-family: var(--font-display);
+  font-size: clamp(1.22rem, 2.3vw, 1.62rem); font-weight: 400;
+  letter-spacing: -0.025em; line-height: 1.28; color: var(--text-hi);
+  margin-bottom: 16px;
+}
+.garantia__titulo strong { font-weight: 600; }
+.garantia__texto { color: var(--muted); line-height: 1.75; margin-bottom: 14px; }
+.garantia__assinatura {
+  color: var(--text); font-size: var(--fs-sm); font-weight: 500;
+  padding-top: 14px; border-top: 1px solid var(--line);
+}
+
 
 @media (max-width: 860px) {
   .conecta__flow { grid-template-columns: 1fr 1fr; gap: 28px 24px; }

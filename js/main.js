@@ -221,7 +221,7 @@
   }
 
   /* ---------- Animated counters ----------
-     O numero REAL fica escrito no HTML (10+, 10+, 2+, 100%). Isso e de
+     O numero REAL fica escrito no HTML (15+, 10+, 2+, 100%). Isso e de
      proposito: se o JS nao rodar, se o robo do Google ler a pagina, ou se
      o visitante nunca chegar a rolar ate a faixa, ele ve o numero certo.
      Antes o HTML trazia "0" e o JS contava ate o valor — quando a contagem
@@ -290,6 +290,125 @@
 
     counters.forEach((el) => { anima.observe(el); prepara.observe(el); });
   }
+
+  /* ---------- Navegacao por ancora sem "#" na barra de enderecos ----------
+     Os <a> continuam com href="#secao" no HTML: sem isso o link nao
+     funciona com JS desligado, e o Google perde o mapa interno da pagina.
+     O que muda e o que acontece DEPOIS do clique — a gente rola por conta
+     propria e reescreve a URL para o caminho limpo, entao o visitante ve
+     livsontecnologia.com.br e nunca livsontecnologia.com.br/#solucoes.
+
+     Sao tres caminhos, e todos terminam com a URL limpa:
+       1. link para uma secao da MESMA pagina -> rola aqui e limpa a URL;
+       2. link para uma secao de OUTRA pagina -> guarda o destino em
+          sessionStorage e navega para o caminho sem "#", para o hash nao
+          chegar a aparecer nem durante o carregamento;
+       3. alguem abriu um link antigo com "#" colado -> rola ate a secao e
+          troca a URL pela versao limpa. */
+  const CHAVE_ANCORA = 'livson:ancora';
+
+  const caminhoLimpo = (p) => (p || '/').replace(/index\.html$/, '') || '/';
+  const urlLimpaAtual = () => caminhoLimpo(location.pathname) + location.search;
+
+  const alturaNav = () => (nav && nav.offsetHeight ? nav.offsetHeight : 0);
+
+  // ATENCAO ao terceiro estado do behavior: "auto" NAO quer dizer "salto
+  // instantaneo" — quer dizer "use o scroll-behavior do CSS", e o nosso CSS
+  // diz smooth (html { scroll-behavior: smooth }). Quem precisa de salto
+  // seco tem que pedir "instant" com todas as letras. Com "auto" o
+  // posicionamento de entrada virava uma animacao longa que o refresh do
+  // ScrollTrigger cancelava no meio, e a pagina ficava parada no topo.
+  const posicaoDe = (id) => {
+    // "#hero" e o topo da pagina: rolar ate o elemento deixaria uma sobra
+    // de alguns pixels acima dele, e o topo tem que ser topo mesmo.
+    if (id === 'hero') return 0;
+    const alvo = document.getElementById(id);
+    if (!alvo) return null;
+    return Math.max(0, alvo.getBoundingClientRect().top + window.scrollY - alturaNav() - 12);
+  };
+
+  function irPara(id, suave) {
+    const y = posicaoDe(id);
+    if (y === null) return false;
+    window.scrollTo({ top: y, behavior: suave && !prefersReduced ? 'smooth' : 'instant' });
+    return true;
+  }
+
+  document.addEventListener('click', (e) => {
+    // Deixa passar o que o visitante pediu de proposito: nova aba, download,
+    // clique do meio. Interceptar isso quebraria expectativa do navegador.
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+    const a = e.target.closest && e.target.closest('a[href]');
+    if (!a || a.target === '_blank' || a.hasAttribute('download')) return;
+    if (a.origin !== location.origin) return;
+
+    const id = (a.hash || '').slice(1);
+    if (!id) return;
+
+    if (caminhoLimpo(a.pathname) === caminhoLimpo(location.pathname)) {
+      if (!irPara(id, true)) return;      // secao inexistente: deixa o navegador tentar
+      e.preventDefault();
+      history.replaceState(null, '', urlLimpaAtual());
+      return;
+    }
+
+    // Outra pagina: o destino viaja pelo sessionStorage, nao pela URL.
+    e.preventDefault();
+    try { sessionStorage.setItem(CHAVE_ANCORA, id); } catch (err) { /* modo privado */ }
+    location.href = caminhoLimpo(a.pathname) + a.search;
+  });
+
+  (function ancoraDeEntrada() {
+    let id = '';
+    try {
+      id = sessionStorage.getItem(CHAVE_ANCORA) || '';
+      sessionStorage.removeItem(CHAVE_ANCORA);
+    } catch (err) { /* modo privado */ }
+
+    const veioNoHash = !id && location.hash.length > 1;
+    if (veioNoHash) id = location.hash.slice(1);
+    if (!id) return;
+
+    // Salto seco, sem "smooth": numa pagina que acabou de abrir, a rolagem
+    // animada disputa com a intro do hero e o visitante ve a tela deslizando
+    // sozinha antes de conseguir ler qualquer coisa.
+    //
+    // E repetido algumas vezes de proposito. Nos primeiros segundos a pagina
+    // ainda esta mudando de altura (fontes, imagens preguicosas) e o
+    // ScrollTrigger faz os proprios refreshes, que mexem na rolagem para
+    // medir. Uma tentativa unica cai no lugar errado ou e desfeita; entao a
+    // gente reconfere ate a posicao bater e para assim que bater.
+    let tentativas = 0;
+    let assumiuOControle = false;
+    const desistir = () => { assumiuOControle = true; };
+    ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach((ev) =>
+      window.addEventListener(ev, desistir, { once: true, passive: true }));
+
+    const posicionar = () => {
+      // Se o visitante ja comecou a rolar por conta propria, a posicao passa
+      // a ser dele. Continuar corrigindo aqui seria arrancar a pagina da mao
+      // de quem esta lendo.
+      if (assumiuOControle) return true;
+      const y = posicaoDe(id);
+      if (y === null) return true;                       // secao sumiu: desiste
+      if (Math.abs(window.scrollY - y) < 4) return true;  // ja esta no lugar
+      window.scrollTo({ top: y, behavior: 'instant' });
+      return ++tentativas >= 12;
+    };
+
+    const reconferir = () => {
+      if (posicionar()) {
+        ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach((ev) =>
+          window.removeEventListener(ev, desistir));
+        return;
+      }
+      setTimeout(reconferir, 120);
+    };
+    requestAnimationFrame(reconferir);
+
+    if (veioNoHash) history.replaceState(null, '', urlLimpaAtual());
+  })();
 
   /* ---------- FAQ accordion (Livson Conecta) ---------- */
   document.querySelectorAll('.faq__item').forEach((item) => {
