@@ -3,7 +3,16 @@
    Motion personality: Corporate/Premium
      signature easing: power3.out  (≈ cubic-bezier(.2,0,0,1))
      durations: quick .3 / standard .6 / slow .8
-     stagger: 0.09s  (standard, total < 500ms per group)
+     stagger: 0.08s  (total < 500ms per group)
+
+   Tempos medidos nas referencias (2026-09-21) e o que foi usado:
+     - allia (Webflow IX2): outCubic 500ms na maioria -> o reveal
+       daqui fica em .9s power3.out, um pouco mais lento e sem pulo.
+     - edolus (PlayCanvas): camera com amortecimento .06–.1 por quadro
+       e transicoes de 1.2s power2.inOut -> "Hero: camadas" usa scrub
+       .8 (amortecido) e a cena Spline, lerp .08.
+     - melius: troca de frase em easeInOutCubic (.65,0,.35,1) ->
+       "Troca de frase" usa power3.inOut .75s.
    ========================================================= */
 (function () {
   'use strict';
@@ -141,6 +150,8 @@
     const heroReveals = document.querySelectorAll('.hero .reveal');
 
     if (prefersReduced || !hasGSAP) {
+      // sem GSAP ou com movimento reduzido: tudo aparece parado, e a
+      // troca de frase nao roda (fica a primeira, que e a do HTML)
       lines.forEach((l) => (l.style.opacity = 1));
       heroReveals.forEach((b) => b.classList.add('is-in'));
       return;
@@ -163,7 +174,12 @@
 
     const tl = gsap.timeline({
       defaults: { ease: 'power3.out' },
-      onComplete: () => titulo && titulo.classList.remove('is-revealing'),
+      onComplete: () => {
+        titulo && titulo.classList.remove('is-revealing');
+        // a troca de frase so comeca depois que o titulo terminou de
+        // subir: duas mascaras mexendo ao mesmo tempo viram ruido
+        document.querySelectorAll('[data-rotator]').forEach(iniciarRotativo);
+      },
     });
     tl.fromTo('.hero__badge', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 })
       // Sem opacidade de proposito: quem revela e a mascara. Misturar os
@@ -175,12 +191,67 @@
       .fromTo('.hero__actions', { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, '-=0.5')
       .fromTo('.hero__trust, .hero__company', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, '-=0.5')
       // A ancora visual entra por ultimo e de baixo: o texto le primeiro,
-      // a tela do produto confirma. Sem isso ela ficaria em opacity:0,
+      // a ilustracao confirma. Sem isso ela ficaria em opacity:0,
       // porque .reveal zera tudo e so a timeline devolve.
       .fromTo('.hero__anchor', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9 }, '-=0.75');
   }
 
-  /* ---------- Scroll reveals ---------- */
+  /* ---------- Troca de frase no titulo (referencia: melius.com) ----------
+     As frases ja estao todas no HTML, empilhadas na mesma celula de grid
+     (ver .rotator no CSS) — a largura da maior esta reservada desde o
+     primeiro quadro, entao nada aqui mede ou redimensiona coisa alguma.
+     O JS so faz a troca: a atual sai por cima da aresta, a proxima entra
+     por baixo. Mascara, sem opacidade, igual ao reveal do titulo.
+
+     Para quando o hero sai da tela (IntersectionObserver). Aba em segundo
+     plano o proprio GSAP ja pausa, porque o relogio dele e o rAF. */
+  const ROTATIVO_PAUSA = 2.6;   // s parado em cada frase
+  const ROTATIVO_TROCA = 0.75;  // s de troca
+
+  function iniciarRotativo(el) {
+    const itens = Array.prototype.slice.call(el.querySelectorAll('.rotator__item'));
+    if (itens.length < 2 || !hasGSAP || prefersReduced) return;
+
+    let atual = Math.max(0, itens.findIndex((i) => i.classList.contains('is-active')));
+    let espera = null;
+
+    const trocar = () => {
+      const sai = itens[atual];
+      atual = (atual + 1) % itens.length;
+      const entra = itens[atual];
+      entra.classList.add('is-active');
+      el.classList.add('is-rolling');
+      gsap.timeline({
+        defaults: { duration: ROTATIVO_TROCA, ease: 'power3.inOut' },
+        onComplete: () => {
+          sai.classList.remove('is-active');
+          el.classList.remove('is-rolling');
+        },
+      })
+        .fromTo(sai, { yPercent: 0 }, { yPercent: -115 }, 0)
+        .fromTo(entra, { yPercent: 115 }, { yPercent: 0 }, 0.06);
+    };
+
+    const agendar = () => {
+      espera = gsap.delayedCall(ROTATIVO_PAUSA, () => { trocar(); agendar(); });
+    };
+    const ligar = () => { if (!espera) agendar(); };
+    const desligar = () => { if (espera) { espera.kill(); espera = null; } };
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((entradas) => {
+        entradas[0].isIntersecting ? ligar() : desligar();
+      }).observe(el);
+    } else {
+      ligar();
+    }
+  }
+
+  /* ---------- Scroll reveals ----------
+     Em lote (ScrollTrigger.batch): o que entra na tela junto sobe junto,
+     com 80ms entre um e outro. Antes cada elemento tinha o proprio gatilho
+     e uma grade de 4 itens subia como 4 eventos soltos. Timing sobrio de
+     proposito — 28px e .9s, nada de escala, nada de rotacao. */
   const reveals = Array.from(document.querySelectorAll('.reveal')).filter(
     (el) => !el.closest('.hero')
   );
@@ -190,19 +261,15 @@
   } else if (hasGSAP && window.ScrollTrigger) {
     gsap.registerPlugin(ScrollTrigger);
 
-    reveals.forEach((el) => {
-      gsap.fromTo(
-        el,
-        { y: 34, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: el, start: 'top 86%', once: true },
-          onStart: () => el.classList.add('is-in'),
-        }
-      );
+    ScrollTrigger.batch(reveals, {
+      start: 'top 88%',
+      once: true,
+      onEnter: (lote) => {
+        lote.forEach((el) => el.classList.add('is-in'));
+        gsap.fromTo(lote,
+          { y: 28, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out', stagger: 0.08, overwrite: true });
+      },
     });
   } else {
     // Fallback: IntersectionObserver
@@ -339,13 +406,106 @@
     if (veioNoHash) history.replaceState(null, '', urlLimpaAtual());
   })();
 
-  /* ---------- FAQ accordion (Livson Conecta) ---------- */
-  document.querySelectorAll('.faq__item').forEach((item) => {
-    const question = item.querySelector('.faq__question');
-    question && question.addEventListener('click', () => {
-      const isOpen = item.classList.contains('is-open');
-      item.parentElement.querySelectorAll('.faq__item').forEach((i) => i.classList.remove('is-open'));
-      if (!isOpen) item.classList.add('is-open');
+  /* ---------- Ilustracoes isometricas: so animam na tela ----------
+     Cada <svg class="iso"> ganha .is-live enquanto esta visivel (o CSS so
+     aplica animacao com essa classe) e perde quando sai. As que usam SMIL
+     (o disco que percorre as placas) tambem pausam o relogio proprio do
+     SVG. Com movimento reduzido nada liga: fica o quadro parado. */
+  const isos = Array.prototype.slice.call(document.querySelectorAll('svg.iso'));
+  const pausarSmil = (svg) => { try { svg.pauseAnimations(); } catch (e) { /* sem SMIL */ } };
+  const tocarSmil = (svg) => { try { svg.unpauseAnimations(); } catch (e) { /* sem SMIL */ } };
+
+  isos.forEach(pausarSmil);
+  if (!prefersReduced && 'IntersectionObserver' in window) {
+    const ioIso = new IntersectionObserver((entradas) => {
+      entradas.forEach((e) => {
+        e.target.classList.toggle('is-live', e.isIntersecting);
+        e.isIntersecting ? tocarSmil(e.target) : pausarSmil(e.target);
+      });
+    }, { rootMargin: '80px 0px' });
+    isos.forEach((svg) => ioIso.observe(svg));
+  }
+
+  /* ---------- Hero: camadas reagindo ao scroll (referencia: edolus.com) ----------
+     Na edolus a camera anda conforme o scroll, com amortecimento. Aqui a
+     versao leve disso no SVG: enquanto o hero sai da tela, as placas da
+     pilha se afastam umas das outras (vista explodida) e a pilha sobe um
+     pouco mais devagar que a pagina. scrub .8 = o amortecimento.
+     So desktop: no celular o hero e estatico, como pedido. Quando a cena
+     Spline carrega, o SVG some e quem reage ao scroll e o hero-3d.js. */
+  if (hasGSAP && window.ScrollTrigger && !prefersReduced &&
+      window.matchMedia('(min-width: 1081px)').matches) {
+    const pilhaHero = document.querySelector('.hero__anchor .iso');
+    const camadas = pilhaHero ? pilhaHero.querySelectorAll('.iso__layer') : [];
+    if (camadas.length) {
+      gsap.timeline({
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.8 },
+      })
+        .to(camadas, { y: (i) => -i * 30, ease: 'none' }, 0)
+        .to(pilhaHero, { yPercent: -10, ease: 'none' }, 0);
+    }
+  }
+
+  /* ---------- Casos de uso: preview dos tiles ----------
+     Uma classe so (.is-playing) dispara a animacao nos dois mundos:
+     - mouse: liga ao entrar no tile, desliga ao sair (tirar e por a
+       classe reinicia a animacao do zero a cada passada);
+     - toque: liga quando o tile esta bem visivel na tela.
+     Movimento reduzido: nunca liga — o tile mostra o quadro final. */
+  const tiles = document.querySelectorAll('.tile');
+  if (tiles.length && !prefersReduced) {
+    if (window.matchMedia('(hover: hover)').matches) {
+      tiles.forEach((t) => {
+        t.addEventListener('mouseenter', () => t.classList.add('is-playing'));
+        t.addEventListener('mouseleave', () => t.classList.remove('is-playing'));
+      });
+    } else if ('IntersectionObserver' in window) {
+      const ioTile = new IntersectionObserver((entradas) => {
+        entradas.forEach((e) => e.target.classList.toggle('is-playing', e.isIntersecting));
+      }, { threshold: 0.6 });
+      tiles.forEach((t) => ioTile.observe(t));
+    }
+  }
+
+  /* ---------- FAQ (Livson Conecta) — acordeao WAI-ARIA ----------
+     Sem JS as respostas ficam abertas (conteudo nunca preso). Aqui elas
+     fecham e a abertura anima a ALTURA MEDIDA do conteudo — o limite fixo
+     de 260px que existia antes cortava resposta longa no celular. Abre
+     uma por vez, como antes. */
+  const faqItens = Array.prototype.slice.call(document.querySelectorAll('.faq__item'));
+
+  function alternarFaq(item, abrir) {
+    const botao = item.querySelector('.faq__question');
+    const painel = item.querySelector('.faq__answer');
+    if (!botao || !painel) return;
+    if ((botao.getAttribute('aria-expanded') === 'true') === abrir) return;
+    botao.setAttribute('aria-expanded', String(abrir));
+
+    if (prefersReduced || !painel.animate) {
+      painel.hidden = !abrir;
+      return;
+    }
+    if (painel._anim) painel._anim.cancel();
+    painel.hidden = false;
+    const altura = painel.scrollHeight;
+    const quadros = abrir ? [{ height: '0px' }, { height: altura + 'px' }]
+                          : [{ height: altura + 'px' }, { height: '0px' }];
+    painel._anim = painel.animate(quadros, { duration: 380, easing: 'cubic-bezier(.2, 0, 0, 1)' });
+    painel._anim.onfinish = () => {
+      painel._anim = null;
+      if (!abrir) painel.hidden = true;
+    };
+  }
+
+  faqItens.forEach((item) => {
+    const botao = item.querySelector('.faq__question');
+    const painel = item.querySelector('.faq__answer');
+    if (!botao || !painel) return;
+    painel.hidden = true;
+    botao.addEventListener('click', () => {
+      const abrir = botao.getAttribute('aria-expanded') !== 'true';
+      if (abrir) faqItens.forEach((outro) => { if (outro !== item) alternarFaq(outro, false); });
+      alternarFaq(item, abrir);
     });
   });
 })();

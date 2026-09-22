@@ -64,8 +64,8 @@ diagnostico.html              formulário de diagnóstico (calcula receita perdi
 politica-de-privacidade.html  LGPD
 termos-de-uso.html
 css/style.css                 todo o estilo do site
-js/main.js                    navegação, animações de scroll, preloader
-js/scene.js                   fundo 3D (Three.js) — só em desktop com placa de vídeo
+js/main.js                    navegação, animações de scroll, preloader, troca de frase, FAQ
+js/hero-3d.js                 cena 3D do hero (Spline) — só desktop com placa de vídeo, e só se configurada
 js/diagnostico.js             lógica e cálculo do diagnóstico
 .htaccess                     URLs sem .html + regras de cache
 sitemap.xml / robots.txt      SEO
@@ -74,41 +74,90 @@ bump-versao.py                troca a versão dos CSS/JS (ver acima)
 
 ---
 
-## Os mockups de produto do index (telas em HTML/CSS)
+## As ilustrações isométricas (no lugar dos mockups)
 
-O hero e a seção de Soluções mostram **telas do produto renderizadas em
-código** — nenhuma imagem envolvida. São quatro: um site/landing, uma
-conversa de WhatsApp com o vendedor IA, o pipeline do CRM e o painel de
-resultado. As regras ficam em `css/style.css`, no bloco
-`MOCKUPS DE PRODUTO`.
+Até 21/09/2026 o hero e a seção Soluções mostravam telas de produto
+desenhadas em HTML/CSS (site, WhatsApp, CRM, painel) com nomes e números
+fictícios. Mesmo com legenda, liam como "tela falsa". Saíram todas.
 
-Cada mockup é um `<figure class="mock">` isolado, com esta anatomia:
+No lugar entrou **uma linguagem visual só**, usada no site inteiro:
+placas em perspectiva isométrica — as camadas de um sistema. A mesma
+pilha de 4 placas aparece no hero das duas páginas e nos 4 passos do
+Conecta (com a placa do passo acesa); a seção Soluções da home tem três
+variações (vitrine com anéis de alcance, três placas com um disco
+passando, grade em cascata com painel).
 
-```html
-<figure class="mock mock--browser">
-  <div class="mock__frame">
-    <div class="mock__chrome">...barra do navegador...</div>
-    <div class="mock__screen scr-site">...a tela...</div>
-  </div>
-  <figcaption class="mock__cap">Exemplo de tela — dados fictícios</figcaption>
-</figure>
-```
+- **São SVG inline, sem imagem.** O truque está no
+  `<g transform="matrix(.866 .5 -.866 .5 0 0)">`: ele deita o desenho no
+  chão isométrico, então o conteúdo de cada placa é escrito em
+  coordenadas planas comuns (`<rect>`, `<circle>`) e aparece em
+  perspectiva sozinho. Para mexer, edite os retângulos dentro desse grupo.
+- **Cor é só token.** A mesma ilustração fica escura no hero e clara nas
+  faixas claras sem regra extra. Não coloque cor fixa (`#...`) no SVG.
+- **Movimento só na tela.** O `main.js` liga `.is-live` quando a
+  ilustração aparece e desliga quando sai; parada, cada uma já mostra um
+  quadro completo (é o que aparece com movimento reduzido).
 
-**Para trocar por um print real** basta substituir o miolo de
-`.mock__screen` por `<img src="..." alt="" />`. O frame, a sombra, a
-legenda e o responsivo continuam funcionando sem tocar em mais nada.
+**Quando houver print real do produto**, ele entra no lugar da
+ilustração dentro do `<figure class="block__media">` (home) ou
+`<figure class="passo__visual">` (Conecta) como `<img>` comum. Peça
+autorização se for tela de cliente.
 
-Dois detalhes que têm motivo de ser:
+---
 
-- **Os dados são fictícios de propósito** (Clínica Vitalis, Ateliê Bela
-  Casa, os nomes nos cards). A legenda "Exemplo de tela — dados
-  fictícios" existe para que nenhum número dentro do mockup seja lido
-  como resultado real de cliente. Se um dia trocar por print de cliente
-  real, peça autorização e ajuste a legenda.
-- **A escala usa container queries** (`cqi`), não `vw`. Por isso o
-  mockup encolhe inteiro junto com a coluna, em vez de virar texto
-  minúsculo dentro de caixa grande. O `@supports` logo acima garante um
-  tamanho fixo em navegador que não suporte.
+## A cena 3D do hero (Spline)
+
+O hero sempre mostra a pilha isométrica em SVG. Por cima dela pode
+entrar uma **cena 3D feita no Spline**, que o `js/hero-3d.js` carrega só
+quando vale a pena: desktop, placa de vídeo de verdade, sem modo
+economia de dados, sem "reduzir movimento", e depois da página pronta.
+Se a cena rodar pesada nos primeiros quadros, ela é desmontada e o SVG
+fica. No celular nunca é baixada.
+
+**Hoje ela está desligada** (`data-spline=""`), porque cena do Spline é
+feita no editor visual do Spline — não dá para gerar por código.
+
+### Como ligar
+
+1. Monte a cena no Spline seguindo o roteiro abaixo.
+2. **Export → Code Export → Vanilla JS** e copie a URL que termina em
+   `.splinecode`.
+3. Cole em `data-spline="..."` no `<figure class="hero__anchor">` do
+   `index.html` **e** do `livson-conecta.html`. Não precisa mexer em JS.
+4. Não precisa rodar o `bump-versao.py` só por isso (o HTML não fica em
+   cache), mas não custa.
+
+### Roteiro da cena (para ela casar com o resto do site)
+
+- **O objeto é a própria pilha do SVG:** 4 placas quadradas de cantos
+  arredondados, empilhadas com um vão entre elas, a de cima com contorno
+  de acento. Assim a troca SVG → 3D não parece outro site.
+- **Agrupe as 4 placas num objeto chamado `Assinatura`.** O script gira
+  esse objeto e o faz subir conforme o visitante rola o hero (inspirado
+  na câmera da edolus.com). Sem esse nome a cena roda, só não reage ao
+  scroll. Quem preferir animar dentro do Spline pode criar uma variável
+  numérica `scroll` — o script manda o valor de 0 a 1.
+- **Cores da paleta:** placas `#161d30` / `#111729`, bordas brancas bem
+  finas e translúcidas, acento `#899cec`. Nada de neon, nada de arco-íris.
+- **Fundo transparente** (o gradiente do hero fica atrás) e câmera numa
+  vista próxima da isométrica do SVG. Deixe o objeto inteiro dentro do
+  quadro, com folga — o canvas não é a tela toda, é o lado direito do hero.
+- **Leve:** poucos polígonos, sem física, sem sons, arquivo `.splinecode`
+  abaixo de ~1,5 MB.
+- **Confira a marca d'água:** conforme o plano do Spline, a exportação
+  pode incluir o selo "Built with Spline".
+
+---
+
+## Tipografia
+
+- **Newsreader** (serifada, corte display): só títulos grandes (h1, h2,
+  títulos de passo, tile, portfólio, manifesto, CTA).
+- **Geist**: interface e texto corrido.
+- **Geist Mono**: anotações — eyebrow, numeração, rótulos.
+
+A serifada é carregada só nos pesos 300 a 500. Não peça `font-weight`
+600/700 num título serifado: o navegador inventa um negrito falso.
 
 ---
 
@@ -165,10 +214,16 @@ do próprio Formspree, não no código.
 
 ## Detalhes que têm motivo de ser (não mexa sem saber)
 
-- **`js/scene.js` só roda em desktop com placa de vídeo.** Em celular ou
-  em máquina sem aceleração de vídeo, a cena 3D trava a página por vários
-  segundos. Existe uma trava de segurança que mede o desempenho real e
+- **`js/hero-3d.js` só roda em desktop com placa de vídeo.** Em celular ou
+  em máquina sem aceleração de vídeo, qualquer cena 3D trava a página por
+  vários segundos (aconteceu em 08/2026 com a cena Three.js que existia
+  antes). Existe uma trava de segurança que mede o desempenho real e
   desmonta a cena sozinha se o aparelho não der conta.
+- **A frase do título que troca sozinha** (home e Conecta) tem todas as
+  frases no HTML, empilhadas: a largura da maior fica reservada e a linha
+  nunca pula. Se trocar as frases, prefira todas curtas — a mais longa
+  define o espaço de todas (no Conecta, "faz follow-up" jogava o verbo
+  para uma linha sozinho; virou "lembra").
 - **O preloader tem teto de 700ms** (`PRELOADER_MAX_MS` em `js/main.js`).
   Ele cobre a tela inteira, então tudo que ele fica visível conta como
   página lenta para o Google.

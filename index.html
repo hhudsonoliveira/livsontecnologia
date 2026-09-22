@@ -44,10 +44,10 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" /></noscript>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@72,300..500&family=Geist:wght@400..700&family=Geist+Mono:wght@400..500&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@72,300..500&family=Geist:wght@400..700&family=Geist+Mono:wght@400..500&display=swap" /></noscript>
 
-  <link rel="stylesheet" href="css/style.css?v=20260907c" />
+  <link rel="stylesheet" href="css/style.css?v=20260921" />
 
   <!-- Dados estruturados (SEO) -->
   <script type="application/ld+json">
@@ -92,16 +92,6 @@
     ]
   }
   </script>
-
-  <!-- Three.js via importmap -->
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "https://unpkg.com/three@0.161.0/build/three.module.js",
-      "three/addons/": "https://unpkg.com/three@0.161.0/examples/jsm/"
-    }
-  }
-  </script>
 </head>
 <body class="tema-hero-escuro">
 
@@ -114,8 +104,8 @@
     <div class="preloader__bar"><span id="preloaderBar"></span></div>
   </div>
 
-  <!-- ===== 3D BACKGROUND CANVAS ===== -->
-  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <!-- Fundo do hero: so gradiente CSS. A cena 3D mora dentro do hero
+       (.hero__anchor), nao mais num canvas fixo na tela inteira. -->
   <div class="bg-overlay" aria-hidden="true"></div>
 
   <!-- ===== NAVBAR ===== -->
@@ -153,14 +143,25 @@
           <div class="hero__badge reveal">
             <span class="pulse-dot"></span> Consultoria e tecnologia para PMEs
           </div>
+          <!-- Troca de frase no titulo — referencia: melius.com.
+               Duas coisas copiadas do metodo deles, e so elas:
+               1. a largura e reservada pela frase mais longa (aqui, as
+                  frases ficam empilhadas na mesma celula de grid, entao a
+                  caixa ja nasce com a largura da maior e a linha nunca
+                  pula quando a frase troca);
+               2. o leitor de tela recebe uma frase fixa (.sr-only) e o
+                  rotativo inteiro e aria-hidden.
+               A troca em si segue a regra da casa: mascara, nunca fade.
+               As frases antecipam as tres travas da secao Solucoes. -->
           <h1 class="hero__title">
             <span class="reveal-line hero__line-1">Todo negócio trava em um ponto diferente.</span>
-            <span class="reveal-line hero__line-2">Achar o seu é a nossa <span class="grad">primeira entrega</span>.</span>
+            <span class="reveal-line hero__line-2">No seu, pode ser <span class="rotator grad" data-rotator aria-hidden="true"><span class="rotator__item is-active">o atendimento.</span><span class="rotator__item">a planilha.</span><span class="rotator__item">o site.</span><span class="rotator__item">o retrabalho.</span></span></span>
+            <span class="sr-only">o atendimento, a planilha, o site ou o retrabalho.</span>
           </h1>
           <p class="hero__sub reveal">
-            A Livson estuda como a sua operação funciona hoje, <strong>encontra o gargalo</strong>
-            e constrói o que resolve — site, landing page, CRM, painel, aplicativo, automação
-            ou IA.
+            Achar esse ponto é a nossa <strong>primeira entrega</strong>. A Livson estuda como a sua
+            operação funciona hoje, encontra o gargalo e constrói o que resolve — site, landing page,
+            CRM, painel, aplicativo, automação ou IA.
           </p>
           <div class="hero__actions reveal">
             <a href="/diagnostico" class="btn btn--primary btn--glow">Começar pelo diagnóstico</a>
@@ -174,75 +175,93 @@
         </div>
 
         <!-- ÂNCORA VISUAL DO HERO ==========================================
-             Composição das telas que a Livson entrega, renderizada em
-             HTML/CSS puro (regras em "MOCKUPS DE PRODUTO" no style.css).
-             Nenhuma imagem envolvida.
+             Referência: edolus.com (cena 3D no hero, câmera reagindo ao
+             scroll) + melius.com (um objeto-assinatura que se repete).
 
-             PARA TROCAR POR PRINT REAL: substitua o conteúdo de
-             .mock__screen por <img src="..." alt="" />. O frame, a sombra,
-             a legenda e o responsivo continuam funcionando sem mais nada.
+             Duas camadas, uma por cima da outra:
+             1. SVG isométrico (sempre presente) — a pilha de camadas do
+                sistema. É o fallback: celular, máquina sem placa de vídeo,
+                movimento reduzido, ou enquanto a cena não carregou.
+             2. Cena Spline (opcional) — js/hero-3d.js só a carrega em
+                desktop com GPU de verdade, depois da página pronta, e só
+                se data-spline tiver a URL da cena. Com o atributo vazio,
+                nada é baixado e fica só o SVG.
 
-             Os dados são fictícios de propósito (ver a legenda). -->
-        <figure class="hero__anchor reveal" aria-hidden="true">
-          <div class="hero__stack">
-
-            <div class="mock mock--browser hero__stack-back">
-              <div class="mock__frame">
-                <div class="mock__chrome">
-                  <span class="mock__dots"><i></i><i></i><i></i></span>
-                  <span class="mock__url">app.livsonconecta.com.br/pipeline</span>
-                </div>
-                <div class="mock__screen scr-crm">
-                  <div class="crm__bar">
-                    <span class="crm__title">Pipeline comercial</span>
-                    <span class="crm__pill">Últimos 7 dias</span>
-                  </div>
-                  <div class="crm__cols">
-                    <div class="crm__col">
-                      <p class="crm__colhead">Novo lead <span>4</span></p>
-                      <div class="crm__card crm__card--hot"><b>Marina Duarte</b><span>WhatsApp · há 6 min</span></div>
-                      <div class="crm__card"><b>Rogério Lima</b><span>Instagram · há 1 h</span></div>
-                    </div>
-                    <div class="crm__col">
-                      <p class="crm__colhead">Em conversa <span>3</span></p>
-                      <div class="crm__card"><b>Camila Prado</b><span>Vendedor IA · há 12 min</span></div>
-                      <div class="crm__card"><b>Anderson Reis</b><span>Vendedor IA · há 40 min</span></div>
-                    </div>
-                    <div class="crm__col">
-                      <p class="crm__colhead">Agendado <span>2</span></p>
-                      <div class="crm__card"><b>Patrícia Nunes</b><span>Sábado, 09:30</span></div>
-                    </div>
-                    <div class="crm__col">
-                      <p class="crm__colhead">Cliente <span>5</span></p>
-                      <div class="crm__card"><b>Thiago Barbosa</b><span>Fechado · 22/08</span></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="mock mock--phone hero__stack-front">
-              <div class="mock__frame">
-                <div class="mock__screen scr-wa">
-                  <div class="wa__top">
-                    <span class="wa__av">CV</span>
-                    <span class="wa__who"><b>Clínica Vitalis</b><i>respondendo agora</i></span>
-                  </div>
-                  <div class="wa__body">
-                    <p class="wa__msg wa__msg--in">Vocês atendem no sábado?<time>19:42</time></p>
-                    <p class="wa__msg wa__msg--out">Atendemos sim, das 8h às 13h. Quer que eu veja um horário pra você?<time>19:42</time></p>
-                    <p class="wa__msg wa__msg--in">Quero, de manhã<time>19:43</time></p>
-                    <p class="wa__msg wa__msg--out">Tenho 09:30 ou 11:00. Qual fica melhor?<time>19:43</time></p>
-                    <p class="wa__msg wa__msg--in">09:30<time>19:44</time></p>
-                    <p class="wa__msg wa__msg--out">Agendado, Marina. Sábado, 09:30, com a Dra. Helena. Mando um lembrete na sexta.<time>19:44</time></p>
-                  </div>
-                  <div class="wa__input">Mensagem</div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-          <figcaption class="mock__cap">Exemplo de tela — dados fictícios</figcaption>
+             COMO LIGAR O 3D: no Spline, Export > Code Export > Vanilla JS,
+             copie a URL que termina em .splinecode e cole em data-spline
+             (aqui e na página do Conecta). Instruções da cena no LEIA-ME. -->
+        <figure class="hero__anchor reveal" data-spline="" aria-hidden="true">
+          <svg class="iso iso--pilha iso--hero" viewBox="0 0 600 660" focusable="false" aria-hidden="true">
+            <defs><radialGradient id="iso-sombra-hero" class="iso__shadow"><stop offset="0"/><stop offset="1" stop-opacity="0"/></radialGradient></defs>
+            <ellipse cx="300" cy="604" rx="250" ry="58" fill="url(#iso-sombra-hero)"/>
+            <!-- 1. Vitrine -->
+            <g transform="translate(300 500)"><g class="iso__float" style="--i:0"><g class="iso__layer">
+              <rect class="iso__edge" x="-110" y="-110" width="220" height="220" rx="16" transform="translate(0 10) matrix(.866 .5 -.866 .5 0 0)"/>
+              <g transform="matrix(.866 .5 -.866 .5 0 0)">
+                <rect class="iso__face" x="-110" y="-110" width="220" height="220" rx="16"/>
+                <!-- vitrine: barra, titulo, botao, tres blocos -->
+                <rect class="iso__ink" x="-90" y="-90" width="180" height="12" rx="6"/>
+                <rect class="iso__ink" x="-90" y="-62" width="130" height="14" rx="7"/>
+                <rect class="iso__ink" x="-90" y="-40" width="96" height="14" rx="7"/>
+                <rect class="iso__hot" x="-90" y="-14" width="58" height="16" rx="8"/>
+                <rect class="iso__ink iso__ink--soft" x="-90" y="20" width="54" height="70" rx="8"/>
+                <rect class="iso__ink iso__ink--soft" x="-27" y="20" width="54" height="70" rx="8"/>
+                <rect class="iso__ink iso__ink--soft" x="36" y="20" width="54" height="70" rx="8"/>
+              </g>
+            </g></g></g>
+            <!-- 2. Vendedor IA -->
+            <g transform="translate(300 420)"><g class="iso__float" style="--i:1"><g class="iso__layer">
+              <rect class="iso__edge" x="-110" y="-110" width="220" height="220" rx="16" transform="translate(0 10) matrix(.866 .5 -.866 .5 0 0)"/>
+              <g transform="matrix(.866 .5 -.866 .5 0 0)">
+                <rect class="iso__face" x="-110" y="-110" width="220" height="220" rx="16"/>
+                <!-- vendedor IA: conversa alternando os lados -->
+                <rect class="iso__ink" x="-90" y="-90" width="104" height="24" rx="12"/>
+                <rect class="iso__hot iso__hot--soft" x="-14" y="-56" width="104" height="24" rx="12"/>
+                <rect class="iso__ink" x="-90" y="-22" width="78" height="24" rx="12"/>
+                <rect class="iso__hot iso__hot--soft" x="6" y="12" width="84" height="24" rx="12"/>
+                <rect class="iso__ink" x="-90" y="46" width="120" height="24" rx="12"/>
+                <rect class="iso__ink iso__ink--soft" x="-90" y="80" width="180" height="10" rx="5"/>
+              </g>
+            </g></g></g>
+            <!-- 3. CRM -->
+            <g transform="translate(300 340)"><g class="iso__float" style="--i:2"><g class="iso__layer">
+              <rect class="iso__edge" x="-110" y="-110" width="220" height="220" rx="16" transform="translate(0 10) matrix(.866 .5 -.866 .5 0 0)"/>
+              <g transform="matrix(.866 .5 -.866 .5 0 0)">
+                <rect class="iso__face" x="-110" y="-110" width="220" height="220" rx="16"/>
+                <!-- CRM: quatro colunas de cards -->
+                <rect class="iso__ink" x="-90" y="-90" width="40.5" height="8" rx="4"/>
+                <rect class="iso__ink iso__ink--soft" x="-90" y="-72" width="40.5" height="26" rx="6"/>
+                <rect class="iso__ink iso__ink--soft" x="-90" y="-40" width="40.5" height="26" rx="6"/>
+                <rect class="iso__ink iso__ink--soft" x="-90" y="-8" width="40.5" height="26" rx="6"/>
+                <rect class="iso__ink" x="-43.5" y="-90" width="40.5" height="8" rx="4"/>
+                <rect class="iso__ink iso__ink--soft" x="-43.5" y="-72" width="40.5" height="26" rx="6"/>
+                <rect class="iso__ink iso__ink--soft" x="-43.5" y="-40" width="40.5" height="26" rx="6"/>
+                <rect class="iso__ink" x="3" y="-90" width="40.5" height="8" rx="4"/>
+                <rect class="iso__hot" x="3" y="-72" width="40.5" height="26" rx="6"/>
+                <rect class="iso__ink" x="49.5" y="-90" width="40.5" height="8" rx="4"/>
+                <rect class="iso__ink iso__ink--soft" x="49.5" y="-72" width="40.5" height="26" rx="6"/>
+                <rect class="iso__ink iso__ink--soft" x="49.5" y="-40" width="40.5" height="26" rx="6"/>
+              </g>
+            </g></g></g>
+            <!-- 4. Painel -->
+            <g transform="translate(300 260)"><g class="iso__float" style="--i:3"><g class="iso__layer is-ativo">
+              <rect class="iso__edge" x="-110" y="-110" width="220" height="220" rx="16" transform="translate(0 10) matrix(.866 .5 -.866 .5 0 0)"/>
+              <g transform="matrix(.866 .5 -.866 .5 0 0)">
+                <rect class="iso__face" x="-110" y="-110" width="220" height="220" rx="16"/>
+                <!-- painel: tres indicadores e barras -->
+                <rect class="iso__ink iso__ink--soft" x="-90" y="-90" width="56" height="30" rx="7"/>
+                <rect class="iso__ink iso__ink--soft" x="-28" y="-90" width="56" height="30" rx="7"/>
+                <rect class="iso__ink iso__ink--soft" x="34" y="-90" width="56" height="30" rx="7"/>
+                <rect class="iso__ink" x="-90" y="46" width="18" height="44" rx="4"/>
+                <rect class="iso__ink" x="-63" y="20" width="18" height="70" rx="4"/>
+                <rect class="iso__ink" x="-36" y="34" width="18" height="56" rx="4"/>
+                <rect class="iso__ink" x="-9" y="-2" width="18" height="92" rx="4"/>
+                <rect class="iso__hot" x="18" y="-28" width="18" height="118" rx="4"/>
+                <rect class="iso__ink" x="45" y="10" width="18" height="80" rx="4"/>
+                <rect class="iso__ink" x="72" y="30" width="18" height="60" rx="4"/>
+              </g>
+            </g></g></g>
+          </svg>
         </figure>
 
       </div>
@@ -293,30 +312,39 @@
                 </div>
               </div>
             </div>
-            <div class="block__media">
-              <figure class="mock mock--browser" aria-hidden="true">
-                <div class="mock__frame">
-                  <div class="mock__chrome">
-                    <span class="mock__dots"><i></i><i></i><i></i></span>
-                    <span class="mock__url">clinicavitalis.com.br</span>
-                  </div>
-                  <div class="mock__screen scr-site">
-                    <div class="site__nav">
-                      <span class="site__mark"></span><i></i><i></i><i></i>
-                      <span class="site__btn">Agendar</span>
-                    </div>
-                    <div class="site__hero">
-                      <p class="site__eyebrow">Clínica Vitalis · Salvador</p>
-                      <h4>Sua avaliação agendada em 2 minutos</h4>
-                      <p class="site__p">Fisioterapia e pilates com horário no mesmo dia, sem fila de espera.</p>
-                      <span class="site__cta">Agendar avaliação</span>
-                    </div>
-                    <div class="site__cards"><i></i><i></i><i></i></div>
-                  </div>
-                </div>
-                <figcaption class="mock__cap">Exemplo de tela — dados fictícios</figcaption>
-              </figure>
-            </div>
+            <!-- Vitrine flutuando sobre aneis de alcance: pulsos saem dela,
+                 visitantes chegam das bordas. Era um mockup de site com
+                 clinica ficticia. -->
+            <figure class="block__media" aria-hidden="true">
+              <svg class="iso iso--encontra" viewBox="0 0 600 500" focusable="false" aria-hidden="true">
+                <!-- chao: aneis de alcance, pulsos saindo da vitrine e visitantes chegando -->
+                <g transform="translate(300 380) matrix(.866 .5 -.866 .5 0 0)">
+                  <circle class="iso__ring" r="80"/>
+                  <circle class="iso__ring" r="125"/>
+                  <circle class="iso__ring iso__ring--fora" r="170"/>
+                  <circle class="iso__pulso" r="80" style="--d:0"/>
+                  <circle class="iso__pulso" r="80" style="--d:1"/>
+                  <circle class="iso__visita" r="7" style="--dx:-154px;--dy:-72px;--d:0"/>
+                  <circle class="iso__visita" r="7" style="--dx:85px;--dy:-147px;--d:1"/>
+                  <circle class="iso__visita" r="7" style="--dx:154px;--dy:72px;--d:2"/>
+                </g>
+                <!-- a vitrine, flutuando acima do centro -->
+                <g transform="translate(300 232)"><g class="iso__float" style="--i:0"><g class="iso__layer is-ativo">
+                  <rect class="iso__edge" x="-110" y="-110" width="220" height="220" rx="16" transform="translate(0 10) matrix(.866 .5 -.866 .5 0 0)"/>
+                  <g transform="matrix(.866 .5 -.866 .5 0 0)">
+                    <rect class="iso__face" x="-110" y="-110" width="220" height="220" rx="16"/>
+                    <!-- vitrine: barra, titulo, botao, tres blocos -->
+                    <rect class="iso__ink" x="-90" y="-90" width="180" height="12" rx="6"/>
+                    <rect class="iso__ink" x="-90" y="-62" width="130" height="14" rx="7"/>
+                    <rect class="iso__ink" x="-90" y="-40" width="96" height="14" rx="7"/>
+                    <rect class="iso__hot" x="-90" y="-14" width="58" height="16" rx="8"/>
+                    <rect class="iso__ink iso__ink--soft" x="-90" y="20" width="54" height="70" rx="8"/>
+                    <rect class="iso__ink iso__ink--soft" x="-27" y="20" width="54" height="70" rx="8"/>
+                    <rect class="iso__ink iso__ink--soft" x="36" y="20" width="54" height="70" rx="8"/>
+                  </g>
+                </g></g></g>
+              </svg>
+            </figure>
           </div>
 
           <!-- BLOCO 2 — invertido: conversa à esquerda, texto à direita -->
@@ -340,27 +368,69 @@
                 </div>
               </div>
             </div>
-            <div class="block__media">
-              <figure class="mock mock--phone mock--phone-wide" aria-hidden="true">
-                <div class="mock__frame">
-                  <div class="mock__screen scr-wa">
-                    <div class="wa__top">
-                      <span class="wa__av">AB</span>
-                      <span class="wa__who"><b>Ateliê Bela Casa</b><i>respondendo agora</i></span>
-                    </div>
-                    <div class="wa__body">
-                      <p class="wa__msg wa__msg--in">Boa noite! Vocês fazem armário planejado pra cozinha pequena?<time>21:14</time></p>
-                      <p class="wa__msg wa__msg--out">Boa noite, Rogério! Fazemos sim — cozinha compacta é o que mais sai aqui. Você já tem as medidas?<time>21:14</time></p>
-                      <p class="wa__msg wa__msg--in">Mais ou menos: 2,40 x 1,80<time>21:15</time></p>
-                      <p class="wa__msg wa__msg--out">Dá pra trabalhar bem com isso. Consigo uma visita técnica quinta 14h ou sexta 10h — qual prefere?<time>21:15</time></p>
-                      <p class="wa__msg wa__msg--in">Quinta 14h<time>21:16</time></p>
-                    </div>
-                    <div class="wa__input">Mensagem</div>
-                  </div>
-                </div>
-                <figcaption class="mock__cap">Exemplo de tela — dados fictícios</figcaption>
-              </figure>
-            </div>
+            <!-- Contato -> atendimento -> CRM no mesmo plano: um disco
+                 percorre as tres placas e cada uma acende quando ele chega.
+                 Era um mockup de WhatsApp com conversa ficticia. -->
+            <figure class="block__media" aria-hidden="true">
+              <svg class="iso iso--fluxo" viewBox="0 0 600 440" focusable="false" aria-hidden="true">
+                <!-- tres etapas no mesmo plano: contato -> atendimento -> CRM -->
+                <g transform="translate(130 130)"><g class="iso__layer">
+                  <rect class="iso__edge" x="-74" y="-74" width="148" height="148" rx="14" transform="translate(0 9) matrix(.866 .5 -.866 .5 0 0)"/>
+                  <g transform="matrix(.866 .5 -.866 .5 0 0)">
+                    <rect class="iso__face" x="-74" y="-74" width="148" height="148" rx="14"/>
+                    <g transform="scale(1.194)">
+                      <!-- contato chegando -->
+                      <circle class="iso__ink" cx="-30" cy="-30" r="14"/>
+                      <rect class="iso__ink" x="-8" y="-40" width="58" height="9" rx="4.5"/>
+                      <rect class="iso__ink iso__ink--soft" x="-8" y="-24" width="40" height="9" rx="4.5"/>
+                      <rect class="iso__ink iso__ink--soft" x="-50" y="4" width="100" height="44" rx="8"/>
+                    </g>
+                    <rect class="iso__flash" x="-74" y="-74" width="148" height="148" rx="14" opacity="0"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;.14;.24;1" dur="4.2s" repeatCount="indefinite"/></rect>
+                  </g>
+                </g></g>
+                <g transform="translate(300 228)"><g class="iso__layer">
+                  <rect class="iso__edge" x="-74" y="-74" width="148" height="148" rx="14" transform="translate(0 9) matrix(.866 .5 -.866 .5 0 0)"/>
+                  <g transform="matrix(.866 .5 -.866 .5 0 0)">
+                    <rect class="iso__face" x="-74" y="-74" width="148" height="148" rx="14"/>
+                    <g transform="scale(1.194)">
+                      <!-- atendimento -->
+                      <rect class="iso__ink" x="-50" y="-50" width="64" height="17" rx="8.5"/>
+                      <rect class="iso__hot iso__hot--soft" x="-14" y="-26" width="64" height="17" rx="8.5"/>
+                      <rect class="iso__ink" x="-50" y="-2" width="52" height="17" rx="8.5"/>
+                      <rect class="iso__hot iso__hot--soft" x="-6" y="22" width="56" height="17" rx="8.5"/>
+                    </g>
+                    <rect class="iso__flash" x="-74" y="-74" width="148" height="148" rx="14" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;.40;.45;.58;.68;1" dur="4.2s" repeatCount="indefinite"/></rect>
+                  </g>
+                </g></g>
+                <g transform="translate(470 326)"><g class="iso__layer">
+                  <rect class="iso__edge" x="-74" y="-74" width="148" height="148" rx="14" transform="translate(0 9) matrix(.866 .5 -.866 .5 0 0)"/>
+                  <g transform="matrix(.866 .5 -.866 .5 0 0)">
+                    <rect class="iso__face" x="-74" y="-74" width="148" height="148" rx="14"/>
+                    <g transform="scale(1.194)">
+                      <!-- organizado no CRM -->
+                      <rect class="iso__ink" x="-50" y="-50" width="32" height="6" rx="3"/>
+                      <rect class="iso__ink iso__ink--soft" x="-50" y="-38" width="32" height="19" rx="5"/>
+                      <rect class="iso__ink iso__ink--soft" x="-50" y="-14" width="32" height="19" rx="5"/>
+                      <rect class="iso__ink iso__ink--soft" x="-50" y="10" width="32" height="19" rx="5"/>
+                      <rect class="iso__ink" x="-16" y="-50" width="32" height="6" rx="3"/>
+                      <rect class="iso__ink iso__ink--soft" x="-16" y="-38" width="32" height="19" rx="5"/>
+                      <rect class="iso__ink iso__ink--soft" x="-16" y="-14" width="32" height="19" rx="5"/>
+                      <rect class="iso__ink" x="18" y="-50" width="32" height="6" rx="3"/>
+                      <rect class="iso__hot" x="18" y="-38" width="32" height="19" rx="5"/>
+                      <rect class="iso__ink iso__ink--soft" x="18" y="-14" width="32" height="19" rx="5"/>
+                    </g>
+                    <rect class="iso__flash" x="-74" y="-74" width="148" height="148" rx="14" opacity="0"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0;.84;.89;1" dur="4.2s" repeatCount="indefinite"/></rect>
+                  </g>
+                </g></g>
+                <g transform="translate(300 228) matrix(.866 .5 -.866 .5 0 0)">
+                  <path class="iso__line" d="M-122 0H-74M74 0H122"/>
+                  <circle class="iso__puck" r="9">
+                    <animateMotion dur="4.2s" repeatCount="indefinite" path="M-196 0H196" calcMode="linear" keyPoints="0;0;.5;.5;1;1" keyTimes="0;.14;.44;.58;.88;1"/>
+                    <animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.06;.5;.92;1" dur="4.2s" repeatCount="indefinite"/>
+                  </circle>
+                </g>
+              </svg>
+            </figure>
           </div>
 
           <!-- BLOCO 3 — texto à esquerda, painel à direita -->
@@ -391,37 +461,83 @@
                 </div>
               </div>
             </div>
-            <div class="block__media">
-              <figure class="mock mock--browser" aria-hidden="true">
-                <div class="mock__frame">
-                  <div class="mock__chrome">
-                    <span class="mock__dots"><i></i><i></i><i></i></span>
-                    <span class="mock__url">app.livsonconecta.com.br/painel</span>
-                  </div>
-                  <div class="mock__screen scr-dash">
-                    <div class="dash__head">
-                      <b>Painel do mês</b>
-                      <span>atualizado agora</span>
-                    </div>
-                    <div class="dash__kpis">
-                      <div class="dash__kpi"><i>Leads</i><b>128</b></div>
-                      <div class="dash__kpi"><i>Atendidos pela IA</i><b>112</b></div>
-                      <div class="dash__kpi"><i>Agendados</i><b>34</b></div>
-                    </div>
-                    <div class="dash__chart">
-                      <i style="--h:34%"></i><i style="--h:52%"></i><i style="--h:41%"></i>
-                      <i style="--h:68%"></i><i class="is-up" style="--h:88%"></i>
-                      <i style="--h:60%"></i><i style="--h:29%"></i>
-                    </div>
-                    <div class="dash__foot">
-                      <span>seg</span><span>ter</span><span>qua</span><span>qui</span>
-                      <span>sex</span><span>sáb</span><span>dom</span>
-                    </div>
-                  </div>
-                </div>
-                <figcaption class="mock__cap">Exemplo de tela — dados fictícios</figcaption>
-              </figure>
-            </div>
+            <!-- Grade de tarefas que se resolvem em cascata (automacao) e,
+                 acima, o painel com o resultado. Era um mockup de dashboard
+                 com numeros ficticios. -->
+            <figure class="block__media" aria-hidden="true">
+              <svg class="iso iso--escala" viewBox="0 0 600 520" focusable="false" aria-hidden="true">
+                <!-- base: grade de tarefas que se resolvem em cascata (automacao) -->
+                <g transform="translate(300 350)"><g class="iso__layer">
+                  <rect class="iso__edge" x="-122" y="-122" width="244" height="244" rx="16" transform="translate(0 10) matrix(.866 .5 -.866 .5 0 0)"/>
+                  <g transform="matrix(.866 .5 -.866 .5 0 0)">
+                    <rect class="iso__face" x="-122" y="-122" width="244" height="244" rx="16"/>
+                    <rect class="iso__ink iso__ink--soft" x="-106" y="-106" width="36" height="36" rx="7"/>
+                    <rect class="iso__onda is-on" x="-106" y="-106" width="36" height="36" rx="7" style="--k:0"/>
+                    <rect class="iso__ink iso__ink--soft" x="-62" y="-106" width="36" height="36" rx="7"/>
+                    <rect class="iso__onda is-on" x="-62" y="-106" width="36" height="36" rx="7" style="--k:1"/>
+                    <rect class="iso__ink iso__ink--soft" x="-18" y="-106" width="36" height="36" rx="7"/>
+                    <rect class="iso__onda is-on" x="-18" y="-106" width="36" height="36" rx="7" style="--k:2"/>
+                    <rect class="iso__ink iso__ink--soft" x="26" y="-106" width="36" height="36" rx="7"/>
+                    <rect class="iso__onda" x="26" y="-106" width="36" height="36" rx="7" style="--k:3"/>
+                    <rect class="iso__ink iso__ink--soft" x="70" y="-106" width="36" height="36" rx="7"/>
+                    <rect class="iso__onda" x="70" y="-106" width="36" height="36" rx="7" style="--k:4"/>
+                    <rect class="iso__ink iso__ink--soft" x="-106" y="-62" width="36" height="36" rx="7"/>
+                    <rect class="iso__onda is-on" x="-106" y="-62" width="36" height="36" rx="7" style="--k:1"/>
+                    <rect class="iso__ink iso__ink--soft" x="-62" y="-62" width="36" height="36" rx="7"/>
+                    <rect class="iso__onda is-on" x="-62" y="-62" width="36" height="36" rx="7" style="--k:2"/>
+                    <rect class="iso__ink iso__ink--soft" x="-18" y="-62" width="36" height="36" rx="7"/>
+                    <rect class="iso__onda" x="-18" y="-62" width="36" height="36" rx="7" style="--k:3"/>
+                    <rect class="iso__ink iso__ink--soft" x="26" y="-62" width="36" height="36" rx="7"/>
+                    <rect class="iso__onda" x="26" y="-62" width="36" height="36" rx="7" style="--k:4"/>
+                    <rect class="iso__ink iso__ink--soft" x="70" y="-62" width="36" height="36" rx="7"/>
+                    <rect class="iso__onda" x="70" y="-62" width="36" height="36" rx="7" style="--k:5"/>
+                    <rect class="iso__ink iso__ink--soft" x="-106" y="-18" width="36" height="36" rx="7"/>
+                    <rect class="iso__onda is-on" x="-106" y="-18" width="36" height="36" rx="7" style="--k:2"/>
+                    <rect class="iso__ink iso__ink--soft" x="-62" y="-18" width="36" height="36" rx="7"/>
+                    <rect class="iso__onda" x="-62" y="-18" width="36" height="36" rx="7" style="--k:3"/>
+                    <rect class="iso__ink iso__ink--soft" x="-18" y="-18" width="36" height="36" rx="7"/>
+                    <rect class="iso__onda" x="-18" y="-18" width="36" height="36" rx="7" style="--k:4"/>
+                    <rect class="iso__ink iso__ink--soft" x="26" y="-18" width="36" height="36" rx="7"/>
+                    <rect class="iso__onda" x="26" y="-18" width="36" height="36" rx="7" style="--k:5"/>
+                    <rect class="iso__ink iso__ink--soft" x="70" y="-18" width="36" height="36" rx="7"/>
+                    <rect class="iso__onda" x="70" y="-18" width="36" height="36" rx="7" style="--k:6"/>
+                    <rect class="iso__ink iso__ink--soft" x="-106" y="26" width="36" height="36" rx="7"/>
+                    <rect class="iso__onda" x="-106" y="26" width="36" height="36" rx="7" style="--k:3"/>
+                    <rect class="iso__ink iso__ink--soft" x="-62" y="26" width="36" height="36" rx="7"/>
+                    <rect class="iso__onda" x="-62" y="26" width="36" height="36" rx="7" style="--k:4"/>
+                    <rect class="iso__ink iso__ink--soft" x="-18" y="26" width="36" height="36" rx="7"/>
+                    <rect class="iso__onda" x="-18" y="26" width="36" height="36" rx="7" style="--k:5"/>
+                    <rect class="iso__ink iso__ink--soft" x="26" y="26" width="36" height="36" rx="7"/>
+                    <rect class="iso__onda" x="26" y="26" width="36" height="36" rx="7" style="--k:6"/>
+                    <rect class="iso__ink iso__ink--soft" x="70" y="26" width="36" height="36" rx="7"/>
+                    <rect class="iso__onda" x="70" y="26" width="36" height="36" rx="7" style="--k:7"/>
+                    <rect class="iso__ink iso__ink--soft" x="-106" y="70" width="36" height="36" rx="7"/>
+                    <rect class="iso__onda" x="-106" y="70" width="36" height="36" rx="7" style="--k:4"/>
+                    <rect class="iso__ink iso__ink--soft" x="-62" y="70" width="36" height="36" rx="7"/>
+                    <rect class="iso__onda" x="-62" y="70" width="36" height="36" rx="7" style="--k:5"/>
+                    <rect class="iso__ink iso__ink--soft" x="-18" y="70" width="36" height="36" rx="7"/>
+                    <rect class="iso__onda" x="-18" y="70" width="36" height="36" rx="7" style="--k:6"/>
+                    <rect class="iso__ink iso__ink--soft" x="26" y="70" width="36" height="36" rx="7"/>
+                    <rect class="iso__onda" x="26" y="70" width="36" height="36" rx="7" style="--k:7"/>
+                    <rect class="iso__ink iso__ink--soft" x="70" y="70" width="36" height="36" rx="7"/>
+                    <rect class="iso__onda" x="70" y="70" width="36" height="36" rx="7" style="--k:8"/>
+                  </g>
+                </g></g>
+                <!-- acima: o painel que mostra o resultado -->
+                <g transform="translate(300 142)"><g class="iso__float" style="--i:1"><g class="iso__layer is-ativo">
+                  <rect class="iso__edge" x="-72" y="-72" width="144" height="144" rx="12" transform="translate(0 8) matrix(.866 .5 -.866 .5 0 0)"/>
+                  <g transform="matrix(.866 .5 -.866 .5 0 0)">
+                    <rect class="iso__face" x="-72" y="-72" width="144" height="144" rx="12"/>
+                    <rect class="iso__ink iso__ink--soft" x="-56" y="-58" width="112" height="14" rx="7"/>
+                    <rect class="iso__barra iso__ink" x="-52" y="26" width="16" height="30" rx="4" style="--b:0"/>
+                    <rect class="iso__barra iso__ink" x="-28" y="8" width="16" height="48" rx="4" style="--b:1"/>
+                    <rect class="iso__barra iso__ink" x="-4" y="16" width="16" height="40" rx="4" style="--b:2"/>
+                    <rect class="iso__barra iso__ink" x="20" y="-8" width="16" height="64" rx="4" style="--b:3"/>
+                    <rect class="iso__barra iso__hot" x="44" y="-30" width="16" height="86" rx="4" style="--b:4"/>
+                  </g>
+                </g></g></g>
+              </svg>
+            </figure>
           </div>
 
         </div>
@@ -746,9 +862,9 @@
   </a>
 
   <!-- Scripts -->
-  <script type="module" src="js/scene.js?v=20260907c"></script>
+  <script type="module" src="js/hero-3d.js?v=20260921"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-  <script src="js/main.js?v=20260907c" defer></script>
+  <script src="js/main.js?v=20260921" defer></script>
 </body>
 </html>
