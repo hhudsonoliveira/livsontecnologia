@@ -431,10 +431,11 @@
      versao leve disso no SVG: enquanto o hero sai da tela, as placas da
      pilha se afastam umas das outras (vista explodida) e a pilha sobe um
      pouco mais devagar que a pagina. scrub .8 = o amortecimento.
-     So desktop: no celular o hero e estatico, como pedido. Quando a cena
-     Spline carrega, o SVG some e quem reage ao scroll e o hero-3d.js. */
-  if (hasGSAP && window.ScrollTrigger && !prefersReduced &&
-      window.matchMedia('(min-width: 1081px)').matches) {
+     Vale no celular tambem (ate 2026-09-22 era so desktop e o hero ficava
+     morto no telefone): e so transform num SVG. O que continua so desktop
+     e a cena Spline — quando ela carrega, o SVG some e quem reage ao
+     scroll e o hero-3d.js. */
+  if (hasGSAP && window.ScrollTrigger && !prefersReduced) {
     const pilhaHero = document.querySelector('.hero__anchor .iso');
     const camadas = pilhaHero ? pilhaHero.querySelectorAll('.iso__layer') : [];
     if (camadas.length) {
@@ -450,9 +451,21 @@
      Uma classe so (.is-playing) dispara a animacao nos dois mundos:
      - mouse: liga ao entrar no tile, desliga ao sair (tirar e por a
        classe reinicia a animacao do zero a cada passada);
-     - toque: liga quando o tile esta bem visivel na tela.
+     - toque: liga quando o tile esta bem visivel na tela e REPETE a cada
+       4,5s enquanto ele estiver ali. Sem isso o preview tocava uma vez
+       so, ainda durante a rolagem, e no celular parecia nao existir —
+       no toque nao ha hover para o visitante pedir de novo.
      Movimento reduzido: nunca liga — o tile mostra o quadro final. */
+  const TILE_REPETE_MS = 4500;
+  const TILE_ESPERA_MS = 250;   // deixa a rolagem assentar antes de tocar
   const tiles = document.querySelectorAll('.tile');
+
+  const tocarTile = (t) => {
+    t.classList.remove('is-playing');
+    void t.offsetWidth;          // forca o navegador a reiniciar as animacoes
+    t.classList.add('is-playing');
+  };
+
   if (tiles.length && !prefersReduced) {
     if (window.matchMedia('(hover: hover)').matches) {
       tiles.forEach((t) => {
@@ -461,7 +474,19 @@
       });
     } else if ('IntersectionObserver' in window) {
       const ioTile = new IntersectionObserver((entradas) => {
-        entradas.forEach((e) => e.target.classList.toggle('is-playing', e.isIntersecting));
+        entradas.forEach((e) => {
+          const t = e.target;
+          clearTimeout(t._espera);
+          clearInterval(t._repete);
+          if (e.isIntersecting) {
+            t._espera = setTimeout(() => {
+              tocarTile(t);
+              t._repete = setInterval(() => tocarTile(t), TILE_REPETE_MS);
+            }, TILE_ESPERA_MS);
+          } else {
+            t.classList.remove('is-playing');
+          }
+        });
       }, { threshold: 0.6 });
       tiles.forEach((t) => ioTile.observe(t));
     }

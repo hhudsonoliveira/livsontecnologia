@@ -540,6 +540,8 @@ body.tema-hero-escuro { background: var(--ground); }
 .hero__spline canvas { display: block; width: 100% !important; height: 100% !important; }
 .hero__anchor.is-3d .hero__spline { opacity: 1; }
 .hero__anchor.is-3d .iso { opacity: 0; }
+/* SVG escondido atras da cena nao precisa continuar redesenhando */
+.hero__anchor.is-3d .iso .iso__float { animation: none; }
 
 .hero__scroll {
   position: absolute; bottom: 40px;
@@ -725,7 +727,7 @@ body.tema-hero-escuro { background: var(--ground); }
    Movimento: so roda com .is-live (o main.js liga quando a
    ilustracao esta na tela e desliga quando sai). Parada, cada uma
    ja mostra um quadro completo — e o que aparece com movimento
-   reduzido. No hero, a flutuacao so existe no desktop.
+   reduzido. A flutuacao vale em qualquer largura (ver abaixo).
    ========================================================= */
 .iso {
   display: block; width: 100%; height: auto; overflow: visible;
@@ -761,16 +763,18 @@ body.tema-hero-escuro { background: var(--ground); }
 /* no hero as placas sao vidro escuro: deixam ver um pouco a de baixo */
 .hero .iso__face { fill-opacity: .86; }
 
-/* ---------- hero: flutuacao lenta, so desktop ---------- */
+/* ---------- flutuacao lenta das placas ----------
+   Ate 2026-09-22 so existia no desktop, e no celular o objeto do hero
+   ficava 100% parado — lia como "animacao quebrada". O que precisa ficar
+   fora do celular e a cena Spline (pesada), nao isto: sao quatro
+   translateY num SVG, e so rodam com a ilustracao na tela (.is-live). */
 @keyframes iso-flutua {
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(-7px); }
 }
-@media (min-width: 1081px) {
-  .iso.is-live .iso__float {
-    animation: iso-flutua 7s cubic-bezier(.45, 0, .55, 1) infinite;
-    animation-delay: calc(var(--i, 0) * -1.1s);
-  }
+.iso.is-live .iso__float {
+  animation: iso-flutua 7s cubic-bezier(.45, 0, .55, 1) infinite;
+  animation-delay: calc(var(--i, 0) * -1.1s);
 }
 
 /* ---------- Solucoes 1: aneis de alcance ---------- */
@@ -1411,9 +1415,11 @@ summary:focus-visible,
   border: 1px solid var(--line); background: var(--surface);
 }
 .uc-agenda i.x { background: var(--line-2); border-color: transparent; }
-.uc-agenda__alvo {
+/* Especificidade em vez de !important: declaracao !important vence a
+   animacao, e a troca de cor do horario marcado nunca aparecia. */
+.uc-agenda i.uc-agenda__alvo {
   position: relative;
-  background: var(--accent) !important; border-color: var(--accent) !important;
+  background: var(--accent); border-color: var(--accent);
   color: var(--accent-ink);
   display: grid; place-items: center;
 }
