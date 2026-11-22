@@ -105,9 +105,12 @@ referência de movimento — só o princípio, nada copiado deles.
 - **Logo sempre sólido** (L em texto forte + quadrado laranja), em SVG no
   próprio HTML. Os ícones da aba e do celular (`img/favicon-*.png`,
   `img/apple-touch-icon.png`) já são o logo sólido sobre o petróleo, com
-  `?v=` no link para furar o cache do navegador. O PNG em gradiente
-  (`img/livson-tecnologia-logo.png`) ainda é a imagem de compartilhamento
-  e o logo dos dados estruturados — falta trocar.
+  `?v=` no link para furar o cache do navegador.
+  `img/livson-tecnologia-logo.png` (quadrado, 1080 px) é o logo dos dados
+  estruturados. A imagem de compartilhamento (WhatsApp, redes) é
+  `img/livson-compartilhar.png`, 1200×630: logo, o título com o ponto
+  laranja e o endereço. Se refizer, troque o NOME do arquivo — o WhatsApp
+  guarda a prévia pela URL e não busca de novo um arquivo com o mesmo nome.
 - **Zero emoji.** As opções do diagnóstico tinham; saíram.
 - **Movimento reduzido ou sem WebGL:** nada se mexe e tudo fica legível
   parado.
