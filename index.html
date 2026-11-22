@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="no-js">
+<html lang="pt-BR">
 <head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-TPRQHFC8YE"></script>
@@ -11,12 +11,12 @@
   </script>
 
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Livson Tecnologia — Sites, Sistemas, Automação e IA para PMEs</title>
   <meta name="description" content="Consultoria e desenvolvimento para PMEs: sites, landing pages, CRM, painéis, aplicativos, automação e IA. Descubra onde o seu negócio trava com um diagnóstico gratuito." />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="Hudson Oliveira Santos" />
-  <meta name="theme-color" content="#05070d" />
+  <meta name="theme-color" content="#0F2B31" />
   <meta name="google-site-verification" content="oKN8B9ohaWWIbi0YmA1UInHUXblFPRXBQpBtSsQxb2g" />
   <link rel="canonical" href="https://livsontecnologia.com.br/" />
 
@@ -42,12 +42,14 @@
   <meta name="twitter:description" content="Todo negócio trava em um ponto diferente. A Livson estuda sua operação, acha o gargalo e constrói só o que resolve." />
   <meta name="twitter:image" content="https://livsontecnologia.com.br/img/livson-tecnologia-logo.png" />
 
+  <!-- Fontes: Archivo (títulos, larga) + Geist (texto). Carregam sem travar a página. -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@72,300..500&family=Geist:wght@400..700&family=Geist+Mono:wght@400..500&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@72,300..500&family=Geist:wght@400..700&family=Geist+Mono:wght@400..500&display=swap" /></noscript>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..700&family=Geist:wght@400..600&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..700&family=Geist:wght@400..600&display=swap" /></noscript>
 
-  <link rel="stylesheet" href="css/style.css?v=20260922" />
+  <!-- A home tem estilo próprio (identidade de 2026-11-21). As outras páginas seguem no css/style.css. -->
+  <link rel="stylesheet" href="css/home.css?v=20261121b" />
 
   <!-- Dados estruturados (SEO) -->
   <script type="application/ld+json">
@@ -73,7 +75,7 @@
           "addressCountry": "BR"
         },
         "areaServed": "BR",
-        "sameAs": ["https://www.instagram.com/hhudson.oliveira/"],
+        "sameAs": ["https://www.instagram.com/hudsonoliveira.dev/"],
         "founder": {
           "@type": "Person",
           "name": "Hudson Oliveira Santos",
@@ -93,656 +95,257 @@
   }
   </script>
 </head>
-<body class="tema-hero-escuro">
+<body>
 
-  <!-- ===== PRELOADER ===== -->
-  <div class="preloader" id="preloader">
-    <div class="preloader__logo">
-      <img src="img/livson-tecnologia-logo.png" alt="" class="preloader__mark" width="20" height="20" />
-      <span>LIVSON</span>
-    </div>
-    <div class="preloader__bar"><span id="preloaderBar"></span></div>
-  </div>
-
-  <!-- Fundo do hero: so gradiente CSS. A cena 3D mora dentro do hero
-       (.hero__anchor), nao mais num canvas fixo na tela inteira. -->
-  <div class="bg-overlay" aria-hidden="true"></div>
-
-  <!-- ===== NAVBAR ===== -->
-  <header class="nav" id="nav">
-    <div class="container nav__inner">
+  <!-- ===== MENU ===== -->
+  <div class="wrap">
+    <header class="nav" id="nav">
       <a href="#hero" class="brand" aria-label="Livson Tecnologia — início">
-        <img src="img/livson-tecnologia-logo.png" alt="" class="brand__mark" width="32" height="32" />
-        <span class="brand__text">LIVSON<em>TECNOLOGIA</em></span>
+        <svg viewBox="200 140 712 800" aria-hidden="true"><rect class="l" x="220" y="160" width="215" height="760" rx="64"/><rect class="l" x="220" y="705" width="640" height="215" rx="64"/><rect class="p" x="742" y="243" width="150" height="150" rx="40"/></svg>
+        <span>Livson</span>
       </a>
-
-      <nav class="nav__links" id="navLinks">
-        <a href="/livson-conecta" class="nav__hot">Livson Conecta</a>
+      <nav class="nav__links" id="navLinks" aria-label="Principal">
+        <a href="/livson-conecta">Livson Conecta</a>
         <a href="#solucoes">Soluções</a>
         <a href="/livson-conecta#planos-conecta">Planos</a>
         <a href="/livson-conecta#impacto-conecta">Impacto Real</a>
         <a href="#portfolio">Portfólio</a>
         <a href="#contato">Contato</a>
+        <a href="/diagnostico" class="nav__only-mobile">Diagnóstico Grátis</a>
       </nav>
-
-      <a href="/diagnostico" class="btn btn--sm btn--primary nav__cta">Diagnóstico Grátis</a>
-
-      <button class="nav__toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
+      <div class="nav__end">
+        <a href="/diagnostico" class="btn btn--sm">Diagnóstico Grátis</a>
+        <button class="nav__toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navLinks">Menu</button>
+      </div>
+    </header>
+  </div>
 
   <main>
 
-    <!-- ===== HERO ===== -->
-    <section class="hero" id="hero">
-      <div class="container container--wide hero__inner">
-
-        <div class="hero__copy">
-          <div class="hero__badge reveal">
-            <span class="pulse-dot"></span> Consultoria e tecnologia para PMEs
+    <!-- ===== HERO =====
+         O quadrado laranja no meio do título é o "ponto" (o mesmo do logo).
+         Com JS ele vira um cubo que gira entre as letras (passa atrás do M
+         e na frente do P: a camada .title--front só pinta o P) e, ao rolar,
+         voa até virar o ponto final da frase seguinte. Sem JS ou com
+         movimento reduzido, fica o quadrado parado. -->
+    <section class="hero wrap" id="hero">
+      <div class="hero__title-wrap">
+        <h1 class="title" id="t-back">
+          <span class="ln">Todo negócio trava</span>
+          <span class="ln ln--in">em um<span class="slot" id="slotA"> </span>ponto</span>
+          <span class="ln">diferente.</span>
+        </h1>
+        <div class="title title--front" aria-hidden="true">
+          <span class="ln">Todo negócio trava</span>
+          <span class="ln ln--in">em um<span class="slot"> </span><b>p</b>onto</span>
+          <span class="ln">diferente.</span>
+        </div>
+      </div>
+      <div class="hero__foot">
+        <a class="hero__hint" href="#solucoes">Role para ver onde você trava</a>
+        <div class="hero__side">
+          <p class="hero__note">Consultoria e tecnologia para pequenas e médias empresas. No seu negócio, pode ser <span class="rot" id="rot" aria-hidden="true"><span class="rot__in">o atendimento.</span></span><span class="sr-only">o atendimento, a planilha, o site ou o retrabalho.</span></p>
+          <div class="actions">
+            <a class="btn" href="/diagnostico">Começar pelo diagnóstico</a>
+            <a class="btn btn--ghost" href="#solucoes">Ver soluções</a>
           </div>
-          <!-- Troca de frase no titulo — referencia: melius.com.
-               Duas coisas copiadas do metodo deles, e so elas:
-               1. a largura e reservada pela frase mais longa (aqui, as
-                  frases ficam empilhadas na mesma celula de grid, entao a
-                  caixa ja nasce com a largura da maior e a linha nunca
-                  pula quando a frase troca);
-               2. o leitor de tela recebe uma frase fixa (.sr-only) e o
-                  rotativo inteiro e aria-hidden.
-               A troca em si segue a regra da casa: mascara, nunca fade.
-               As frases antecipam as tres travas da secao Solucoes. -->
-          <h1 class="hero__title">
-            <span class="reveal-line hero__line-1">Todo negócio trava em um ponto diferente.</span>
-            <span class="reveal-line hero__line-2">No seu, pode ser <span class="rotator grad" data-rotator aria-hidden="true"><span class="rotator__item is-active">o atendimento.</span><span class="rotator__item">a planilha.</span><span class="rotator__item">o site.</span><span class="rotator__item">o retrabalho.</span></span></span>
-            <span class="sr-only">o atendimento, a planilha, o site ou o retrabalho.</span>
-          </h1>
-          <p class="hero__sub reveal">
-            Achar esse ponto é a nossa <strong>primeira entrega</strong>. A Livson estuda como a sua
-            operação funciona hoje, encontra o gargalo e constrói o que resolve — site, landing page,
-            CRM, painel, aplicativo, automação ou IA.
-          </p>
-          <div class="hero__actions reveal">
-            <a href="/diagnostico" class="btn btn--primary btn--glow">Começar pelo diagnóstico</a>
-            <a href="#solucoes" class="btn btn--ghost">Ver soluções</a>
-          </div>
-          <div class="hero__trust reveal">
-            <span class="hero__trust-badge"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.5 9 12 14l9.5-5L12 4Z"/><path d="M6.8 11.4V16c0 1.35 2.33 2.45 5.2 2.45S17.2 17.35 17.2 16v-4.6"/><path d="M21.5 9.2v4.6"/></svg> MBA em IA</span>
-            <span class="hero__trust-item">Fundada por especialista em Inteligência Artificial</span>
-            <span class="hero__trust-item">Atendimento 100% remoto no Brasil e Exterior</span>
+          <div class="hero__trust">
+            <span><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.5 9 12 14l9.5-5L12 4Z"/><path d="M6.8 11.4V16c0 1.35 2.33 2.45 5.2 2.45S17.2 17.35 17.2 16v-4.6"/><path d="M21.5 9.2v4.6"/></svg> MBA em IA</span>
+            <span>Fundada por especialista em Inteligência Artificial</span>
+            <span>Atendimento 100% remoto no Brasil e Exterior</span>
           </div>
         </div>
-
-        <!-- ÂNCORA VISUAL DO HERO ==========================================
-             Referência: edolus.com (cena 3D no hero, câmera reagindo ao
-             scroll) + melius.com (um objeto-assinatura que se repete).
-
-             Duas camadas, uma por cima da outra:
-             1. SVG isométrico (sempre presente) — a pilha de camadas do
-                sistema. É o fallback: celular, máquina sem placa de vídeo,
-                movimento reduzido, ou enquanto a cena não carregou.
-             2. Cena Spline (opcional) — js/hero-3d.js só a carrega em
-                desktop com GPU de verdade, depois da página pronta, e só
-                se data-spline tiver a URL da cena. Com o atributo vazio,
-                nada é baixado e fica só o SVG.
-
-             COMO LIGAR O 3D: no Spline, Export > Code Export > Vanilla JS,
-             copie a URL que termina em .splinecode e cole em data-spline
-             (aqui e na página do Conecta). Instruções da cena no LEIA-ME. -->
-        <figure class="hero__anchor reveal" data-spline="" aria-hidden="true">
-          <svg class="iso iso--pilha iso--hero" viewBox="0 0 600 660" focusable="false" aria-hidden="true">
-            <defs><radialGradient id="iso-sombra-hero" class="iso__shadow"><stop offset="0"/><stop offset="1" stop-opacity="0"/></radialGradient></defs>
-            <ellipse cx="300" cy="604" rx="250" ry="58" fill="url(#iso-sombra-hero)"/>
-            <!-- 1. Vitrine -->
-            <g transform="translate(300 500)"><g class="iso__float" style="--i:0"><g class="iso__layer">
-              <rect class="iso__edge" x="-110" y="-110" width="220" height="220" rx="16" transform="translate(0 10) matrix(.866 .5 -.866 .5 0 0)"/>
-              <g transform="matrix(.866 .5 -.866 .5 0 0)">
-                <rect class="iso__face" x="-110" y="-110" width="220" height="220" rx="16"/>
-                <!-- vitrine: barra, titulo, botao, tres blocos -->
-                <rect class="iso__ink" x="-90" y="-90" width="180" height="12" rx="6"/>
-                <rect class="iso__ink" x="-90" y="-62" width="130" height="14" rx="7"/>
-                <rect class="iso__ink" x="-90" y="-40" width="96" height="14" rx="7"/>
-                <rect class="iso__hot" x="-90" y="-14" width="58" height="16" rx="8"/>
-                <rect class="iso__ink iso__ink--soft" x="-90" y="20" width="54" height="70" rx="8"/>
-                <rect class="iso__ink iso__ink--soft" x="-27" y="20" width="54" height="70" rx="8"/>
-                <rect class="iso__ink iso__ink--soft" x="36" y="20" width="54" height="70" rx="8"/>
-              </g>
-            </g></g></g>
-            <!-- 2. Vendedor IA -->
-            <g transform="translate(300 420)"><g class="iso__float" style="--i:1"><g class="iso__layer">
-              <rect class="iso__edge" x="-110" y="-110" width="220" height="220" rx="16" transform="translate(0 10) matrix(.866 .5 -.866 .5 0 0)"/>
-              <g transform="matrix(.866 .5 -.866 .5 0 0)">
-                <rect class="iso__face" x="-110" y="-110" width="220" height="220" rx="16"/>
-                <!-- vendedor IA: conversa alternando os lados -->
-                <rect class="iso__ink" x="-90" y="-90" width="104" height="24" rx="12"/>
-                <rect class="iso__hot iso__hot--soft" x="-14" y="-56" width="104" height="24" rx="12"/>
-                <rect class="iso__ink" x="-90" y="-22" width="78" height="24" rx="12"/>
-                <rect class="iso__hot iso__hot--soft" x="6" y="12" width="84" height="24" rx="12"/>
-                <rect class="iso__ink" x="-90" y="46" width="120" height="24" rx="12"/>
-                <rect class="iso__ink iso__ink--soft" x="-90" y="80" width="180" height="10" rx="5"/>
-              </g>
-            </g></g></g>
-            <!-- 3. CRM -->
-            <g transform="translate(300 340)"><g class="iso__float" style="--i:2"><g class="iso__layer">
-              <rect class="iso__edge" x="-110" y="-110" width="220" height="220" rx="16" transform="translate(0 10) matrix(.866 .5 -.866 .5 0 0)"/>
-              <g transform="matrix(.866 .5 -.866 .5 0 0)">
-                <rect class="iso__face" x="-110" y="-110" width="220" height="220" rx="16"/>
-                <!-- CRM: quatro colunas de cards -->
-                <rect class="iso__ink" x="-90" y="-90" width="40.5" height="8" rx="4"/>
-                <rect class="iso__ink iso__ink--soft" x="-90" y="-72" width="40.5" height="26" rx="6"/>
-                <rect class="iso__ink iso__ink--soft" x="-90" y="-40" width="40.5" height="26" rx="6"/>
-                <rect class="iso__ink iso__ink--soft" x="-90" y="-8" width="40.5" height="26" rx="6"/>
-                <rect class="iso__ink" x="-43.5" y="-90" width="40.5" height="8" rx="4"/>
-                <rect class="iso__ink iso__ink--soft" x="-43.5" y="-72" width="40.5" height="26" rx="6"/>
-                <rect class="iso__ink iso__ink--soft" x="-43.5" y="-40" width="40.5" height="26" rx="6"/>
-                <rect class="iso__ink" x="3" y="-90" width="40.5" height="8" rx="4"/>
-                <rect class="iso__hot" x="3" y="-72" width="40.5" height="26" rx="6"/>
-                <rect class="iso__ink" x="49.5" y="-90" width="40.5" height="8" rx="4"/>
-                <rect class="iso__ink iso__ink--soft" x="49.5" y="-72" width="40.5" height="26" rx="6"/>
-                <rect class="iso__ink iso__ink--soft" x="49.5" y="-40" width="40.5" height="26" rx="6"/>
-              </g>
-            </g></g></g>
-            <!-- 4. Painel -->
-            <g transform="translate(300 260)"><g class="iso__float" style="--i:3"><g class="iso__layer is-ativo">
-              <rect class="iso__edge" x="-110" y="-110" width="220" height="220" rx="16" transform="translate(0 10) matrix(.866 .5 -.866 .5 0 0)"/>
-              <g transform="matrix(.866 .5 -.866 .5 0 0)">
-                <rect class="iso__face" x="-110" y="-110" width="220" height="220" rx="16"/>
-                <!-- painel: tres indicadores e barras -->
-                <rect class="iso__ink iso__ink--soft" x="-90" y="-90" width="56" height="30" rx="7"/>
-                <rect class="iso__ink iso__ink--soft" x="-28" y="-90" width="56" height="30" rx="7"/>
-                <rect class="iso__ink iso__ink--soft" x="34" y="-90" width="56" height="30" rx="7"/>
-                <rect class="iso__ink" x="-90" y="46" width="18" height="44" rx="4"/>
-                <rect class="iso__ink" x="-63" y="20" width="18" height="70" rx="4"/>
-                <rect class="iso__ink" x="-36" y="34" width="18" height="56" rx="4"/>
-                <rect class="iso__ink" x="-9" y="-2" width="18" height="92" rx="4"/>
-                <rect class="iso__hot" x="18" y="-28" width="18" height="118" rx="4"/>
-                <rect class="iso__ink" x="45" y="10" width="18" height="80" rx="4"/>
-                <rect class="iso__ink" x="72" y="30" width="18" height="60" rx="4"/>
-              </g>
-            </g></g></g>
-          </svg>
-        </figure>
-
       </div>
-      <a href="#solucoes" class="hero__scroll" aria-label="Rolar para as soluções">
-        <span class="hero__scroll-line" aria-hidden="true"></span>
-        <span class="hero__scroll-label">Role para ver onde você trava</span>
-      </a>
     </section>
 
-    <!-- ===== SOLUÇÕES ===== -->
-    <section class="section" id="solucoes">
-      <div class="container">
-        <div class="section__head section__head--split reveal">
-          <div>
-            <span class="eyebrow">Soluções</span>
-            <h2 class="section__title title--display">Os pontos onde o negócio <strong>costuma travar</strong></h2>
+    <!-- ===== O PONTO FINAL ===== -->
+    <section class="stmt">
+      <div class="wrap split">
+        <h2 class="big">Achar esse ponto é a nossa primeira entrega<span class="dot" id="dotB" aria-hidden="true"></span><span class="sr-only">.</span></h2>
+        <p class="aside">A Livson estuda como a sua operação funciona hoje, encontra o gargalo e constrói o que resolve — site, landing page, CRM, painel, aplicativo, automação ou IA.</p>
+      </div>
+    </section>
+
+    <!-- ===== VITRINE DAS TRAVAS (3D) =====
+         As quatro palavras são as do título que troca, e a quinta é o
+         Conecta. Com 3D, a seção fica presa na tela: cada item desce do
+         topo, para e sai por baixo (e volta ao contrário ao subir). Os
+         objetos são desenhados pelo js/home.js; cada um carrega "o ponto"
+         em laranja. Sem 3D, os itens ficam um embaixo do outro. -->
+    <section class="show" id="solucoes">
+      <h2 class="sr-only">Onde o negócio costuma travar</h2>
+      <div class="show__pin wrap" id="pin">
+        <article class="item" data-obj="bolha">
+          <div class="item__stage"><p class="item__word" aria-hidden="true">Atendimento</p></div>
+          <div class="item__info">
+            <p class="item__tag"><span class="pill">Onde trava</span> Atendimento sobrecarregado</p>
+            <div class="item__mid"><a class="btn" href="/diagnostico">Fazer diagnóstico</a></div>
+            <div class="item__txt"><h3>Chatbots com IA</h3><p>Atenda 24/7, qualifique leads e responda dúvidas automaticamente.</p></div>
           </div>
-          <p class="section__lead">Cada empresa trava em um lugar diferente. Na prática, quase sempre é um destes três — e o que a gente constrói muda conforme o seu.</p>
+        </article>
+        <article class="item" data-obj="planilha">
+          <div class="item__stage"><p class="item__word" aria-hidden="true">Planilha</p></div>
+          <div class="item__info">
+            <p class="item__tag"><span class="pill">Onde trava</span> Contato perdido na planilha</p>
+            <div class="item__mid"><a class="btn" href="/diagnostico">Fazer diagnóstico</a></div>
+            <div class="item__txt"><h3>CRM para organizar os leads</h3><p>Cada cliente no lugar certo, com follow-up acontecendo sem ninguém lembrar.</p></div>
+          </div>
+        </article>
+        <article class="item" data-obj="site">
+          <div class="item__stage"><p class="item__word" aria-hidden="true">Site</p></div>
+          <div class="item__info">
+            <p class="item__tag"><span class="pill">Onde trava</span> Sem presença profissional</p>
+            <div class="item__mid"><a class="btn" href="/diagnostico">Fazer diagnóstico</a></div>
+            <div class="item__txt"><h3>Sites profissionais</h3><p>Um site rápido, bonito no celular e que passa credibilidade de empresa séria.</p></div>
+          </div>
+        </article>
+        <article class="item" data-obj="anel">
+          <div class="item__stage"><p class="item__word" aria-hidden="true">Retrabalho</p></div>
+          <div class="item__info">
+            <p class="item__tag"><span class="pill">Onde trava</span> Processos manuais</p>
+            <div class="item__mid"><a class="btn" href="/diagnostico">Fazer diagnóstico</a></div>
+            <div class="item__txt"><h3>Automação inteligente com n8n</h3><p>Elimine tarefas repetitivas e conecte suas ferramentas em fluxos automáticos.</p></div>
+          </div>
+        </article>
+        <article class="item" data-obj="pilha" id="livson-conecta">
+          <div class="item__stage"><p class="item__word" aria-hidden="true">Conecta</p></div>
+          <div class="item__info">
+            <p class="item__tag"><span class="pill">Já existe pronto</span> Quando o gargalo é comercial</p>
+            <div class="item__mid"><a class="btn" href="/livson-conecta">Conhecer o Livson Conecta</a></div>
+            <div class="item__txt"><h3>Livson Conecta</h3><p>Capta, atende, agenda, organiza e mede — do primeiro clique ao cliente agendado.</p></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== TODAS AS SOLUÇÕES ===== -->
+    <section class="sec" id="todas-as-solucoes">
+      <div class="wrap">
+        <div class="split">
+          <h2 class="big">Os pontos onde o negócio costuma travar</h2>
+          <p class="aside">Cada empresa trava em um lugar diferente. Na prática, quase sempre é um destes três — e o que a gente constrói muda conforme o seu.</p>
         </div>
-
-        <div class="blocks">
-
-          <!-- BLOCO 1 — texto à esquerda, site à direita -->
-          <div class="block reveal">
-            <div class="block__copy">
-              <h3 class="block__name">Ninguém te encontra</h3>
-              <div class="track__list">
-                <div class="trava">
-                  <p class="trava__problem">Sem presença profissional</p>
-                  <div>
-                    <p class="trava__solution">Sites Profissionais</p>
-                    <p class="trava__desc">Um site rápido, bonito no celular e que passa credibilidade de empresa séria.</p>
-                  </div>
-                </div>
-                <div class="trava">
-                  <p class="trava__problem">Sem clientes online</p>
-                  <div>
-                    <p class="trava__solution">Landing Pages de Alta Conversão</p>
-                    <p class="trava__desc">Páginas rápidas, persuasivas e focadas em transformar visitantes em clientes.</p>
-                  </div>
-                </div>
-                <div class="trava">
-                  <p class="trava__problem">Invisível no Google</p>
-                  <div>
-                    <p class="trava__solution">SEO Estratégico</p>
-                    <p class="trava__desc">Seja encontrado por quem procura o seu serviço, na hora certa.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Vitrine flutuando sobre aneis de alcance: pulsos saem dela,
-                 visitantes chegam das bordas. Era um mockup de site com
-                 clinica ficticia. -->
-            <figure class="block__media" aria-hidden="true">
-              <svg class="iso iso--encontra" viewBox="0 0 600 500" focusable="false" aria-hidden="true">
-                <!-- chao: aneis de alcance, pulsos saindo da vitrine e visitantes chegando -->
-                <g transform="translate(300 380) matrix(.866 .5 -.866 .5 0 0)">
-                  <circle class="iso__ring" r="80"/>
-                  <circle class="iso__ring" r="125"/>
-                  <circle class="iso__ring iso__ring--fora" r="170"/>
-                  <circle class="iso__pulso" r="80" style="--d:0"/>
-                  <circle class="iso__pulso" r="80" style="--d:1"/>
-                  <circle class="iso__visita" r="7" style="--dx:-154px;--dy:-72px;--d:0"/>
-                  <circle class="iso__visita" r="7" style="--dx:85px;--dy:-147px;--d:1"/>
-                  <circle class="iso__visita" r="7" style="--dx:154px;--dy:72px;--d:2"/>
-                </g>
-                <!-- a vitrine, flutuando acima do centro -->
-                <g transform="translate(300 232)"><g class="iso__float" style="--i:0"><g class="iso__layer is-ativo">
-                  <rect class="iso__edge" x="-110" y="-110" width="220" height="220" rx="16" transform="translate(0 10) matrix(.866 .5 -.866 .5 0 0)"/>
-                  <g transform="matrix(.866 .5 -.866 .5 0 0)">
-                    <rect class="iso__face" x="-110" y="-110" width="220" height="220" rx="16"/>
-                    <!-- vitrine: barra, titulo, botao, tres blocos -->
-                    <rect class="iso__ink" x="-90" y="-90" width="180" height="12" rx="6"/>
-                    <rect class="iso__ink" x="-90" y="-62" width="130" height="14" rx="7"/>
-                    <rect class="iso__ink" x="-90" y="-40" width="96" height="14" rx="7"/>
-                    <rect class="iso__hot" x="-90" y="-14" width="58" height="16" rx="8"/>
-                    <rect class="iso__ink iso__ink--soft" x="-90" y="20" width="54" height="70" rx="8"/>
-                    <rect class="iso__ink iso__ink--soft" x="-27" y="20" width="54" height="70" rx="8"/>
-                    <rect class="iso__ink iso__ink--soft" x="36" y="20" width="54" height="70" rx="8"/>
-                  </g>
-                </g></g></g>
-              </svg>
-            </figure>
+        <div class="groups">
+          <div class="group">
+            <h3>Ninguém te encontra</h3>
+            <dl>
+              <div><dt>Sites Profissionais <span>· sem presença profissional</span></dt><dd>Um site rápido, bonito no celular e que passa credibilidade de empresa séria.</dd></div>
+              <div><dt>Landing Pages de Alta Conversão <span>· sem clientes online</span></dt><dd>Páginas rápidas, persuasivas e focadas em transformar visitantes em clientes.</dd></div>
+              <div><dt>SEO Estratégico <span>· invisível no Google</span></dt><dd>Seja encontrado por quem procura o seu serviço, na hora certa.</dd></div>
+            </dl>
           </div>
-
-          <!-- BLOCO 2 — invertido: conversa à esquerda, texto à direita -->
-          <div class="block block--flip reveal">
-            <div class="block__copy">
-              <h3 class="block__name">O cliente chega e se perde</h3>
-              <div class="track__list">
-                <div class="trava">
-                  <p class="trava__problem">Atendimento sobrecarregado</p>
-                  <div>
-                    <p class="trava__solution">Chatbots com IA</p>
-                    <p class="trava__desc">Atenda 24/7, qualifique leads e responda dúvidas automaticamente.</p>
-                  </div>
-                </div>
-                <div class="trava">
-                  <p class="trava__problem">Contato perdido na planilha</p>
-                  <div>
-                    <p class="trava__solution">CRM para Organizar os Leads</p>
-                    <p class="trava__desc">Cada cliente no lugar certo, com follow-up acontecendo sem ninguém lembrar.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Contato -> atendimento -> CRM no mesmo plano: um disco
-                 percorre as tres placas e cada uma acende quando ele chega.
-                 Era um mockup de WhatsApp com conversa ficticia. -->
-            <figure class="block__media" aria-hidden="true">
-              <svg class="iso iso--fluxo" viewBox="0 0 600 440" focusable="false" aria-hidden="true">
-                <!-- tres etapas no mesmo plano: contato -> atendimento -> CRM -->
-                <g transform="translate(130 130)"><g class="iso__layer">
-                  <rect class="iso__edge" x="-74" y="-74" width="148" height="148" rx="14" transform="translate(0 9) matrix(.866 .5 -.866 .5 0 0)"/>
-                  <g transform="matrix(.866 .5 -.866 .5 0 0)">
-                    <rect class="iso__face" x="-74" y="-74" width="148" height="148" rx="14"/>
-                    <g transform="scale(1.194)">
-                      <!-- contato chegando -->
-                      <circle class="iso__ink" cx="-30" cy="-30" r="14"/>
-                      <rect class="iso__ink" x="-8" y="-40" width="58" height="9" rx="4.5"/>
-                      <rect class="iso__ink iso__ink--soft" x="-8" y="-24" width="40" height="9" rx="4.5"/>
-                      <rect class="iso__ink iso__ink--soft" x="-50" y="4" width="100" height="44" rx="8"/>
-                    </g>
-                    <rect class="iso__flash" x="-74" y="-74" width="148" height="148" rx="14" opacity="0"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;.14;.24;1" dur="4.2s" repeatCount="indefinite"/></rect>
-                  </g>
-                </g></g>
-                <g transform="translate(300 228)"><g class="iso__layer">
-                  <rect class="iso__edge" x="-74" y="-74" width="148" height="148" rx="14" transform="translate(0 9) matrix(.866 .5 -.866 .5 0 0)"/>
-                  <g transform="matrix(.866 .5 -.866 .5 0 0)">
-                    <rect class="iso__face" x="-74" y="-74" width="148" height="148" rx="14"/>
-                    <g transform="scale(1.194)">
-                      <!-- atendimento -->
-                      <rect class="iso__ink" x="-50" y="-50" width="64" height="17" rx="8.5"/>
-                      <rect class="iso__hot iso__hot--soft" x="-14" y="-26" width="64" height="17" rx="8.5"/>
-                      <rect class="iso__ink" x="-50" y="-2" width="52" height="17" rx="8.5"/>
-                      <rect class="iso__hot iso__hot--soft" x="-6" y="22" width="56" height="17" rx="8.5"/>
-                    </g>
-                    <rect class="iso__flash" x="-74" y="-74" width="148" height="148" rx="14" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;.40;.45;.58;.68;1" dur="4.2s" repeatCount="indefinite"/></rect>
-                  </g>
-                </g></g>
-                <g transform="translate(470 326)"><g class="iso__layer">
-                  <rect class="iso__edge" x="-74" y="-74" width="148" height="148" rx="14" transform="translate(0 9) matrix(.866 .5 -.866 .5 0 0)"/>
-                  <g transform="matrix(.866 .5 -.866 .5 0 0)">
-                    <rect class="iso__face" x="-74" y="-74" width="148" height="148" rx="14"/>
-                    <g transform="scale(1.194)">
-                      <!-- organizado no CRM -->
-                      <rect class="iso__ink" x="-50" y="-50" width="32" height="6" rx="3"/>
-                      <rect class="iso__ink iso__ink--soft" x="-50" y="-38" width="32" height="19" rx="5"/>
-                      <rect class="iso__ink iso__ink--soft" x="-50" y="-14" width="32" height="19" rx="5"/>
-                      <rect class="iso__ink iso__ink--soft" x="-50" y="10" width="32" height="19" rx="5"/>
-                      <rect class="iso__ink" x="-16" y="-50" width="32" height="6" rx="3"/>
-                      <rect class="iso__ink iso__ink--soft" x="-16" y="-38" width="32" height="19" rx="5"/>
-                      <rect class="iso__ink iso__ink--soft" x="-16" y="-14" width="32" height="19" rx="5"/>
-                      <rect class="iso__ink" x="18" y="-50" width="32" height="6" rx="3"/>
-                      <rect class="iso__hot" x="18" y="-38" width="32" height="19" rx="5"/>
-                      <rect class="iso__ink iso__ink--soft" x="18" y="-14" width="32" height="19" rx="5"/>
-                    </g>
-                    <rect class="iso__flash" x="-74" y="-74" width="148" height="148" rx="14" opacity="0"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0;.84;.89;1" dur="4.2s" repeatCount="indefinite"/></rect>
-                  </g>
-                </g></g>
-                <g transform="translate(300 228) matrix(.866 .5 -.866 .5 0 0)">
-                  <path class="iso__line" d="M-122 0H-74M74 0H122"/>
-                  <circle class="iso__puck" r="9">
-                    <animateMotion dur="4.2s" repeatCount="indefinite" path="M-196 0H196" calcMode="linear" keyPoints="0;0;.5;.5;1;1" keyTimes="0;.14;.44;.58;.88;1"/>
-                    <animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;.06;.5;.92;1" dur="4.2s" repeatCount="indefinite"/>
-                  </circle>
-                </g>
-              </svg>
-            </figure>
+          <div class="group">
+            <h3>O cliente chega e se perde</h3>
+            <dl>
+              <div><dt>Chatbots com IA <span>· atendimento sobrecarregado</span></dt><dd>Atenda 24/7, qualifique leads e responda dúvidas automaticamente.</dd></div>
+              <div><dt>CRM para Organizar os Leads <span>· contato perdido na planilha</span></dt><dd>Cada cliente no lugar certo, com follow-up acontecendo sem ninguém lembrar.</dd></div>
+            </dl>
           </div>
-
-          <!-- BLOCO 3 — texto à esquerda, painel à direita -->
-          <div class="block reveal">
-            <div class="block__copy">
-              <h3 class="block__name">A operação não escala</h3>
-              <div class="track__list">
-                <div class="trava">
-                  <p class="trava__problem">Processos manuais</p>
-                  <div>
-                    <p class="trava__solution">Automação Inteligente com n8n</p>
-                    <p class="trava__desc">Elimine tarefas repetitivas e conecte suas ferramentas em fluxos automáticos.</p>
-                  </div>
-                </div>
-                <div class="trava">
-                  <p class="trava__problem">Sem visibilidade de dados</p>
-                  <div>
-                    <p class="trava__solution">Dashboards Inteligentes</p>
-                    <p class="trava__desc">Enxergue seus números em tempo real e tome decisões com clareza.</p>
-                  </div>
-                </div>
-                <div class="trava">
-                  <p class="trava__problem">A ferramenta que você precisa não existe</p>
-                  <div>
-                    <p class="trava__solution">Aplicativos e Sistemas Sob Medida</p>
-                    <p class="trava__desc">Quando nada no mercado serve, a gente constrói para o seu jeito de trabalhar.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Grade de tarefas que se resolvem em cascata (automacao) e,
-                 acima, o painel com o resultado. Era um mockup de dashboard
-                 com numeros ficticios. -->
-            <figure class="block__media" aria-hidden="true">
-              <svg class="iso iso--escala" viewBox="0 0 600 520" focusable="false" aria-hidden="true">
-                <!-- base: grade de tarefas que se resolvem em cascata (automacao) -->
-                <g transform="translate(300 350)"><g class="iso__layer">
-                  <rect class="iso__edge" x="-122" y="-122" width="244" height="244" rx="16" transform="translate(0 10) matrix(.866 .5 -.866 .5 0 0)"/>
-                  <g transform="matrix(.866 .5 -.866 .5 0 0)">
-                    <rect class="iso__face" x="-122" y="-122" width="244" height="244" rx="16"/>
-                    <rect class="iso__ink iso__ink--soft" x="-106" y="-106" width="36" height="36" rx="7"/>
-                    <rect class="iso__onda is-on" x="-106" y="-106" width="36" height="36" rx="7" style="--k:0"/>
-                    <rect class="iso__ink iso__ink--soft" x="-62" y="-106" width="36" height="36" rx="7"/>
-                    <rect class="iso__onda is-on" x="-62" y="-106" width="36" height="36" rx="7" style="--k:1"/>
-                    <rect class="iso__ink iso__ink--soft" x="-18" y="-106" width="36" height="36" rx="7"/>
-                    <rect class="iso__onda is-on" x="-18" y="-106" width="36" height="36" rx="7" style="--k:2"/>
-                    <rect class="iso__ink iso__ink--soft" x="26" y="-106" width="36" height="36" rx="7"/>
-                    <rect class="iso__onda" x="26" y="-106" width="36" height="36" rx="7" style="--k:3"/>
-                    <rect class="iso__ink iso__ink--soft" x="70" y="-106" width="36" height="36" rx="7"/>
-                    <rect class="iso__onda" x="70" y="-106" width="36" height="36" rx="7" style="--k:4"/>
-                    <rect class="iso__ink iso__ink--soft" x="-106" y="-62" width="36" height="36" rx="7"/>
-                    <rect class="iso__onda is-on" x="-106" y="-62" width="36" height="36" rx="7" style="--k:1"/>
-                    <rect class="iso__ink iso__ink--soft" x="-62" y="-62" width="36" height="36" rx="7"/>
-                    <rect class="iso__onda is-on" x="-62" y="-62" width="36" height="36" rx="7" style="--k:2"/>
-                    <rect class="iso__ink iso__ink--soft" x="-18" y="-62" width="36" height="36" rx="7"/>
-                    <rect class="iso__onda" x="-18" y="-62" width="36" height="36" rx="7" style="--k:3"/>
-                    <rect class="iso__ink iso__ink--soft" x="26" y="-62" width="36" height="36" rx="7"/>
-                    <rect class="iso__onda" x="26" y="-62" width="36" height="36" rx="7" style="--k:4"/>
-                    <rect class="iso__ink iso__ink--soft" x="70" y="-62" width="36" height="36" rx="7"/>
-                    <rect class="iso__onda" x="70" y="-62" width="36" height="36" rx="7" style="--k:5"/>
-                    <rect class="iso__ink iso__ink--soft" x="-106" y="-18" width="36" height="36" rx="7"/>
-                    <rect class="iso__onda is-on" x="-106" y="-18" width="36" height="36" rx="7" style="--k:2"/>
-                    <rect class="iso__ink iso__ink--soft" x="-62" y="-18" width="36" height="36" rx="7"/>
-                    <rect class="iso__onda" x="-62" y="-18" width="36" height="36" rx="7" style="--k:3"/>
-                    <rect class="iso__ink iso__ink--soft" x="-18" y="-18" width="36" height="36" rx="7"/>
-                    <rect class="iso__onda" x="-18" y="-18" width="36" height="36" rx="7" style="--k:4"/>
-                    <rect class="iso__ink iso__ink--soft" x="26" y="-18" width="36" height="36" rx="7"/>
-                    <rect class="iso__onda" x="26" y="-18" width="36" height="36" rx="7" style="--k:5"/>
-                    <rect class="iso__ink iso__ink--soft" x="70" y="-18" width="36" height="36" rx="7"/>
-                    <rect class="iso__onda" x="70" y="-18" width="36" height="36" rx="7" style="--k:6"/>
-                    <rect class="iso__ink iso__ink--soft" x="-106" y="26" width="36" height="36" rx="7"/>
-                    <rect class="iso__onda" x="-106" y="26" width="36" height="36" rx="7" style="--k:3"/>
-                    <rect class="iso__ink iso__ink--soft" x="-62" y="26" width="36" height="36" rx="7"/>
-                    <rect class="iso__onda" x="-62" y="26" width="36" height="36" rx="7" style="--k:4"/>
-                    <rect class="iso__ink iso__ink--soft" x="-18" y="26" width="36" height="36" rx="7"/>
-                    <rect class="iso__onda" x="-18" y="26" width="36" height="36" rx="7" style="--k:5"/>
-                    <rect class="iso__ink iso__ink--soft" x="26" y="26" width="36" height="36" rx="7"/>
-                    <rect class="iso__onda" x="26" y="26" width="36" height="36" rx="7" style="--k:6"/>
-                    <rect class="iso__ink iso__ink--soft" x="70" y="26" width="36" height="36" rx="7"/>
-                    <rect class="iso__onda" x="70" y="26" width="36" height="36" rx="7" style="--k:7"/>
-                    <rect class="iso__ink iso__ink--soft" x="-106" y="70" width="36" height="36" rx="7"/>
-                    <rect class="iso__onda" x="-106" y="70" width="36" height="36" rx="7" style="--k:4"/>
-                    <rect class="iso__ink iso__ink--soft" x="-62" y="70" width="36" height="36" rx="7"/>
-                    <rect class="iso__onda" x="-62" y="70" width="36" height="36" rx="7" style="--k:5"/>
-                    <rect class="iso__ink iso__ink--soft" x="-18" y="70" width="36" height="36" rx="7"/>
-                    <rect class="iso__onda" x="-18" y="70" width="36" height="36" rx="7" style="--k:6"/>
-                    <rect class="iso__ink iso__ink--soft" x="26" y="70" width="36" height="36" rx="7"/>
-                    <rect class="iso__onda" x="26" y="70" width="36" height="36" rx="7" style="--k:7"/>
-                    <rect class="iso__ink iso__ink--soft" x="70" y="70" width="36" height="36" rx="7"/>
-                    <rect class="iso__onda" x="70" y="70" width="36" height="36" rx="7" style="--k:8"/>
-                  </g>
-                </g></g>
-                <!-- acima: o painel que mostra o resultado -->
-                <g transform="translate(300 142)"><g class="iso__float" style="--i:1"><g class="iso__layer is-ativo">
-                  <rect class="iso__edge" x="-72" y="-72" width="144" height="144" rx="12" transform="translate(0 8) matrix(.866 .5 -.866 .5 0 0)"/>
-                  <g transform="matrix(.866 .5 -.866 .5 0 0)">
-                    <rect class="iso__face" x="-72" y="-72" width="144" height="144" rx="12"/>
-                    <rect class="iso__ink iso__ink--soft" x="-56" y="-58" width="112" height="14" rx="7"/>
-                    <rect class="iso__barra iso__ink" x="-52" y="26" width="16" height="30" rx="4" style="--b:0"/>
-                    <rect class="iso__barra iso__ink" x="-28" y="8" width="16" height="48" rx="4" style="--b:1"/>
-                    <rect class="iso__barra iso__ink" x="-4" y="16" width="16" height="40" rx="4" style="--b:2"/>
-                    <rect class="iso__barra iso__ink" x="20" y="-8" width="16" height="64" rx="4" style="--b:3"/>
-                    <rect class="iso__barra iso__hot" x="44" y="-30" width="16" height="86" rx="4" style="--b:4"/>
-                  </g>
-                </g></g></g>
-              </svg>
-            </figure>
+          <div class="group">
+            <h3>A operação não escala</h3>
+            <dl>
+              <div><dt>Automação Inteligente com n8n <span>· processos manuais</span></dt><dd>Elimine tarefas repetitivas e conecte suas ferramentas em fluxos automáticos.</dd></div>
+              <div><dt>Dashboards Inteligentes <span>· sem visibilidade de dados</span></dt><dd>Enxergue seus números em tempo real e tome decisões com clareza.</dd></div>
+              <div><dt>Aplicativos e Sistemas Sob Medida <span>· a ferramenta que você precisa não existe</span></dt><dd>Quando nada no mercado serve, a gente constrói para o seu jeito de trabalhar.</dd></div>
+            </dl>
           </div>
-
         </div>
-
-        <div class="section__outro reveal">
+        <div class="outro">
           <p>Não sabe em qual dos três você está? É exatamente isso que o diagnóstico responde.</p>
-          <a href="/diagnostico" class="btn btn--sm btn--primary">Fazer Diagnóstico</a>
+          <a href="/diagnostico" class="btn">Fazer Diagnóstico</a>
         </div>
       </div>
     </section>
 
-    <!-- ===== LIVSON CONECTA (teaser — página completa em livson-conecta.html) ===== -->
-    <section class="section conecta-teaser" id="livson-conecta">
-      <div class="container conecta-teaser__inner">
-        <div class="conecta-teaser__copy reveal">
-          <span class="eyebrow">Quando o gargalo é comercial</span>
-          <h2 class="section__title title--display">Para esse caso, já existe pronto: <strong>Livson Conecta</strong></h2>
-          <p class="conecta__tagline">Tudo conectado. Vendendo por você.</p>
-          <p class="section__lead">Tem um gargalo que aparece na maioria dos diagnósticos: o cliente chega e ninguém responde a tempo. Para ele a gente não precisa começar do zero — o Livson Conecta <strong>capta, atende, agenda, organiza e mede</strong>, do primeiro clique ao cliente agendado.</p>
-          <ul class="conecta-teaser__list">
-            <li><strong>01 Vitrine</strong> — site ou landing page que capta o lead</li>
-            <li><strong>02 Vendedor IA</strong> — atende no WhatsApp 24/7 e agenda sozinho</li>
-            <li><strong>03 CRM</strong> — cada lead organizado, com follow‑up automático</li>
-            <li><strong>04 Painel</strong> — resultado e retorno em tempo real</li>
-          </ul>
-          <div class="conecta__cta">
-            <a href="/livson-conecta" class="btn btn--primary btn--glow btn--lg">Conhecer o Livson Conecta</a>
-            <a href="#contato" class="btn btn--ghost">Falar com um especialista</a>
-          </div>
+    <!-- ===== METODOLOGIA ===== (a única numeração da página: é uma sequência de verdade) -->
+    <section class="sec" id="metodologia">
+      <div class="wrap">
+        <div class="split">
+          <h2 class="big">Um processo sem surpresa</h2>
+          <p class="aside">Da primeira conversa ao suporte contínuo, você sabe exatamente o que esperar — inclusive o que a gente vai dizer para não fazer.</p>
         </div>
-      </div>
-    </section>
-
-    <!-- ===== METODOLOGIA ===== -->
-    <section class="section" id="metodologia">
-      <div class="container">
-        <div class="section__head section__head--split reveal">
-          <div>
-            <span class="eyebrow">Como Funciona</span>
-            <h2 class="section__title title--display">Um processo <strong>sem surpresa</strong></h2>
-          </div>
-          <p class="section__lead">Da primeira conversa ao suporte contínuo, você sabe exatamente o que esperar — inclusive o que a gente vai dizer para não fazer.</p>
-        </div>
-
-        <div class="flow">
-          <div class="flow__step reveal">
-            <span class="flow__num">01</span>
-            <h3>Diagnóstico</h3>
-            <p>Estudamos como sua operação funciona hoje e achamos onde ela trava. Todo projeto começa aqui.</p>
-          </div>
-          <div class="flow__step reveal">
-            <span class="flow__num">02</span>
-            <h3>Proposta</h3>
-            <p>Você recebe o que resolve o problema — e também o que não vale a pena fazer agora.</p>
-          </div>
-          <div class="flow__step reveal">
-            <span class="flow__num">03</span>
-            <h3>Desenvolvimento</h3>
-            <p>Construímos a solução e colocamos no ar, com você acompanhando cada etapa.</p>
-          </div>
-          <div class="flow__step reveal">
-            <span class="flow__num">04</span>
-            <h3>Suporte</h3>
-            <p>Acompanhamento contínuo para você crescer com tranquilidade.</p>
-          </div>
-        </div>
+        <ol class="steps">
+          <li class="step"><span class="step__num">01</span><h3>Diagnóstico</h3><p>Estudamos como sua operação funciona hoje e achamos onde ela trava. Todo projeto começa aqui.</p></li>
+          <li class="step"><span class="step__num">02</span><h3>Proposta</h3><p>Você recebe o que resolve o problema — e também o que não vale a pena fazer agora.</p></li>
+          <li class="step"><span class="step__num">03</span><h3>Desenvolvimento</h3><p>Construímos a solução e colocamos no ar, com você acompanhando cada etapa.</p></li>
+          <li class="step"><span class="step__num">04</span><h3>Suporte</h3><p>Acompanhamento contínuo para você crescer com tranquilidade.</p></li>
+        </ol>
       </div>
     </section>
 
     <!-- ===== COMPROMISSOS =====
-         Ficava aqui uma faixa de numeros (15+ projetos, 10+ clientes, 2+
-         anos, 100% foco). Saiu inteira em 2026-09-07 por decisao do
-         Hudson, e vale registrar o motivo para ninguem "melhorar" a
-         pagina colocando os numeros de volta:
-
-           - "2+ anos de experiencia" era o unico dado da faixa que servia
-             para o visitante DESQUALIFICAR a Livson. Oferecer isso
-             espontaneamente e entregar o argumento contrario de bandeja.
-           - "100% foco em resultado" nao e estatistica, e slogan vestido
-             de numero. O leitor percebe na hora — e passa a desconfiar
-             dos outros tres, que sao verdadeiros.
-           - "15+ projetos" e "10+ clientes" diziam quase a mesma coisa.
-
-         No lugar entram compromissos: o portfolio logo abaixo ja prova
-         QUE a Livson entrega; o que ele nao responde e o medo de quem
-         contrata empresa pequena de tecnologia ("vou ficar na mao?",
-         "vou falar com vendedor ou com quem programa?"). Cada item aqui
-         ja e afirmado em algum outro ponto do site (Metodologia,
-         Manifesto, Fundador) — esta faixa e a versao escaneavel. -->
-    <section class="pactos" id="compromissos">
-      <div class="container">
-        <p class="pactos__intro reveal"><span class="eyebrow">Nosso compromisso</span> O que você pode <strong>cobrar da gente</strong></p>
-        <ul class="pactos__lista">
-          <li class="pacto reveal">
-            <h3 class="pacto__titulo">Diagnóstico antes de proposta</h3>
-            <p class="pacto__texto">Todo projeto começa entendendo onde a sua operação trava hoje. Escopo e preço vêm depois disso — nunca antes.</p>
-          </li>
-          <li class="pacto reveal">
-            <h3 class="pacto__titulo">Você fala com quem constrói</h3>
-            <p class="pacto__texto">Sem telefone sem fio entre quem atende e quem programa: quem ouve o seu problema é quem entrega a solução.</p>
-          </li>
-          <li class="pacto reveal">
-            <h3 class="pacto__titulo">A gente diz o que não fazer</h3>
-            <p class="pacto__texto">Se uma parte do projeto não vale a pena agora, você ouve isso e o porquê. Escopo grande impressiona na proposta; resultado aparece na operação.</p>
-          </li>
-          <li class="pacto reveal">
-            <h3 class="pacto__titulo">Remoto do começo ao fim</h3>
-            <p class="pacto__texto">O trabalho acontece a distância sem perder proximidade — inclusive fora do Brasil, como no site do In Europa, entregue para Lisboa.</p>
-          </li>
+         Ficava aqui uma faixa de números (15+ projetos, 10+ clientes, 2+
+         anos, 100% foco). Saiu em 2026-09-07 por decisão do Hudson: "2+
+         anos" servia para desqualificar a Livson, "100%" era slogan vestido
+         de número, e 15+/10+ diziam quase a mesma coisa. Não recoloque. -->
+    <section class="sec" id="compromissos">
+      <div class="wrap">
+        <h2 class="big">O que você pode cobrar da gente</h2>
+        <ul class="pactos">
+          <li class="pacto"><h3>Diagnóstico antes de proposta</h3><p>Todo projeto começa entendendo onde a sua operação trava hoje. Escopo e preço vêm depois disso — nunca antes.</p></li>
+          <li class="pacto"><h3>Você fala com quem constrói</h3><p>Sem telefone sem fio entre quem atende e quem programa: quem ouve o seu problema é quem entrega a solução.</p></li>
+          <li class="pacto"><h3>A gente diz o que não fazer</h3><p>Se uma parte do projeto não vale a pena agora, você ouve isso e o porquê. Escopo grande impressiona na proposta; resultado aparece na operação.</p></li>
+          <li class="pacto"><h3>Remoto do começo ao fim</h3><p>O trabalho acontece a distância sem perder proximidade — inclusive fora do Brasil, como no site do In Europa, entregue para Lisboa.</p></li>
         </ul>
       </div>
     </section>
 
-    <!-- ===== PORTFÓLIO ===== -->
-    <section class="section section--alt" id="portfolio">
-      <div class="container">
-        <div class="section__head section__head--split reveal">
-          <div>
-            <span class="eyebrow">Portfólio</span>
-            <h2 class="section__title title--display">Projetos que <strong>foram ao ar</strong></h2>
-          </div>
-          <p class="section__lead">Alguns clientes que confiaram na Livson Tecnologia — no Brasil e fora dele. Onde há depoimento, o texto é do próprio cliente, exatamente como ele escreveu.</p>
+    <!-- ===== PORTFÓLIO =====
+         Com movimento, a seção fica presa na tela e os cards cruzam da
+         direita para a esquerda ao rolar para baixo (voltam ao subir).
+         Depoimentos com o texto exato de cada cliente. Não invente outros. -->
+    <section class="team" id="portfolio">
+      <div class="team__pin">
+        <div class="wrap split team__grid">
+          <h2 class="big team__title">Projetos que foram ao ar</h2>
+          <p class="aside">Alguns clientes que confiaram na Livson Tecnologia — no Brasil e fora dele. Onde há depoimento, o texto é do próprio cliente, exatamente como ele escreveu.</p>
         </div>
-
-        <div class="works">
-
-          <article class="work reveal">
-            <a class="work__shot" href="https://proximonivel-empreendedores.com" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
-              <img src="img/portfolio/in-europa.webp"
-                   alt="Página inicial do site do In Europa, encontro internacional em Lisboa, entregue pela Livson Tecnologia"
-                   width="1100" height="688" loading="lazy" decoding="async" />
-            </a>
-            <div class="work__copy">
-              <p class="work__tag">Evento Internacional · Lisboa</p>
-              <h3 class="work__name"><a href="https://proximonivel-empreendedores.com" target="_blank" rel="noopener">In Europa — Inteligência nos Negócios ↗</a></h3>
-              <p class="work__desc">Site da 6.ª edição do encontro internacional de inteligência nos negócios, em Lisboa. Projeto fora do Brasil: página de programação, convidados e captação de aplicações para os dois dias de evento no Hotel Real Palácio.</p>
-              <p class="work__client">Próximo Nível Empreendedores · Lisboa, Portugal</p>
-            </div>
+        <div class="cards wrap">
+          <article class="card">
+            <p class="card__brand">In Europa</p>
+            <p class="card__tag">Evento internacional · Lisboa</p>
+            <p class="card__quote">Site da 6.ª edição do encontro internacional de inteligência nos negócios, em Lisboa.</p>
+            <a class="card__link" href="https://inteligencianosnegocios.com/" target="_blank" rel="noopener">Ver o site ↗</a>
           </article>
-
-          <article class="work work--inverso reveal">
-            <a class="work__shot" href="https://indelevelmulher.com.br" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
-              <img src="img/portfolio/indelevel-mulher.webp"
-                   alt="Página inicial do site Indelével Mulher, evento em Salvador, entregue pela Livson Tecnologia"
-                   width="1100" height="688" loading="lazy" decoding="async" />
-            </a>
-            <div class="work__copy">
-              <p class="work__tag">Evento · Empreendedorismo Feminino</p>
-              <h3 class="work__name"><a href="https://indelevelmulher.com.br" target="_blank" rel="noopener">Indelével Mulher ↗</a></h3>
-              <p class="work__desc">Página de venda de um encontro presencial para 200 mulheres empreendedoras em Salvador, com a programação dos dois dias, as palestrantes e o checkout de ingressos.</p>
-              <p class="work__client">Indelével Mulher · Salvador, BA</p>
-            </div>
+          <!-- ATENCAO: jvsaudebelezaestetica.com esta sem registro A no DNS (nao resolve). Sem link para o site. -->
+          <article class="card">
+            <p class="card__brand">JV Saúde Beleza e Estética</p>
+            <p class="card__quote">"Trabalho incrível! Ficou exatamente como eu sonhava — profissional, bonito e moderno."</p>
+            <p class="card__who">Jacira Oliveira · <a href="https://www.instagram.com/jaciraoliversantos/" target="_blank" rel="noopener">@jaciraoliversantos</a> <span class="stars" aria-label="5 estrelas">★★★★★</span></p>
           </article>
-
-          <!-- ATENCAO: jvsaudebelezaestetica.com esta sem registro A no DNS
-               (nao resolve). Depoimento e @ preservados; sem print porque o
-               site nao esta no ar para ser capturado. -->
-          <article class="work work--texto reveal">
-            <div>
-              <p class="work__tag">Saúde &amp; Estética</p>
-              <h3 class="work__name"><a href="https://jvsaudebelezaestetica.com/" target="_blank" rel="noopener">JV Saúde Beleza e Estética ↗</a></h3>
-            </div>
-            <div>
-              <blockquote class="work__quote">"Trabalho incrível! Ficou exatamente como eu sonhava — profissional, bonito e moderno."</blockquote>
-              <p class="work__client">Jacira Oliveira · <a href="https://www.instagram.com/jaciraoliversantos/" target="_blank" rel="noopener">@jaciraoliversantos</a> <span class="stars">★★★★★</span></p>
-            </div>
+          <article class="card">
+            <p class="card__brand">Indelével Mulher</p>
+            <p class="card__tag">Evento · Empreendedorismo feminino</p>
+            <p class="card__quote">Página de venda de um encontro presencial para 200 mulheres empreendedoras em Salvador.</p>
+            <a class="card__link" href="https://indelevelmulher.com.br" target="_blank" rel="noopener">Ver o site ↗</a>
           </article>
-
-          <article class="work reveal">
-            <a class="work__shot" href="https://fabifelintro.com/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
-              <img src="img/portfolio/fabi-felintro.webp"
-                   alt="Página inicial do site Fabi Felintro Personal, entregue pela Livson Tecnologia"
-                   width="1100" height="688" loading="lazy" decoding="async" />
-            </a>
-            <div class="work__copy">
-              <p class="work__tag">Personal Trainer</p>
-              <h3 class="work__name"><a href="https://fabifelintro.com/" target="_blank" rel="noopener">Fabi Felintro Personal ↗</a></h3>
-              <blockquote class="work__quote">"Muito dedicado e atencioso! Entregou tudo no prazo e superou expectativas."</blockquote>
-              <p class="work__client">Fabi Felintro · <a href="https://www.instagram.com/fabifelintro.trainer/" target="_blank" rel="noopener">@fabifelintro.trainer</a> <span class="stars">★★★★★</span></p>
-            </div>
+          <article class="card">
+            <p class="card__brand">Fabi Felintro Personal</p>
+            <p class="card__quote">"Muito dedicado e atencioso! Entregou tudo no prazo e superou expectativas."</p>
+            <p class="card__who">Fabi Felintro · <a href="https://www.instagram.com/fabifelintro.trainer/" target="_blank" rel="noopener">@fabifelintro.trainer</a> <span class="stars" aria-label="5 estrelas">★★★★★</span></p>
+            <a class="card__link" href="https://fabifelintro.com/" target="_blank" rel="noopener">Ver o site ↗</a>
           </article>
-
-          <article class="work work--inverso reveal">
-            <a class="work__shot" href="https://marketingbazcar.com/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
-              <img src="img/portfolio/bazcar.webp"
-                   alt="Página inicial do site da Agência Bazcar, entregue pela Livson Tecnologia"
-                   width="1100" height="688" loading="lazy" decoding="async" />
-            </a>
-            <div class="work__copy">
-              <p class="work__tag">Marketing Digital</p>
-              <h3 class="work__name"><a href="https://marketingbazcar.com/" target="_blank" rel="noopener">Agência Bazcar ↗</a></h3>
-              <blockquote class="work__quote">"Parceria perfeita! Entrega no prazo, design impecável e comunicação clara."</blockquote>
-              <p class="work__client">Agência Bazcar · <a href="https://www.instagram.com/agenciabazcar/" target="_blank" rel="noopener">@agenciabazcar</a> <span class="stars">★★★★★</span></p>
-            </div>
+          <!-- Sem datas no texto de proposito: a pagina do evento e de uma edicao com data marcada, e o card fica no ar depois dela. -->
+          <article class="card">
+            <p class="card__brand">FIEX 8ª edição</p>
+            <p class="card__tag">Evento · Formação empresarial · Salvador</p>
+            <p class="card__quote">Página da Formação Inteligência Empresarial Experience, imersão de três dias com Moisés Ribeiro: programação de cada dia e entrada no Grupo VIP.</p>
+            <a class="card__link" href="https://fiexoitavaedicao.com.br/" target="_blank" rel="noopener">Ver o site ↗</a>
           </article>
-
+          <article class="card">
+            <p class="card__brand">Agência Bazcar</p>
+            <p class="card__quote">"Parceria perfeita! Entrega no prazo, design impecável e comunicação clara."</p>
+            <p class="card__who">Agência Bazcar · <a href="https://www.instagram.com/agenciabazcar/" target="_blank" rel="noopener">@agenciabazcar</a> <span class="stars" aria-label="5 estrelas">★★★★★</span></p>
+            <a class="card__link" href="https://marketingbazcar.com/" target="_blank" rel="noopener">Ver o site ↗</a>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- ===== MANIFESTO (absorve Missão/Visão/Valores como texto corrido) ===== -->
-    <section class="manifesto" id="sobre">
-      <div class="container manifesto__inner reveal">
-        <span class="eyebrow">Como a gente trabalha</span>
-        <p class="manifesto__lead">Tecnologia não é o que a gente vende. É o que a gente usa para <em>destravar o seu negócio</em>.</p>
+    <!-- ===== MANIFESTO ===== -->
+    <section class="sec" id="sobre">
+      <div class="wrap split">
+        <p class="big manifesto__lead">Tecnologia não é o que a gente vende. É o que a gente usa para <em>destravar o seu negócio</em>.</p>
         <div class="manifesto__body">
           <p>Quase todo projeto começa com alguém pedindo um site. E quase nunca o site é o problema. Por isso a primeira coisa que a Livson entrega não é código — é <strong>clareza sobre onde a sua operação está perdendo cliente hoje</strong>.</p>
           <p>Depois disso, a gente constrói só o que resolve. Se for simples, dizemos que é simples. Se não valer a pena fazer agora, dizemos também — e explicamos por quê. Escopo grande impressiona na proposta; <strong>resultado real aparece na operação</strong>.</p>
@@ -751,97 +354,99 @@
       </div>
     </section>
 
-    <!-- ===== FUNDADOR ===== -->
-    <section class="section founder" id="fundador">
-      <div class="container founder__inner">
-        <div class="founder__media reveal">
-          <!-- Recorte com fundo transparente e CORTE RETO na base. Não
-               tente dissolver a base: sobre fundo claro isso vira uma
-               mancha cinza (ver LEIA-ME.md). O corte é justificado pelo
-               painel em ::before de .founder__media. -->
+    <!-- ===== FUNDADOR =====
+         Recorte com fundo transparente e CORTE RETO na base. Não tente
+         dissolver a base (ver LEIA-ME.md): o painel em volta, com a borda
+         de baixo rente à foto, é o que justifica o corte. -->
+    <section class="sec" id="fundador">
+      <div class="wrap founder">
+        <div class="founder__media">
           <img
             src="img/hudson-recorte.webp"
             srcset="img/hudson-recorte-620.webp 620w, img/hudson-recorte.webp 1040w"
-            sizes="(max-width: 960px) 320px, 34vw"
+            sizes="(max-width: 860px) 92vw, 34vw"
             alt="Hudson Oliveira Santos, fundador da Livson Tecnologia"
             width="1040" height="983" loading="lazy" decoding="async"
-            class="founder__photo"
           />
         </div>
-        <div class="founder__copy reveal">
-          <span class="eyebrow">Quem está por trás</span>
-          <h2 class="section__title title--display">Feito por quem entende <strong>do assunto</strong></h2>
+        <div class="founder__copy">
+          <h2 class="big">Feito por quem entende do assunto</h2>
           <p class="founder__name">Hudson Oliveira Santos</p>
           <p class="founder__role">Fundador &amp; Desenvolvedor Full Stack</p>
-          <p class="section__lead">Toda entrega da Livson passa pelas mãos de quem a fundou: MBA em Inteligência Artificial pela Faculdade Sirius e desenvolvedor full stack há mais de 2 anos, construindo sites, agentes de IA e automações de ponta a ponta — sem terceirizar o que importa.</p>
-          <p class="founder__desc">Isso significa comunicação direta, do diagnóstico à entrega — sem telefone sem fio entre quem atende e quem programa.</p>
+          <p>Toda entrega da Livson passa pelas mãos de quem a fundou: MBA em Inteligência Artificial pela Faculdade Sirius e desenvolvedor full stack há mais de 2 anos, construindo sites, agentes de IA e automações de ponta a ponta — sem terceirizar o que importa.</p>
+          <p>Isso significa comunicação direta, do diagnóstico à entrega — sem telefone sem fio entre quem atende e quem programa.</p>
           <div class="founder__badges">
-            <span class="founder__badge"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.5 9 12 14l9.5-5L12 4Z"/><path d="M6.8 11.4V16c0 1.35 2.33 2.45 5.2 2.45S17.2 17.35 17.2 16v-4.6"/><path d="M21.5 9.2v4.6"/></svg> MBA em Inteligência Artificial — Faculdade Sirius</span>
-            <span class="founder__badge"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8.6 8.8-3.4 3.2 3.4 3.2"/><path d="m15.4 8.8 3.4 3.2-3.4 3.2"/><path d="M13.4 6.6 10.6 17.4"/></svg> Full Stack Developer — 2+ anos</span>
+            <span><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.5 9 12 14l9.5-5L12 4Z"/><path d="M6.8 11.4V16c0 1.35 2.33 2.45 5.2 2.45S17.2 17.35 17.2 16v-4.6"/><path d="M21.5 9.2v4.6"/></svg> MBA em Inteligência Artificial — Faculdade Sirius</span>
+            <span><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8.6 8.8-3.4 3.2 3.4 3.2"/><path d="m15.4 8.8 3.4 3.2-3.4 3.2"/><path d="M13.4 6.6 10.6 17.4"/></svg> Full Stack Developer — 2+ anos</span>
           </div>
-          <a href="https://wa.me/5571996466575?text=Ol%C3%A1%2C%20Hudson!%20Vim%20pelo%20site%20e%20quero%20saber%20mais." target="_blank" rel="noopener" class="btn btn--ghost">Falar com o Hudson</a>
+          <div class="actions">
+            <a href="https://wa.me/5571996466575?text=Ol%C3%A1%2C%20Hudson!%20Vim%20pelo%20site%20e%20quero%20saber%20mais." target="_blank" rel="noopener" class="btn btn--ghost">Falar com o Hudson</a>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ===== DIAGNÓSTICO / CTA ===== -->
-    <section class="cta-band" id="diagnostico">
-      <div class="container cta-band__inner reveal">
-        <h2>A primeira entrega <span class="grad">começa aqui</span></h2>
-        <p>Em <strong>menos de 3 minutos e sem custo</strong>, você descobre onde o seu negócio está perdendo cliente hoje e o que resolver primeiro. Sem enrolação, sem compromisso.</p>
-        <a href="/diagnostico" class="btn btn--primary btn--glow btn--lg">Quero meu diagnóstico grátis</a>
+    <!-- ===== DIAGNÓSTICO ===== -->
+    <section class="sec" id="diagnostico">
+      <div class="wrap split">
+        <h2 class="big">A primeira entrega começa aqui</h2>
+        <div class="side">
+          <p>Em <strong>menos de 3 minutos e sem custo</strong>, você descobre onde o seu negócio está perdendo cliente hoje e o que resolver primeiro. Sem enrolação, sem compromisso.</p>
+          <div class="actions"><a href="/diagnostico" class="btn">Quero meu diagnóstico grátis</a></div>
+        </div>
       </div>
     </section>
 
     <!-- ===== CONTATO ===== -->
-    <section class="section" id="contato">
-      <div class="container contact--simple">
-        <div class="section__head section__head--center reveal">
-          <span class="eyebrow">Fale Conosco</span>
-          <h2 class="section__title title--display">Vamos conversar sobre o seu <strong>projeto</strong></h2>
-          <p class="section__lead">Chama no WhatsApp — é o canal mais rápido pra gente te responder.</p>
+    <section class="sec" id="contato">
+      <div class="wrap split">
+        <div>
+          <h2 class="big">Vamos conversar sobre o seu projeto</h2>
+          <p class="aside" style="margin-top: 18px">Chama no WhatsApp — é o canal mais rápido pra gente te responder.</p>
         </div>
-
-        <ul class="contact__list contact__list--center reveal">
-          <li><span class="contact__ic"><svg viewBox="0 0 32 32" aria-hidden="true" fill="currentColor"><path d="M16.004 3C9.377 3 4 8.377 4 15.004c0 2.42.71 4.673 1.936 6.567L4 29l7.61-1.897a11.94 11.94 0 0 0 4.395.833h.004c6.627 0 12.003-5.377 12.003-12.003C28.012 8.377 22.63 3 16.004 3zm0 21.723h-.003a9.7 9.7 0 0 1-4.942-1.354l-.354-.21-3.68.918.98-3.59-.23-.368a9.688 9.688 0 0 1-1.487-5.115c0-5.362 4.363-9.725 9.72-9.725 2.598 0 5.04 1.013 6.877 2.852a9.654 9.654 0 0 1 2.848 6.878c0 5.362-4.364 9.714-9.729 9.714zm5.33-7.282c-.29-.145-1.72-.849-1.987-.946-.267-.097-.462-.145-.656.146-.194.29-.752.946-.922 1.14-.17.194-.34.218-.63.073-.29-.146-1.225-.452-2.335-1.44-.863-.77-1.446-1.72-1.615-2.01-.17-.29-.018-.447.127-.59.13-.13.29-.34.435-.51.146-.17.194-.29.29-.485.097-.194.049-.363-.024-.509-.073-.145-.656-1.58-.9-2.164-.237-.568-.478-.49-.656-.499l-.559-.01c-.194 0-.509.073-.775.363-.267.29-1.018.995-1.018 2.427 0 1.432 1.042 2.816 1.187 3.011.146.194 2.052 3.133 4.973 4.393.695.3 1.237.48 1.66.614.697.222 1.332.19 1.834.115.56-.083 1.72-.703 1.963-1.382.243-.679.243-1.261.17-1.382-.073-.122-.267-.194-.558-.34z"/></svg></span> <a href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Livson%20e%20quero%20conversar%20sobre%20o%20meu%20neg%C3%B3cio." target="_blank" rel="noopener">WhatsApp: (71) 99646-6575</a></li>
-          <li><span class="contact__ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3.5 6.5l8.5 7 8.5-7"/></svg></span> <a href="mailto:contato@livsontecnologia.com.br">contato@livsontecnologia.com.br</a></li>
-          <li><span class="contact__ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.3"/><circle cx="17.3" cy="6.7" r="0.9" fill="currentColor" stroke="none"/></svg></span> <a href="https://www.instagram.com/hhudson.oliveira/" target="_blank" rel="noopener">@hhudson.oliveira</a></li>
-          <li><span class="contact__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s6.8-5.5 6.8-11a6.8 6.8 0 1 0-13.6 0C5.2 15.5 12 21 12 21Z"/><circle cx="12" cy="10" r="2.5"/></svg></span> Salvador, Bahia — atendimento 100% remoto no Brasil e Exterior</li>
-        </ul>
-
-        <div class="contact__cta reveal">
-          <a href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Livson%20e%20quero%20conversar%20sobre%20o%20meu%20neg%C3%B3cio." target="_blank" rel="noopener" class="btn btn--primary btn--glow btn--lg">Chamar no WhatsApp</a>
-          <a href="https://www.instagram.com/hhudson.oliveira/" target="_blank" rel="noopener" class="btn btn--ghost">Seguir no Instagram</a>
+        <div class="side">
+          <ul class="contact">
+            <li><svg viewBox="0 0 32 32" aria-hidden="true" fill="currentColor"><path d="M16.004 3C9.377 3 4 8.377 4 15.004c0 2.42.71 4.673 1.936 6.567L4 29l7.61-1.897a11.94 11.94 0 0 0 4.395.833h.004c6.627 0 12.003-5.377 12.003-12.003C28.012 8.377 22.63 3 16.004 3zm0 21.723h-.003a9.7 9.7 0 0 1-4.942-1.354l-.354-.21-3.68.918.98-3.59-.23-.368a9.688 9.688 0 0 1-1.487-5.115c0-5.362 4.363-9.725 9.72-9.725 2.598 0 5.04 1.013 6.877 2.852a9.654 9.654 0 0 1 2.848 6.878c0 5.362-4.364 9.714-9.729 9.714zm5.33-7.282c-.29-.145-1.72-.849-1.987-.946-.267-.097-.462-.145-.656.146-.194.29-.752.946-.922 1.14-.17.194-.34.218-.63.073-.29-.146-1.225-.452-2.335-1.44-.863-.77-1.446-1.72-1.615-2.01-.17-.29-.018-.447.127-.59.13-.13.29-.34.435-.51.146-.17.194-.29.29-.485.097-.194.049-.363-.024-.509-.073-.145-.656-1.58-.9-2.164-.237-.568-.478-.49-.656-.499l-.559-.01c-.194 0-.509.073-.775.363-.267.29-1.018.995-1.018 2.427 0 1.432 1.042 2.816 1.187 3.011.146.194 2.052 3.133 4.973 4.393.695.3 1.237.48 1.66.614.697.222 1.332.19 1.834.115.56-.083 1.72-.703 1.963-1.382.243-.679.243-1.261.17-1.382-.073-.122-.267-.194-.558-.34z"/></svg> <a href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Livson%20e%20quero%20conversar%20sobre%20o%20meu%20neg%C3%B3cio." target="_blank" rel="noopener">WhatsApp: (71) 99646-6575</a></li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3.5 6.5l8.5 7 8.5-7"/></svg> <a href="mailto:contato@livsontecnologia.com.br">contato@livsontecnologia.com.br</a></li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.3"/><circle cx="17.3" cy="6.7" r="0.9" fill="currentColor" stroke="none"/></svg> <a href="https://www.instagram.com/hudsonoliveira.dev/" target="_blank" rel="noopener">@hudsonoliveira.dev</a></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s6.8-5.5 6.8-11a6.8 6.8 0 1 0-13.6 0C5.2 15.5 12 21 12 21Z"/><circle cx="12" cy="10" r="2.5"/></svg> Salvador, Bahia — atendimento 100% remoto no Brasil e Exterior</li>
+          </ul>
+          <div class="actions">
+            <a href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Livson%20e%20quero%20conversar%20sobre%20o%20meu%20neg%C3%B3cio." target="_blank" rel="noopener" class="btn">Chamar no WhatsApp</a>
+            <a href="https://www.instagram.com/hudsonoliveira.dev/" target="_blank" rel="noopener" class="btn btn--ghost">Seguir no Instagram</a>
+          </div>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- ===== FOOTER ===== -->
+  <!-- ===== RODAPÉ ===== -->
   <footer class="footer">
-    <div class="container footer__inner">
+    <div class="wrap footer__top">
       <div class="footer__brand">
-        <img src="img/livson-tecnologia-logo.png" alt="" class="brand__mark" width="32" height="32" />
-        <span class="brand__text">LIVSON<em>TECNOLOGIA</em></span>
+        <a href="#hero" class="brand" aria-label="Livson Tecnologia — início">
+          <svg viewBox="200 140 712 800" aria-hidden="true"><rect class="l" x="220" y="160" width="215" height="760" rx="64"/><rect class="l" x="220" y="705" width="640" height="215" rx="64"/><rect class="p" x="742" y="243" width="150" height="150" rx="40"/></svg>
+          <span>Livson Tecnologia</span>
+        </a>
         <p>Consultoria e tecnologia para pequenas e médias empresas: sites, sistemas, automação e IA.</p>
       </div>
-      <nav class="footer__nav">
+      <nav aria-label="Rodapé">
         <a href="/livson-conecta">Livson Conecta</a>
-        <a href="/#solucoes">Soluções</a>
+        <a href="#solucoes">Soluções</a>
         <a href="/livson-conecta#planos-conecta">Planos</a>
-        <a href="/#portfolio">Portfólio</a>
-        <a href="/#fundador">Fundador</a>
+        <a href="#portfolio">Portfólio</a>
+        <a href="#fundador">Fundador</a>
         <a href="/diagnostico">Diagnóstico Grátis</a>
       </nav>
       <div class="footer__contact">
-        <a href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Livson%20e%20quero%20conversar%20sobre%20o%20meu%20neg%C3%B3cio." target="_blank" rel="noopener"><span class="icon"><svg viewBox="0 0 32 32" aria-hidden="true" fill="currentColor"><path d="M16.004 3C9.377 3 4 8.377 4 15.004c0 2.42.71 4.673 1.936 6.567L4 29l7.61-1.897a11.94 11.94 0 0 0 4.395.833h.004c6.627 0 12.003-5.377 12.003-12.003C28.012 8.377 22.63 3 16.004 3zm0 21.723h-.003a9.7 9.7 0 0 1-4.942-1.354l-.354-.21-3.68.918.98-3.59-.23-.368a9.688 9.688 0 0 1-1.487-5.115c0-5.362 4.363-9.725 9.72-9.725 2.598 0 5.04 1.013 6.877 2.852a9.654 9.654 0 0 1 2.848 6.878c0 5.362-4.364 9.714-9.729 9.714zm5.33-7.282c-.29-.145-1.72-.849-1.987-.946-.267-.097-.462-.145-.656.146-.194.29-.752.946-.922 1.14-.17.194-.34.218-.63.073-.29-.146-1.225-.452-2.335-1.44-.863-.77-1.446-1.72-1.615-2.01-.17-.29-.018-.447.127-.59.13-.13.29-.34.435-.51.146-.17.194-.29.29-.485.097-.194.049-.363-.024-.509-.073-.145-.656-1.58-.9-2.164-.237-.568-.478-.49-.656-.499l-.559-.01c-.194 0-.509.073-.775.363-.267.29-1.018.995-1.018 2.427 0 1.432 1.042 2.816 1.187 3.011.146.194 2.052 3.133 4.973 4.393.695.3 1.237.48 1.66.614.697.222 1.332.19 1.834.115.56-.083 1.72-.703 1.963-1.382.243-.679.243-1.261.17-1.382-.073-.122-.267-.194-.558-.34z"/></svg></span> (71) 99646-6575</a>
-        <a href="https://www.instagram.com/hhudson.oliveira/" target="_blank" rel="noopener"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.3"/><circle cx="17.3" cy="6.7" r="0.9" fill="currentColor" stroke="none"/></svg></span> @hhudson.oliveira</a>
+        <a href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Livson%20e%20quero%20conversar%20sobre%20o%20meu%20neg%C3%B3cio." target="_blank" rel="noopener"><svg viewBox="0 0 32 32" aria-hidden="true" fill="currentColor"><path d="M16.004 3C9.377 3 4 8.377 4 15.004c0 2.42.71 4.673 1.936 6.567L4 29l7.61-1.897a11.94 11.94 0 0 0 4.395.833h.004c6.627 0 12.003-5.377 12.003-12.003C28.012 8.377 22.63 3 16.004 3zm0 21.723h-.003a9.7 9.7 0 0 1-4.942-1.354l-.354-.21-3.68.918.98-3.59-.23-.368a9.688 9.688 0 0 1-1.487-5.115c0-5.362 4.363-9.725 9.72-9.725 2.598 0 5.04 1.013 6.877 2.852a9.654 9.654 0 0 1 2.848 6.878c0 5.362-4.364 9.714-9.729 9.714zm5.33-7.282c-.29-.145-1.72-.849-1.987-.946-.267-.097-.462-.145-.656.146-.194.29-.752.946-.922 1.14-.17.194-.34.218-.63.073-.29-.146-1.225-.452-2.335-1.44-.863-.77-1.446-1.72-1.615-2.01-.17-.29-.018-.447.127-.59.13-.13.29-.34.435-.51.146-.17.194-.29.29-.485.097-.194.049-.363-.024-.509-.073-.145-.656-1.58-.9-2.164-.237-.568-.478-.49-.656-.499l-.559-.01c-.194 0-.509.073-.775.363-.267.29-1.018.995-1.018 2.427 0 1.432 1.042 2.816 1.187 3.011.146.194 2.052 3.133 4.973 4.393.695.3 1.237.48 1.66.614.697.222 1.332.19 1.834.115.56-.083 1.72-.703 1.963-1.382.243-.679.243-1.261.17-1.382-.073-.122-.267-.194-.558-.34z"/></svg> (71) 99646-6575</a>
+        <a href="https://www.instagram.com/hudsonoliveira.dev/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.3"/><circle cx="17.3" cy="6.7" r="0.9" fill="currentColor" stroke="none"/></svg> @hudsonoliveira.dev</a>
       </div>
     </div>
-    <div class="footer__bottom container">
-      <span>© <span id="year"></span> Livson Tecnologia LTDA. Todos os direitos reservados.</span>
-      <nav class="footer__legal">
+    <div class="wrap footer__bottom">
+      <span>© <span id="year">2026</span> Livson Tecnologia LTDA. Todos os direitos reservados.</span>
+      <nav class="footer__legal" aria-label="Legal">
         <a href="/politica-de-privacidade">Política de Privacidade</a>
         <a href="/termos-de-uso">Termos de Uso</a>
       </nav>
@@ -851,20 +456,18 @@
   <!-- ===== WHATSAPP FLUTUANTE ===== -->
   <a
     href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Livson%20e%20quero%20conversar%20sobre%20o%20meu%20neg%C3%B3cio."
-    class="whatsapp-float"
-    target="_blank"
-    rel="noopener"
+    class="whatsapp-float" target="_blank" rel="noopener"
     aria-label="Falar no WhatsApp com a Livson Tecnologia"
   >
-    <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true" fill="currentColor">
-      <path d="M16.004 3C9.377 3 4 8.377 4 15.004c0 2.42.71 4.673 1.936 6.567L4 29l7.61-1.897a11.94 11.94 0 0 0 4.395.833h.004c6.627 0 12.003-5.377 12.003-12.003C28.012 8.377 22.63 3 16.004 3zm0 21.723h-.003a9.7 9.7 0 0 1-4.942-1.354l-.354-.21-3.68.918.98-3.59-.23-.368a9.688 9.688 0 0 1-1.487-5.115c0-5.362 4.363-9.725 9.72-9.725 2.598 0 5.04 1.013 6.877 2.852a9.654 9.654 0 0 1 2.848 6.878c0 5.362-4.364 9.714-9.729 9.714zm5.33-7.282c-.29-.145-1.72-.849-1.987-.946-.267-.097-.462-.145-.656.146-.194.29-.752.946-.922 1.14-.17.194-.34.218-.63.073-.29-.146-1.225-.452-2.335-1.44-.863-.77-1.446-1.72-1.615-2.01-.17-.29-.018-.447.127-.59.13-.13.29-.34.435-.51.146-.17.194-.29.29-.485.097-.194.049-.363-.024-.509-.073-.145-.656-1.58-.9-2.164-.237-.568-.478-.49-.656-.499l-.559-.01c-.194 0-.509.073-.775.363-.267.29-1.018.995-1.018 2.427 0 1.432 1.042 2.816 1.187 3.011.146.194 2.052 3.133 4.973 4.393.695.3 1.237.48 1.66.614.697.222 1.332.19 1.834.115.56-.083 1.72-.703 1.963-1.382.243-.679.243-1.261.17-1.382-.073-.122-.267-.194-.558-.34z"/>
-    </svg>
+    <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true" fill="currentColor"><path d="M16.004 3C9.377 3 4 8.377 4 15.004c0 2.42.71 4.673 1.936 6.567L4 29l7.61-1.897a11.94 11.94 0 0 0 4.395.833h.004c6.627 0 12.003-5.377 12.003-12.003C28.012 8.377 22.63 3 16.004 3zm0 21.723h-.003a9.7 9.7 0 0 1-4.942-1.354l-.354-.21-3.68.918.98-3.59-.23-.368a9.688 9.688 0 0 1-1.487-5.115c0-5.362 4.363-9.725 9.72-9.725 2.598 0 5.04 1.013 6.877 2.852a9.654 9.654 0 0 1 2.848 6.878c0 5.362-4.364 9.714-9.729 9.714zm5.33-7.282c-.29-.145-1.72-.849-1.987-.946-.267-.097-.462-.145-.656.146-.194.29-.752.946-.922 1.14-.17.194-.34.218-.63.073-.29-.146-1.225-.452-2.335-1.44-.863-.77-1.446-1.72-1.615-2.01-.17-.29-.018-.447.127-.59.13-.13.29-.34.435-.51.146-.17.194-.29.29-.485.097-.194.049-.363-.024-.509-.073-.145-.656-1.58-.9-2.164-.237-.568-.478-.49-.656-.499l-.559-.01c-.194 0-.509.073-.775.363-.267.29-1.018.995-1.018 2.427 0 1.432 1.042 2.816 1.187 3.011.146.194 2.052 3.133 4.973 4.393.695.3 1.237.48 1.66.614.697.222 1.332.19 1.834.115.56-.083 1.72-.703 1.963-1.382.243-.679.243-1.261.17-1.382-.073-.122-.267-.194-.558-.34z"/></svg>
   </a>
 
-  <!-- Scripts -->
-  <script type="module" src="js/hero-3d.js?v=20260922"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-  <script src="js/main.js?v=20260922" defer></script>
+  <!-- Camadas fixas das animações: o cubo do hero e o 3D da vitrine -->
+  <canvas id="gl" aria-hidden="true"></canvas>
+  <div class="stage" aria-hidden="true">
+    <div class="holder" id="holder"><div class="cube" id="cube"><i class="f1"></i><i class="f2"></i><i class="f3"></i><i class="f4"></i><i class="f5"></i><i class="f6"></i></div></div>
+  </div>
+
+  <script src="js/home.js?v=20261121" defer></script>
 </body>
 </html>

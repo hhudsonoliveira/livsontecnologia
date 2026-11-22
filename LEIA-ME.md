@@ -58,19 +58,58 @@ A versão que aparecer ali (`?v=...`) tem que ser a nova.
 ## Estrutura
 
 ```
-index.html                    página principal
+index.html                    página principal (identidade nova, ver abaixo)
 livson-conecta.html           página do produto
 diagnostico.html              formulário de diagnóstico (calcula receita perdida)
 politica-de-privacidade.html  LGPD
 termos-de-uso.html
-css/style.css                 todo o estilo do site
-js/main.js                    navegação, animações de scroll, preloader, troca de frase, FAQ
+css/home.css                  estilo SÓ da home (identidade de 21/11/2026)
+js/home.js                    tudo que se mexe na home: cubo do hero, vitrine 3D, cards, menu
+css/style.css                 estilo das outras páginas (identidade anterior)
+js/main.js                    outras páginas: navegação, animações de scroll, preloader, troca de frase, FAQ
 js/hero-3d.js                 cena 3D do hero (Spline) — só desktop com placa de vídeo, e só se configurada
 js/diagnostico.js             lógica e cálculo do diagnóstico
 .htaccess                     URLs sem .html + regras de cache
 sitemap.xml / robots.txt      SEO
 bump-versao.py                troca a versão dos CSS/JS (ver acima)
 ```
+
+---
+
+## A home nova (identidade de 21/11/2026)
+
+A home foi refeita a partir de um protótipo aprovado
+(claude.ai/artifact/L1VRCdn6VrYhXmnR8hiYox), com o noomoagency.com como
+referência de movimento — só o princípio, nada copiado deles.
+
+- **Só a home mudou.** Ela usa `css/home.css` + `js/home.js` e não carrega
+  mais `style.css`, `main.js` nem `hero-3d.js`. As outras quatro páginas
+  continuam na identidade anterior até serem migradas.
+- **Paleta petróleo e laranja:** fundo `#0F2B31`, superfície `#17383F`,
+  texto suave `#9EB8BD`, texto forte `#EEF5F4`, destaque `#FF7A1A`.
+  `--acc2` (verde-água) e `--ice` (vidro) são só dos objetos 3D.
+- **Títulos em Archivo larga, caixa alta** (`font-stretch: 125%`). Já foi
+  testada a versão condensada em caixa normal e ela foi rejeitada.
+- **A ideia da página é "o ponto"**: o cubo laranja que gira entre as
+  letras de "EM UM ▢ PONTO" e, ao rolar, vira o ponto final de "ACHAR ESSE
+  PONTO É A NOSSA PRIMEIRA ENTREGA". Cada objeto 3D também carrega um ponto
+  laranja.
+- **Vitrine 3D** (`#solucoes`): seção presa na tela; cada palavra desce do
+  topo, para e sai por baixo, e volta ao contrário quando se rola para
+  cima. O Three.js (r128, cdnjs) só é baixado quando a vitrine está a uma
+  tela e meia de distância. Existe uma trava: se o aparelho não der conta,
+  o 3D baixa a resolução e, se ainda assim travar, desliga sozinho — as
+  palavras continuam se movendo.
+- **Objeto 3D nunca em branco chapado.** Foi testado e ficou com cara de
+  massinha. O brilho vem de um "estúdio" desenhado em canvas que os objetos
+  refletem.
+- **Cards do portfólio** cruzam a tela com a rolagem. Os depoimentos têm o
+  texto exato de cada cliente — não invente outros.
+- **Movimento reduzido ou sem WebGL:** nada se mexe e tudo fica legível
+  parado (quadrado laranja no título, itens um embaixo do outro, cards em
+  grade).
+- As gravações de tela usadas como referência (`Gravação de Tela *.mp4`)
+  estão no `.gitignore` e **não vão para a Hostinger**.
 
 ---
 
