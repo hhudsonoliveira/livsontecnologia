@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="no-js">
+<html lang="pt-BR">
 <head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-TPRQHFC8YE"></script>
@@ -11,11 +11,11 @@
   </script>
 
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Termos de Uso | Livson Tecnologia</title>
   <meta name="description" content="Termos de Uso da Livson Tecnologia: regras de uso do site, dos serviços e das condições de contratação." />
   <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#05070d" />
+  <meta name="theme-color" content="#0F2B31" />
   <link rel="canonical" href="https://livsontecnologia.com.br/termos-de-uso" />
 
   <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png" />
@@ -31,48 +31,44 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@72,300..500&family=Geist:wght@400..700&family=Geist+Mono:wght@400..500&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@72,300..500&family=Geist:wght@400..700&family=Geist+Mono:wght@400..500&display=swap" /></noscript>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..700&family=Geist:wght@400..600&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..700&family=Geist:wght@400..600&display=swap" /></noscript>
 
-  <link rel="stylesheet" href="css/style.css?v=20260922" />
+  <link rel="stylesheet" href="css/base.css?v=20261121" />
+  <link rel="stylesheet" href="css/legal.css?v=20261121" />
 </head>
 <body>
 
-  <!-- ===== NAVBAR ===== -->
-  <header class="nav" id="nav">
-    <div class="container nav__inner">
-      <a href="/" class="brand" aria-label="Livson Tecnologia — início">
-        <img src="img/livson-tecnologia-logo.png" alt="" class="brand__mark" width="32" height="32" />
-        <span class="brand__text">LIVSON<em>TECNOLOGIA</em></span>
-      </a>
-
-      <nav class="nav__links" id="navLinks">
+  <!-- ===== MENU ===== -->
+  <div class="wrap">
+    <header class="nav" id="nav">
+      <a href="/" class="brand" aria-label="Livson Tecnologia — início"><svg viewBox="200 140 712 800" aria-hidden="true"><rect class="l" x="220" y="160" width="215" height="760" rx="64"/><rect class="l" x="220" y="705" width="640" height="215" rx="64"/><rect class="p" x="742" y="243" width="150" height="150" rx="40"/></svg> <span>Livson</span></a>
+      <nav class="nav__links" id="navLinks" aria-label="Principal">
         <a href="/">Início</a>
         <a href="/livson-conecta">Livson Conecta</a>
         <a href="/livson-conecta#planos-conecta">Planos</a>
         <a href="/#portfolio">Portfólio</a>
         <a href="/#contato">Contato</a>
+        <a href="/diagnostico" class="nav__only-mobile">Diagnóstico Grátis</a>
       </nav>
-
-      <a href="/diagnostico" class="btn btn--sm btn--primary nav__cta">Diagnóstico Grátis</a>
-
-      <button class="nav__toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
+      <div class="nav__end">
+        <a href="/diagnostico" class="btn btn--sm">Diagnóstico Grátis</a>
+        <button class="nav__toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navLinks">Menu</button>
+      </div>
+    </header>
+  </div>
 
   <main>
     <section class="legal-hero">
-      <div class="container">
-        <nav class="breadcrumb reveal" aria-label="breadcrumb"><a href="/">Início</a> / <span>Termos de Uso</span></nav>
+      <div class="wrap">
+        <nav class="breadcrumb" aria-label="Você está em"><a href="/">Início</a> / <span>Termos de Uso</span></nav>
         <h1>Termos de Uso</h1>
         <p>Última atualização: 25 de julho de 2026.</p>
       </div>
     </section>
 
-    <section class="section section--tight-top">
-      <div class="container prose reveal">
+    <section class="legal-body">
+      <div class="wrap prose">
         <h2>1. Aceitação dos termos</h2>
         <p>Ao acessar e usar este site, você concorda com estes Termos de Uso. Se você não concordar com alguma condição aqui descrita, pedimos que não utilize o site. Estes termos se aplicam em conjunto com a nossa <a href="/politica-de-privacidade">Política de Privacidade</a>.</p>
 
@@ -112,15 +108,14 @@
     </section>
   </main>
 
-  <!-- ===== FOOTER ===== -->
+  <!-- ===== RODAPÉ ===== -->
   <footer class="footer">
-    <div class="container footer__inner">
+    <div class="wrap footer__top">
       <div class="footer__brand">
-        <img src="img/livson-tecnologia-logo.png" alt="" class="brand__mark" width="32" height="32" />
-        <span class="brand__text">LIVSON<em>TECNOLOGIA</em></span>
-        <p>O sistema que capta, atende e agenda seus clientes — 24 horas por dia.</p>
+        <a href="/" class="brand" aria-label="Livson Tecnologia — início"><svg viewBox="200 140 712 800" aria-hidden="true"><rect class="l" x="220" y="160" width="215" height="760" rx="64"/><rect class="l" x="220" y="705" width="640" height="215" rx="64"/><rect class="p" x="742" y="243" width="150" height="150" rx="40"/></svg> <span>Livson Tecnologia</span></a>
+        <p>Consultoria e tecnologia para pequenas e médias empresas: sites, sistemas, automação e IA.</p>
       </div>
-      <nav class="footer__nav">
+      <nav aria-label="Rodapé">
         <a href="/livson-conecta">Livson Conecta</a>
         <a href="/#solucoes">Soluções</a>
         <a href="/livson-conecta#planos-conecta">Planos</a>
@@ -129,13 +124,13 @@
         <a href="/diagnostico">Diagnóstico Grátis</a>
       </nav>
       <div class="footer__contact">
-        <a href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20saber%20mais%20sobre%20o%20Livson%20Conecta." target="_blank" rel="noopener"><span class="icon"><svg viewBox="0 0 32 32" aria-hidden="true" fill="currentColor"><path d="M16.004 3C9.377 3 4 8.377 4 15.004c0 2.42.71 4.673 1.936 6.567L4 29l7.61-1.897a11.94 11.94 0 0 0 4.395.833h.004c6.627 0 12.003-5.377 12.003-12.003C28.012 8.377 22.63 3 16.004 3zm0 21.723h-.003a9.7 9.7 0 0 1-4.942-1.354l-.354-.21-3.68.918.98-3.59-.23-.368a9.688 9.688 0 0 1-1.487-5.115c0-5.362 4.363-9.725 9.72-9.725 2.598 0 5.04 1.013 6.877 2.852a9.654 9.654 0 0 1 2.848 6.878c0 5.362-4.364 9.714-9.729 9.714zm5.33-7.282c-.29-.145-1.72-.849-1.987-.946-.267-.097-.462-.145-.656.146-.194.29-.752.946-.922 1.14-.17.194-.34.218-.63.073-.29-.146-1.225-.452-2.335-1.44-.863-.77-1.446-1.72-1.615-2.01-.17-.29-.018-.447.127-.59.13-.13.29-.34.435-.51.146-.17.194-.29.29-.485.097-.194.049-.363-.024-.509-.073-.145-.656-1.58-.9-2.164-.237-.568-.478-.49-.656-.499l-.559-.01c-.194 0-.509.073-.775.363-.267.29-1.018.995-1.018 2.427 0 1.432 1.042 2.816 1.187 3.011.146.194 2.052 3.133 4.973 4.393.695.3 1.237.48 1.66.614.697.222 1.332.19 1.834.115.56-.083 1.72-.703 1.963-1.382.243-.679.243-1.261.17-1.382-.073-.122-.267-.194-.558-.34z"/></svg></span> (71) 99646-6575</a>
-        <a href="https://www.instagram.com/hudsonoliveira.dev/" target="_blank" rel="noopener"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.3"/><circle cx="17.3" cy="6.7" r="0.9" fill="currentColor" stroke="none"/></svg></span> @hudsonoliveira.dev</a>
+        <a href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20saber%20mais%20sobre%20o%20Livson%20Conecta." target="_blank" rel="noopener"><svg viewBox="0 0 32 32" aria-hidden="true" fill="currentColor"><path d="M16.004 3C9.377 3 4 8.377 4 15.004c0 2.42.71 4.673 1.936 6.567L4 29l7.61-1.897a11.94 11.94 0 0 0 4.395.833h.004c6.627 0 12.003-5.377 12.003-12.003C28.012 8.377 22.63 3 16.004 3zm0 21.723h-.003a9.7 9.7 0 0 1-4.942-1.354l-.354-.21-3.68.918.98-3.59-.23-.368a9.688 9.688 0 0 1-1.487-5.115c0-5.362 4.363-9.725 9.72-9.725 2.598 0 5.04 1.013 6.877 2.852a9.654 9.654 0 0 1 2.848 6.878c0 5.362-4.364 9.714-9.729 9.714zm5.33-7.282c-.29-.145-1.72-.849-1.987-.946-.267-.097-.462-.145-.656.146-.194.29-.752.946-.922 1.14-.17.194-.34.218-.63.073-.29-.146-1.225-.452-2.335-1.44-.863-.77-1.446-1.72-1.615-2.01-.17-.29-.018-.447.127-.59.13-.13.29-.34.435-.51.146-.17.194-.29.29-.485.097-.194.049-.363-.024-.509-.073-.145-.656-1.58-.9-2.164-.237-.568-.478-.49-.656-.499l-.559-.01c-.194 0-.509.073-.775.363-.267.29-1.018.995-1.018 2.427 0 1.432 1.042 2.816 1.187 3.011.146.194 2.052 3.133 4.973 4.393.695.3 1.237.48 1.66.614.697.222 1.332.19 1.834.115.56-.083 1.72-.703 1.963-1.382.243-.679.243-1.261.17-1.382-.073-.122-.267-.194-.558-.34z"/></svg> (71) 99646-6575</a>
+        <a href="https://www.instagram.com/hudsonoliveira.dev/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.3"/><circle cx="17.3" cy="6.7" r="0.9" fill="currentColor" stroke="none"/></svg> @hudsonoliveira.dev</a>
       </div>
     </div>
-    <div class="footer__bottom container">
-      <span>© <span id="year"></span> Livson Tecnologia LTDA. Todos os direitos reservados.</span>
-      <nav class="footer__legal">
+    <div class="wrap footer__bottom">
+      <span>© <span id="year">2026</span> Livson Tecnologia LTDA. Todos os direitos reservados.</span>
+      <nav class="footer__legal" aria-label="Legal">
         <a href="/politica-de-privacidade">Política de Privacidade</a>
         <a href="/termos-de-uso">Termos de Uso</a>
       </nav>
@@ -143,21 +138,10 @@
   </footer>
 
   <!-- ===== WHATSAPP FLUTUANTE ===== -->
-  <a
-    href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20saber%20mais%20sobre%20o%20Livson%20Conecta."
-    class="whatsapp-float"
-    target="_blank"
-    rel="noopener"
-    aria-label="Falar no WhatsApp com a Livson Tecnologia"
-  >
-    <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true" fill="currentColor">
-      <path d="M16.004 3C9.377 3 4 8.377 4 15.004c0 2.42.71 4.673 1.936 6.567L4 29l7.61-1.897a11.94 11.94 0 0 0 4.395.833h.004c6.627 0 12.003-5.377 12.003-12.003C28.012 8.377 22.63 3 16.004 3zm0 21.723h-.003a9.7 9.7 0 0 1-4.942-1.354l-.354-.21-3.68.918.98-3.59-.23-.368a9.688 9.688 0 0 1-1.487-5.115c0-5.362 4.363-9.725 9.72-9.725 2.598 0 5.04 1.013 6.877 2.852a9.654 9.654 0 0 1 2.848 6.878c0 5.362-4.364 9.714-9.729 9.714zm5.33-7.282c-.29-.145-1.72-.849-1.987-.946-.267-.097-.462-.145-.656.146-.194.29-.752.946-.922 1.14-.17.194-.34.218-.63.073-.29-.146-1.225-.452-2.335-1.44-.863-.77-1.446-1.72-1.615-2.01-.17-.29-.018-.447.127-.59.13-.13.29-.34.435-.51.146-.17.194-.29.29-.485.097-.194.049-.363-.024-.509-.073-.145-.656-1.58-.9-2.164-.237-.568-.478-.49-.656-.499l-.559-.01c-.194 0-.509.073-.775.363-.267.29-1.018.995-1.018 2.427 0 1.432 1.042 2.816 1.187 3.011.146.194 2.052 3.133 4.973 4.393.695.3 1.237.48 1.66.614.697.222 1.332.19 1.834.115.56-.083 1.72-.703 1.963-1.382.243-.679.243-1.261.17-1.382-.073-.122-.267-.194-.558-.34z"/>
-    </svg>
+  <a href="https://wa.me/5571996466575?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20saber%20mais%20sobre%20o%20Livson%20Conecta." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Falar no WhatsApp com a Livson Tecnologia">
+    <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true" fill="currentColor"><path d="M16.004 3C9.377 3 4 8.377 4 15.004c0 2.42.71 4.673 1.936 6.567L4 29l7.61-1.897a11.94 11.94 0 0 0 4.395.833h.004c6.627 0 12.003-5.377 12.003-12.003C28.012 8.377 22.63 3 16.004 3zm0 21.723h-.003a9.7 9.7 0 0 1-4.942-1.354l-.354-.21-3.68.918.98-3.59-.23-.368a9.688 9.688 0 0 1-1.487-5.115c0-5.362 4.363-9.725 9.72-9.725 2.598 0 5.04 1.013 6.877 2.852a9.654 9.654 0 0 1 2.848 6.878c0 5.362-4.364 9.714-9.729 9.714zm5.33-7.282c-.29-.145-1.72-.849-1.987-.946-.267-.097-.462-.145-.656.146-.194.29-.752.946-.922 1.14-.17.194-.34.218-.63.073-.29-.146-1.225-.452-2.335-1.44-.863-.77-1.446-1.72-1.615-2.01-.17-.29-.018-.447.127-.59.13-.13.29-.34.435-.51.146-.17.194-.29.29-.485.097-.194.049-.363-.024-.509-.073-.145-.656-1.58-.9-2.164-.237-.568-.478-.49-.656-.499l-.559-.01c-.194 0-.509.073-.775.363-.267.29-1.018.995-1.018 2.427 0 1.432 1.042 2.816 1.187 3.011.146.194 2.052 3.133 4.973 4.393.695.3 1.237.48 1.66.614.697.222 1.332.19 1.834.115.56-.083 1.72-.703 1.963-1.382.243-.679.243-1.261.17-1.382-.073-.122-.267-.194-.558-.34z"/></svg>
   </a>
 
-  <!-- Scripts (sem cena 3D — página leve/textual) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-  <script src="js/main.js?v=20260922" defer></script>
+  <script src="js/base.js?v=20261121" defer></script>
 </body>
 </html>

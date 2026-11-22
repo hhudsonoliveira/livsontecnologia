@@ -1,12 +1,9 @@
 /* =========================================================
    LIVSON TECNOLOGIA — home (identidade de 2026-11-21)
-   Só a home carrega este arquivo. As outras páginas seguem no js/main.js.
+   Só a home carrega este arquivo (depois do js/base.js).
 
-   O que tem aqui:
-   1. ano do rodapé, menu do celular
-   2. navegação por âncora sem "#" na barra (mesma regra do js/main.js,
-      inclusive a chave do sessionStorage, para os links das outras páginas
-      continuarem caindo na seção certa)
+   Ano do rodapé, menu e âncora sem "#" ficam no js/base.js (todas as
+   páginas). Aqui fica só o que se mexe na home:
    3. palavra que troca no hero (por máscara, nunca fade)
    4. o cubo do hero: gira no título, voa e vira o ponto final da frase
    5. cards do portfólio cruzando a tela com a rolagem
@@ -20,79 +17,6 @@
   'use strict';
   var root = document.documentElement;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ---------- 1. ano e menu ---------- */
-  var year = document.getElementById('year');
-  if (year) year.textContent = new Date().getFullYear();
-
-  var nav = document.getElementById('nav'), toggle = document.getElementById('navToggle');
-  if (nav && toggle) {
-    toggle.addEventListener('click', function () {
-      var open = nav.classList.toggle('is-open');
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      toggle.textContent = open ? 'Fechar' : 'Menu';
-    });
-    nav.addEventListener('click', function (e) {
-      if (e.target.closest && e.target.closest('.nav__links a')) {
-        nav.classList.remove('is-open'); toggle.setAttribute('aria-expanded', 'false'); toggle.textContent = 'Menu';
-      }
-    });
-  }
-
-  /* ---------- 2. âncora sem "#" ---------- */
-  var CHAVE_ANCORA = 'livson:ancora';
-  function caminhoLimpo(p) { return (p || '/').replace(/index\.html$/, '') || '/'; }
-  function urlLimpaAtual() { return caminhoLimpo(location.pathname) + location.search; }
-  function posicaoDe(id) {
-    if (id === 'hero' || id === 'topo') return 0;
-    var alvo = document.getElementById(id);
-    if (!alvo) return null;
-    return Math.max(0, alvo.getBoundingClientRect().top + window.scrollY - 12);
-  }
-  function irPara(id, suave) {
-    var y = posicaoDe(id);
-    if (y === null) return false;
-    window.scrollTo({ top: y, behavior: suave && !reduce ? 'smooth' : 'instant' });
-    return true;
-  }
-  document.addEventListener('click', function (e) {
-    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-    var a = e.target.closest && e.target.closest('a[href]');
-    if (!a || a.target === '_blank' || a.hasAttribute('download')) return;
-    if (a.origin !== location.origin) return;
-    var id = (a.hash || '').slice(1);
-    if (!id) return;
-    if (caminhoLimpo(a.pathname) === caminhoLimpo(location.pathname)) {
-      if (!irPara(id, true)) return;
-      e.preventDefault();
-      history.replaceState(null, '', urlLimpaAtual());
-      return;
-    }
-    e.preventDefault();
-    try { sessionStorage.setItem(CHAVE_ANCORA, id); } catch (err) {}
-    location.href = caminhoLimpo(a.pathname) + a.search;
-  });
-  (function ancoraDeEntrada() {
-    var id = '';
-    try { id = sessionStorage.getItem(CHAVE_ANCORA) || ''; sessionStorage.removeItem(CHAVE_ANCORA); } catch (err) {}
-    var veioNoHash = !id && location.hash.length > 1;
-    if (veioNoHash) id = location.hash.slice(1);
-    if (!id) return;
-    /* salto seco, repetido algumas vezes: nos primeiros instantes a página
-       ainda muda de altura (fontes, seções que ficam altas quando a
-       animação liga). Para assim que o visitante rolar por conta própria. */
-    var tentativas = 0, dele = false;
-    function desistir() { dele = true; }
-    ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (ev) { window.addEventListener(ev, desistir, { once: true, passive: true }); });
-    (function reconferir() {
-      if (dele) return;
-      var y = posicaoDe(id);
-      if (y === null || Math.abs(window.scrollY - y) < 4 && tentativas > 2) return;
-      window.scrollTo({ top: y, behavior: 'instant' });
-      if (++tentativas < 12) setTimeout(reconferir, 120);
-    })();
-    if (veioNoHash) history.replaceState(null, '', urlLimpaAtual());
-  })();
 
   /* ---------- 3. palavra que troca ---------- */
   var rot = document.getElementById('rot');

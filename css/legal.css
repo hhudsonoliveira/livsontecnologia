@@ -1,0 +1,31 @@
+/* =========================================================
+   LIVSON TECNOLOGIA — páginas legais (privacidade e termos)
+   Base comum em css/base.css. Texto longo: coluna de leitura de ~70
+   caracteres, títulos de seção grandes e uma régua entre eles.
+   ========================================================= */
+
+.legal-hero { padding-block: clamp(32px, 6vw, 80px) clamp(28px, 4vw, 48px); }
+.legal-hero .wrap { display: grid; gap: 18px; }
+.legal-hero h1 {
+  font-family: var(--display); font-stretch: 125%; font-weight: 460;
+  font-size: clamp(2rem, 5.4vw, 5.2rem); line-height: 1; letter-spacing: -0.012em;
+  text-transform: uppercase; text-wrap: balance;
+}
+.legal-hero p { color: var(--soft); }
+
+.legal-body { padding-bottom: 20px; }
+.prose { max-width: calc(70ch + 80px); margin-left: 0; }
+.prose h2 {
+  font-family: var(--display); font-stretch: 125%; font-weight: 460;
+  font-size: clamp(1.2rem, 2vw, 1.6rem); line-height: 1.15; text-transform: uppercase;
+  margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--line);
+}
+.prose h2:first-child { margin-top: 0; }
+.prose p, .prose li { color: var(--soft); font-size: 1.02rem; line-height: 1.7; max-width: 70ch; }
+.prose p { margin-top: 14px; }
+.prose strong { color: var(--ink); font-weight: 600; }
+.prose ul { margin-top: 12px; display: grid; gap: 10px; }
+/* marcador posicionado, não flex: com flex, o <strong> do começo do item virava uma coluna separada */
+.prose li { position: relative; padding-left: 20px; }
+.prose li::before { content: ""; position: absolute; left: 0; top: .68em; width: 7px; height: 7px; border-radius: 2px; background: var(--acc); }
+.prose a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--acc); text-decoration-thickness: 2px; text-underline-offset: 3px; }

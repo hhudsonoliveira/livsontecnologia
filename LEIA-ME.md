@@ -15,8 +15,8 @@ rodando a **versão antiga** — a sua correção simplesmente não chega nele.
 Por isso todo CSS/JS é referenciado assim nas páginas:
 
 ```html
-<link rel="stylesheet" href="css/style.css?v=20260802" />
-<script src="js/main.js?v=20260802" defer></script>
+<link rel="stylesheet" href="css/base.css?v=20261121" />
+<script src="js/base.js?v=20261121" defer></script>
 ```
 
 Esse `?v=...` é o que obriga o navegador a baixar de novo.
@@ -48,7 +48,7 @@ Não confie em abrir o site e olhar — o seu navegador também tem cache.
 Para conferir de verdade, veja o que está sendo servido:
 
 ```bash
-curl -s https://livsontecnologia.com.br/ | grep "scene.js"
+curl -s https://livsontecnologia.com.br/ | grep "home.js"
 ```
 
 A versão que aparecer ali (`?v=...`) tem que ser a nova.
@@ -58,145 +58,85 @@ A versão que aparecer ali (`?v=...`) tem que ser a nova.
 ## Estrutura
 
 ```
-index.html                    página principal (identidade nova, ver abaixo)
+index.html                    página principal
 livson-conecta.html           página do produto
-diagnostico.html              formulário de diagnóstico (calcula receita perdida)
+diagnostico.html              formulário de diagnóstico (resultado qualitativo)
 politica-de-privacidade.html  LGPD
 termos-de-uso.html
-css/home.css                  estilo SÓ da home (identidade de 21/11/2026)
-js/home.js                    tudo que se mexe na home: cubo do hero, vitrine 3D, cards, menu
-css/style.css                 estilo das outras páginas (identidade anterior)
-js/main.js                    outras páginas: navegação, animações de scroll, preloader, troca de frase, FAQ
-js/hero-3d.js                 cena 3D do hero (Spline) — só desktop com placa de vídeo, e só se configurada
-js/diagnostico.js             lógica e cálculo do diagnóstico
+css/base.css                  comum a TODAS as páginas: cores, tipografia, botões, menu, rodapé
+css/home.css                  só da home
+css/conecta.css               só do Conecta
+css/diagnostico.css           só do diagnóstico
+css/legal.css                 só das páginas legais
+js/base.js                    comum: ano do rodapé, menu do celular, âncora sem "#"
+js/home.js                    home: cubo do hero, vitrine 3D, cards do portfólio
+js/conecta.js                 Conecta: título que troca, ilustrações, casos de uso, FAQ
+js/diagnostico.js             lógica do diagnóstico e envio ao Formspree
 .htaccess                     URLs sem .html + regras de cache
 sitemap.xml / robots.txt      SEO
 bump-versao.py                troca a versão dos CSS/JS (ver acima)
 ```
 
+Até 21/11/2026 existiam `css/style.css`, `js/main.js` e `js/hero-3d.js`
+(identidade anterior). Saíram quando todas as páginas migraram; estão no
+histórico do git se precisar consultar.
+
 ---
 
-## A home nova (identidade de 21/11/2026)
+## A identidade (21/11/2026)
 
-A home foi refeita a partir de um protótipo aprovado
+Feita a partir de um protótipo aprovado
 (claude.ai/artifact/L1VRCdn6VrYhXmnR8hiYox), com o noomoagency.com como
 referência de movimento — só o princípio, nada copiado deles.
 
-- **Só a home mudou.** Ela usa `css/home.css` + `js/home.js` e não carrega
-  mais `style.css`, `main.js` nem `hero-3d.js`. As outras quatro páginas
-  continuam na identidade anterior até serem migradas.
 - **Paleta petróleo e laranja:** fundo `#0F2B31`, superfície `#17383F`,
   texto suave `#9EB8BD`, texto forte `#EEF5F4`, destaque `#FF7A1A`.
-  `--acc2` (verde-água) e `--ice` (vidro) são só dos objetos 3D.
-- **Títulos em Archivo larga, caixa alta** (`font-stretch: 125%`). Já foi
-  testada a versão condensada em caixa normal e ela foi rejeitada.
-- **A ideia da página é "o ponto"**: o cubo laranja que gira entre as
-  letras de "EM UM ▢ PONTO" e, ao rolar, vira o ponto final de "ACHAR ESSE
-  PONTO É A NOSSA PRIMEIRA ENTREGA". Cada objeto 3D também carrega um ponto
-  laranja.
-- **Vitrine 3D** (`#solucoes`): seção presa na tela; cada palavra desce do
-  topo, para e sai por baixo, e volta ao contrário quando se rola para
-  cima. O Three.js (r128, cdnjs) só é baixado quando a vitrine está a uma
-  tela e meia de distância. Existe uma trava: se o aparelho não der conta,
-  o 3D baixa a resolução e, se ainda assim travar, desliga sozinho — as
-  palavras continuam se movendo.
-- **Objeto 3D nunca em branco chapado.** Foi testado e ficou com cara de
-  massinha. O brilho vem de um "estúdio" desenhado em canvas que os objetos
-  refletem.
-- **Cards do portfólio** cruzam a tela com a rolagem. Os depoimentos têm o
-  texto exato de cada cliente — não invente outros.
+  `--acc2` (verde-água) e `--ice` (vidro) são só de objetos 3D e
+  ilustrações. Tudo em `css/base.css`.
+- **Títulos em Archivo larga, caixa alta** (`font-stretch: 125%`), texto em
+  Geist. Já foi testada a versão condensada em caixa normal e ela foi
+  rejeitada.
+- **A ideia da marca é "o ponto"**, o quadrado do logo. Na home, o cubo
+  laranja gira entre as letras de "EM UM ▢ PONTO" e, ao rolar, vira o
+  ponto final de "ACHAR ESSE PONTO É A NOSSA PRIMEIRA ENTREGA". No resto do
+  site ele aparece como marcador: nas listas, no "ponto" de cada objeto
+  3D, na opção escolhida do diagnóstico e no nível do resultado (1 a 3
+  quadrados).
+- **Logo sempre sólido** (L em texto forte + quadrado laranja), em SVG no
+  próprio HTML. O PNG em gradiente ainda é usado no ícone da aba e na
+  imagem de compartilhamento — falta trocar.
+- **Zero emoji.** As opções do diagnóstico tinham; saíram.
 - **Movimento reduzido ou sem WebGL:** nada se mexe e tudo fica legível
-  parado (quadrado laranja no título, itens um embaixo do outro, cards em
-  grade).
+  parado.
 - As gravações de tela usadas como referência (`Gravação de Tela *.mp4`)
   estão no `.gitignore` e **não vão para a Hostinger**.
 
----
+### Home
 
-## As ilustrações isométricas (no lugar dos mockups)
+- **Vitrine 3D** (`#solucoes`): seção presa na tela; cada palavra desce do
+  topo, para e sai por baixo, e volta ao contrário quando se rola para
+  cima. O Three.js (r128, cdnjs) só é baixado quando a vitrine está a uma
+  tela e meia de distância. Trava de segurança: se o aparelho não der
+  conta, o 3D baixa a resolução e, se ainda travar, desliga sozinho — as
+  palavras continuam se movendo.
+- **Objeto 3D nunca em branco chapado.** Foi testado e ficou com cara de
+  massinha. O brilho vem de um "estúdio" desenhado em canvas que os
+  objetos refletem.
+- **Cards do portfólio** cruzam a tela com a rolagem. Os depoimentos têm o
+  texto exato de cada cliente — não invente outros. Card de evento com
+  data marcada (FIEX) fica sem data no texto, para não envelhecer.
 
-Até 21/09/2026 o hero e a seção Soluções mostravam telas de produto
-desenhadas em HTML/CSS (site, WhatsApp, CRM, painel) com nomes e números
-fictícios. Mesmo com legenda, liam como "tela falsa". Saíram todas.
+### Conecta: as ilustrações isométricas
 
-No lugar entrou **uma linguagem visual só**, usada no site inteiro:
-placas em perspectiva isométrica — as camadas de um sistema. A mesma
-pilha de 4 placas aparece no hero das duas páginas e nos 4 passos do
-Conecta (com a placa do passo acesa); a seção Soluções da home tem três
-variações (vitrine com anéis de alcance, três placas com um disco
-passando, grade em cascata com painel).
-
-- **São SVG inline, sem imagem.** O truque está no
-  `<g transform="matrix(.866 .5 -.866 .5 0 0)">`: ele deita o desenho no
-  chão isométrico, então o conteúdo de cada placa é escrito em
-  coordenadas planas comuns (`<rect>`, `<circle>`) e aparece em
-  perspectiva sozinho. Para mexer, edite os retângulos dentro desse grupo.
-- **Cor é só token.** A mesma ilustração fica escura no hero e clara nas
-  faixas claras sem regra extra. Não coloque cor fixa (`#...`) no SVG.
-- **Movimento só na tela.** O `main.js` liga `.is-live` quando a
-  ilustração aparece e desliga quando sai; parada, cada uma já mostra um
-  quadro completo (é o que aparece com movimento reduzido).
-
-**Quando houver print real do produto**, ele entra no lugar da
-ilustração dentro do `<figure class="block__media">` (home) ou
-`<figure class="passo__visual">` (Conecta) como `<img>` comum. Peça
-autorização se for tela de cliente.
-
----
-
-## A cena 3D do hero (Spline)
-
-O hero sempre mostra a pilha isométrica em SVG. Por cima dela pode
-entrar uma **cena 3D feita no Spline**, que o `js/hero-3d.js` carrega só
-quando vale a pena: desktop, placa de vídeo de verdade, sem modo
-economia de dados, sem "reduzir movimento", e depois da página pronta.
-Se a cena rodar pesada nos primeiros quadros, ela é desmontada e o SVG
-fica. No celular nunca é baixada.
-
-**Hoje ela está desligada** (`data-spline=""`), porque cena do Spline é
-feita no editor visual do Spline — não dá para gerar por código.
-
-### Como ligar
-
-1. Monte a cena no Spline seguindo o roteiro abaixo.
-2. **Export → Code Export → Vanilla JS** e copie a URL que termina em
-   `.splinecode`.
-3. Cole em `data-spline="..."` no `<figure class="hero__anchor">` do
-   `index.html` **e** do `livson-conecta.html`. Não precisa mexer em JS.
-4. Não precisa rodar o `bump-versao.py` só por isso (o HTML não fica em
-   cache), mas não custa.
-
-### Roteiro da cena (para ela casar com o resto do site)
-
-- **O objeto é a própria pilha do SVG:** 4 placas quadradas de cantos
-  arredondados, empilhadas com um vão entre elas, a de cima com contorno
-  de acento. Assim a troca SVG → 3D não parece outro site.
-- **Agrupe as 4 placas num objeto chamado `Assinatura`.** O script gira
-  esse objeto e o faz subir conforme o visitante rola o hero (inspirado
-  na câmera da edolus.com). Sem esse nome a cena roda, só não reage ao
-  scroll. Quem preferir animar dentro do Spline pode criar uma variável
-  numérica `scroll` — o script manda o valor de 0 a 1.
-- **Cores da paleta:** placas `#161d30` / `#111729`, bordas brancas bem
-  finas e translúcidas, acento `#899cec`. Nada de neon, nada de arco-íris.
-- **Fundo transparente** (o gradiente do hero fica atrás) e câmera numa
-  vista próxima da isométrica do SVG. Deixe o objeto inteiro dentro do
-  quadro, com folga — o canvas não é a tela toda, é o lado direito do hero.
-- **Leve:** poucos polígonos, sem física, sem sons, arquivo `.splinecode`
-  abaixo de ~1,5 MB.
-- **Confira a marca d'água:** conforme o plano do Spline, a exportação
-  pode incluir o selo "Built with Spline".
-
----
-
-## Tipografia
-
-- **Newsreader** (serifada, corte display): só títulos grandes (h1, h2,
-  títulos de passo, tile, portfólio, manifesto, CTA).
-- **Geist**: interface e texto corrido.
-- **Geist Mono**: anotações — eyebrow, numeração, rótulos.
-
-A serifada é carregada só nos pesos 300 a 500. Não peça `font-weight`
-600/700 num título serifado: o navegador inventa um negrito falso.
+A pilha de 4 placas (os 4 módulos) aparece no hero e nos 4 passos, com a
+placa do passo acesa e levantada. São **SVG inline**: o
+`<g transform="matrix(.866 .5 -.866 .5 0 0)">` deita o desenho no chão
+isométrico, então o conteúdo de cada placa é escrito em coordenadas planas
+e aparece em perspectiva sozinho. **Cor só por token** (`css/conecta.css`,
+variáveis `--iso-*`): placas em vidro verde-água, conteúdo em branco
+translúcido, o ponto de cada placa em laranja. Não coloque cor fixa no SVG.
+O `js/conecta.js` liga a flutuação (`.is-live`) só com a ilustração na
+tela.
 
 ---
 
@@ -206,38 +146,17 @@ A serifada é carregada só nos pesos 300 a 500. Não peça `font-weight`
 `img/DSC00714.JPG` com recorte por matte (rembg / U²-Net human-seg).
 
 **A base tem corte reto, de propósito. Não tente dissolvê-la.** Isso já
-foi tentado duas vezes e falhou nas duas:
+foi tentado duas vezes e falhou nas duas (degradê cinza no terno escuro).
+O que funciona é **justificar o corte**: `.founder__media` é um painel
+(superfície, cantos arredondados, `overflow: hidden`) que envolve a foto
+inteira, com a aresta de baixo rente à base dela — um retrato emoldurado.
+O `padding-top` dá ar acima da cabeça.
 
-1. Fade simples de alpha: o terno quase preto virando transparente
-   produz um degradê cinza ocupando ~30% da altura da imagem. Em fundo
-   escuro é invisível; em fundo claro é uma mancha.
-2. Fade "inteligente", clareando o pixel na direção do fundo enquanto
-   perde alpha: melhorou a média (desvio 87 → 44) mas **ficou pior aos
-   olhos** — uma nuvem cinza suja mais que uma forma escura definida. A
-   média é a métrica errada aqui; o que importa é a área afetada.
-
-O que funciona é **justificar o corte**: o `::before` de
-`.founder__media` desenha um painel (`--bg-1`, cantos arredondados) que
-envolve a foto inteira, com a aresta de baixo rente à base dele — um
-retrato emoldurado. Aí ela lê como enquadramento, não como mancha.
-
-O `padding-top` de `.founder__media` é o que dá ar acima da cabeça. Sem
-ele a cabeça encosta na borda do painel, porque o recorte começa
-praticamente rente ao topo do crânio.
-
-Números da versão atual: 7.389 pixels de meia-transparência (só a borda
-antialiasada da silhueta) contra 164.000 da versão que dissolvia.
-
-Outras regras:
-
-- **Não adicione luz de recorte (rim light).** Ela existia quando a
-  faixa do fundador era escura, para separar o terno preto do fundo.
-  Sobre fundo claro vira halo esbranquiçado no contorno.
-- **Não use `drop-shadow` na foto.** Ele segue o alpha, então a sombra
-  reintroduz cinza justamente na borda de baixo.
-- **Se trocar a altura do recorte, atualize `width`/`height` no
-  `<img>`**, senão o navegador reserva a proporção errada e a página
-  pula ao carregar.
+- **Não use `drop-shadow` na foto** (ele segue o alpha e reintroduz cinza
+  na borda de baixo) nem luz de recorte.
+- **Se trocar a altura do recorte, atualize `width`/`height` no `<img>`.**
+- **`img { height: auto }` no CSS é obrigatório.** Sem ele a foto mantém a
+  altura do atributo e estica (aconteceu em 21/11/2026).
 
 O original sem recorte continua em `img/DSC00714.JPG`.
 
@@ -247,38 +166,27 @@ O original sem recorte continua em `img/DSC00714.JPG`.
 
 O diagnóstico envia para o **Formspree** (`js/diagnostico.js`, constante
 `FORM_ENDPOINT`). O e-mail que recebe as respostas é configurado no painel
-do próprio Formspree, não no código.
+do próprio Formspree, não no código. O resultado é calculado no navegador,
+então aparece mesmo se o envio falhar.
 
 ---
 
 ## Detalhes que têm motivo de ser (não mexa sem saber)
 
-- **`js/hero-3d.js` só roda em desktop com placa de vídeo.** Em celular ou
-  em máquina sem aceleração de vídeo, qualquer cena 3D trava a página por
-  vários segundos (aconteceu em 08/2026 com a cena Three.js que existia
-  antes). Existe uma trava de segurança que mede o desempenho real e
-  desmonta a cena sozinha se o aparelho não der conta.
-- **A frase do título que troca sozinha** (home e Conecta) tem todas as
-  frases no HTML, empilhadas: a largura da maior fica reservada e a linha
-  nunca pula. Se trocar as frases, prefira todas curtas — a mais longa
-  define o espaço de todas (no Conecta, "faz follow-up" jogava o verbo
-  para uma linha sozinho; virou "lembra").
-- **O preloader tem teto de 700ms** (`PRELOADER_MAX_MS` em `js/main.js`).
-  Ele cobre a tela inteira, então tudo que ele fica visível conta como
-  página lenta para o Google.
+- **A frase que troca no título do Conecta** tem as quatro palavras no
+  HTML, empilhadas: a largura da maior fica reservada e a linha nunca pula.
+  Prefira palavras curtas ("faz follow-up" jogava a palavra para uma linha
+  sozinha; virou "lembra"). A troca é por máscara, nunca por fade.
 - **As fontes do Google carregam sem travar a renderização**
   (`rel="preload"` + troca no `onload`).
-- **A barra de endereços nunca mostra `#`.** Os links de menu e rodapé
-  continuam escritos com âncora no HTML (`href="#solucoes"`,
-  `href="/livson-conecta#planos-conecta"`) — **não tire isso**: sem a
-  âncora o link para de funcionar com JS desligado e o Google perde o mapa
-  interno da página. Quem esconde o `#` é o `js/main.js`: ele intercepta o
-  clique, rola por conta própria e reescreve a URL para o caminho limpo.
-  Link para outra página leva o destino por `sessionStorage`, e link antigo
-  com `#` colado ainda funciona (rola e limpa a URL). Duas armadilhas ali,
-  se precisar mexer: `behavior: 'auto'` **não** é salto instantâneo —
-  significa "usa o `scroll-behavior` do CSS", que aqui é `smooth`; para
-  salto seco é `'instant'`. E o posicionamento de entrada reconfere algumas
-  vezes, porque o ScrollTrigger mexe na rolagem para medir a página.
+- **A barra de endereços nunca mostra `#`.** Os links continuam escritos
+  com âncora no HTML (`href="#solucoes"`, `href="/livson-conecta#planos-conecta"`)
+  — **não tire isso**: sem a âncora o link para de funcionar com JS
+  desligado e o Google perde o mapa interno. Quem esconde o `#` é o
+  `js/base.js`: intercepta o clique, rola e reescreve a URL. Link para
+  outra página leva o destino pelo `sessionStorage` (chave
+  `livson:ancora`). Armadilha: `behavior: 'auto'` **não** é salto
+  instantâneo, é "usa o `scroll-behavior` do CSS" (que é `smooth`); salto
+  seco é `'instant'`.
 - **`diagnostico.html` é `noindex`** de propósito: a página é para ser
   acessada pelo link que você divulga, não pela busca do Google.

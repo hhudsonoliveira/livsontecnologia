@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="no-js">
+<html lang="pt-BR">
 <head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-TPRQHFC8YE"></script>
@@ -11,11 +11,11 @@
   </script>
 
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Diagnóstico Grátis | Livson Tecnologia</title>
   <meta name="description" content="Responda algumas perguntas rápidas e descubra, na hora, onde o seu negócio está perdendo venda por demora de resposta e falta de follow-up." />
   <meta name="robots" content="noindex, follow" />
-  <meta name="theme-color" content="#05070d" />
+  <meta name="theme-color" content="#0F2B31" />
   <link rel="canonical" href="https://livsontecnologia.com.br/diagnostico" />
 
   <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png" />
@@ -32,30 +32,30 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@72,300..500&family=Geist:wght@400..700&family=Geist+Mono:wght@400..500&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@72,300..500&family=Geist:wght@400..700&family=Geist+Mono:wght@400..500&display=swap" /></noscript>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..700&family=Geist:wght@400..600&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..700&family=Geist:wght@400..600&display=swap" /></noscript>
 
-  <link rel="stylesheet" href="css/style.css?v=20260922" />
+  <link rel="stylesheet" href="css/base.css?v=20261121" />
+  <link rel="stylesheet" href="css/diagnostico.css?v=20261121" />
 </head>
 <body>
 
-  <!-- ===== NAVBAR (minimalista, sem distração) ===== -->
-  <header class="nav is-scrolled" id="nav">
-    <div class="container nav__inner">
-      <a href="/" class="brand" aria-label="Livson Tecnologia — início">
-        <img src="img/livson-tecnologia-logo.png" alt="" class="brand__mark" width="32" height="32" />
-        <span class="brand__text">LIVSON<em>TECNOLOGIA</em></span>
-      </a>
-      <a href="/" class="diag__exit">Sair</a>
+  <!-- ===== MENU (mínimo, sem distração) ===== -->
+  <div class="diag-nav">
+    <div class="wrap">
+      <header class="nav" id="nav">
+        <a href="/" class="brand" aria-label="Livson Tecnologia — início"><svg viewBox="200 140 712 800" aria-hidden="true"><rect class="l" x="220" y="160" width="215" height="760" rx="64"/><rect class="l" x="220" y="705" width="640" height="215" rx="64"/><rect class="p" x="742" y="243" width="150" height="150" rx="40"/></svg> <span>Livson</span></a>
+        <a href="/" class="nav__exit">Sair</a>
+      </header>
     </div>
-  </header>
+  </div>
 
   <div class="diag__progress-track" aria-hidden="true">
     <div class="diag__progress-bar" id="diagProgressBar"></div>
   </div>
 
   <main>
-    <section class="diag">
+    <section class="diag wrap">
       <div class="diag__form">
 
         <p class="diag__counter" id="diagCounter">Pergunta 1 de 11</p>
@@ -75,7 +75,7 @@
             <div class="diag__meta">São poucas perguntas rápidas. No final você recebe um diagnóstico personalizado do que está te custando venda hoje — e o que resolver primeiro. Sem compromisso.</div>
             <div class="diag__nav">
               <span></span>
-              <button type="button" class="btn btn--primary diag__next">Começar</button>
+              <button type="button" class="btn diag__next">Começar</button>
             </div>
           </div>
 
@@ -87,7 +87,7 @@
             <p class="diag__error"></p>
             <div class="diag__nav">
               <button type="button" class="btn btn--ghost diag__back">Voltar</button>
-              <button type="button" class="btn btn--primary diag__next">Continuar</button>
+              <button type="button" class="btn diag__next">Continuar</button>
             </div>
           </div>
 
@@ -98,7 +98,7 @@
             <p class="diag__error"></p>
             <div class="diag__nav">
               <button type="button" class="btn btn--ghost diag__back">Voltar</button>
-              <button type="button" class="btn btn--primary diag__next">Continuar</button>
+              <button type="button" class="btn diag__next">Continuar</button>
             </div>
           </div>
 
@@ -110,7 +110,7 @@
             <p class="diag__error"></p>
             <div class="diag__nav">
               <button type="button" class="btn btn--ghost diag__back">Voltar</button>
-              <button type="button" class="btn btn--primary diag__next">Continuar</button>
+              <button type="button" class="btn diag__next">Continuar</button>
             </div>
           </div>
 
@@ -127,7 +127,7 @@
             <p class="diag__error"></p>
             <div class="diag__nav">
               <button type="button" class="btn btn--ghost diag__back">Voltar</button>
-              <button type="button" class="btn btn--primary diag__next">Continuar</button>
+              <button type="button" class="btn diag__next">Continuar</button>
             </div>
           </div>
 
@@ -143,7 +143,7 @@
             <p class="diag__error"></p>
             <div class="diag__nav">
               <button type="button" class="btn btn--ghost diag__back">Voltar</button>
-              <button type="button" class="btn btn--primary diag__next">Continuar</button>
+              <button type="button" class="btn diag__next">Continuar</button>
             </div>
           </div>
 
@@ -160,7 +160,7 @@
             <p class="diag__error"></p>
             <div class="diag__nav">
               <button type="button" class="btn btn--ghost diag__back">Voltar</button>
-              <button type="button" class="btn btn--primary diag__next">Continuar</button>
+              <button type="button" class="btn diag__next">Continuar</button>
             </div>
           </div>
 
@@ -176,7 +176,7 @@
             <p class="diag__error"></p>
             <div class="diag__nav">
               <button type="button" class="btn btn--ghost diag__back">Voltar</button>
-              <button type="button" class="btn btn--primary diag__next">Continuar</button>
+              <button type="button" class="btn diag__next">Continuar</button>
             </div>
           </div>
 
@@ -184,16 +184,16 @@
           <div class="diag__step" data-step="8">
             <h1 class="diag__question">Qual o maior problema hoje?</h1>
             <div class="diag__options" role="radiogroup">
-              <div class="diag__option"><input type="radio" name="problema" id="p1" value="Poucos clientes chegando" required /><label for="p1">🎯 Poucos clientes chegando</label></div>
-              <div class="diag__option"><input type="radio" name="problema" id="p2" value="Demoro muito pra responder" /><label for="p2">⏱️ Demoro muito pra responder</label></div>
-              <div class="diag__option"><input type="radio" name="problema" id="p3" value="Não tenho site ou landing page" /><label for="p3">🖥️ Não tenho site ou landing page</label></div>
-              <div class="diag__option"><input type="radio" name="problema" id="p4" value="Perco o controle dos contatos (sem CRM)" /><label for="p4">🗂️ Perco o controle dos contatos</label></div>
-              <div class="diag__option"><input type="radio" name="problema" id="p5" value="Não sei se o que eu faço está funcionando" /><label for="p5">📊 Não sei se o que eu faço está funcionando</label></div>
+              <div class="diag__option"><input type="radio" name="problema" id="p1" value="Poucos clientes chegando" required /><label for="p1">Poucos clientes chegando</label></div>
+              <div class="diag__option"><input type="radio" name="problema" id="p2" value="Demoro muito pra responder" /><label for="p2">Demoro muito pra responder</label></div>
+              <div class="diag__option"><input type="radio" name="problema" id="p3" value="Não tenho site ou landing page" /><label for="p3">Não tenho site ou landing page</label></div>
+              <div class="diag__option"><input type="radio" name="problema" id="p4" value="Perco o controle dos contatos (sem CRM)" /><label for="p4">Perco o controle dos contatos</label></div>
+              <div class="diag__option"><input type="radio" name="problema" id="p5" value="Não sei se o que eu faço está funcionando" /><label for="p5">Não sei se o que eu faço está funcionando</label></div>
             </div>
             <p class="diag__error"></p>
             <div class="diag__nav">
               <button type="button" class="btn btn--ghost diag__back">Voltar</button>
-              <button type="button" class="btn btn--primary diag__next">Continuar</button>
+              <button type="button" class="btn diag__next">Continuar</button>
             </div>
           </div>
 
@@ -211,7 +211,7 @@
             <p class="diag__error"></p>
             <div class="diag__nav">
               <button type="button" class="btn btn--ghost diag__back">Voltar</button>
-              <button type="button" class="btn btn--primary diag__next">Continuar</button>
+              <button type="button" class="btn diag__next">Continuar</button>
             </div>
           </div>
 
@@ -219,21 +219,21 @@
           <div class="diag__step" data-step="10">
             <h1 class="diag__question">Quando você quer resolver isso?</h1>
             <div class="diag__options" role="radiogroup">
-              <div class="diag__option"><input type="radio" name="urgencia" id="u1" value="O quanto antes" required /><label for="u1">🔥 O quanto antes</label></div>
-              <div class="diag__option"><input type="radio" name="urgencia" id="u2" value="Nas próximas semanas" /><label for="u2">🗓️ Nas próximas semanas</label></div>
-              <div class="diag__option"><input type="radio" name="urgencia" id="u3" value="Só pesquisando por enquanto" /><label for="u3">👀 Só pesquisando por enquanto</label></div>
+              <div class="diag__option"><input type="radio" name="urgencia" id="u1" value="O quanto antes" required /><label for="u1">O quanto antes</label></div>
+              <div class="diag__option"><input type="radio" name="urgencia" id="u2" value="Nas próximas semanas" /><label for="u2">Nas próximas semanas</label></div>
+              <div class="diag__option"><input type="radio" name="urgencia" id="u3" value="Só pesquisando por enquanto" /><label for="u3">Só pesquisando por enquanto</label></div>
             </div>
             <p class="diag__error"></p>
             <div class="diag__nav">
               <button type="button" class="btn btn--ghost diag__back">Voltar</button>
-              <button type="submit" class="btn btn--primary btn--glow diag__submit">Ver meu resultado</button>
+              <button type="submit" class="btn diag__submit">Ver meu resultado</button>
             </div>
           </div>
         </form>
 
         <!-- RESULTADO -->
         <div class="diag__done" id="diagDone" hidden>
-          <div class="report reveal">
+          <div class="report">
             <div class="report__head">
               <span class="report__tag">Resultado do diagnóstico</span>
               <span class="report__who" id="repWho">—</span>
@@ -252,7 +252,7 @@
             <h2>O que dá pra fazer com isso</h2>
             <p>Vou analisar suas respostas e te chamar no WhatsApp com a leitura completa — onde está o maior vazamento e o que resolveria primeiro. Sem compromisso.</p>
             <div class="report__actions">
-              <a id="waLink" href="https://wa.me/5571996466575" target="_blank" rel="noopener" class="btn btn--primary btn--glow btn--lg">Falar no WhatsApp agora</a>
+              <a id="waLink" href="https://wa.me/5571996466575" target="_blank" rel="noopener" class="btn btn--lg">Falar no WhatsApp agora</a>
               <a href="/livson-conecta" class="btn btn--ghost btn--lg">Ver como o sistema funciona</a>
             </div>
           </div>
@@ -262,7 +262,7 @@
     </section>
   </main>
 
-  <footer class="diag__footer">
+  <footer class="diag__footer wrap">
     <p>Seus dados são usados só pra elaborar o seu diagnóstico. Veja nossa <a href="/politica-de-privacidade">Política de Privacidade</a>.</p>
   </footer>
 

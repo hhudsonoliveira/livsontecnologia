@@ -1,0 +1,99 @@
+/* =========================================================
+   LIVSON TECNOLOGIA — diagnóstico (formulário em etapas)
+   Base comum em css/base.css. A lógica está no js/diagnostico.js, que
+   depende destas classes: .diag__step / .is-active, .diag__next,
+   .diag__back, .diag__submit, .diag__error, .report__level--ok /
+   --atencao / --critico. Não renomeie.
+   ========================================================= */
+
+.diag-nav { border-bottom: 1px solid var(--line); }
+.diag__progress-track { height: 3px; background: var(--line); }
+.diag__progress-bar { height: 100%; width: 0; background: var(--acc); transition: width .4s var(--ease); }
+
+.diag { padding-block: clamp(40px, 8vh, 96px) clamp(56px, 9vh, 110px); }
+.diag__form { max-width: 760px; margin: 0 auto; }
+.diag__counter { color: var(--soft); font-size: .9rem; margin-bottom: 18px; }
+
+.diag__step { display: none; }
+.diag__step.is-active { display: grid; gap: 18px; }
+.diag__question {
+  font-family: var(--display); font-stretch: 125%; font-weight: 460;
+  font-size: clamp(1.55rem, 3.6vw, 2.8rem); line-height: 1.05; letter-spacing: -0.01em;
+  text-transform: uppercase; text-wrap: balance;
+}
+.diag__hint { color: var(--soft); }
+
+.diag__input {
+  width: 100%; min-height: 56px; padding: 0 18px;
+  background: var(--sf); color: var(--ink); border: 1px solid var(--line); border-radius: 12px;
+  font: 400 1.05rem var(--text);
+  transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
+}
+.diag__input::placeholder { color: var(--soft); }
+.diag__input:focus { outline: none; border-color: var(--acc); box-shadow: 0 0 0 3px color-mix(in srgb, var(--acc) 28%, transparent); }
+
+/* opções: a marca da escolhida é o "ponto" laranja */
+.diag__options { display: grid; gap: 10px; }
+.diag__option { position: relative; }
+.diag__option input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.diag__option label {
+  display: flex; align-items: center; gap: 14px; min-height: 56px; padding: 14px 18px;
+  background: var(--sf); border: 1px solid var(--line); border-radius: 12px; cursor: pointer;
+  font-size: 1rem; transition: border-color .2s var(--ease), background .2s var(--ease);
+}
+.diag__option label::before {
+  content: ""; width: 16px; height: 16px; flex: none; border-radius: 4px;
+  border: 1.5px solid var(--soft); transition: background .2s var(--ease), border-color .2s var(--ease);
+}
+.diag__option label:hover { border-color: color-mix(in srgb, var(--ink) 40%, transparent); }
+.diag__option input:checked + label { border-color: var(--acc); background: color-mix(in srgb, var(--acc) 10%, var(--sf)); }
+.diag__option input:checked + label::before { background: var(--acc); border-color: var(--acc); }
+.diag__option input:focus-visible + label { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+/* erro: vermelho funcional, separado da cor de destaque, 7,2:1 no fundo */
+.diag__error { color: #FF9C8A; font-size: .92rem; min-height: 1.3em; }
+.diag__meta { color: var(--soft); font-size: .92rem; padding-top: 16px; border-top: 1px solid var(--line); }
+.diag__nav { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-top: 8px; }
+
+/* ---------- Resultado ---------- */
+.report { background: var(--sf); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.report__head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 18px; padding: 18px 24px; border-bottom: 1px solid var(--line); font-size: .9rem; }
+.report__tag { color: var(--soft); }
+.report__who { font-weight: 600; }
+.report__body { padding: 26px 24px 28px; display: grid; gap: 14px; }
+.report__label { color: var(--soft); font-size: .92rem; }
+/* o nível em texto + de 1 a 3 quadrados (quanto mais pontos, mais
+   problema). Nada de verde/amarelo/vermelho: a palavra já diz o nível. */
+.report__level {
+  display: flex; align-items: center; gap: 52px;
+  font-family: var(--display); font-stretch: 125%; font-weight: 460;
+  font-size: clamp(1.7rem, 3.4vw, 2.6rem); line-height: 1; text-transform: uppercase;
+  --p1: var(--line); --p2: var(--line); --p3: var(--line);
+}
+.report__level::before {
+  content: ""; width: 14px; height: 14px; flex: none; border-radius: 3px;
+  background: var(--p1); box-shadow: 19px 0 0 var(--p2), 38px 0 0 var(--p3);
+}
+.report__level--ok { --p1: var(--acc); }
+.report__level--atencao { --p1: var(--acc); --p2: var(--acc); }
+.report__level--critico { --p1: var(--acc); --p2: var(--acc); --p3: var(--acc); }
+.report__causes { display: grid; margin-top: 8px; border-top: 1px solid var(--line); }
+.report__cause { padding-block: 16px; border-bottom: 1px solid var(--line); display: grid; gap: 6px; }
+.report__cause h3 { font-size: 1.05rem; font-weight: 600; }
+.report__cause p { color: var(--soft); }
+.report__note { color: var(--soft); }
+.report__next { margin-top: clamp(40px, 6vw, 64px); display: grid; gap: 16px; }
+.report__next h2 { font-family: var(--display); font-stretch: 125%; font-weight: 460; font-size: clamp(1.5rem, 3vw, 2.2rem); line-height: 1.05; text-transform: uppercase; }
+.report__next p { color: var(--soft); max-width: 60ch; }
+.report__actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.diag__footer { border-top: 1px solid var(--line); padding-block: 22px 40px; font-size: .84rem; color: var(--soft); }
+.diag__footer a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--acc); text-underline-offset: 3px; }
+
+@media (max-width: 560px) {
+  .diag__nav .btn { flex: 1; }
+  .report__actions .btn { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .diag__progress-bar, .diag__input, .diag__option label, .diag__option label::before { transition: none; }
+}
