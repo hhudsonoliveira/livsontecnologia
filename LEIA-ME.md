@@ -103,8 +103,11 @@ referência de movimento — só o princípio, nada copiado deles.
   3D, na opção escolhida do diagnóstico e no nível do resultado (1 a 3
   quadrados).
 - **Logo sempre sólido** (L em texto forte + quadrado laranja), em SVG no
-  próprio HTML. O PNG em gradiente ainda é usado no ícone da aba e na
-  imagem de compartilhamento — falta trocar.
+  próprio HTML. Os ícones da aba e do celular (`img/favicon-*.png`,
+  `img/apple-touch-icon.png`) já são o logo sólido sobre o petróleo, com
+  `?v=` no link para furar o cache do navegador. O PNG em gradiente
+  (`img/livson-tecnologia-logo.png`) ainda é a imagem de compartilhamento
+  e o logo dos dados estruturados — falta trocar.
 - **Zero emoji.** As opções do diagnóstico tinham; saíram.
 - **Movimento reduzido ou sem WebGL:** nada se mexe e tudo fica legível
   parado.
